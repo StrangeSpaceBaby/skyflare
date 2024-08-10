@@ -1,0 +1,113 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_cat_addr List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-right">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_cat_addr_list' }).initTable().then( () => { new _table({ table: '_cat_addr_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_cat_addr_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_cat_addr_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__cat_addr_box" onClick="new _form({ form_id: 'save__cat_addr_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						</div>
+						<div id="_cat_addr_list"
+							class="list-group col-12 autoload _cat_addr_list"
+							data-src="/_cat_addr/list"
+							data-populate="_cat_addr_list"
+							data-tpl="_cat_addr_list_tpl"
+							data-when-empty="<div class='list-group-item'>No _cat_addr to display</div>"
+							>
+							<div class="list-group-item list-group-header keep">
+								<div class="row">
+									<div class="col" data-col="_cat_addr_id" data-col-type="int">_cat_addr_id</div>
+<div class="col" data-col="_cat_addr_new" data-col-type="timestamp">_cat_addr_new</div>
+<div class="col" data-col="_cat_addr_edit" data-col-type="timestamp">_cat_addr_edit</div>
+<div class="col" data-col="_cat_addr_del" data-col-type="timestamp">_cat_addr_del</div>
+<div class="col" data-col="_cat_addr_arch" data-col-type="timestamp">_cat_addr_arch</div>
+<div class="col" data-col="_cat_addr_active" data-col-type="tinyint">_cat_addr_active</div>
+<div class="col" data-col="_cat_addr_order" data-col-type="smallint">_cat_addr_order</div>
+<div class="col" data-col="_cat_addr_name" data-col-type="varchar">_cat_addr_name</div>
+<div class="col text-center"><i class="fa fa-tools"></i></div>
+								</div>
+							</div>
+						</div>
+						<template id="_cat_addr_list_tpl" class="d-none">
+							<div id="_cat_addr_~~_cat_addr_id~~" class="list-group-item"
+								data-filter-_cat_addr_id=~~_cat_addr_id~~
+data-filter-_cat_addr_new=~~_cat_addr_new~~
+data-filter-_cat_addr_edit=~~_cat_addr_edit~~
+data-filter-_cat_addr_del=~~_cat_addr_del~~
+data-filter-_cat_addr_arch=~~_cat_addr_arch~~
+data-filter-_cat_addr_active=~~_cat_addr_active~~
+data-filter-_cat_addr_order=~~_cat_addr_order~~
+data-filter-_cat_addr_name=~~_cat_addr_name~~
+								>
+								<div class="row justify-content-between">
+									<div class="col" data-col="_cat_addr_id" data-col-type="int">~~_cat_addr_id~~</div>
+<div class="col" data-col="_cat_addr_new" data-col-type="timestamp">~~_cat_addr_new~~</div>
+<div class="col" data-col="_cat_addr_edit" data-col-type="timestamp">~~_cat_addr_edit~~</div>
+<div class="col" data-col="_cat_addr_del" data-col-type="timestamp">~~_cat_addr_del~~</div>
+<div class="col" data-col="_cat_addr_arch" data-col-type="timestamp">~~_cat_addr_arch~~</div>
+<div class="col" data-col="_cat_addr_active" data-col-type="tinyint">~~_cat_addr_active~~</div>
+<div class="col" data-col="_cat_addr_order" data-col-type="smallint">~~_cat_addr_order~~</div>
+<div class="col" data-col="_cat_addr_name" data-col-type="varchar">~~_cat_addr_name~~</div>
+
+									<div class="col">
+										<div class="row">
+											<div class="col d-flex justify-content-between">
+												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__cat_addr_box"
+													onClick="
+														new _form({ form_id: 'save__cat_addr_form', autoform: true }).autoform()
+														.then(
+															() =>
+															{
+																new _api({ url: '/_cat_addr/fetch/~~_cat_addr_id~~' })
+																.poll()
+																.then(
+																	function( _ret )
+																	{
+																		if( 1 == _ret.return )
+																		{
+																			new _form({ form_id: 'save__cat_addr_form', data: _ret.data }).popForm();
+																		}
+																	}
+																);
+															}
+														);
+													">
+													<i class="bi bi-pencil-fill"></i>
+												</a>
+												<a href="javascript:void(0);"
+													onClick="
+														if( confirm( 'Are you sure you want to delete?' ) )
+														{
+															new _api({ url: '/_cat_addr/delete/~~_cat_addr_id~~' })
+																.poll()
+																.then(
+																	() =>
+																	{
+																		new _loader({}).load( '._cat_addr_list' );
+																	}
+																);
+														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__cat_addr_modal_tpl" class="autotpl" data-tpl="modal/_cat_addr_save"></div>
+
+~~include:_master_foot~~

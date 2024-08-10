@@ -1,0 +1,116 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_token_xl8 List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-right">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_token_xl8_list' }).initTable().then( () => { new _table({ table: '_token_xl8_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_token_xl8_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_token_xl8_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__token_xl8_box" onClick="new _form({ form_id: 'save__token_xl8_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						</div>
+						<div id="_token_xl8_list"
+							class="list-group col-12 autoload _token_xl8_list"
+							data-src="/_token_xl8/list"
+							data-populate="_token_xl8_list"
+							data-tpl="_token_xl8_list_tpl"
+							data-when-empty="<div class='list-group-item'>No _token_xl8 to display</div>"
+							>
+							<div class="list-group-item list-group-header keep">
+								<div class="row">
+									<div class="col" data-col="_token_xl8_id" data-col-type="int">_token_xl8_id</div>
+<div class="col" data-col="_token_xl8_new" data-col-type="timestamp">_token_xl8_new</div>
+<div class="col" data-col="_token_xl8_edit" data-col-type="timestamp">_token_xl8_edit</div>
+<div class="col" data-col="_token_xl8_del" data-col-type="timestamp">_token_xl8_del</div>
+<div class="col" data-col="_token_xl8_arch" data-col-type="timestamp">_token_xl8_arch</div>
+<div class="col" data-col="_token_xl8_active" data-col-type="tinyint">_token_xl8_active</div>
+<div class="col" data-col="fk__token_id" data-col-type="int">fk__token_id</div>
+<div class="col" data-col="fk__lang_id" data-col-type="int">fk__lang_id</div>
+<div class="col" data-col="_token_xl8" data-col-type="mediumtext">_token_xl8</div>
+<div class="col text-center"><i class="fa fa-tools"></i></div>
+								</div>
+							</div>
+						</div>
+						<template id="_token_xl8_list_tpl" class="d-none">
+							<div id="_token_xl8_~~_token_xl8_id~~" class="list-group-item"
+								data-filter-_token_xl8_id=~~_token_xl8_id~~
+data-filter-_token_xl8_new=~~_token_xl8_new~~
+data-filter-_token_xl8_edit=~~_token_xl8_edit~~
+data-filter-_token_xl8_del=~~_token_xl8_del~~
+data-filter-_token_xl8_arch=~~_token_xl8_arch~~
+data-filter-_token_xl8_active=~~_token_xl8_active~~
+data-filter-fk__token_id=~~fk__token_id~~
+data-filter-fk__lang_id=~~fk__lang_id~~
+data-filter-_token_xl8=~~_token_xl8~~
+								>
+								<div class="row justify-content-between">
+									<div class="col" data-col="_token_xl8_id" data-col-type="int">~~_token_xl8_id~~</div>
+<div class="col" data-col="_token_xl8_new" data-col-type="timestamp">~~_token_xl8_new~~</div>
+<div class="col" data-col="_token_xl8_edit" data-col-type="timestamp">~~_token_xl8_edit~~</div>
+<div class="col" data-col="_token_xl8_del" data-col-type="timestamp">~~_token_xl8_del~~</div>
+<div class="col" data-col="_token_xl8_arch" data-col-type="timestamp">~~_token_xl8_arch~~</div>
+<div class="col" data-col="_token_xl8_active" data-col-type="tinyint">~~_token_xl8_active~~</div>
+<div class="col" data-col="fk__token_id" data-col-type="int">~~fk__token_id~~</div>
+<div class="col" data-col="fk__lang_id" data-col-type="int">~~fk__lang_id~~</div>
+<div class="col" data-col="_token_xl8" data-col-type="mediumtext">~~_token_xl8~~</div>
+
+									<div class="col">
+										<div class="row">
+											<div class="col d-flex justify-content-between">
+												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__token_xl8_box"
+													onClick="
+														new _form({ form_id: 'save__token_xl8_form', autoform: true }).autoform()
+														.then(
+															() =>
+															{
+																new _api({ url: '/_token_xl8/fetch/~~_token_xl8_id~~' })
+																.poll()
+																.then(
+																	function( _ret )
+																	{
+																		if( 1 == _ret.return )
+																		{
+																			new _form({ form_id: 'save__token_xl8_form', data: _ret.data }).popForm();
+																		}
+																	}
+																);
+															}
+														);
+													">
+													<i class="bi bi-pencil-fill"></i>
+												</a>
+												<a href="javascript:void(0);"
+													onClick="
+														if( confirm( 'Are you sure you want to delete?' ) )
+														{
+															new _api({ url: '/_token_xl8/delete/~~_token_xl8_id~~' })
+																.poll()
+																.then(
+																	() =>
+																	{
+																		new _loader({}).load( '#_token_xl8_list' );
+																	}
+																);
+														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__token_xl8_modal_tpl" class="autotpl" data-tpl="modal/_token_xl8_save"></div>
+
+~~include:_master_foot~~

@@ -1,0 +1,155 @@
+~~include:_master_head~~
+
+<div class="row">
+	<div class="col-8">
+		<div class="h6">Pricing</div>
+		<form>
+			<div class="accordion autoload" id="pricing_list"
+				data-src="/_pricing/list"
+				data-tpl="pricing_list_tpl"
+				data-populate="pricing_list"
+			>
+			</div>
+		</form>
+		<template id="pricing_list_tpl">
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="heading_~~_pricing_id~~">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_pricing_~~_pricing_id~~" aria-expanded="false" aria-controls="collapse_pricing_~~_pricing_id~~">
+						<div class="form-check">
+							<input type="radio" name="_pricing_id" value="~~_pricing_id~~" class="form-check-input"
+								onClick="if( 0 == $( '#module_list_~~_pricing_id~~' ).children().not( '.keep' ).length ) { new _loader({}).load( 'module_list_~~_pricing_id~~' ); }"
+							/>
+							<label class="form-check-label">~~_pricing_name~~</label>
+						</div>
+					</button>
+				</h2>
+				<div id="collapse_pricing_~~_pricing_id~~" class="accordion-collapse collapse" aria-labelledby="heading_~~_pricing_id~~" data-bs-parent="#pricing_list">
+					<div class="accordion-body">
+						<ul id="module_list_~~_pricing_id~~" class="list-group list-group-flush"
+							data-src="/_pricing_module/get_by_pricing/~~_pricing_id~~"
+							data-tpl="module_list_tpl"
+							data-populate="module_list_~~_pricing_id~~"
+							data-when-empty="<li class='list-group-item'>No modules to display</li>"
+						>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</template>
+		<template id="module_list_tpl">
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="heading_module_~~_pricing_module_id~~">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_module_~~_pricing_module_id~~" aria-expanded="false" aria-controls="collapse_module_~~_pricing_module_id~~">
+						<div class="form-check">
+							<input type="checkbox" name="_pricing_module_id[]" value="~~_pricing_module_id~~" class="form-check-input"
+								onClick="if( 0 == $( '#pricing_limit_list_~~_pricing_module_id~~' ).children().not( '.keep' ).length ) { new _loader({}).load( 'pricing_limit_list_~~_pricing_module_id~~' ); }"
+							/><label class="form-check-label">~~_module_name~~ ~~_pricing_module_id~~</label>
+						</div>
+					</button>
+				</h2>
+				<div id="collapse_module_~~_pricing_module_id~~" class="accordion-collapse collapse" aria-labelledby="heading_module_~~_pricing_module_id~~" data-bs-parent="#module_list_~~_pricing_module_id~~">
+					<div class="accordion-body">
+						<div class="accordion" id="pricing_limit_list_~~_pricing_module_id~~"
+							data-src="/_pricing_limit/get_by_pricing_module/~~_pricing_module_id~~"
+							data-tpl="limit_list_tpl"
+							data-populate="pricing_limit_list_~~_pricing_module_id~~"
+						>
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+		<template id="limit_list_tpl">
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="heading_limit_~~_pricing_limit_id~~">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_limit_~~_pricing_limit_id~~" aria-expanded="false" aria-controls="collapse_limit_~~_pricing_limit_id~~">
+						<div class="form-check">
+							<input type="checkbox" name="_pricing_limit_id[]" value="~~_pricing_limit_id~~" class="form-check-input"
+								onClick=""
+							/><label class="form-check-label">~~_pricing_limit_name~~</label>
+						</div>
+					</button>
+				</h2>
+				<div id="collapse_limit_~~_pricing_limit_id~~" class="accordion-collapse collapse" aria-labelledby="heading_limit_~~_pricing_limit_id~~" data-bs-parent="#pricing_limit_list_~~_pricing_limit_id~~">
+					<div class="accordion-body">
+						<div class="row">
+							<div class="col">
+								<div class="form-check">
+									<input type="checkbox" name="limits" value="~~_pricing_limit_id~~" class="form-check-input" /><label class="form-check-label">~~_pricing_limit_name~~</label>
+								</div>
+							</div>
+							<div class="col">
+								$~~_pricing_limit_price~~
+							</div>
+							<div class="col">
+								<input id="limit_count_~~_pricing_limit_id~~" class="pricing_limit" type="number"
+									name="limit[~~_pricing_limit_id~~]"
+									value="~~_pricing_limit_min~~"
+									data-price="~~_pricing_limit_price~~"
+									data-min="~~_pricing_limit_min~~"
+									data-max="~~_pricing_limit_max~~"
+									data-free="~~_pricing_limit_free~~"
+								/>
+							</div>
+							<div id="limit_total_~~_pricing_limit_id~~" class="col">
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--
+			<li id="_pricing_limit_~~_pricing_module_id~~" class="list-group-item">
+				<div class="row">
+					<div class="col">
+						<div class="form-check">
+							<input type="checkbox" name="limits" value="~~_pricing_limit_id~~" class="form-check-input" /><label class="form-check-label">~~_pricing_limit_name~~</label>
+						</div>
+					</div>
+					<div class="col">
+						$~~_pricing_limit_price~~
+					</div>
+					<div class="col">
+						<input id="limit_count_~~_pricing_limit_id~~" class="pricing_limit" type="number"
+							name="limit[~~_pricing_limit_id~~]"
+							value="~~_pricing_limit_min~~"
+							data-price="~~_pricing_limit_price~~"
+							data-min="~~_pricing_limit_min~~"
+							data-max="~~_pricing_limit_max~~"
+							data-free="~~_pricing_limit_free~~"
+						/>
+					</div>
+					<div id="limit_total_~~_pricing_limit_id~~" class="col">
+
+					</div>
+				</div>
+			</li>
+			-->
+		</template>
+	</div>
+	<div class="col-4">
+		<div class="card">
+			<div class="card-header">
+				<div class="card-title">Invoice</div>
+			</div>
+			<div class="card-body" style="min-height: 80vh;">
+				<ul class="list-group">
+					<li class="list-group-item d-flex justify-content-between">
+					</li>
+				</ul>
+			</div>
+			<div class="card-footer">
+				<button type="button" class="btn btn-primary" onClick="new _pricing({}).calcBill();">Update</button>
+				<a href="#" class="btn btn-primary">Pay</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+~~include:_master_foot~~
+
+<script src="/core/js/_pricing.js"></script>
+
+<div id="save_pricing_limit_modal" data-tpl="modal/_pricing_limit_save" class="autotpl"></div>
+<div id="save_pricing_module_modal" data-tpl="modal/_pricing_module_save" class="autotpl"></div>
+<div id="save_pricing_modal" data-tpl="modal/_pricing_save" class="autotpl"></div>

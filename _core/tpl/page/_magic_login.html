@@ -1,0 +1,25 @@
+~~include:app_head~~
+
+~~include:app_foot~~
+<script>
+	$().ready(
+		function()
+		{
+			if( ~~valid_token~~ )
+			{
+				console.log( 'Setting token ~~auth_token~~' );
+				new _store({}).put( 'auth_token', '~~auth_token~~' );
+				let expires = new Date( '~~auth_token_expires~~' );
+				new _store({}).put( 'auth_token_expires', expires.toISOString() );
+				document.cookie = "auth_token=~~auth_token~~;max-age=86400;path=/";
+				console.log( 'auth cookie' );
+				console.log( document.cookie );
+				window.location.href = '/';
+			}
+			else
+			{
+				console.log( 'no valid token' );
+			}
+		}
+	);
+</script>

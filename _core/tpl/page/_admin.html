@@ -1,0 +1,33 @@
+~~include:_master_head~~
+
+<div class="row">
+	<div class="col-6 h3">Objects</div>
+	<div class="col-6">
+		<a href="#reload" onClick="new _loader({}).load( 'obj_list' );" class="btn btn-sm btn-primary"><i class="bi bi-arrow-repeat"></i></a>
+		<a href="#awareness" onClick="new _api({ url: '/_admin/awareness' }).poll().then( ( _ret ) => { new _loader({}).load( 'obj_list' ); } );" class="btn btn-sm btn-primary"><i class="bi bi-x-diamond-fill"></i></a>
+		<a href="#add_new_object" data-bs-target="#save__admin_obj_box" data-bs-toggle="modal" class="btn btn-sm btn-primary"><i class="bi bi-plus"></i></a>
+	</div>
+</div>
+<div class="row autoload"
+		id="obj_list"
+		data-src="/_admin/get_objs"
+		data-populate="obj_list"
+		data-tpl="obj_list_tpl"
+		data-when-empty="<li class='list-group-item'>No objects to display</li>"
+	>
+</div>
+<template id="obj_list_tpl">
+	<div class="card col-4">
+		<div class="card-body d-flex">
+			<div class="col-md-10 col-6">~~_admin_obj_name~~</div>
+			<div class="col-md-2 col-6 d-flex justify-content-between">
+				<a href="#rebuild"><i class="bi bi-gear-fill"></i  ></a>
+				<a href="/page/~~_admin_obj_name~~" target="_blank"><i class="bi bi-sliders"></i></a>
+			</div>
+		</div>
+	</div>
+</template>
+
+<div id="beehive_modal_tpl" class="autotpl" data-tpl="modal/_admin_obj_save"></div>
+
+~~include:_master_foot~~

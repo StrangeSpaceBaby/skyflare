@@ -1,0 +1,124 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_co List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-right">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_co_list' }).initTable().then( () => { new _table({ table: '_co_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_co_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_co_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__co_box" onClick="new _form({ form_id: 'save__co_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						</div>
+						<div id="_co_list"
+							class="list-group col-12 autoload _co_list"
+							data-src="/_co/list"
+							data-populate="_co_list"
+							data-tpl="_co_list_tpl"
+							data-when-empty="<div class='list-group-item'>No _co to display</div>"
+							>
+							<div class="list-group-item list-group-header keep">
+								<div class="row">
+									<div class="col" data-col="_co_id" data-col-type="int">id</div>
+									<div class="col" data-col="_co_new" data-col-type="timestamp">new</div>
+									<div class="col" data-col="_co_edit" data-col-type="timestamp">edit</div>
+									<div class="col" data-col="_co_del" data-col-type="timestamp">del</div>
+									<div class="col" data-col="_co_arch" data-col-type="timestamp">arch</div>
+									<div class="col" data-col="_co_active" data-col-type="tinyint">active</div>
+									<div class="col" data-col="fk__mem_id" data-col-type="int">mem</div>
+									<div class="col" data-col="fk__pricing_id" data-col-type="int">pricing</div>
+									<div class="col" data-col="_co_name" data-col-type="varchar">name</div>
+									<div class="col" data-col="_co_domain" data-col-type="varchar">domain</div>
+									<div class="col" data-col="_co_ulid" data-col-type="varchar">uuid</div>
+									<div class="col" data-col="_co_configured" data-col-type="tinyint">configured</div>
+								</div>
+							</div>
+						</div>
+						<template id="_co_list_tpl" class="d-none">
+							<div id="_co_~~_co_id~~" class="list-group-item"
+								data-filter-_co_id=~~_co_id~~
+data-filter-_co_new=~~_co_new~~
+data-filter-_co_edit=~~_co_edit~~
+data-filter-_co_del=~~_co_del~~
+data-filter-_co_arch=~~_co_arch~~
+data-filter-_co_active=~~_co_active~~
+data-filter-fk__mem_id=~~fk__mem_id~~
+data-filter-fk__pricing_id=~~fk__pricing_id~~
+data-filter-_co_name=~~_co_name~~
+data-filter-_co_domain=~~_co_domain~~
+data-filter-_co_ulid=~~_co_ulid~~
+data-filter-_co_configured=~~_co_configured~~
+								>
+								<div class="row justify-content-between">
+									<div class="col" data-col="_co_id" data-col-type="int">~~_co_id~~</div>
+<div class="col" data-col="_co_new" data-col-type="timestamp">~~_co_new~~</div>
+<div class="col" data-col="_co_edit" data-col-type="timestamp">~~_co_edit~~</div>
+<div class="col" data-col="_co_del" data-col-type="timestamp">~~_co_del~~</div>
+<div class="col" data-col="_co_arch" data-col-type="timestamp">~~_co_arch~~</div>
+<div class="col" data-col="_co_active" data-col-type="tinyint">~~_co_active~~</div>
+<div class="col" data-col="fk__mem_id" data-col-type="int">~~fk__mem_id~~</div>
+<div class="col" data-col="fk__pricing_id" data-col-type="int">~~fk__pricing_id~~</div>
+<div class="col" data-col="_co_name" data-col-type="varchar">~~_co_name~~</div>
+<div class="col" data-col="_co_domain" data-col-type="varchar">~~_co_domain~~</div>
+<div class="col" data-col="_co_ulid" data-col-type="varchar">~~_co_ulid~~</div>
+<div class="col" data-col="_co_configured" data-col-type="tinyint">~~_co_configured~~</div>
+
+									<div class="col">
+										<div class="row">
+											<div class="col d-flex justify-content-between">
+												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__co_box"
+													onClick="
+														new _form({ form_id: 'save__co_form', autoform: true }).autoform()
+														.then(
+															() =>
+															{
+																new _api({ url: '/_co/fetch/~~_co_id~~' })
+																.poll()
+																.then(
+																	function( _ret )
+																	{
+																		if( 1 == _ret.return )
+																		{
+																			new _form({ form_id: 'save__co_form', data: _ret.data }).popForm();
+																		}
+																	}
+																);
+															}
+														);
+													">
+													<i class="bi bi-pencil-fill"></i>
+												</a>
+												<a href="javascript:void(0);"
+													onClick="
+														if( confirm( 'Are you sure you want to delete?' ) )
+														{
+															new _api({ url: '/_co/delete/~~_co_id~~' })
+																.poll()
+																.then(
+																	() =>
+																	{
+																		new _loader({}).load( '#_co_list' );
+																	}
+																);
+														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__co_modal_tpl" class="autotpl" data-tpl="modal/_co_save"></div>
+
+~~include:_master_foot~~

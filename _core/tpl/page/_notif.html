@@ -1,0 +1,116 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_notif List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-right">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_notif_list' }).initTable().then( () => { new _table({ table: '_notif_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_notif_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_notif_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__notif_box" onClick="new _form({ form_id: 'save__notif_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						</div>
+						<div id="_notif_list"
+							class="list-group col-12 autoload _notif_list"
+							data-src="/_notif/list"
+							data-populate="_notif_list"
+							data-tpl="_notif_list_tpl"
+							data-when-empty="<div class='list-group-item'>No _notif to display</div>"
+							>
+							<div class="list-group-item list-group-header keep">
+								<div class="row">
+									<div class="col" data-col="_notif_id" data-col-type="int">_notif_id</div>
+<div class="col" data-col="_notif_new" data-col-type="timestamp">_notif_new</div>
+<div class="col" data-col="_notif_edit" data-col-type="timestamp">_notif_edit</div>
+<div class="col" data-col="_notif_del" data-col-type="timestamp">_notif_del</div>
+<div class="col" data-col="_notif_arch" data-col-type="timestamp">_notif_arch</div>
+<div class="col" data-col="_notif_active" data-col-type="tinyint">_notif_active</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">fk__co_id</div>
+<div class="col" data-col="fk__mem_id" data-col-type="int">fk__mem_id</div>
+<div class="col" data-col="_notif_text" data-col-type="text">_notif_text</div>
+<div class="col text-center"><i class="fa fa-tools"></i></div>
+								</div>
+							</div>
+						</div>
+						<template id="_notif_list_tpl" class="d-none">
+							<div id="_notif_~~_notif_id~~" class="list-group-item"
+								data-filter-_notif_id=~~_notif_id~~
+data-filter-_notif_new=~~_notif_new~~
+data-filter-_notif_edit=~~_notif_edit~~
+data-filter-_notif_del=~~_notif_del~~
+data-filter-_notif_arch=~~_notif_arch~~
+data-filter-_notif_active=~~_notif_active~~
+data-filter-fk__co_id=~~fk__co_id~~
+data-filter-fk__mem_id=~~fk__mem_id~~
+data-filter-_notif_text=~~_notif_text~~
+								>
+								<div class="row justify-content-between">
+									<div class="col" data-col="_notif_id" data-col-type="int">~~_notif_id~~</div>
+<div class="col" data-col="_notif_new" data-col-type="timestamp">~~_notif_new~~</div>
+<div class="col" data-col="_notif_edit" data-col-type="timestamp">~~_notif_edit~~</div>
+<div class="col" data-col="_notif_del" data-col-type="timestamp">~~_notif_del~~</div>
+<div class="col" data-col="_notif_arch" data-col-type="timestamp">~~_notif_arch~~</div>
+<div class="col" data-col="_notif_active" data-col-type="tinyint">~~_notif_active~~</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">~~fk__co_id~~</div>
+<div class="col" data-col="fk__mem_id" data-col-type="int">~~fk__mem_id~~</div>
+<div class="col" data-col="_notif_text" data-col-type="text">~~_notif_text~~</div>
+
+									<div class="col">
+										<div class="row">
+											<div class="col d-flex justify-content-between">
+												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__notif_box"
+													onClick="
+														new _form({ form_id: 'save__notif_form', autoform: true }).autoform()
+														.then(
+															() =>
+															{
+																new _api({ url: '/_notif/fetch/~~_notif_id~~' })
+																.poll()
+																.then(
+																	function( _ret )
+																	{
+																		if( 1 == _ret.return )
+																		{
+																			new _form({ form_id: 'save__notif_form', data: _ret.data }).popForm();
+																		}
+																	}
+																);
+															}
+														);
+													">
+													<i class="bi bi-pencil-fill"></i>
+												</a>
+												<a href="javascript:void(0);"
+													onClick="
+														if( confirm( 'Are you sure you want to delete?' ) )
+														{
+															new _api({ url: '/_notif/delete/~~_notif_id~~' })
+																.poll()
+																.then(
+																	() =>
+																	{
+																		new _loader({}).load( '#_notif_list' );
+																	}
+																);
+														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__notif_modal_tpl" class="autotpl" data-tpl="modal/_notif_save"></div>
+
+~~include:_master_foot~~

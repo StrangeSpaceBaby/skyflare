@@ -1,0 +1,145 @@
+~~include:app_top~~
+
+<div class="row">
+	<div class="col-md-6 col-xl-3 mb-4">
+		<div class="card" style="min-height: 37vh">
+			<div class="card-header">
+				<h6 class="card-title">Email Footer</h6>
+			</div>
+			<div class="card-body">
+				<form id="change_footer_form" method="POST" action="/_co/save_email_footer" class="form validate">
+					This will appear in all the emails that are sent on your organization's behalf.
+					<div class="form-group">
+						<textarea name="new_email_footer" id="change_footer_form_new_email_footer" class="form-control"style="min-height: 20vh">~~sub_prefs.email_footer~~</textarea>
+					</div>
+				</form>
+			</div>
+			<div class="card-footer d-flex justify-content-between">
+				<a href="#reset_subdomain" onClick="new _form({ form_id: '#change_footer_form' }).resetForm();" class="btn btn-default">Cancel</a>
+				<a href="#save_subdomain" onClick="new _form({ form_id: 'change_footer_form' })
+					.send()
+					.then(
+						function( _ret )
+						{
+							if( 1 == _ret.return )
+							{
+								growl( _ret.msg, 'success' );
+							}
+							else
+							{
+								growl( _ret.msg, 'error' );
+							}
+						}
+					);" class="btn btn-primary">Save New Footer</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-xl-3 mb-4">
+		<div class="card" style="min-height: 37vh">
+			<div class="card-header">
+				<h6 class="card-title">Change Your URL</h6>
+			</div>
+			<div class="card-body">
+				<form id="change_subdomain_form" method="POST" action="/_co/save_subdomain" class="form validate">
+					<div class="bg-danger text-white rounded p-3 mb-2">Changing this has big consequences. All of your login links and reset links will be broken. Only change this if you really need to.</div>
+					<div class="form-group">
+						<div class="input-group">
+							<input type="text" name="new_subdomain" id="change_subdomain_form_new_subdomain" value="~~_co._co_domain~~" class="form-control text-right" />
+							<span class="input-group-text app_domain"></span>
+						</div>
+						<small>URLs may not start or end with a hyphen (-). Only a-z, 0-9 and hyphen are allowed.</small>
+					</div>
+				</form>
+			</div>
+			<div class="card-footer d-flex justify-content-between">
+				<a href="#reset_subdomain" onClick="new _form({ form_id: '#change_subdomain_form' }).resetForm();" class="btn btn-default">Cancel</a>
+				<a href="#save_subdomain" onClick="new _form({ form_id: 'change_subdomain_form' }).send()
+				.then(
+					function( _ret )
+					{
+						if( 1 == _ret.return )
+						{
+							new _form({ form_id: '#change_subdomain_form' }).resetForm();
+							window.location.href = location.protocol + '//' + _ret.data;
+						}
+						else
+						{
+							growl( _ret.msg, 'error' );
+						}
+					}
+				);" class="btn btn-primary">Save New URL</a>
+			</div>
+		</div>
+	</div>
+	<div class="card mb-2 col-md-6 col-12 p-0">
+		<div class="card-header d-flex justify-content-between">
+			<h6 class="card-title">Locations</h6>
+			<div>
+				<a href="#refresh_users" onClick="new _loader({}).load( 'loc_list' );"><i class="fad fa-redo-alt"></i></a>
+				<a href="#new_user" data-bs-target="#save_loc_box" data-bs-toggle="modal" class="btn btn-primary btn-sm ml-3"><i class="fa fa-plus mr-1"></i> Add New Location</a>
+			</div>
+		</div>
+		<div class="card-body">
+			<ul id="loc_list" class="autoload list-group list-group-flush loc_list"
+				data-src="/loc/list"
+				data-tpl="loc_list_tpl"
+				data-populate="loc_list"
+				data-when-empty="<li class='list-group-item'>No locations</li>"
+			>
+			</ul>
+			<template id="loc_list_tpl">
+				<li class="list-group-item">
+					<div class="row">
+						<div class="col-md-3 col-12">
+							<div class="dropdown">
+								<button class="btn btn-light btn-block border-1 dropdown-toggle" type="button" id="_mem_dropdown_~~_mem_id~~" data-bs-toggle="dropdown" aria-expanded="false">
+									~~loc_name~~
+								</button>
+								<ul class="dropdown-menu" aria-labelledby="_mem_dropdown_~~_mem_id~~">
+									<li class="dropdown-item">
+										<a href="#edit_user" data-bs-toggle="modal" data-bs-target="#save_loc_box"
+											onClick="new _api({ url: '/loc/fetch/~~loc_id~~' })
+													.poll()
+													.then(
+														( _ret ) =>
+														{
+															if( 1 == _ret.return )
+															{
+																new _form({ form_id: 'save_loc_form', data: _ret.data }).popForm();
+															}
+															else
+															{
+																growl( _ret.msg, 'error' );
+															}
+														}
+													);"
+										>Edit</a>
+									</li>
+									<li class="dropdown-item">Archive</li>
+									<li class="dropdown-item">Delete</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-3 col-12">
+							~~loc_street~~ ~~loc_street_2~~<br />
+							~~loc_city~~ ~~_state_abbrev~~ ~~loc_postal~~
+						</div>
+						<div class="col-md-3 col-12">
+							~~loc_phone_1~~<br />
+							~~loc_phone_2~~<br />
+							~~loc_phone_3~~
+						</div>
+						<div class="col-md-3 col-12">
+							~~loc_hours~~<br />
+							~~loc_spec_instr~~
+						</div>
+					</div>
+				</li>
+			</template>
+		</div>
+	</div>
+</div>
+
+<div id="save_loc_tpl" data-tpl="modal/loc_save" class="autotpl"></div>
+
+~~include:app_foot~~

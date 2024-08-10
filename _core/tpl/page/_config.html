@@ -1,0 +1,119 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_config List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-right">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_config_list' }).initTable().then( () => { new _table({ table: '_config_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_config_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_config_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__config_box" onClick="new _form({ form_id: 'save__config_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						</div>
+						<div id="_config_list"
+							class="list-group col-12 autoload _config_list"
+							data-src="/_config/list"
+							data-populate="_config_list"
+							data-tpl="_config_list_tpl"
+							data-when-empty="<div class='list-group-item'>No _config to display</div>"
+							>
+							<div class="list-group-item list-group-header keep">
+								<div class="row">
+									<div class="col" data-col="_config_id" data-col-type="int">_config_id</div>
+<div class="col" data-col="_config_new" data-col-type="timestamp">_config_new</div>
+<div class="col" data-col="_config_edit" data-col-type="timestamp">_config_edit</div>
+<div class="col" data-col="_config_del" data-col-type="timestamp">_config_del</div>
+<div class="col" data-col="_config_arch" data-col-type="timestamp">_config_arch</div>
+<div class="col" data-col="_config_active" data-col-type="tinyint">_config_active</div>
+<div class="col" data-col="_config_name" data-col-type="varchar">_config_name</div>
+<div class="col" data-col="_config_desc" data-col-type="varchar">_config_desc</div>
+<div class="col" data-col="_config_table" data-col-type="varchar">_config_table</div>
+<div class="col" data-col="_config_link" data-col-type="varchar">_config_link</div>
+<div class="col text-center"><i class="fa fa-tools"></i></div>
+								</div>
+							</div>
+						</div>
+						<template id="_config_list_tpl" class="d-none">
+							<div id="_config_~~_config_id~~" class="list-group-item"
+								data-filter-_config_id=~~_config_id~~
+data-filter-_config_new=~~_config_new~~
+data-filter-_config_edit=~~_config_edit~~
+data-filter-_config_del=~~_config_del~~
+data-filter-_config_arch=~~_config_arch~~
+data-filter-_config_active=~~_config_active~~
+data-filter-_config_name=~~_config_name~~
+data-filter-_config_desc=~~_config_desc~~
+data-filter-_config_table=~~_config_table~~
+data-filter-_config_link=~~_config_link~~
+								>
+								<div class="row justify-content-between">
+									<div class="col" data-col="_config_id" data-col-type="int">~~_config_id~~</div>
+<div class="col" data-col="_config_new" data-col-type="timestamp">~~_config_new~~</div>
+<div class="col" data-col="_config_edit" data-col-type="timestamp">~~_config_edit~~</div>
+<div class="col" data-col="_config_del" data-col-type="timestamp">~~_config_del~~</div>
+<div class="col" data-col="_config_arch" data-col-type="timestamp">~~_config_arch~~</div>
+<div class="col" data-col="_config_active" data-col-type="tinyint">~~_config_active~~</div>
+<div class="col" data-col="_config_name" data-col-type="varchar">~~_config_name~~</div>
+<div class="col" data-col="_config_desc" data-col-type="varchar">~~_config_desc~~</div>
+<div class="col" data-col="_config_table" data-col-type="varchar">~~_config_table~~</div>
+<div class="col" data-col="_config_link" data-col-type="varchar">~~_config_link~~</div>
+
+									<div class="col">
+										<div class="row">
+											<div class="col d-flex justify-content-between">
+												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__config_box"
+													onClick="
+														new _form({ form_id: 'save__config_form', autoform: true }).autoform()
+														.then(
+															() =>
+															{
+																new _api({ url: '/_config/fetch/~~_config_id~~' })
+																.poll()
+																.then(
+																	function( _ret )
+																	{
+																		if( 1 == _ret.return )
+																		{
+																			new _form({ form_id: 'save__config_form', data: _ret.data }).popForm();
+																		}
+																	}
+																);
+															}
+														);
+													">
+													<i class="bi bi-pencil-fill"></i>
+												</a>
+												<a href="javascript:void(0);"
+													onClick="
+														if( confirm( 'Are you sure you want to delete?' ) )
+														{
+															new _api({ url: '/_config/delete/~~_config_id~~' })
+																.poll()
+																.then(
+																	() =>
+																	{
+																		new _loader({}).load( '#_config_list' );
+																	}
+																);
+														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__config_modal_tpl" class="autotpl" data-tpl="modal/_config_save"></div>
+
+~~include:_master_foot~~

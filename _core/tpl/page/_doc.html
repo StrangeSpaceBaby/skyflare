@@ -1,0 +1,134 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_doc List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-right">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_doc_list' }).initTable().then( () => { new _table({ table: '_doc_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_doc_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_doc_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__doc_box" onClick="new _form({ form_id: 'save__doc_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						</div>
+						<div id="_doc_list"
+							class="list-group col-12 autoload _doc_list"
+							data-src="/_doc/list"
+							data-populate="_doc_list"
+							data-tpl="_doc_list_tpl"
+							data-when-empty="<div class='list-group-item'>No _doc to display</div>"
+							>
+							<div class="list-group-item list-group-header keep">
+								<div class="row">
+									<div class="col" data-col="_doc_id" data-col-type="int">_doc_id</div>
+<div class="col" data-col="_doc_new" data-col-type="timestamp">_doc_new</div>
+<div class="col" data-col="_doc_edit" data-col-type="timestamp">_doc_edit</div>
+<div class="col" data-col="_doc_del" data-col-type="timestamp">_doc_del</div>
+<div class="col" data-col="_doc_arch" data-col-type="timestamp">_doc_arch</div>
+<div class="col" data-col="_doc_active" data-col-type="tinyint">_doc_active</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">fk__co_id</div>
+<div class="col" data-col="fk__mem_id" data-col-type="int">fk__mem_id</div>
+<div class="col" data-col="fk_uploader__mem_id" data-col-type="int">fk_uploader__mem_id</div>
+<div class="col" data-col="_doc_name" data-col-type="varchar">_doc_name</div>
+<div class="col" data-col="_doc_orig_name" data-col-type="varchar">_doc_orig_name</div>
+<div class="col" data-col="_doc_type" data-col-type="varchar">_doc_type</div>
+<div class="col" data-col="_doc_size" data-col-type="int">_doc_size</div>
+<div class="col" data-col="_doc_s3_loc" data-col-type="varchar">_doc_s3_loc</div>
+<div class="col" data-col="_doc_hash" data-col-type="varchar">_doc_hash</div>
+<div class="col text-center"><i class="fa fa-tools"></i></div>
+								</div>
+							</div>
+						</div>
+						<template id="_doc_list_tpl" class="d-none">
+							<div id="_doc_~~_doc_id~~" class="list-group-item"
+								data-filter-_doc_id=~~_doc_id~~
+data-filter-_doc_new=~~_doc_new~~
+data-filter-_doc_edit=~~_doc_edit~~
+data-filter-_doc_del=~~_doc_del~~
+data-filter-_doc_arch=~~_doc_arch~~
+data-filter-_doc_active=~~_doc_active~~
+data-filter-fk__co_id=~~fk__co_id~~
+data-filter-fk__mem_id=~~fk__mem_id~~
+data-filter-fk_uploader__mem_id=~~fk_uploader__mem_id~~
+data-filter-_doc_name=~~_doc_name~~
+data-filter-_doc_orig_name=~~_doc_orig_name~~
+data-filter-_doc_type=~~_doc_type~~
+data-filter-_doc_size=~~_doc_size~~
+data-filter-_doc_s3_loc=~~_doc_s3_loc~~
+data-filter-_doc_hash=~~_doc_hash~~
+								>
+								<div class="row justify-content-between">
+									<div class="col" data-col="_doc_id" data-col-type="int">~~_doc_id~~</div>
+<div class="col" data-col="_doc_new" data-col-type="timestamp">~~_doc_new~~</div>
+<div class="col" data-col="_doc_edit" data-col-type="timestamp">~~_doc_edit~~</div>
+<div class="col" data-col="_doc_del" data-col-type="timestamp">~~_doc_del~~</div>
+<div class="col" data-col="_doc_arch" data-col-type="timestamp">~~_doc_arch~~</div>
+<div class="col" data-col="_doc_active" data-col-type="tinyint">~~_doc_active~~</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">~~fk__co_id~~</div>
+<div class="col" data-col="fk__mem_id" data-col-type="int">~~fk__mem_id~~</div>
+<div class="col" data-col="fk_uploader__mem_id" data-col-type="int">~~fk_uploader__mem_id~~</div>
+<div class="col" data-col="_doc_name" data-col-type="varchar">~~_doc_name~~</div>
+<div class="col" data-col="_doc_orig_name" data-col-type="varchar">~~_doc_orig_name~~</div>
+<div class="col" data-col="_doc_type" data-col-type="varchar">~~_doc_type~~</div>
+<div class="col" data-col="_doc_size" data-col-type="int">~~_doc_size~~</div>
+<div class="col" data-col="_doc_s3_loc" data-col-type="varchar">~~_doc_s3_loc~~</div>
+<div class="col" data-col="_doc_hash" data-col-type="varchar">~~_doc_hash~~</div>
+
+									<div class="col">
+										<div class="row">
+											<div class="col d-flex justify-content-between">
+												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__doc_box"
+													onClick="
+														new _form({ form_id: 'save__doc_form', autoform: true }).autoform()
+														.then(
+															() =>
+															{
+																new _api({ url: '/_doc/fetch/~~_doc_id~~' })
+																.poll()
+																.then(
+																	function( _ret )
+																	{
+																		if( 1 == _ret.return )
+																		{
+																			new _form({ form_id: 'save__doc_form', data: _ret.data }).popForm();
+																		}
+																	}
+																);
+															}
+														);
+													">
+													<i class="bi bi-pencil-fill"></i>
+												</a>
+												<a href="javascript:void(0);"
+													onClick="
+														if( confirm( 'Are you sure you want to delete?' ) )
+														{
+															new _api({ url: '/_doc/delete/~~_doc_id~~' })
+																.poll()
+																.then(
+																	() =>
+																	{
+																		new _loader({}).load( '#_doc_list' );
+																	}
+																);
+														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__doc_modal_tpl" class="autotpl" data-tpl="modal/_doc_save"></div>
+
+~~include:_master_foot~~

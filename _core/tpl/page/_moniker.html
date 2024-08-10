@@ -1,0 +1,116 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_moniker List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-right">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_moniker_list' }).initTable().then( () => { new _table({ table: '_moniker_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_moniker_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_moniker_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__moniker_box" onClick="new _form({ form_id: 'save__moniker_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						</div>
+						<div id="_moniker_list"
+							class="list-group col-12 autoload _moniker_list"
+							data-src="/_moniker/list"
+							data-populate="_moniker_list"
+							data-tpl="_moniker_list_tpl"
+							data-when-empty="<div class='list-group-item'>No _moniker to display</div>"
+							>
+							<div class="list-group-item list-group-header keep">
+								<div class="row">
+									<div class="col" data-col="_moniker_id" data-col-type="int">_moniker_id</div>
+<div class="col" data-col="_moniker_new" data-col-type="timestamp">_moniker_new</div>
+<div class="col" data-col="_moniker_edit" data-col-type="timestamp">_moniker_edit</div>
+<div class="col" data-col="_moniker_del" data-col-type="timestamp">_moniker_del</div>
+<div class="col" data-col="_moniker_arch" data-col-type="timestamp">_moniker_arch</div>
+<div class="col" data-col="_moniker_active" data-col-type="tinyint">_moniker_active</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">fk__co_id</div>
+<div class="col" data-col="_moniker_ulid" data-col-type="char">_moniker_ulid</div>
+<div class="col text-center"><i class="fa fa-tools"></i></div>
+								</div>
+							</div>
+						</div>
+						<template id="_moniker_list_tpl" class="d-none">
+							<div id="_moniker_~~_moniker_id~~" class="list-group-item"
+								data-filter-_moniker_id=~~_moniker_id~~
+data-filter-_moniker_new=~~_moniker_new~~
+data-filter-_moniker_edit=~~_moniker_edit~~
+data-filter-_moniker_del=~~_moniker_del~~
+data-filter-_moniker_arch=~~_moniker_arch~~
+data-filter-_moniker_active=~~_moniker_active~~
+data-filter-fk__co_id=~~fk__co_id~~
+data-filter-_moniker_ulid=~~_moniker_ulid~~
+								>
+								<div class="row justify-content-between">
+									<div class="col" data-col="_moniker_id" data-col-type="int">~~_moniker_id~~</div>
+<div class="col" data-col="_moniker_new" data-col-type="timestamp">~~_moniker_new~~</div>
+<div class="col" data-col="_moniker_edit" data-col-type="timestamp">~~_moniker_edit~~</div>
+<div class="col" data-col="_moniker_del" data-col-type="timestamp">~~_moniker_del~~</div>
+<div class="col" data-col="_moniker_arch" data-col-type="timestamp">~~_moniker_arch~~</div>
+<div class="col" data-col="_moniker_active" data-col-type="tinyint">~~_moniker_active~~</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">~~fk__co_id~~</div>
+<div class="col" data-col="_moniker_ulid" data-col-type="char">~~_moniker_ulid~~</div>
+
+									<div class="col">
+										<div class="btn-group">
+											<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#save__moniker_box"
+												onClick="
+													new _form({ form_id: 'save__moniker_form', autoform: true }).autoform()
+													.then(
+														() =>
+														{
+															new _api({ url: '/_moniker/fetch/~~_moniker_id~~' })
+															.poll()
+															.then(
+																function( _ret )
+																{
+																	if( 1 == _ret.return )
+																	{
+																		new _form({ form_id: 'save__moniker_form', data: _ret.data }).popForm();
+																	}
+																}
+															);
+														}
+													);
+												">Edit
+											</button>
+											<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+												<span class="visually-hidden">Toggle Dropdown</span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a href="javascript:void(0);" class="dropdown-item"
+													onClick="
+														if( confirm( 'Are you sure you want to delete?' ) )
+														{
+															new _api({ url: '/_moniker/delete/~~_moniker_id~~' })
+																.poll()
+																.then(
+																	() =>
+																	{
+																		new _loader({}).load( '._moniker_list' );
+																	}
+																);
+														}">Delete
+												</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__moniker_modal_tpl" class="autotpl" data-tpl="modal/_moniker_save"></div>
+
+~~include:_master_foot~~

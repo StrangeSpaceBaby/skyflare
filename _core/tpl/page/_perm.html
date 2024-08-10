@@ -1,0 +1,116 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_perm List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-right">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_perm_list' }).initTable().then( () => { new _table({ table: '_perm_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_perm_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_perm_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__perm_box" onClick="new _form({ form_id: 'save__perm_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						</div>
+						<div id="_perm_list"
+							class="list-group col-12 autoload _perm_list"
+							data-src="/_perm/list"
+							data-populate="_perm_list"
+							data-tpl="_perm_list_tpl"
+							data-when-empty="<div class='list-group-item'>No _perm to display</div>"
+							>
+							<div class="list-group-item list-group-header keep">
+								<div class="row">
+									<div class="col" data-col="_perm_id" data-col-type="int">_perm_id</div>
+<div class="col" data-col="_perm_new" data-col-type="timestamp">_perm_new</div>
+<div class="col" data-col="_perm_edit" data-col-type="timestamp">_perm_edit</div>
+<div class="col" data-col="_perm_del" data-col-type="timestamp">_perm_del</div>
+<div class="col" data-col="_perm_arch" data-col-type="timestamp">_perm_arch</div>
+<div class="col" data-col="_perm_active" data-col-type="tinyint">_perm_active</div>
+<div class="col" data-col="_perm_name" data-col-type="varchar">_perm_name</div>
+<div class="col" data-col="_perm_path" data-col-type="varchar">_perm_path</div>
+<div class="col" data-col="_perm_desc" data-col-type="varchar">_perm_desc</div>
+<div class="col text-center"><i class="fa fa-tools"></i></div>
+								</div>
+							</div>
+						</div>
+						<template id="_perm_list_tpl" class="d-none">
+							<div id="_perm_~~_perm_id~~" class="list-group-item"
+								data-filter-_perm_id=~~_perm_id~~
+data-filter-_perm_new=~~_perm_new~~
+data-filter-_perm_edit=~~_perm_edit~~
+data-filter-_perm_del=~~_perm_del~~
+data-filter-_perm_arch=~~_perm_arch~~
+data-filter-_perm_active=~~_perm_active~~
+data-filter-_perm_name=~~_perm_name~~
+data-filter-_perm_path=~~_perm_path~~
+data-filter-_perm_desc=~~_perm_desc~~
+								>
+								<div class="row justify-content-between">
+									<div class="col" data-col="_perm_id" data-col-type="int">~~_perm_id~~</div>
+<div class="col" data-col="_perm_new" data-col-type="timestamp">~~_perm_new~~</div>
+<div class="col" data-col="_perm_edit" data-col-type="timestamp">~~_perm_edit~~</div>
+<div class="col" data-col="_perm_del" data-col-type="timestamp">~~_perm_del~~</div>
+<div class="col" data-col="_perm_arch" data-col-type="timestamp">~~_perm_arch~~</div>
+<div class="col" data-col="_perm_active" data-col-type="tinyint">~~_perm_active~~</div>
+<div class="col" data-col="_perm_name" data-col-type="varchar">~~_perm_name~~</div>
+<div class="col" data-col="_perm_path" data-col-type="varchar">~~_perm_path~~</div>
+<div class="col" data-col="_perm_desc" data-col-type="varchar">~~_perm_desc~~</div>
+
+									<div class="col">
+										<div class="row">
+											<div class="col d-flex justify-content-between">
+												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__perm_box"
+													onClick="
+														new _form({ form_id: 'save__perm_form', autoform: true }).autoform()
+														.then(
+															() =>
+															{
+																new _api({ url: '/_perm/fetch/~~_perm_id~~' })
+																.poll()
+																.then(
+																	function( _ret )
+																	{
+																		if( 1 == _ret.return )
+																		{
+																			new _form({ form_id: 'save__perm_form', data: _ret.data }).popForm();
+																		}
+																	}
+																);
+															}
+														);
+													">
+													<i class="bi bi-pencil-fill"></i>
+												</a>
+												<a href="javascript:void(0);"
+													onClick="
+														if( confirm( 'Are you sure you want to delete?' ) )
+														{
+															new _api({ url: '/_perm/delete/~~_perm_id~~' })
+																.poll()
+																.then(
+																	() =>
+																	{
+																		new _loader({}).load( '#_perm_list' );
+																	}
+																);
+														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__perm_modal_tpl" class="autotpl" data-tpl="modal/_perm_save"></div>
+
+~~include:_master_foot~~

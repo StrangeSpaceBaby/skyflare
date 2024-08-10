@@ -1,0 +1,167 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_mem_addr List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-right">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_mem_addr_list' }).initTable().then( () => { new _table({ table: '_mem_addr_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_mem_addr_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_mem_addr_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__mem_addr_box" onClick="new _form({ form_id: 'save__mem_addr_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						</div>
+						<div id="_mem_addr_list"
+							class="list-group col-12 autoload _mem_addr_list"
+							data-src="/_mem_addr/list"
+							data-populate="_mem_addr_list"
+							data-tpl="_mem_addr_list_tpl"
+							data-when-empty="<div class='list-group-item'>No _mem_addr to display</div>"
+							>
+							<div class="list-group-item list-group-header keep">
+								<div class="row">
+									<div class="col" data-col="_mem_addr_id" data-col-type="int">_mem_addr_id</div>
+<div class="col" data-col="_mem_addr_new" data-col-type="timestamp">_mem_addr_new</div>
+<div class="col" data-col="_mem_addr_edit" data-col-type="timestamp">_mem_addr_edit</div>
+<div class="col" data-col="_mem_addr_del" data-col-type="timestamp">_mem_addr_del</div>
+<div class="col" data-col="_mem_addr_arch" data-col-type="timestamp">_mem_addr_arch</div>
+<div class="col" data-col="_mem_addr_active" data-col-type="tinyint">_mem_addr_active</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">fk__co_id</div>
+<div class="col" data-col="fk___mem_id" data-col-type="int">fk___mem_id</div>
+<div class="col" data-col="fk_cat_relation_id" data-col-type="int">fk_cat_relation_id</div>
+<div class="col" data-col="fk__state_id" data-col-type="int">fk__state_id</div>
+<div class="col" data-col="fk__country_id" data-col-type="int">fk__country_id</div>
+<div class="col" data-col="fk_cat_housing_type_id" data-col-type="int">fk_cat_housing_type_id</div>
+<div class="col" data-col="_mem_addr_street" data-col-type="varchar">_mem_addr_street</div>
+<div class="col" data-col="_mem_addr_street_two" data-col-type="varchar">_mem_addr_street_two</div>
+<div class="col" data-col="_mem_addr_apt_name" data-col-type="varchar">_mem_addr_apt_name</div>
+<div class="col" data-col="_mem_addr_city" data-col-type="varchar">_mem_addr_city</div>
+<div class="col" data-col="_mem_addr_postal" data-col-type="varchar">_mem_addr_postal</div>
+<div class="col" data-col="_mem_addr_owned" data-col-type="tinyint">_mem_addr_owned</div>
+<div class="col" data-col="_mem_addr_rented" data-col-type="tinyint">_mem_addr_rented</div>
+<div class="col" data-col="_mem_addr_start" data-col-type="date">_mem_addr_start</div>
+<div class="col" data-col="_mem_addr_end" data-col-type="date">_mem_addr_end</div>
+<div class="col" data-col="_mem_addr_current" data-col-type="tinyint">_mem_addr_current</div>
+<div class="col" data-col="_mem_addr_renewal" data-col-type="date">_mem_addr_renewal</div>
+<div class="col" data-col="_mem_addr_duration" data-col-type="smallint">_mem_addr_duration</div>
+<div class="col" data-col="_mem_addr_homeless" data-col-type="tinyint">_mem_addr_homeless</div>
+<div class="col" data-col="_mem_addr_protect" data-col-type="tinyint">_mem_addr_protect</div>
+<div class="col text-center"><i class="fa fa-tools"></i></div>
+								</div>
+							</div>
+						</div>
+						<template id="_mem_addr_list_tpl" class="d-none">
+							<div id="_mem_addr_~~_mem_addr_id~~" class="list-group-item"
+								data-filter-_mem_addr_id=~~_mem_addr_id~~
+data-filter-_mem_addr_new=~~_mem_addr_new~~
+data-filter-_mem_addr_edit=~~_mem_addr_edit~~
+data-filter-_mem_addr_del=~~_mem_addr_del~~
+data-filter-_mem_addr_arch=~~_mem_addr_arch~~
+data-filter-_mem_addr_active=~~_mem_addr_active~~
+data-filter-fk__co_id=~~fk__co_id~~
+data-filter-fk___mem_id=~~fk___mem_id~~
+data-filter-fk_cat_relation_id=~~fk_cat_relation_id~~
+data-filter-fk__state_id=~~fk__state_id~~
+data-filter-fk__country_id=~~fk__country_id~~
+data-filter-fk_cat_housing_type_id=~~fk_cat_housing_type_id~~
+data-filter-_mem_addr_street=~~_mem_addr_street~~
+data-filter-_mem_addr_street_two=~~_mem_addr_street_two~~
+data-filter-_mem_addr_apt_name=~~_mem_addr_apt_name~~
+data-filter-_mem_addr_city=~~_mem_addr_city~~
+data-filter-_mem_addr_postal=~~_mem_addr_postal~~
+data-filter-_mem_addr_owned=~~_mem_addr_owned~~
+data-filter-_mem_addr_rented=~~_mem_addr_rented~~
+data-filter-_mem_addr_start=~~_mem_addr_start~~
+data-filter-_mem_addr_end=~~_mem_addr_end~~
+data-filter-_mem_addr_current=~~_mem_addr_current~~
+data-filter-_mem_addr_renewal=~~_mem_addr_renewal~~
+data-filter-_mem_addr_duration=~~_mem_addr_duration~~
+data-filter-_mem_addr_homeless=~~_mem_addr_homeless~~
+data-filter-_mem_addr_protect=~~_mem_addr_protect~~
+								>
+								<div class="row justify-content-between">
+									<div class="col" data-col="_mem_addr_id" data-col-type="int">~~_mem_addr_id~~</div>
+<div class="col" data-col="_mem_addr_new" data-col-type="timestamp">~~_mem_addr_new~~</div>
+<div class="col" data-col="_mem_addr_edit" data-col-type="timestamp">~~_mem_addr_edit~~</div>
+<div class="col" data-col="_mem_addr_del" data-col-type="timestamp">~~_mem_addr_del~~</div>
+<div class="col" data-col="_mem_addr_arch" data-col-type="timestamp">~~_mem_addr_arch~~</div>
+<div class="col" data-col="_mem_addr_active" data-col-type="tinyint">~~_mem_addr_active~~</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">~~fk__co_id~~</div>
+<div class="col" data-col="fk___mem_id" data-col-type="int">~~fk___mem_id~~</div>
+<div class="col" data-col="fk_cat_relation_id" data-col-type="int">~~fk_cat_relation_id~~</div>
+<div class="col" data-col="fk__state_id" data-col-type="int">~~fk__state_id~~</div>
+<div class="col" data-col="fk__country_id" data-col-type="int">~~fk__country_id~~</div>
+<div class="col" data-col="fk_cat_housing_type_id" data-col-type="int">~~fk_cat_housing_type_id~~</div>
+<div class="col" data-col="_mem_addr_street" data-col-type="varchar">~~_mem_addr_street~~</div>
+<div class="col" data-col="_mem_addr_street_two" data-col-type="varchar">~~_mem_addr_street_two~~</div>
+<div class="col" data-col="_mem_addr_apt_name" data-col-type="varchar">~~_mem_addr_apt_name~~</div>
+<div class="col" data-col="_mem_addr_city" data-col-type="varchar">~~_mem_addr_city~~</div>
+<div class="col" data-col="_mem_addr_postal" data-col-type="varchar">~~_mem_addr_postal~~</div>
+<div class="col" data-col="_mem_addr_owned" data-col-type="tinyint">~~_mem_addr_owned~~</div>
+<div class="col" data-col="_mem_addr_rented" data-col-type="tinyint">~~_mem_addr_rented~~</div>
+<div class="col" data-col="_mem_addr_start" data-col-type="date">~~_mem_addr_start~~</div>
+<div class="col" data-col="_mem_addr_end" data-col-type="date">~~_mem_addr_end~~</div>
+<div class="col" data-col="_mem_addr_current" data-col-type="tinyint">~~_mem_addr_current~~</div>
+<div class="col" data-col="_mem_addr_renewal" data-col-type="date">~~_mem_addr_renewal~~</div>
+<div class="col" data-col="_mem_addr_duration" data-col-type="smallint">~~_mem_addr_duration~~</div>
+<div class="col" data-col="_mem_addr_homeless" data-col-type="tinyint">~~_mem_addr_homeless~~</div>
+<div class="col" data-col="_mem_addr_protect" data-col-type="tinyint">~~_mem_addr_protect~~</div>
+
+									<div class="col">
+										<div class="row">
+											<div class="col d-flex justify-content-between">
+												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__mem_addr_box"
+													onClick="
+														new _form({ form_id: 'save__mem_addr_form', autoform: true }).autoform()
+														.then(
+															() =>
+															{
+																new _api({ url: '/_mem_addr/fetch/~~_mem_addr_id~~' })
+																.poll()
+																.then(
+																	function( _ret )
+																	{
+																		if( 1 == _ret.return )
+																		{
+																			new _form({ form_id: 'save__mem_addr_form', data: _ret.data }).popForm();
+																		}
+																	}
+																);
+															}
+														);
+													">
+													<i class="bi bi-pencil-fill"></i>
+												</a>
+												<a href="javascript:void(0);"
+													onClick="
+														if( confirm( 'Are you sure you want to delete?' ) )
+														{
+															new _api({ url: '/_mem_addr/delete/~~_mem_addr_id~~' })
+																.poll()
+																.then(
+																	() =>
+																	{
+																		new _loader({}).load( '._mem_addr_list' );
+																	}
+																);
+														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__mem_addr_modal_tpl" class="autotpl" data-tpl="modal/_mem_addr_save"></div>
+
+~~include:_master_foot~~

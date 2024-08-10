@@ -1,0 +1,149 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_task List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-right">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_task_list' }).initTable().then( () => { new _table({ table: '_task_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_task_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_task_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__task_box" onClick="new _form({ form_id: 'save__task_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						</div>
+						<div id="_task_list"
+							class="list-group col-12 autoload _task_list"
+							data-src="/_task/list"
+							data-populate="_task_list"
+							data-tpl="_task_list_tpl"
+							data-when-empty="<div class='list-group-item'>No _task to display</div>"
+							>
+							<div class="list-group-item list-group-header keep">
+								<div class="row">
+									<div class="col" data-col="_task_id" data-col-type="int">_task_id</div>
+<div class="col" data-col="_task_new" data-col-type="timestamp">_task_new</div>
+<div class="col" data-col="_task_edit" data-col-type="timestamp">_task_edit</div>
+<div class="col" data-col="_task_del" data-col-type="timestamp">_task_del</div>
+<div class="col" data-col="_task_arch" data-col-type="timestamp">_task_arch</div>
+<div class="col" data-col="_task_active" data-col-type="tinyint">_task_active</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">fk__co_id</div>
+<div class="col" data-col="fk__mem_id" data-col-type="int">fk__mem_id</div>
+<div class="col" data-col="fk_task_completer_id" data-col-type="int">fk_task_completer_id</div>
+<div class="col" data-col="fk_cat_task_id" data-col-type="int">fk_cat_task_id</div>
+<div class="col" data-col="fk_program_id" data-col-type="int">fk_program_id</div>
+<div class="col" data-col="_task_due_date" data-col-type="date">_task_due_date</div>
+<div class="col" data-col="_task_name" data-col-type="varchar">_task_name</div>
+<div class="col" data-col="_task_desc" data-col-type="text">_task_desc</div>
+<div class="col" data-col="_task_obj" data-col-type="varchar">_task_obj</div>
+<div class="col" data-col="_task_obj_id" data-col-type="int">_task_obj_id</div>
+<div class="col" data-col="_task_required" data-col-type="tinyint">_task_required</div>
+<div class="col" data-col="_task_completion_date" data-col-type="date">_task_completion_date</div>
+<div class="col" data-col="_task_status" data-col-type="tinytext">_task_status</div>
+<div class="col" data-col="_task_private" data-col-type="tinyint">_task_private</div>
+<div class="col text-center"><i class="fa fa-tools"></i></div>
+								</div>
+							</div>
+						</div>
+						<template id="_task_list_tpl" class="d-none">
+							<div id="_task_~~_task_id~~" class="list-group-item"
+								data-filter-_task_id=~~_task_id~~
+data-filter-_task_new=~~_task_new~~
+data-filter-_task_edit=~~_task_edit~~
+data-filter-_task_del=~~_task_del~~
+data-filter-_task_arch=~~_task_arch~~
+data-filter-_task_active=~~_task_active~~
+data-filter-fk__co_id=~~fk__co_id~~
+data-filter-fk__mem_id=~~fk__mem_id~~
+data-filter-fk_task_completer_id=~~fk_task_completer_id~~
+data-filter-fk_cat_task_id=~~fk_cat_task_id~~
+data-filter-fk_program_id=~~fk_program_id~~
+data-filter-_task_due_date=~~_task_due_date~~
+data-filter-_task_name=~~_task_name~~
+data-filter-_task_desc=~~_task_desc~~
+data-filter-_task_obj=~~_task_obj~~
+data-filter-_task_obj_id=~~_task_obj_id~~
+data-filter-_task_required=~~_task_required~~
+data-filter-_task_completion_date=~~_task_completion_date~~
+data-filter-_task_status=~~_task_status~~
+data-filter-_task_private=~~_task_private~~
+								>
+								<div class="row justify-content-between">
+									<div class="col" data-col="_task_id" data-col-type="int">~~_task_id~~</div>
+<div class="col" data-col="_task_new" data-col-type="timestamp">~~_task_new~~</div>
+<div class="col" data-col="_task_edit" data-col-type="timestamp">~~_task_edit~~</div>
+<div class="col" data-col="_task_del" data-col-type="timestamp">~~_task_del~~</div>
+<div class="col" data-col="_task_arch" data-col-type="timestamp">~~_task_arch~~</div>
+<div class="col" data-col="_task_active" data-col-type="tinyint">~~_task_active~~</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">~~fk__co_id~~</div>
+<div class="col" data-col="fk__mem_id" data-col-type="int">~~fk__mem_id~~</div>
+<div class="col" data-col="fk_task_completer_id" data-col-type="int">~~fk_task_completer_id~~</div>
+<div class="col" data-col="fk_cat_task_id" data-col-type="int">~~fk_cat_task_id~~</div>
+<div class="col" data-col="fk_program_id" data-col-type="int">~~fk_program_id~~</div>
+<div class="col" data-col="_task_due_date" data-col-type="date">~~_task_due_date~~</div>
+<div class="col" data-col="_task_name" data-col-type="varchar">~~_task_name~~</div>
+<div class="col" data-col="_task_desc" data-col-type="text">~~_task_desc~~</div>
+<div class="col" data-col="_task_obj" data-col-type="varchar">~~_task_obj~~</div>
+<div class="col" data-col="_task_obj_id" data-col-type="int">~~_task_obj_id~~</div>
+<div class="col" data-col="_task_required" data-col-type="tinyint">~~_task_required~~</div>
+<div class="col" data-col="_task_completion_date" data-col-type="date">~~_task_completion_date~~</div>
+<div class="col" data-col="_task_status" data-col-type="tinytext">~~_task_status~~</div>
+<div class="col" data-col="_task_private" data-col-type="tinyint">~~_task_private~~</div>
+
+									<div class="col">
+										<div class="row">
+											<div class="col d-flex justify-content-between">
+												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__task_box"
+													onClick="
+														new _form({ form_id: 'save__task_form', autoform: true }).autoform()
+														.then(
+															() =>
+															{
+																new _api({ url: '/_task/fetch/~~_task_id~~' })
+																.poll()
+																.then(
+																	function( _ret )
+																	{
+																		if( 1 == _ret.return )
+																		{
+																			new _form({ form_id: 'save__task_form', data: _ret.data }).popForm();
+																		}
+																	}
+																);
+															}
+														);
+													">
+													<i class="bi bi-pencil-fill"></i>
+												</a>
+												<a href="javascript:void(0);"
+													onClick="
+														if( confirm( 'Are you sure you want to delete?' ) )
+														{
+															new _api({ url: '/_task/delete/~~_task_id~~' })
+																.poll()
+																.then(
+																	() =>
+																	{
+																		new _loader({}).load( '#_task_list' );
+																	}
+																);
+														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__task_modal_tpl" class="autotpl" data-tpl="modal/_task_save"></div>
+
+~~include:_master_foot~~

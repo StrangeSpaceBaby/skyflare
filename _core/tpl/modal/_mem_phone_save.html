@@ -1,0 +1,53 @@
+<div id="save__mem_phone_box" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal" role="document" style="display: block;">
+		<div class="modal-content rounded">
+			<div class="modal-header">
+				<h5 class="modal-title">Save Phone</h5>
+			</div>
+			<div class="modal-body">
+				<form id="save__mem_phone_form" method="POST" action="/_mem_phone/save" class="form validate">
+					<div id="save__mem_phone_form_fields">
+						<div class="form-row">
+							<input type="hidden" name="_mem_phone_id" id="save__mem_phone_form__mem_phone_id" value="">
+							<input type="hidden" name="fk__mem_id" id="save__mem_phone_form_fk__mem_id" value="">
+						</div>
+						<div class="form-row">
+							<label for="save__mem_phone_form_fk__cat_phone_id">
+								<a href="javascript:void(0);" onclick="new _loader({}).load( 'save__mem_phone_form_fk__cat_phone_id' );">Phone Category</a>
+							</label>
+							<select name="fk__cat_phone_id" id="save__mem_phone_form_fk__cat_phone_id" class="form-control autoload"
+								data-src="/_cat_phone/list"
+								data-tpl="save__mem_phone_form_fk__cat_phone_id_tpl"
+								data-populate="save__mem_phone_form_fk__cat_phone_id"
+								data-when-empty="<option value=''>No phone categories to list</option>"
+							>
+								<option value="" class="keep">Select</option>
+							</select>
+							<template id="save__mem_phone_form_fk__cat_phone_id_tpl">
+								<option value="~~_cat_phone_id~~">~~_cat_phone_name~~</option>
+							</template>
+						</div>
+						<div class="form-row">
+							<label for="save__mem_phone_form__mem_phone_number">_mem_phone_number</label>
+							<input type="text" name="_mem_phone_number" id="save__mem_phone_form__mem_phone_number" value="" class="form-control">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer d-flex justify-content-between">
+				<a href="javascript:void(0)" data-bs-dismiss="modal" onClick="new _form({ form_id: '#save__mem_phone_form' }).resetForm();" class="btn btn-default">Cancel</a>
+				<a href="javascript:void(0)"
+					onClick="new _form({ form_id: 'save__mem_phone_form' })
+							.send()
+							.then(
+								function( _ret )
+								{
+									new _form({ form_id: '#save__mem_phone_form' }).resetForm();
+									new _loader({}).load( '._mem_phone_list' );
+									$( '#save__mem_phone_box' ).modal( 'toggle' );
+								}
+							);" class="btn btn-primary">Save</a>
+			</div>
+		</div>
+	</div>
+</div>

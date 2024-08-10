@@ -1,0 +1,39 @@
+.cal-day
+{
+	border: thin solid black;
+	min-height: 145px;
+	max-height: 152px;
+	background-color: white;
+	padding-left: 1%;
+	padding-right: 1%;
+}
+
+.dark-date
+{
+	background-color: LightGrey;
+}
+
+.cal-date
+{
+	position: relative;
+	left: 0;
+	top: 0;
+}
+
+.cal-week
+{
+}
+
+.cal-week-header
+{
+	margin-top: 2%;
+	border: thin solid black;
+	text-align: center;
+}
+
+.cal-event
+{
+	font-size: 80%;
+	padding: 1%;
+	text-align: center;
+}

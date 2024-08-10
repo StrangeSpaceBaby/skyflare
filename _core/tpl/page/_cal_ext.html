@@ -1,0 +1,113 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_cal_ext List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-right">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_cal_ext_list' }).initTable().then( () => { new _table({ table: '_cal_ext_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_cal_ext_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_cal_ext_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__cal_ext_box" onClick="new _form({ form_id: 'save__cal_ext_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						</div>
+						<div id="_cal_ext_list"
+							class="list-group col-12 autoload _cal_ext_list"
+							data-src="/_cal_ext/list"
+							data-populate="_cal_ext_list"
+							data-tpl="_cal_ext_list_tpl"
+							data-when-empty="<div class='list-group-item'>No _cal_ext to display</div>"
+							>
+							<div class="list-group-item list-group-header keep">
+								<div class="row">
+									<div class="col" data-col="_cal_ext_id" data-col-type="int">_cal_ext_id</div>
+<div class="col" data-col="_cal_ext_new" data-col-type="timestamp">_cal_ext_new</div>
+<div class="col" data-col="_cal_ext_edit" data-col-type="timestamp">_cal_ext_edit</div>
+<div class="col" data-col="_cal_ext_del" data-col-type="timestamp">_cal_ext_del</div>
+<div class="col" data-col="_cal_ext_arch" data-col-type="timestamp">_cal_ext_arch</div>
+<div class="col" data-col="_cal_ext_active" data-col-type="tinyint">_cal_ext_active</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">fk__co_id</div>
+<div class="col" data-col="_cal_ext_name" data-col-type="varchar">_cal_ext_name</div>
+<div class="col text-center"><i class="fa fa-tools"></i></div>
+								</div>
+							</div>
+						</div>
+						<template id="_cal_ext_list_tpl" class="d-none">
+							<div id="_cal_ext_~~_cal_ext_id~~" class="list-group-item"
+								data-filter-_cal_ext_id=~~_cal_ext_id~~
+data-filter-_cal_ext_new=~~_cal_ext_new~~
+data-filter-_cal_ext_edit=~~_cal_ext_edit~~
+data-filter-_cal_ext_del=~~_cal_ext_del~~
+data-filter-_cal_ext_arch=~~_cal_ext_arch~~
+data-filter-_cal_ext_active=~~_cal_ext_active~~
+data-filter-fk__co_id=~~fk__co_id~~
+data-filter-_cal_ext_name=~~_cal_ext_name~~
+								>
+								<div class="row justify-content-between">
+									<div class="col" data-col="_cal_ext_id" data-col-type="int">~~_cal_ext_id~~</div>
+<div class="col" data-col="_cal_ext_new" data-col-type="timestamp">~~_cal_ext_new~~</div>
+<div class="col" data-col="_cal_ext_edit" data-col-type="timestamp">~~_cal_ext_edit~~</div>
+<div class="col" data-col="_cal_ext_del" data-col-type="timestamp">~~_cal_ext_del~~</div>
+<div class="col" data-col="_cal_ext_arch" data-col-type="timestamp">~~_cal_ext_arch~~</div>
+<div class="col" data-col="_cal_ext_active" data-col-type="tinyint">~~_cal_ext_active~~</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">~~fk__co_id~~</div>
+<div class="col" data-col="_cal_ext_name" data-col-type="varchar">~~_cal_ext_name~~</div>
+
+									<div class="col">
+										<div class="row">
+											<div class="col d-flex justify-content-between">
+												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__cal_ext_box"
+													onClick="
+														new _form({ form_id: 'save__cal_ext_form', autoform: true }).autoform()
+														.then(
+															() =>
+															{
+																new _api({ url: '/_cal_ext/fetch/~~_cal_ext_id~~' })
+																.poll()
+																.then(
+																	function( _ret )
+																	{
+																		if( 1 == _ret.return )
+																		{
+																			new _form({ form_id: 'save__cal_ext_form', data: _ret.data }).popForm();
+																		}
+																	}
+																);
+															}
+														);
+													">
+													<i class="bi bi-pencil-fill"></i>
+												</a>
+												<a href="javascript:void(0);"
+													onClick="
+														if( confirm( 'Are you sure you want to delete?' ) )
+														{
+															new _api({ url: '/_cal_ext/delete/~~_cal_ext_id~~' })
+																.poll()
+																.then(
+																	() =>
+																	{
+																		new _loader({}).load( '._cal_ext_list' );
+																	}
+																);
+														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__cal_ext_modal_tpl" class="autotpl" data-tpl="modal/_cal_ext_save"></div>
+
+~~include:_master_foot~~

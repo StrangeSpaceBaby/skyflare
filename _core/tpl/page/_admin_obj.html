@@ -1,0 +1,134 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_admin_obj List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-right">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_admin_obj_list' }).initTable().then( () => { new _table({ table: '_admin_obj_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_admin_obj_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_admin_obj_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__admin_obj_box" onClick="new _form({ form_id: 'save__admin_obj_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						</div>
+						<div id="_admin_obj_list"
+							class="list-group col-12 autoload _admin_obj_list"
+							data-src="/_admin_obj/list"
+							data-populate="_admin_obj_list"
+							data-tpl="_admin_obj_list_tpl"
+							data-when-empty="<div class='list-group-item'>No _admin_obj to display</div>"
+							>
+							<div class="list-group-item list-group-header keep">
+								<div class="row">
+									<div class="col" data-col="_admin_obj_id" data-col-type="int">_admin_obj_id</div>
+<div class="col" data-col="_admin_obj_new" data-col-type="timestamp">_admin_obj_new</div>
+<div class="col" data-col="_admin_obj_edit" data-col-type="timestamp">_admin_obj_edit</div>
+<div class="col" data-col="_admin_obj_del" data-col-type="timestamp">_admin_obj_del</div>
+<div class="col" data-col="_admin_obj_arch" data-col-type="timestamp">_admin_obj_arch</div>
+<div class="col" data-col="_admin_obj_active" data-col-type="tinyint">_admin_obj_active</div>
+<div class="col" data-col="_admin_obj_name" data-col-type="varchar">_admin_obj_name</div>
+<div class="col" data-col="_admin_obj_table" data-col-type="varchar">_admin_obj_table</div>
+<div class="col" data-col="_admin_obj_obj" data-col-type="tinyint">_admin_obj_obj</div>
+<div class="col" data-col="_admin_obj_ctlr" data-col-type="tinyint">_admin_obj_ctlr</div>
+<div class="col" data-col="_admin_obj_page" data-col-type="tinyint">_admin_obj_page</div>
+<div class="col" data-col="_admin_obj_perm" data-col-type="tinyint">_admin_obj_perm</div>
+<div class="col" data-col="_admin_obj_role_perm" data-col-type="tinyint">_admin_obj_role_perm</div>
+<div class="col" data-col="_admin_obj_save_modal" data-col-type="tinyint">_admin_obj_save_modal</div>
+<div class="col" data-col="_admin_obj_valid_form" data-col-type="tinyint">_admin_obj_valid_form</div>
+<div class="col text-center"><i class="fa fa-tools"></i></div>
+								</div>
+							</div>
+						</div>
+						<template id="_admin_obj_list_tpl" class="d-none">
+							<div id="_admin_obj_~~_admin_obj_id~~" class="list-group-item"
+								data-filter-_admin_obj_id=~~_admin_obj_id~~
+data-filter-_admin_obj_new=~~_admin_obj_new~~
+data-filter-_admin_obj_edit=~~_admin_obj_edit~~
+data-filter-_admin_obj_del=~~_admin_obj_del~~
+data-filter-_admin_obj_arch=~~_admin_obj_arch~~
+data-filter-_admin_obj_active=~~_admin_obj_active~~
+data-filter-_admin_obj_name=~~_admin_obj_name~~
+data-filter-_admin_obj_table=~~_admin_obj_table~~
+data-filter-_admin_obj_obj=~~_admin_obj_obj~~
+data-filter-_admin_obj_ctlr=~~_admin_obj_ctlr~~
+data-filter-_admin_obj_page=~~_admin_obj_page~~
+data-filter-_admin_obj_perm=~~_admin_obj_perm~~
+data-filter-_admin_obj_role_perm=~~_admin_obj_role_perm~~
+data-filter-_admin_obj_save_modal=~~_admin_obj_save_modal~~
+data-filter-_admin_obj_valid_form=~~_admin_obj_valid_form~~
+								>
+								<div class="row justify-content-between">
+									<div class="col" data-col="_admin_obj_id" data-col-type="int">~~_admin_obj_id~~</div>
+<div class="col" data-col="_admin_obj_new" data-col-type="timestamp">~~_admin_obj_new~~</div>
+<div class="col" data-col="_admin_obj_edit" data-col-type="timestamp">~~_admin_obj_edit~~</div>
+<div class="col" data-col="_admin_obj_del" data-col-type="timestamp">~~_admin_obj_del~~</div>
+<div class="col" data-col="_admin_obj_arch" data-col-type="timestamp">~~_admin_obj_arch~~</div>
+<div class="col" data-col="_admin_obj_active" data-col-type="tinyint">~~_admin_obj_active~~</div>
+<div class="col" data-col="_admin_obj_name" data-col-type="varchar">~~_admin_obj_name~~</div>
+<div class="col" data-col="_admin_obj_table" data-col-type="varchar">~~_admin_obj_table~~</div>
+<div class="col" data-col="_admin_obj_obj" data-col-type="tinyint">~~_admin_obj_obj~~</div>
+<div class="col" data-col="_admin_obj_ctlr" data-col-type="tinyint">~~_admin_obj_ctlr~~</div>
+<div class="col" data-col="_admin_obj_page" data-col-type="tinyint">~~_admin_obj_page~~</div>
+<div class="col" data-col="_admin_obj_perm" data-col-type="tinyint">~~_admin_obj_perm~~</div>
+<div class="col" data-col="_admin_obj_role_perm" data-col-type="tinyint">~~_admin_obj_role_perm~~</div>
+<div class="col" data-col="_admin_obj_save_modal" data-col-type="tinyint">~~_admin_obj_save_modal~~</div>
+<div class="col" data-col="_admin_obj_valid_form" data-col-type="tinyint">~~_admin_obj_valid_form~~</div>
+
+									<div class="col">
+										<div class="row">
+											<div class="col d-flex justify-content-between">
+												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__admin_obj_box"
+													onClick="
+														new _form({ form_id: 'save__admin_obj_form', autoform: true }).autoform()
+														.then(
+															() =>
+															{
+																new _api({ url: '/_admin_obj/fetch/~~_admin_obj_id~~' })
+																.poll()
+																.then(
+																	function( _ret )
+																	{
+																		if( 1 == _ret.return )
+																		{
+																			new _form({ form_id: 'save__admin_obj_form', data: _ret.data }).popForm();
+																		}
+																	}
+																);
+															}
+														);
+													">
+													<i class="bi bi-pencil-fill"></i>
+												</a>
+												<a href="javascript:void(0);"
+													onClick="
+														if( confirm( 'Are you sure you want to delete?' ) )
+														{
+															new _api({ url: '/_admin_obj/delete/~~_admin_obj_id~~' })
+																.poll()
+																.then(
+																	() =>
+																	{
+																		new _loader({}).load( '#_admin_obj_list' );
+																	}
+																);
+														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__admin_obj_modal_tpl" class="autotpl" data-tpl="modal/_admin_obj_save"></div>
+
+~~include:_master_foot~~

@@ -1,0 +1,9 @@
+{
+	"version": 0,
+	"compare_db": "db_compare",
+	"skip_tables": [ "_setting" ],
+	"skip_data": [ "_setting", "_mem_auth", "_mem_reset" ],
+	"skip_schema": [],
+	"track_data": [ "_country", "_state", "_tz", "_public_path" ],
+	"help": "compare_db must use the same credentials as the SetEnv credentials for the calling endpoint and have read access to information_schema"
+}

@@ -1,0 +1,134 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_note List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-right">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_note_list' }).initTable().then( () => { new _table({ table: '_note_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_note_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_note_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__note_box" onClick="new _form({ form_id: 'save__note_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						</div>
+						<div id="_note_list"
+							class="list-group col-12 autoload _note_list"
+							data-src="/_note/list"
+							data-populate="_note_list"
+							data-tpl="_note_list_tpl"
+							data-when-empty="<div class='list-group-item'>No _note to display</div>"
+							>
+							<div class="list-group-item list-group-header keep">
+								<div class="row">
+									<div class="col" data-col="_note_id" data-col-type="int">_note_id</div>
+<div class="col" data-col="_note_new" data-col-type="timestamp">_note_new</div>
+<div class="col" data-col="_note_edit" data-col-type="timestamp">_note_edit</div>
+<div class="col" data-col="_note_del" data-col-type="timestamp">_note_del</div>
+<div class="col" data-col="_note_arch" data-col-type="timestamp">_note_arch</div>
+<div class="col" data-col="_note_active" data-col-type="tinyint">_note_active</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">fk__co_id</div>
+<div class="col" data-col="fk__mem_id" data-col-type="int">fk__mem_id</div>
+<div class="col" data-col="fk_program_id" data-col-type="int">fk_program_id</div>
+<div class="col" data-col="fk_cat_note_id" data-col-type="int">fk_cat_note_id</div>
+<div class="col" data-col="fk__note_id" data-col-type="int">fk__note_id</div>
+<div class="col" data-col="_note_effective_date" data-col-type="timestamp">_note_effective_date</div>
+<div class="col" data-col="_note_text" data-col-type="mediumtext">_note_text</div>
+<div class="col" data-col="_note_obj" data-col-type="varchar">_note_obj</div>
+<div class="col" data-col="_note_obj_id" data-col-type="int">_note_obj_id</div>
+<div class="col text-center"><i class="fa fa-tools"></i></div>
+								</div>
+							</div>
+						</div>
+						<template id="_note_list_tpl" class="d-none">
+							<div id="_note_~~_note_id~~" class="list-group-item"
+								data-filter-_note_id=~~_note_id~~
+data-filter-_note_new=~~_note_new~~
+data-filter-_note_edit=~~_note_edit~~
+data-filter-_note_del=~~_note_del~~
+data-filter-_note_arch=~~_note_arch~~
+data-filter-_note_active=~~_note_active~~
+data-filter-fk__co_id=~~fk__co_id~~
+data-filter-fk__mem_id=~~fk__mem_id~~
+data-filter-fk_program_id=~~fk_program_id~~
+data-filter-fk_cat_note_id=~~fk_cat_note_id~~
+data-filter-fk__note_id=~~fk__note_id~~
+data-filter-_note_effective_date=~~_note_effective_date~~
+data-filter-_note_text=~~_note_text~~
+data-filter-_note_obj=~~_note_obj~~
+data-filter-_note_obj_id=~~_note_obj_id~~
+								>
+								<div class="row justify-content-between">
+									<div class="col" data-col="_note_id" data-col-type="int">~~_note_id~~</div>
+<div class="col" data-col="_note_new" data-col-type="timestamp">~~_note_new~~</div>
+<div class="col" data-col="_note_edit" data-col-type="timestamp">~~_note_edit~~</div>
+<div class="col" data-col="_note_del" data-col-type="timestamp">~~_note_del~~</div>
+<div class="col" data-col="_note_arch" data-col-type="timestamp">~~_note_arch~~</div>
+<div class="col" data-col="_note_active" data-col-type="tinyint">~~_note_active~~</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">~~fk__co_id~~</div>
+<div class="col" data-col="fk__mem_id" data-col-type="int">~~fk__mem_id~~</div>
+<div class="col" data-col="fk_program_id" data-col-type="int">~~fk_program_id~~</div>
+<div class="col" data-col="fk_cat_note_id" data-col-type="int">~~fk_cat_note_id~~</div>
+<div class="col" data-col="fk__note_id" data-col-type="int">~~fk__note_id~~</div>
+<div class="col" data-col="_note_effective_date" data-col-type="timestamp">~~_note_effective_date~~</div>
+<div class="col" data-col="_note_text" data-col-type="mediumtext">~~_note_text~~</div>
+<div class="col" data-col="_note_obj" data-col-type="varchar">~~_note_obj~~</div>
+<div class="col" data-col="_note_obj_id" data-col-type="int">~~_note_obj_id~~</div>
+
+									<div class="col">
+										<div class="row">
+											<div class="col d-flex justify-content-between">
+												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__note_box"
+													onClick="
+														new _form({ form_id: 'save__note_form', autoform: true }).autoform()
+														.then(
+															() =>
+															{
+																new _api({ url: '/_note/fetch/~~_note_id~~' })
+																.poll()
+																.then(
+																	function( _ret )
+																	{
+																		if( 1 == _ret.return )
+																		{
+																			new _form({ form_id: 'save__note_form', data: _ret.data }).popForm();
+																		}
+																	}
+																);
+															}
+														);
+													">
+													<i class="bi bi-pencil-fill"></i>
+												</a>
+												<a href="javascript:void(0);"
+													onClick="
+														if( confirm( 'Are you sure you want to delete?' ) )
+														{
+															new _api({ url: '/_note/delete/~~_note_id~~' })
+																.poll()
+																.then(
+																	() =>
+																	{
+																		new _loader({}).load( '#_note_list' );
+																	}
+																);
+														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__note_modal_tpl" class="autotpl" data-tpl="modal/_note_save"></div>
+
+~~include:_master_foot~~
