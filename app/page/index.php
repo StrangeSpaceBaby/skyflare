@@ -1,6 +1,0 @@
-<?php
-
-/**
- * Index page
- */
-
