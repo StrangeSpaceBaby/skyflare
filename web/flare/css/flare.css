@@ -1,0 +1,7 @@
+.autotpl
+{
+	display: block;
+	overflow: hidden;
+	position: absolute;
+	left: -999em;
+}
