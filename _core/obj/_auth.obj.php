@@ -93,10 +93,8 @@ class _auth extends _obj
 	 * @param array $vars [ '_mem_login' => '', '_mem_password' => '' ]
 	 * @return string|boolean An auth_token if successful, FALSE if not
 	 */
-	public function auth( array $vars ) : array|bool
+	public function auth() : array|bool
 	{
-		$this->log_data([ 'auth_vars' => $vars ]);
-
 		$o_token = new _auth_token();
 		$auth_token = $o_token->verify_token();
 		$this->log_data([ 'auth_token' => $auth_token ]);

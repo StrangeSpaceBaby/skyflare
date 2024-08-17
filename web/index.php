@@ -11,52 +11,11 @@ require_once( '../init/init.php' );
 
 $log = new _log();
 
-if( !$_REQUEST['request'] )
-{
-	$_REQUEST['request'] = '/page/dashboard';
-}
+$app = new _app();
 
-$uri = array_filter( explode( "/", $_REQUEST['request'] ) );
+$_tpl->assign( '_co', (new _co())->co() );
+$_tpl->assign( 'me', (new _mem())->me() );
 
-if( !SUBDOMAIN_SCOPE )
-{
-	$subdomain = array_shift( $uri ); // This has already been checked in _co->__construct we just need to remove it
-}
-
-$ctlr = array_shift( $uri );
-$func = array_shift( $uri );
-$args = $uri;
-
-if( is_array( $args ) && 1 == count( $args ) )
-{
-	$args = array_shift( $args );
-}
-
-$path = $ctlr . "/" . $func;
-
-// Token can be TRUE if the path is public
-$token = $_auth->auth([ 'ctlr' => $ctlr, 'func' => $func, 'path' => $path ]);
-
-$me = [];
-if( $token['fk__mem_id'] )
-{
-	$me = $_mem->init_me();
-}
-
-$co = $_co->_co();
-
-$_tpl->assign( '_co', $co );
-$_tpl->assign( 'me', $me );
-
-$_perm = new _perm();
-$o_public_path = new _public_path();
-$public_path = $o_public_path->is_public_path( $path );
-
-$path_allowed = FALSE;
-if( !$public_path )
-{
-	$path_allowed = $_perm->verify_path_access( $path, $me['roles'] );
-}
 
 if( !$token && !$path_allowed && !$public_path && '/page/auth-login' != $path )
 {

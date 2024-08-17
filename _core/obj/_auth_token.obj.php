@@ -123,8 +123,8 @@ class _auth_token extends _obj
 				header( 'auth_token: ' . $token['_auth_token'] );
 				header( 'auth_token_expires: ' . $token['_auth_token_expires'] );
 
-				$now = new DateTime();
-				$expires = new DateTime( $token['_auth_token_expires'] );
+				$now = new DateTimeImmutable();
+				$expires = new DateTimeImmutable( $token['_auth_token_expires'] );
 				if( $expires >= $now && !$token['_auth_token_expired'] )
 				{
 					$this->log_msg( 'valid_auth_token' );

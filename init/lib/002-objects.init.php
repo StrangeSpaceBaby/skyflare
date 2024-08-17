@@ -11,7 +11,6 @@ if( !$_co->_co( '_co_id' ) )
 }
 
 $_perm = new _perm();
-$_auth = new _auth();
 $_role = new _role();
 $_mem = new _mem();
 $_setting = new _setting();
