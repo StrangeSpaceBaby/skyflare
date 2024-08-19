@@ -5,7 +5,7 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 
 /**
- *	_log manages everythign related to logging in the application.  Using Monolog,
+ *	_log manages everything related to logging in the application.  Using Monolog,
  *	_log manages channels for message differentiation and logs to the appropriate channels.
  */
 
