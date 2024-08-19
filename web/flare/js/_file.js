@@ -31,7 +31,7 @@ class _file
 				log( _element );
 
 				let _file = $( _element ).prop( 'files' )[0];
-log( _file );
+				log( _file );
 				let $this = this;
 				// @TODO This will later need to grab the user's pricing tier and get the limit
 				// 1 meg limit
@@ -48,8 +48,8 @@ log( _file );
 					function()
 					{
 						let _result = _reader.result;
-log( 'file result' );
-log( _result );
+						log( 'file result' );
+						log( _result );
 						$( '#doc_details_display' ).html( '<div class="col">' + _file.name + '</div><div class="col">' + $this.formatBytes( _file.size ) + '</div>' );
 
 						return _resolve( _result );

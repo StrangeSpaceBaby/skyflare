@@ -16,6 +16,7 @@ $app = new _app();
 $_tpl->assign( '_co', (new _co())->co() );
 $_tpl->assign( 'me', (new _mem())->me() );
 
+// _app logic begins here
 
 if( !$token && !$path_allowed && !$public_path && '/page/auth-login' != $path )
 {

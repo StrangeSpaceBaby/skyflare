@@ -3,7 +3,6 @@
  *	@param	object	_opts	form_id
  */
 
-
 class _form
 {
 	constructor( _opts )
