@@ -5,7 +5,15 @@ class _auth
 		log( '_auth constructor' );
 		log( _opts );
 
-		let _defaults = { form_id: null, _mem_login: null, _mem_password: null };
+		let _defaults = {
+			form_id: null,
+			_mem_login: null,
+			_mem_password: null,
+			auth_endpoint: '/_auth/password',
+			auth_redirect_url: '/',
+			logout_redirect_url: '/_auth/logout'
+		};
+
 		this.opts = { ..._defaults, ..._opts };
 
 		log( '_auth constructor opts' );
@@ -23,7 +31,7 @@ class _auth
 
 		document.cookie = "auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
-		window.location.href = "/_auth/logout";
+		window.location.href = $this.opts.logout_redirect_url;
 	}
 
 	auth()
@@ -42,7 +50,7 @@ class _auth
 					_data = $this.opts;
 				}
 
-				new _api({ url: '/_auth/password', data: _data })
+				new _api({ url: $this.opts.auth_endpoint, data: _data })
 					.poll()
 					.then(
 						( _ret ) =>
@@ -77,7 +85,7 @@ class _auth
   									document.cookie = "auth_token=" + _ret.data.auth_token + ";" + expires + ";path=/";
 								}
 
-								window.location.href = '/';
+								window.location.href = $this.opts.auth_redirect_url;
 							}
 							else
 							{
