@@ -150,11 +150,6 @@ class _form
 		);
 	}
 
-	createForm( _elem )
-	{
-
-	}
-
 	popForm()
 	{
 		let $this = this;
