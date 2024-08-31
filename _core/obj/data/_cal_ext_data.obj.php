@@ -8,8 +8,10 @@ class _cal_ext_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
-						"_cal_ext_id" => "int",
+			"_cal_ext_id" => "int",
 			"_cal_ext_new" => "timestamp",
 			"_cal_ext_edit" => "timestamp",
 			"_cal_ext_del" => "timestamp",
@@ -21,15 +23,13 @@ class _cal_ext_data extends _obj_data
 		];
 
 		$this->select_cols = [
-						"_cal_ext_id" => "int",
+			"_cal_ext_id" => "int",
 			"_cal_ext_new" => "timestamp",
 			"_cal_ext_edit" => "timestamp",
 			"_cal_ext_active" => "tinyint",
 			"_cal_ext_name" => "varchar",
 			"_cal_ext_ulid" => "char"
 		];
-
-		
 
 		$this->full_join = [
 			

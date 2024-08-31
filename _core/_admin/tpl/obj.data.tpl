@@ -8,6 +8,9 @@ class ~~obj~~_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct( '~~obj~~' );
+		$this->log_chan( '~~obj~~_data' );
+
 		$this->cols = [
 			~~cols~~
 		];

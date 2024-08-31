@@ -6,8 +6,15 @@
 
 class _valid_form_data extends _obj_data
 {
+public array $cols;
+	public array $select_cols;
+	public array $full_join;
+
+
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 			"_valid_form_id" => "int",
 			"_valid_form_new" => "timestamp",

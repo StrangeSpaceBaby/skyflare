@@ -8,6 +8,8 @@ class _log_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_log_id" => "int",
 			"_log_new" => "timestamp",

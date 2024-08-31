@@ -18,12 +18,12 @@ class _public_path extends _obj
 	 * @param string $path full requested path
 	 * @return array|boolean _public_path row or FALSE one rror
 	 */
-	public function is_public_path( string $path ) : array|bool
+	public function is_public_path() : array|bool
 	{
-        list( $ctlr, $path ) = explode( '/', $path );
-        $path = $ctlr . '/' . $path;
+        list( $ctlr_level, $path ) = explode( '/', _GET['sky_request'] );
+        $path = $ctlr_level . '/' . $path;
 
-		$public_path = $this->get_by_col([ '_public_path' => [ $ctlr, $path ] ]);
+		$public_path = $this->get_by_col([ '_public_path' => [ $ctlr_level, $path, _GET['sky_request'] ] ]);
 		if( FALSE !== $public_path )
 		{
 			$this->log_data([ $path, $public_path ])->log_msg( 'path_is_public' );

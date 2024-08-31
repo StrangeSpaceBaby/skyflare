@@ -8,6 +8,8 @@ class _menu_item_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_menu_item_id" => "int",
 			"_menu_item_new" => "timestamp",

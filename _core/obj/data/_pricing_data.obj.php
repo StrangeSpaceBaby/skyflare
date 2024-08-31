@@ -8,6 +8,8 @@ class _pricing_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_pricing_id" => "int",
 			"_pricing_new" => "timestamp",

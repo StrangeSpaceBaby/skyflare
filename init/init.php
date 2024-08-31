@@ -44,20 +44,26 @@ require_once( VENDOR . 'autoload.php' );
 spl_autoload_register(
 	function ( $class_name )
 	{
-		if( '_' == substr( $class_name, 0, 1 ) )
+		switch( $class_name )
 		{
-			if( file_exists( OBJ_CORE . $class_name . ".obj.php" ) )
-			{
-				require_once( OBJ_CORE . $class_name . ".obj.php" );
-			}
+			case '_ctlr':
+				$filename = CTLR_CORE . '_ctlr.ctlr.php';
+				break;
+			case '_ctlr' != $class_name && str_ends_with( $class_name, '_ctlr' ):
+				$filename = str_starts_with( $class_name, '_' ) ? CTLR_CORE : CTLR_APP;
+				$filename .= str_replace( '_ctlr', '', $class_name ) . '.ctlr.php';
+				break;
+			case '_obj_data' != $class_name && str_ends_with( $class_name, '_data' ):
+				$filename = str_starts_with( $class_name, '_' ) ? OBJ_DATA_CORE : OBJ_DATA_APP;
+				$filename .= str_replace( '_data', '', $class_name ) . '.data.php';
+				break;
+			default:
+				$filename = str_starts_with( $class_name, '_' ) ? OBJ_CORE : OBJ_APP;
+				$filename .= $class_name . ".obj.php";
+				break;
 		}
-		else
-		{
-			if( file_exists( OBJ_APP . $class_name . ".obj.php" ) )
-			{
-				require_once( OBJ_APP . $class_name . ".obj.php" );
-			}
-		}
+
+		require_once( $filename );
 	}
 );
 

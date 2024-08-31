@@ -8,6 +8,8 @@ class _follow_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_follow_id" => "int",
 			"_follow_new" => "timestamp",

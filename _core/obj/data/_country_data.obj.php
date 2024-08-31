@@ -8,6 +8,8 @@ class _country_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_country_id" => "int",
 			"_country_new" => "timestamp",

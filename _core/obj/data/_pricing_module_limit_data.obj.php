@@ -8,6 +8,8 @@ class _pricing_module_limit_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_pricing_module_limit_id" => "int",
 			"_pricing_module_limit_new" => "timestamp",

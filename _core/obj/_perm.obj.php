@@ -1,10 +1,5 @@
 <?php
 
-/**
- *	_perm is a core object that provides all methods for managing and manipulating
- *	perms.
- */
-
 class _perm extends _obj
 {
 	public function __construct()
@@ -20,10 +15,16 @@ class _perm extends _obj
 	 * @param integer $role_id The auto_increment value of role
 	 * @return array|boolean
 	 */
-	public function verify_path_access( string $path, $role_id ) : array|bool
+	public function verify_path_access( string $path ) : array|bool
 	{
+		$this->log_data([ 'path' => $path ]);
+
+		$_mem = new _mem();
+		$me = $_mem->me();
+		$role_id = $me['roles'];
 		if( !$role_id )
 		{
+			$this->log_msg( 'no role_id found' );
 			$this->fail( 'no_role_id_supplied' );
 			return FALSE;
 		}
@@ -46,7 +47,15 @@ class _perm extends _obj
 		$sth = $this->query( $q, array( $short_path, $path, $this->_co_id ) );
 		$access = $sth->fetch();
 
-		return $access ? $access : FALSE;
+		$this->log_data([ 'access' => $access ])->log_msg( 'verify_path_access result' );
+		if( $access )
+		{
+			$this->success( 'path access verified' );
+			return $access;
+		}
+
+		$this->fail( 'path access not verified' );
+		return FALSE;
 	}
 
 	/**

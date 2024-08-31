@@ -8,6 +8,8 @@ class _workflow_step_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_workflow_step_id" => "int",
 			"_workflow_step_new" => "timestamp",

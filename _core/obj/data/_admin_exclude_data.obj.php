@@ -8,6 +8,8 @@ class _admin_exclude_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_admin_exclude_id" => "int",
 			"_admin_exclude_new" => "timestamp",

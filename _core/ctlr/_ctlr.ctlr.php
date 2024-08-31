@@ -57,7 +57,10 @@ class _ctlr extends _fail
 	 */
 	protected function _obj( string $obj, mixed $args = [] ) : object
 	{
-		$this->obj = new $obj( $args );
+		if( $obj )
+		{
+			$this->obj = new $obj( $args );
+		}
 
 		return $this;
 	}

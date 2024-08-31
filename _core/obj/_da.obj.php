@@ -11,14 +11,14 @@ class _da extends _fail
 {
 	private bool $allow_co_override = FALSE;
 	private bool $paginate = FALSE;
-	private string $dsn;
-	protected string $dbuser;
-	protected string $dbpass;
-	protected string $dbname;
-	private int $default_result_count;
-	private int $page;
-	private int $count;
-	protected object $db;
+	private string $dsn = '';
+	protected string $dbuser = '';
+	protected string $dbpass = '';
+	protected string $dbname = '';
+	private int $default_result_count = 0;
+	private int $page = 0;
+	private int $count = 0;
+	protected object|null $db = NULL;
 
 	/**
 	 *	__construct automatically tries to connect to the database using the special $_SERVER vars ($_SERVER[DB*]).
@@ -349,11 +349,11 @@ class _da extends _fail
 		}
 		catch( ValueError $ve )
 		{
-			$this->log([ 'chan' => 'da', 'type' => 'error', 'msg' => 'query_failed - ' . $ve->getMessage(), 'context' => [ 'query' => $query, 'bind' => $bind ] ]);
+			$this->log([ 'chan' => '_da', 'type' => 'error', 'msg' => 'query_failed - ' . $ve->getMessage(), 'context' => [ 'query' => $query, 'bind' => $bind ] ]);
 		}
 		catch( PDOException $p )
 		{
-			$this->log([ 'chan' => 'da', 'type' => 'error', 'msg' => 'query_failed - ' . $p->getMessage(), 'context' => [ 'query' => $query, 'bind' => $bind ] ]);
+			$this->log([ 'chan' => '_da', 'type' => 'error', 'msg' => 'query_failed - ' . $p->getMessage(), 'context' => [ 'query' => $query, 'bind' => $bind ] ]);
 			throw new QueryException( json_encode( array( 'query' => $query, 'bind' => $bind, 'pdo' => $p ) ) );
 		}
 

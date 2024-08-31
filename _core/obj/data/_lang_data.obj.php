@@ -8,6 +8,8 @@ class _lang_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_lang_id" => "int",
 			"_lang_new" => "timestamp",

@@ -8,6 +8,8 @@ class _mem_auth_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_mem_auth_id" => "int",
 			"_mem_auth_new" => "timestamp",

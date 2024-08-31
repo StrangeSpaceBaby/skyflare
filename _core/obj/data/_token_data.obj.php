@@ -6,8 +6,15 @@
 
 class _token_data extends _obj_data
 {
+public array $cols;
+	public array $select_cols;
+	public array $full_join;
+
+
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 			"_token_id" => "int",
 			"_token_new" => "timestamp",

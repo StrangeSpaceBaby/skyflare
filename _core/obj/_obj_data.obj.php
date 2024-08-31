@@ -1,12 +1,12 @@
 <?php
 
-/**
- * Provides core methods for retrieval of data object
- */
 class _obj_data extends _fail
 {
 	public function __construct()
 	{
+		parent::__construct();
+		$class_name = str_replace( '_data', '', get_class( $this ) );
+		$this->log_chan( $class_name );
 	}
 
 	/**
@@ -51,7 +51,7 @@ class _obj_data extends _fail
 		switch( $format )
 		{
 			case 'array':
-				return $this->select_cols;
+				return array_keys( $this->select_cols );
 			case 'string':
 				return implode( ", ", array_keys( $this->select_cols ) );
 		}
