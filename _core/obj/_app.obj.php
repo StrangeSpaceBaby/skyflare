@@ -35,68 +35,34 @@ class _app extends _fail
 	private function serve_path()
 	{
 		$this->log_msg( 'Serving path' );
-		require_once( CTLR_CORE . '_ctlr.ctlr.php' );
-
-		$ctlr_exists = 0;
-		if( str_starts_with( $this->ctlr, '_' ) )
-		{
-			$this->log_msg( 'controller is _core' );
-			$ctlr_filename = CTLR_CORE . $this->ctlr . '.ctlr.php';
-			if( $ctlr_exists = file_exists( $ctlr_filename ) )
-			{
-				$this->log_msg( 'controller file found' );
-				require_once( $ctlr_filename );
-			}
-			else
-			{
-				$this->log_msg( 'controller file not found' );
-				header( $this->ctlr . ' Resource Not Found ', TRUE, 404 );
-				exit;
-			}
-		}
-		else
-		{
-			$this->log_msg( 'controller is app' );
-			$ctlr_filename = CTLR_APP . $this->ctlr . '.ctlr.php';
-			if( $ctlr_exists = file_exists( $ctlr_filename ) )
-			{
-				require_once( $ctlr_filename );
-			}
-			else
-			{
-				$this->log_msg( 'controller file not found' );
-				header( $this->ctlr . ' Resource Not Found ', TRUE, 404 );
-				exit;
-			}
-		}
 
 		// No need to check if controller exists because if it doesn't exist, we won't get here
-		$ctlr_name = $ctlr . '_ctlr';
-		$ctlr = new $ctlr_name();
-		if( $ctlr )
+		$ctlr_name = $this->ctlr . '_ctlr';
+		$this->log_msg( "serving {$ctlr_name}->{$this->method}" );
+
+		$reflectedClass = new ReflectionClass( $ctlr_name );
+		if( !$reflectedClass->hasMethod( $this->method ) )
 		{
-			$this->log_msg( 'controller instantiated' );
+			throw new InvalidArgumentException( 'Class does not have method' );
+		}
 
-			// Reflection here
-			$result = $ctlr->$func( $args );
+		$ctlr = new $ctlr_name();
+		$this->log_data([ $ctlr ])->log_msg( 'instantiated ctlr' );
 
-			if( $ctlr->failed() )
-			{
-				$this->api->fail( $ctlr->get_error_msg() );
-			}
-			else
-			{
-				$this->api->success( $ctlr->get_error_msg() );
-			}
+		$reflectedMethod = new ReflectionMethod( $ctlr_name, $this->method );
+		$result = $reflectedMethod->invoke( $ctlr, $this->args );
 
-			$this->api->data( $result );
+		if( $ctlr->failed() )
+		{
+			$this->api->fail( $ctlr->get_error_msg() );
 		}
 		else
 		{
-			$this->log_msg( 'controller could not be instantiated' );
+			$this->api->success( $ctlr->get_error_msg() );
 		}
 
-		$this->api->send();
+		$this->api->data( $result )->send();
+		exit;
 	}
 
 	private function start_app() : bool
@@ -119,7 +85,7 @@ class _app extends _fail
 			$this->check_auth();
 		}
 
-		if( !$this->is_authed() && !$this->has_path_access() && '_auth/password' != $this->requested_path )
+		if( !$this->is_authed() && !$this->has_path_access() )
 		{
 			$this->log_msg( '!authed, !path_access & !/_auth/password ' . $this->requested_path );
 			header(  $_SERVER["SERVER_PROTOCOL"] . "401 Path denied {$this->requested_path}", TRUE, 401 );
@@ -148,9 +114,17 @@ class _app extends _fail
 
 		$this->ctlr		= array_shift( $uri );
 		$this->method	= array_shift( $uri );
-		$this->args		= $uri;
+		
+		if( 1 == count( $uri ) )
+		{
+			$this->args = array_shift( $uri );
+		}
+		else
+		{
+			$this->args = $uri;
+		}
 
-		$this->log_data([ 'ctlr' => $this->ctlr, 'method' => $this->method, 'args' => $args]);
+		$this->log_data([ 'ctlr' => $this->ctlr, 'method' => $this->method, 'args' => $args ]);
 
 		if( is_array( $args ) && 1 == count( $args ) )
 		{
@@ -187,7 +161,8 @@ class _app extends _fail
 	private function check_path_access() : bool
 	{
 		$o_public_path = new _public_path();
-		$this->path_access == $o_public_path->is_public_path( $this->path );
+		$this->path_access = $o_public_path->is_public_path( $this->path . '/' . $this->args );
+		$this->log_msg( 'public path access ' . print_r( $this->path_access, TRUE ) );
 		if( !$this->path_access )
 		{
 			$this->path_access = (new _perm())->verify_path_access( $this->path );

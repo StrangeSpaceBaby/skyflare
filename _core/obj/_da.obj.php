@@ -349,11 +349,11 @@ class _da extends _fail
 		}
 		catch( ValueError $ve )
 		{
-			$this->log([ 'chan' => 'da', 'type' => 'error', 'msg' => 'query_failed - ' . $ve->getMessage(), 'context' => [ 'query' => $query, 'bind' => $bind ] ]);
+			$this->log([ 'chan' => '_da', 'type' => 'error', 'msg' => 'query_failed - ' . $ve->getMessage(), 'context' => [ 'query' => $query, 'bind' => $bind ] ]);
 		}
 		catch( PDOException $p )
 		{
-			$this->log([ 'chan' => 'da', 'type' => 'error', 'msg' => 'query_failed - ' . $p->getMessage(), 'context' => [ 'query' => $query, 'bind' => $bind ] ]);
+			$this->log([ 'chan' => '_da', 'type' => 'error', 'msg' => 'query_failed - ' . $p->getMessage(), 'context' => [ 'query' => $query, 'bind' => $bind ] ]);
 			throw new QueryException( json_encode( array( 'query' => $query, 'bind' => $bind, 'pdo' => $p ) ) );
 		}
 
