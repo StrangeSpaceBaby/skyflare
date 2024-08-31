@@ -25,7 +25,6 @@ class _api
 					return _reject( 'no_url_in_api_opts' );
 				}
 
-
 				/*
 				let o_db = new _db({ dbname: 'cached_api', dbversion: 1, key:{ keyPath: 'url', autoIncrement: true }, store: 'cached' });
 				if( !$this.opts.force_fetch )
@@ -82,12 +81,6 @@ class _api
 					error: function( _ret )
 					{
 						log( $this.opts.url + ' failure' );
-						$( '#result_display' ).removeClass( 'text-success' ).addClass( 'text-danger' );
-						if( 'undefined' != typeof _ret.msg && _ret.msg )
-						{
-							log( 'prepending' );
-							$( '#result_display' ).prepend( _ret.msg + "<br />" );
-						}
 						return _reject( _ret );
 					}
 				}).always(

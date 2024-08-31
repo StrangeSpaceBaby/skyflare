@@ -5,7 +5,15 @@ class _auth
 		log( '_auth constructor' );
 		log( _opts );
 
-		let _defaults = { form_id: null, _mem_login: null, _mem_password: null };
+		let _defaults = {
+			form_id: null,
+			_mem_login: null,
+			_mem_password: null,
+			auth_endpoint: '/_auth/password',
+			auth_redirect_url: '/',
+			logout_redirect_url: '/_auth/logout'
+		};
+
 		this.opts = { ..._defaults, ..._opts };
 
 		log( '_auth constructor opts' );
@@ -23,7 +31,7 @@ class _auth
 
 		document.cookie = "auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
-		window.location.href = "/_auth/logout";
+		window.location.href = $this.opts.logout_redirect_url;
 	}
 
 	auth()
@@ -42,7 +50,7 @@ class _auth
 					_data = $this.opts;
 				}
 
-				new _api({ url: '/_auth/password', data: _data })
+				new _api({ url: $this.opts.auth_endpoint, data: _data })
 					.poll()
 					.then(
 						( _ret ) =>
@@ -77,7 +85,7 @@ class _auth
   									document.cookie = "auth_token=" + _ret.data.auth_token + ";" + expires + ";path=/";
 								}
 
-								window.location.href = '/';
+								window.location.href = $this.opts.auth_redirect_url;
 							}
 							else
 							{
@@ -100,77 +108,4 @@ class _auth
 			}
 		);
 	}
-}
-
-function register()
-{
-	let _username = $( '#auth_user__mem_login' ).val();
-	let _usernameVerify = $( '#auth_user__mem_login_verify' ).val();
-
-	if( _username != _usernameVerify )
-	{
-		growl( 'register_username_mismatch', { type: 'danger' } );
-		return false;
-	}
-
-	if( !$( '#auth_user_tos_agree' ).is( ':checked' ) )
-	{
-		growl( 'register_tos_not_checked', { type: 'danger' } );
-		return false;
-	}
-
-	$.post(
-		'/_register/register',
-		{
-			_mem_login: _username,
-			_mem_login_verify: _usernameVerify,
-			tos_agree: $( '#auth_user_tos_agree' ).is( ':checked' ),
-		}
-	)
-	.done(
-		function( _ret )
-		{
-			log( 'register.auth _ret' );
-			tablog( _ret.data );
-
-			growl( _ret.msg, { type: _ret.return ? 'success' : 'danger', 'delay': 10000 } );
-
-			if( 1 == _ret.return )
-			{
-				log( typeof _ret.data.auth_token );
-				log( _ret.data.auth_token );
-				if( 'undefined' !== typeof _ret.data.auth_token )
-				{
-					let _store = new _store();
-					_store.put( 'auth_token', _ret.auth_token );
-					_store.put( 'auth_token_type', _ret.token_type );
-					_store.put( 'auth_token_scope', _ret.scope );
-
-					let _moment = new moment();
-					_moment.add( _ret.expires_in, 'seconds' );
-					_store.put( 'auth_token_expires', _moment.format( 'X' ) );
-
-				}
-
-				log( 'redirect post auth' );
-				log( 'https://' + _ret.data.subscriber_domain );
-				window.location.href = 'https://' + _ret.data.subscriber_domain;
-			}
-		}
-	)
-	.fail(
-		function( _xhr, _textStatus, _errorThrown )
-		{
-			log( 'init.auth failed' );
-			tablog( _xhr );
-			log( _textStatus );
-			log( _errorThrown );
-		}
-	);
-}
-
-function growl( _msg, _vars )
-{
-	log( _msg );
-	tablog( _vars );
 }

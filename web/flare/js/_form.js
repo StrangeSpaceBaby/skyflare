@@ -3,7 +3,6 @@
  *	@param	object	_opts	form_id
  */
 
-
 class _form
 {
 	constructor( _opts )
@@ -149,11 +148,6 @@ class _form
 				return _success( 'autoformed' );
 			}
 		);
-	}
-
-	createForm( _elem )
-	{
-
 	}
 
 	popForm()

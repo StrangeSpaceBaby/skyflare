@@ -7,4 +7,3 @@ require_once( '../init/init.php' );
 
 // Starts app, no need to call anything else.
 $app = new _app();
-
