@@ -8,6 +8,8 @@ class _admin_obj_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_admin_obj_id" => "int",
 			"_admin_obj_new" => "timestamp",

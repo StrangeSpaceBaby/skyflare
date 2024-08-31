@@ -8,6 +8,8 @@ class _mem_pref_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_mem_pref_id" => "int",
 			"_mem_pref_new" => "timestamp",

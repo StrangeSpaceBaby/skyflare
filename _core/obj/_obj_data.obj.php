@@ -1,14 +1,12 @@
 <?php
 
-/**
- * Provides core methods for retrieval of data object
- */
 class _obj_data extends _fail
 {
-	public function __construct( string $obj_name )
+	public function __construct()
 	{
 		parent::__construct();
-		$this->log_chan( $obj_name . '_data' );
+		$class_name = str_replace( '_data', '', get_class( $this ) );
+		$this->log_chan( $class_name );
 	}
 
 	/**

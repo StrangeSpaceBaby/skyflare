@@ -8,6 +8,8 @@ class _chat_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_chat_id" => "int",
 			"_chat_new" => "timestamp",

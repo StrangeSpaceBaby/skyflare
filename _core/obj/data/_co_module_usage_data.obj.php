@@ -8,6 +8,8 @@ class _co_module_usage_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_co_module_usage_id" => "int",
 			"_co_module_usage_new" => "timestamp",

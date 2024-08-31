@@ -8,6 +8,8 @@ class _auth_token_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 			"_auth_token_id" => "int",
 			"_auth_token_new" => "timestamp",

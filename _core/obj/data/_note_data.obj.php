@@ -8,6 +8,8 @@ class _note_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_note_id" => "int",
 			"_note_new" => "timestamp",

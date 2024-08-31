@@ -2,8 +2,8 @@
 
 class _api extends _fail
 {
-	protected int $sub_id = 0;
-	protected ?string $sub_ulid = '';
+	protected int $_co_id = 0;
+	protected ?string $_co_ulid = '';
 	protected array $envelope;
 
 	public function __construct()
@@ -16,8 +16,8 @@ class _api extends _fail
 
 		if( $_co )
 		{
-			$this->_co_id = $_co->sub_id;
-			$this->sub_ulid = $_co->sub_ulid;
+			$this->_co_id = $_co->_co( '_co_id' );;
+			$this->_co_ulid = $_co->_co( '_co_ulid' );
 		}
 
 		$this->new_envelope();

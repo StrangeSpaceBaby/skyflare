@@ -8,6 +8,8 @@ class _cat_addr_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_cat_addr_id" => "int",
 			"_cat_addr_new" => "timestamp",

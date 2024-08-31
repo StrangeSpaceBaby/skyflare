@@ -6,8 +6,15 @@
 
 class _signal_data extends _obj_data
 {
+public array $cols;
+	public array $select_cols;
+	public array $full_join;
+
+
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 			"_signal_id" => "int",
 			"_signal_new" => "timestamp",

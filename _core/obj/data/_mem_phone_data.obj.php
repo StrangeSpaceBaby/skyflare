@@ -8,6 +8,8 @@ class _mem_phone_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_mem_phone_id" => "int",
 			"_mem_phone_new" => "timestamp",

@@ -8,6 +8,8 @@ class _cal_item_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_cal_item_id" => "int",
 			"_cal_item_new" => "timestamp",

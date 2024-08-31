@@ -8,6 +8,8 @@ class _config_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_config_id" => "int",
 			"_config_new" => "timestamp",

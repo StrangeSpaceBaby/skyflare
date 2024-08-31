@@ -8,6 +8,8 @@ class _workflow__mem_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_workflow__mem_id" => "int",
 			"_workflow__mem_new" => "timestamp",

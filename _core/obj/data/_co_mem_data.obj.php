@@ -6,8 +6,15 @@
 
 class _co_mem_data extends _obj_data
 {
+	public array $cols;
+	public array $select_cols;
+	public array $full_join;
+
+
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 			"_co_mem_id" => "int",
 			"_co_mem_new" => "timestamp",

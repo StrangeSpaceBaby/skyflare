@@ -8,6 +8,8 @@ class _role_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_role_id" => "int",
 			"_role_new" => "timestamp",

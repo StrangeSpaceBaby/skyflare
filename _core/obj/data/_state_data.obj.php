@@ -6,8 +6,15 @@
 
 class _state_data extends _obj_data
 {
+public array $cols;
+	public array $select_cols;
+	public array $full_join;
+
+
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 			"_state_id" => "int",
 			"_state_new" => "timestamp",

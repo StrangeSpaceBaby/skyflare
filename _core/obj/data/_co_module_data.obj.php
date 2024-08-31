@@ -8,6 +8,8 @@ class _co_module_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_co_module_id" => "int",
 			"_co_module_new" => "timestamp",

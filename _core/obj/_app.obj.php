@@ -17,7 +17,7 @@ class _app extends _fail
 	public function __construct()
 	{
 		parent::__construct();
-		$this->log_chan( 'app' );
+		$this->log_chan( '_app' );
 
 		$this->api = new _api();
 
@@ -35,7 +35,68 @@ class _app extends _fail
 	private function serve_path()
 	{
 		$this->log_msg( 'Serving path' );
-		exit;
+		require_once( CTLR_CORE . '_ctlr.ctlr.php' );
+
+		$ctlr_exists = 0;
+		if( str_starts_with( $this->ctlr, '_' ) )
+		{
+			$this->log_msg( 'controller is _core' );
+			$ctlr_filename = CTLR_CORE . $this->ctlr . '.ctlr.php';
+			if( $ctlr_exists = file_exists( $ctlr_filename ) )
+			{
+				$this->log_msg( 'controller file found' );
+				require_once( $ctlr_filename );
+			}
+			else
+			{
+				$this->log_msg( 'controller file not found' );
+				header( $this->ctlr . ' Resource Not Found ', TRUE, 404 );
+				exit;
+			}
+		}
+		else
+		{
+			$this->log_msg( 'controller is app' );
+			$ctlr_filename = CTLR_APP . $this->ctlr . '.ctlr.php';
+			if( $ctlr_exists = file_exists( $ctlr_filename ) )
+			{
+				require_once( $ctlr_filename );
+			}
+			else
+			{
+				$this->log_msg( 'controller file not found' );
+				header( $this->ctlr . ' Resource Not Found ', TRUE, 404 );
+				exit;
+			}
+		}
+
+		// No need to check if controller exists because if it doesn't exist, we won't get here
+		$ctlr_name = $ctlr . '_ctlr';
+		$ctlr = new $ctlr_name();
+		if( $ctlr )
+		{
+			$this->log_msg( 'controller instantiated' );
+
+			// Reflection here
+			$result = $ctlr->$func( $args );
+
+			if( $ctlr->failed() )
+			{
+				$this->api->fail( $ctlr->get_error_msg() );
+			}
+			else
+			{
+				$this->api->success( $ctlr->get_error_msg() );
+			}
+
+			$this->api->data( $result );
+		}
+		else
+		{
+			$this->log_msg( 'controller could not be instantiated' );
+		}
+
+		$this->api->send();
 	}
 
 	private function start_app() : bool

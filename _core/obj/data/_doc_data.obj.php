@@ -8,6 +8,8 @@ class _doc_data extends _obj_data
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->cols = [
 						"_doc_id" => "int",
 			"_doc_new" => "timestamp",
