@@ -8,56 +8,42 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 
-CREATE TABLE `_auth_token` (
-  `_auth_token_id` int(11) NOT NULL,
-  `_auth_token_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_auth_token_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_auth_token_del` timestamp(6) NULL DEFAULT NULL,
-  `_auth_token_arch` timestamp(6) NULL DEFAULT NULL,
-  `_auth_token_active` tinyint(1) DEFAULT 1,
-  `fk__mem_id` int(11) DEFAULT NULL,
+CREATE TABLE IF NOT EXISTS `_admin_exclude` (
+  `_admin_exclude_id` int(11) NOT NULL AUTO_INCREMENT,
+  `_admin_exclude_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `_admin_exclude_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `_admin_exclude_del` timestamp(6) NULL DEFAULT NULL,
+  `_admin_exclude_arch` timestamp(6) NULL DEFAULT NULL,
+  `_admin_exclude_active` tinyint(1) DEFAULT 1,
   `fk__co_id` int(11) DEFAULT NULL,
-  `_auth_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_auth_token_type` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_auth_token_expires` datetime DEFAULT NULL,
-  `_auth_token_expired` tinyint(1) DEFAULT 0,
-  `_auth_token_entity_ulid` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_admin_exclude_type` varchar(255) DEFAULT NULL,
+  `_admin_exclude_value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_admin_exclude_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_meditation_exclude` (
-  `_meditation_exclude_id` int(11) NOT NULL,
-  `_meditation_exclude_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_meditation_exclude_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_meditation_exclude_del` timestamp(6) NULL DEFAULT NULL,
-  `_meditation_exclude_arch` timestamp(6) NULL DEFAULT NULL,
-  `_meditation_exclude_active` tinyint(1) DEFAULT 1,
-  `fk__co_id` int(11) DEFAULT NULL,
-  `_meditation_exclude_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_meditation_exclude_value` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `_admin_obj` (
+  `_admin_obj_id` int(11) NOT NULL AUTO_INCREMENT,
+  `_admin_obj_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `_admin_obj_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `_admin_obj_del` timestamp(6) NULL DEFAULT NULL,
+  `_admin_obj_arch` timestamp(6) NULL DEFAULT NULL,
+  `_admin_obj_active` tinyint(1) DEFAULT 1,
+  `_admin_obj_name` varchar(255) DEFAULT NULL,
+  `_admin_obj_table` varchar(255) DEFAULT NULL,
+  `_admin_obj_obj` tinyint(1) DEFAULT 0,
+  `_admin_obj_ctlr` tinyint(1) DEFAULT 0,
+  `_admin_obj_page` tinyint(1) DEFAULT 0,
+  `_admin_obj_perm` tinyint(1) DEFAULT 0,
+  `_admin_obj_role_perm` tinyint(1) DEFAULT 0,
+  `_admin_obj_save_modal` tinyint(1) DEFAULT 0,
+  `_admin_obj_valid_form` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`_admin_obj_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_meditation_obj` (
-  `_meditation_obj_id` int(11) NOT NULL,
-  `_meditation_obj_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_meditation_obj_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_meditation_obj_del` timestamp(6) NULL DEFAULT NULL,
-  `_meditation_obj_arch` timestamp(6) NULL DEFAULT NULL,
-  `_meditation_obj_active` tinyint(1) DEFAULT 1,
-  `_meditation_obj_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_meditation_obj_table` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_meditation_obj_obj` tinyint(1) DEFAULT 0,
-  `_meditation_obj_ctlr` tinyint(1) DEFAULT 0,
-  `_meditation_obj_page` tinyint(1) DEFAULT 0,
-  `_meditation_obj_perm` tinyint(1) DEFAULT 0,
-  `_meditation_obj_role_perm` tinyint(1) DEFAULT 0,
-  `_meditation_obj_save_modal` tinyint(1) DEFAULT 0,
-  `_meditation_obj_valid_form` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-INSERT INTO `_meditation_obj` (`_meditation_obj_id`, `_meditation_obj_new`, `_meditation_obj_edit`, `_meditation_obj_del`, `_meditation_obj_arch`, `_meditation_obj_active`, `_meditation_obj_name`, `_meditation_obj_table`, `_meditation_obj_obj`, `_meditation_obj_ctlr`, `_meditation_obj_page`, `_meditation_obj_perm`, `_meditation_obj_role_perm`, `_meditation_obj_save_modal`, `_meditation_obj_valid_form`) VALUES
+INSERT INTO `_admin_obj` (`_admin_obj_id`, `_admin_obj_new`, `_admin_obj_edit`, `_admin_obj_del`, `_admin_obj_arch`, `_admin_obj_active`, `_admin_obj_name`, `_admin_obj_table`, `_admin_obj_obj`, `_admin_obj_ctlr`, `_admin_obj_page`, `_admin_obj_perm`, `_admin_obj_role_perm`, `_admin_obj_save_modal`, `_admin_obj_valid_form`) VALUES
 (1, '2021-10-05 16:32:28.440091', '2021-10-05 23:32:28.439930', NULL, NULL, 1, '_auth_token', '_auth_token', 1, 1, 1, 1, 1, 1, 1),
-(2, '2021-10-05 16:32:28.506624', '2021-10-05 23:32:28.506407', NULL, NULL, 1, '_meditation_exclude', '_meditation_exclude', 1, 1, 1, 1, 1, 1, 1),
-(3, '2021-10-05 16:32:28.553493', '2021-10-05 23:32:28.553315', NULL, NULL, 1, '_meditation_obj', '_meditation_obj', 1, 1, 1, 1, 1, 1, 1),
+(2, '2021-10-05 16:32:28.506624', '2021-10-05 23:32:28.506407', NULL, NULL, 1, '_admin_exclude', '_admin_exclude', 1, 1, 1, 1, 1, 1, 1),
+(3, '2021-10-05 16:32:28.553493', '2021-10-05 23:32:28.553315', NULL, NULL, 1, '_admin_obj', '_admin_obj', 1, 1, 1, 1, 1, 1, 1),
 (4, '2021-10-05 16:32:28.960927', '2021-10-05 23:32:28.960770', NULL, NULL, 1, '_config', '_config', 1, 1, 1, 1, 1, 1, 1),
 (5, '2021-10-05 16:32:29.003639', '2021-10-05 23:32:29.003487', NULL, NULL, 1, '_country', '_country', 1, 1, 1, 1, 1, 1, 1),
 (6, '2021-10-05 16:32:29.086228', '2021-10-05 23:32:29.086088', NULL, NULL, 1, '_doc', '_doc', 1, 1, 1, 1, 1, 1, 1),
@@ -111,63 +97,89 @@ INSERT INTO `_meditation_obj` (`_meditation_obj_id`, `_meditation_obj_new`, `_me
 (73, '2021-10-05 16:32:29.913624', '2021-10-05 23:32:29.913486', NULL, NULL, 1, '_pay', '_pay', 1, 1, 1, 1, 1, 1, 1),
 (74, '2021-10-05 16:32:30.698807', '2021-10-05 23:32:30.698643', NULL, NULL, 1, '_co_mem', '_co_mem', 1, 1, 1, 1, 1, 1, 1);
 
-CREATE TABLE `_cal` (
-  `_cal_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_auth_token` (
+  `_auth_token_id` int(11) NOT NULL AUTO_INCREMENT,
+  `_auth_token_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `_auth_token_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `_auth_token_del` timestamp(6) NULL DEFAULT NULL,
+  `_auth_token_arch` timestamp(6) NULL DEFAULT NULL,
+  `_auth_token_active` tinyint(1) DEFAULT 1,
+  `fk__mem_id` int(11) DEFAULT NULL,
+  `fk__co_id` int(11) DEFAULT NULL,
+  `_auth_token` varchar(255) DEFAULT NULL,
+  `_auth_token_type` varchar(15) DEFAULT NULL,
+  `_auth_token_expires` datetime DEFAULT NULL,
+  `_auth_token_expired` tinyint(1) DEFAULT 0,
+  `_auth_token_entity_ulid` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_auth_token_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
+
+INSERT INTO `_auth_token` (`_auth_token_id`, `_auth_token_new`, `_auth_token_edit`, `_auth_token_del`, `_auth_token_arch`, `_auth_token_active`, `fk__mem_id`, `fk__co_id`, `_auth_token`, `_auth_token_type`, `_auth_token_expires`, `_auth_token_expired`, `_auth_token_entity_ulid`) VALUES
+(1, '2024-09-01 03:09:44.104859', '2024-09-01 03:09:44.104859', NULL, NULL, 1, 1, 1, 'ee029179914dc2973c370ee7050b1e71b6fa30555ffc503e8c47992e70f6c8c70c88523694fe3ec19f276da3f060d53335a563a540a49e04e161939162b2617e', 'password', '2024-09-01 06:09:44', 0, NULL),
+(2, '2024-09-01 03:12:13.301813', '2024-09-01 03:12:13.301813', NULL, NULL, 1, 1, 1, '8fffd8f5bc97967bb26307433b73db5fc1617e537ef5118e58a1e2d4eb8315ac407fb4dc91fe642864e2d8cf4cccd4e94bc6e33024e9bdfdca96de7496aa1d4b', 'password', '2024-09-01 06:12:13', 0, NULL);
+
+CREATE TABLE IF NOT EXISTS `_cal` (
+  `_cal_id` int(11) NOT NULL AUTO_INCREMENT,
   `_cal_new` timestamp NULL DEFAULT NULL,
   `_cal_edit` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `_cal_del` timestamp NULL DEFAULT NULL,
   `_cal_arch` timestamp NULL DEFAULT NULL,
   `_cal_active` tinyint(1) DEFAULT 1,
   `fk__co_id` int(11) DEFAULT NULL,
-  `_cal_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_cal_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_cal_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_cal_ext` (
-  `_cal_ext_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_cal_ext` (
+  `_cal_ext_id` int(11) NOT NULL AUTO_INCREMENT,
   `_cal_ext_new` timestamp NULL DEFAULT NULL,
   `_cal_ext_edit` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `_cal_ext_del` timestamp NULL DEFAULT NULL,
   `_cal_ext_arch` timestamp NULL DEFAULT NULL,
   `_cal_ext_active` tinyint(1) DEFAULT 1,
   `fk__co_id` int(11) DEFAULT NULL,
-  `_cal_ext_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_cal_ext_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_cal_ext_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_cal_follow` (
-  `_cal_follow_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_cal_follow` (
+  `_cal_follow_id` int(11) NOT NULL AUTO_INCREMENT,
   `_cal_follow_new` timestamp NULL DEFAULT NULL,
   `_cal_follow_edit` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `_cal_follow_del` timestamp NULL DEFAULT NULL,
   `_cal_follow_arch` timestamp NULL DEFAULT NULL,
   `_cal_follow_active` tinyint(1) DEFAULT 1,
   `fk__co_id` int(11) DEFAULT NULL,
-  `_cal_follow_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_cal_follow_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_cal_follow_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_cal_item` (
-  `_cal_item_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_cal_item` (
+  `_cal_item_id` int(11) NOT NULL AUTO_INCREMENT,
   `_cal_item_new` timestamp NULL DEFAULT NULL,
   `_cal_item_edit` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `_cal_item_del` timestamp NULL DEFAULT NULL,
   `_cal_item_arch` timestamp NULL DEFAULT NULL,
   `_cal_item_active` tinyint(1) DEFAULT 1,
   `fk__co_id` int(11) DEFAULT NULL,
-  `_cal_item_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_cal_item_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_cal_item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_cat_addr` (
-  `_cat_addr_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_cat_addr` (
+  `_cat_addr_id` int(11) NOT NULL AUTO_INCREMENT,
   `_cat_addr_new` timestamp NULL DEFAULT NULL,
   `_cat_addr_edit` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `_cat_addr_del` timestamp NULL DEFAULT NULL,
   `_cat_addr_arch` timestamp NULL DEFAULT NULL,
   `_cat_addr_active` tinyint(1) DEFAULT 1,
   `_cat_addr_order` smallint(6) DEFAULT NULL,
-  `_cat_addr_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_cat_addr_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_cat_addr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_cat_note` (
-  `_cat_note_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_cat_note` (
+  `_cat_note_id` int(11) NOT NULL AUTO_INCREMENT,
   `_cat_note_new` timestamp NULL DEFAULT NULL,
   `_cat_note_edit` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `_cat_note_del` timestamp NULL DEFAULT NULL,
@@ -175,44 +187,71 @@ CREATE TABLE `_cat_note` (
   `_cat_note_active` tinyint(1) DEFAULT 1,
   `fk__co_id` int(11) DEFAULT NULL,
   `_cat_note_order` smallint(6) DEFAULT NULL,
-  `_cat_note_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_cat_note_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_cat_note_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_cat_phone` (
-  `_cat_phone_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_cat_phone` (
+  `_cat_phone_id` int(11) NOT NULL AUTO_INCREMENT,
   `_cat_phone_new` timestamp NULL DEFAULT NULL,
   `_cat_phone_edit` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `_cat_phone_del` timestamp NULL DEFAULT NULL,
   `_cat_phone_arch` timestamp NULL DEFAULT NULL,
   `_cat_phone_active` tinyint(1) DEFAULT 1,
   `_cat_phone_order` smallint(6) DEFAULT NULL,
-  `_cat_phone_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_cat_phone_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_cat_phone_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_config` (
-  `_config_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_co` (
+  `_co_id` int(11) NOT NULL AUTO_INCREMENT,
+  `_co_new` timestamp(6) NULL DEFAULT NULL,
+  `_co_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `_co_del` timestamp(6) NULL DEFAULT NULL,
+  `_co_arch` timestamp(6) NULL DEFAULT NULL,
+  `_co_active` tinyint(1) DEFAULT 1,
+  `fk__mem_id` int(11) DEFAULT NULL COMMENT 'The owner of the subscription',
+  `fk__sub_plan` int(11) DEFAULT NULL,
+  `_co_name` varchar(255) DEFAULT NULL,
+  `_co_domain` varchar(255) DEFAULT NULL COMMENT 'This is the subdomain that is used to scope all calls',
+  `_co_ulid` varchar(255) DEFAULT NULL,
+  `_co_setup` tinyint(1) DEFAULT 0,
+  `_co_configured` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`_co_id`),
+  UNIQUE KEY `_co_domain` (`_co_domain`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci COMMENT='Short for subscriber';
+
+INSERT INTO `_co` (`_co_id`, `_co_new`, `_co_edit`, `_co_del`, `_co_arch`, `_co_active`, `fk__mem_id`, `fk__sub_plan`, `_co_name`, `_co_domain`, `_co_ulid`, `_co_setup`, `_co_configured`) VALUES
+(1, '2021-10-08 19:53:38.000000', '2021-10-08 19:53:38.000000', NULL, NULL, 1, 1, NULL, 'Default Install', 'setup', NULL, 1, 1);
+
+CREATE TABLE IF NOT EXISTS `_config` (
+  `_config_id` int(11) NOT NULL AUTO_INCREMENT,
   `_config_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_config_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_config_del` timestamp(6) NULL DEFAULT NULL,
   `_config_arch` timestamp(6) NULL DEFAULT NULL,
   `_config_active` tinyint(1) DEFAULT 1,
-  `_config_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_config_desc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_config_table` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_config_link` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_config_name` varchar(255) DEFAULT NULL,
+  `_config_desc` varchar(255) DEFAULT NULL,
+  `_config_table` varchar(255) DEFAULT NULL,
+  `_config_link` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_config_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_country` (
-  `_country_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_country` (
+  `_country_id` int(11) NOT NULL AUTO_INCREMENT,
   `_country_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_country_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_country_del` timestamp(6) NULL DEFAULT NULL,
   `_country_arch` timestamp(6) NULL DEFAULT NULL,
   `_country_active` tinyint(1) DEFAULT 1,
-  `_country_name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_country_abbrev` char(2) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_country_display_order` smallint(6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_country_name` varchar(100) DEFAULT NULL,
+  `_country_abbrev` char(2) DEFAULT NULL,
+  `_country_display_order` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`_country_id`),
+  KEY `_country_abbrev` (`_country_abbrev`),
+  KEY `_country_name` (`_country_name`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
 INSERT INTO `_country` (`_country_id`, `_country_new`, `_country_edit`, `_country_del`, `_country_arch`, `_country_active`, `_country_name`, `_country_abbrev`, `_country_display_order`) VALUES
 (1, '2021-07-31 03:05:35.000000', '2021-07-31 03:06:05.000000', NULL, NULL, 1, 'Afghanistan', 'AF', NULL),
@@ -462,8 +501,71 @@ INSERT INTO `_country` (`_country_id`, `_country_new`, `_country_edit`, `_countr
 (245, '2021-07-31 03:05:35.000000', '2021-07-31 03:06:05.000000', NULL, NULL, 1, 'Zambia', 'ZM', NULL),
 (246, '2021-07-31 03:05:35.000000', '2021-07-31 03:06:05.000000', NULL, NULL, 1, 'Zimbabwe', 'ZW', NULL);
 
-CREATE TABLE `_doc` (
-  `_doc_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_co_mem` (
+  `_co_mem_id` int(11) NOT NULL AUTO_INCREMENT,
+  `_co_mem_new` timestamp NULL DEFAULT NULL,
+  `_co_mem_edit` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `_co_mem_del` timestamp NULL DEFAULT NULL,
+  `_co_mem_arch` timestamp NULL DEFAULT NULL,
+  `_co_mem_active` tinyint(1) DEFAULT 1,
+  `fk__co_id` int(11) DEFAULT NULL,
+  `fk__mem_id` int(11) DEFAULT NULL,
+  `fk__role_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`_co_mem_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
+
+INSERT INTO `_co_mem` (`_co_mem_id`, `_co_mem_new`, `_co_mem_edit`, `_co_mem_del`, `_co_mem_arch`, `_co_mem_active`, `fk__co_id`, `fk__mem_id`, `fk__role_id`) VALUES
+(1, '2021-11-14 20:17:30', '2021-11-19 20:47:06', NULL, NULL, 1, 1, 1, 1);
+
+CREATE TABLE IF NOT EXISTS `_co_pref` (
+  `_co_pref_id` int(11) NOT NULL AUTO_INCREMENT,
+  `_co_pref_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `_co_pref_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `_co_pref_del` timestamp(6) NULL DEFAULT NULL,
+  `_co_pref_arch` timestamp(6) NULL DEFAULT NULL,
+  `_co_pref_active` tinyint(1) DEFAULT 1,
+  `fk__co_id` int(11) DEFAULT NULL,
+  `_co_pref_key` varchar(255) DEFAULT NULL,
+  `_co_pref_val` mediumtext DEFAULT NULL,
+  PRIMARY KEY (`_co_pref_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
+
+CREATE TABLE IF NOT EXISTS `_co_sub_metric` (
+  `_co_sub_metric_id` int(11) NOT NULL AUTO_INCREMENT,
+  `_co_sub_metric_new` timestamp NOT NULL DEFAULT current_timestamp(),
+  `_co_sub_metric_edit` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `_co_sub_metric_del` timestamp NULL DEFAULT NULL,
+  `_co_sub_metric_arch` timestamp NULL DEFAULT NULL,
+  `_co_sub_metric_active` tinyint(1) DEFAULT NULL,
+  `fk__co_id` int(11) DEFAULT NULL,
+  `fk__sub_plan_metric_id` int(11) DEFAULT NULL,
+  `_co_sub_metric_count_curr` int(11) DEFAULT NULL,
+  `_co_sub_metric_count_over` int(11) DEFAULT NULL,
+  `_co_sub_metric_total_price` decimal(7,2) DEFAULT NULL,
+  `_co_sub_metric_ulid` char(32) DEFAULT NULL,
+  PRIMARY KEY (`_co_sub_metric_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
+
+CREATE TABLE IF NOT EXISTS `_co_sub_plan` (
+  `_co_sub_plan_id` int(11) NOT NULL AUTO_INCREMENT,
+  `_co_sub_plan_new` timestamp NOT NULL DEFAULT current_timestamp(),
+  `_co_sub_plan_edit` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `_co_sub_plan_del` timestamp NULL DEFAULT NULL,
+  `_co_sub_plan_arch` timestamp NULL DEFAULT NULL,
+  `_co_sub_plan_active` tinyint(1) DEFAULT NULL,
+  `fk__co_id` int(11) DEFAULT NULL,
+  `fk__sub_plan_id` int(11) DEFAULT NULL,
+  `_co_sub_plan_has_trial` tinyint(1) DEFAULT 1,
+  `_co_sub_plan_trial_end` date DEFAULT NULL,
+  `_co_sub_plan_total_price` decimal(7,2) DEFAULT NULL,
+  `_co_sub_plan_date_last_bill` date DEFAULT NULL,
+  `_co_sub_plan_date_next_bill` date DEFAULT NULL,
+  `_co_sub_plan_ulid` char(32) DEFAULT NULL,
+  PRIMARY KEY (`_co_sub_plan_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
+
+CREATE TABLE IF NOT EXISTS `_doc` (
+  `_doc_id` int(11) NOT NULL AUTO_INCREMENT,
   `_doc_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_doc_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_doc_del` timestamp(6) NULL DEFAULT NULL,
@@ -472,16 +574,17 @@ CREATE TABLE `_doc` (
   `fk__co_id` int(11) DEFAULT NULL,
   `fk__mem_id` int(11) DEFAULT NULL COMMENT '_mem the document relates to',
   `fk_uploader__mem_id` int(11) DEFAULT NULL,
-  `_doc_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_doc_orig_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_doc_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `_doc_name` varchar(255) DEFAULT NULL,
+  `_doc_orig_name` varchar(255) DEFAULT NULL,
+  `_doc_type` varchar(255) DEFAULT NULL,
   `_doc_size` int(11) DEFAULT NULL COMMENT 'in kb',
-  `_doc_s3_loc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_doc_hash` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_doc_s3_loc` varchar(255) DEFAULT NULL,
+  `_doc_hash` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_doc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_follow` (
-  `_follow_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_follow` (
+  `_follow_id` int(11) NOT NULL AUTO_INCREMENT,
   `_follow_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_follow_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_follow_del` timestamp(6) NULL DEFAULT NULL,
@@ -489,23 +592,27 @@ CREATE TABLE `_follow` (
   `_follow_active` tinyint(1) DEFAULT 1,
   `fk__co_id` int(11) DEFAULT NULL,
   `fk__mem_id` int(11) DEFAULT NULL,
-  `_follow_obj` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_follow_obj_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_follow_obj` varchar(255) DEFAULT NULL,
+  `_follow_obj_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`_follow_id`),
+  KEY `_follow_obj` (`_follow_obj`),
+  KEY `_follow_obj_id` (`_follow_obj_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_lang` (
-  `_lang_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_lang` (
+  `_lang_id` int(11) NOT NULL AUTO_INCREMENT,
   `_lang_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_lang_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_lang_del` timestamp(6) NULL DEFAULT NULL,
   `_lang_arch` timestamp(6) NULL DEFAULT NULL,
   `_lang_active` tinyint(1) DEFAULT 1,
   `_lang_order` smallint(6) DEFAULT NULL,
-  `_lang_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_lang_code` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `_lang_name` varchar(255) DEFAULT NULL,
+  `_lang_code` varchar(5) DEFAULT NULL,
   `_lang_default` tinyint(1) DEFAULT 0,
-  `_lang_system` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_lang_system` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`_lang_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
 INSERT INTO `_lang` (`_lang_id`, `_lang_new`, `_lang_edit`, `_lang_del`, `_lang_arch`, `_lang_active`, `_lang_order`, `_lang_name`, `_lang_code`, `_lang_default`, `_lang_system`) VALUES
 (1, '2021-07-31 03:05:35.000000', '2021-07-31 03:06:05.000000', NULL, NULL, 1, 1, 'English', 'en', 1, 1),
@@ -644,8 +751,8 @@ INSERT INTO `_lang` (`_lang_id`, `_lang_new`, `_lang_edit`, `_lang_del`, `_lang_
 (134, '2021-07-31 03:05:35.000000', '2021-07-31 03:06:05.000000', NULL, NULL, 1, 3, 'Chinese', 'zh', 0, 0),
 (135, '2021-07-31 03:05:35.000000', '2021-07-31 03:06:05.000000', NULL, NULL, 1, 3, 'Zulu', 'zu', 0, 0);
 
-CREATE TABLE `_log` (
-  `_log_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_log` (
+  `_log_id` int(11) NOT NULL AUTO_INCREMENT,
   `_log_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_log_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_log_del` timestamp(6) NULL DEFAULT NULL,
@@ -654,37 +761,39 @@ CREATE TABLE `_log` (
   `fk__co_id` int(11) DEFAULT NULL,
   `fk__mem_id` int(11) DEFAULT NULL,
   `fk__module_id` int(11) DEFAULT NULL,
-  `_log_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_log_obj` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `_log_type` varchar(255) DEFAULT NULL,
+  `_log_obj` varchar(255) DEFAULT NULL,
   `_log_obj_id` int(11) DEFAULT NULL,
-  `_log_note` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_log_note` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_log_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_mem` (
-  `_mem_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_mem` (
+  `_mem_id` int(11) NOT NULL AUTO_INCREMENT,
   `_mem_new` timestamp(6) NULL DEFAULT NULL,
   `_mem_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_mem_del` timestamp(6) NULL DEFAULT NULL,
   `_mem_arch` timestamp(6) NULL DEFAULT NULL,
   `_mem_active` tinyint(1) DEFAULT 1,
   `fk__doc_id` int(11) DEFAULT NULL COMMENT 'Profile Pic',
-  `_mem_ulid` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_mem_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_mem_fname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_mem_mname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_mem_lname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_mem_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `_mem_ulid` varchar(255) DEFAULT NULL,
+  `_mem_code` varchar(255) DEFAULT NULL,
+  `_mem_fname` varchar(255) DEFAULT NULL,
+  `_mem_mname` varchar(255) DEFAULT NULL,
+  `_mem_lname` varchar(255) DEFAULT NULL,
+  `_mem_name` varchar(255) DEFAULT NULL,
   `_mem_dob` date DEFAULT NULL,
-  `_mem_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `_mem_email` varchar(255) DEFAULT NULL,
   `_mem_email_verified` tinyint(1) DEFAULT 0,
-  `_mem_configured` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Short for member';
+  `_mem_configured` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`_mem_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci COMMENT='Short for member';
 
 INSERT INTO `_mem` (`_mem_id`, `_mem_new`, `_mem_edit`, `_mem_del`, `_mem_arch`, `_mem_active`, `fk__doc_id`, `_mem_ulid`, `_mem_code`, `_mem_fname`, `_mem_mname`, `_mem_lname`, `_mem_name`, `_mem_dob`, `_mem_email`, `_mem_email_verified`, `_mem_configured`) VALUES
 (1, '2021-11-14 20:13:54.995658', '2021-11-19 20:39:44.595677', NULL, NULL, 1, NULL, '25c30dce8daf4c4795825127fbc6a221', 'default_admin', 'Default', NULL, 'Admin', 'Default Admin', NULL, 'default@admin', 0, 0);
 
-CREATE TABLE `_mem_addr` (
-  `_mem_addr_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_mem_addr` (
+  `_mem_addr_id` int(11) NOT NULL AUTO_INCREMENT,
   `_mem_addr_new` timestamp NULL DEFAULT NULL,
   `_mem_addr_edit` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `_mem_addr_del` timestamp NULL DEFAULT NULL,
@@ -695,11 +804,11 @@ CREATE TABLE `_mem_addr` (
   `fk__state_id` int(11) DEFAULT NULL,
   `fk__country_id` int(11) DEFAULT NULL,
   `fk__cat_addr_id` int(11) DEFAULT NULL,
-  `_mem_addr_street` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_mem_addr_street_two` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_mem_addr_apt_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_mem_addr_city` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_mem_addr_postal` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `_mem_addr_street` varchar(255) DEFAULT NULL,
+  `_mem_addr_street_two` varchar(255) DEFAULT NULL,
+  `_mem_addr_apt_name` varchar(255) DEFAULT NULL,
+  `_mem_addr_city` varchar(255) DEFAULT NULL,
+  `_mem_addr_postal` varchar(255) DEFAULT NULL,
   `_mem_addr_owned` tinyint(1) DEFAULT 0,
   `_mem_addr_rented` tinyint(1) DEFAULT 0,
   `_mem_addr_start` date DEFAULT NULL,
@@ -708,11 +817,12 @@ CREATE TABLE `_mem_addr` (
   `_mem_addr_renewal` date DEFAULT NULL,
   `_mem_addr_duration` smallint(6) DEFAULT NULL,
   `_mem_addr_homeless` tinyint(1) DEFAULT 0,
-  `_mem_addr_protect` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_mem_addr_protect` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`_mem_addr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_mem_auth` (
-  `_mem_auth_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_mem_auth` (
+  `_mem_auth_id` int(11) NOT NULL AUTO_INCREMENT,
   `_mem_auth_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_mem_auth_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_mem_auth_del` timestamp(6) NULL DEFAULT NULL,
@@ -720,15 +830,16 @@ CREATE TABLE `_mem_auth` (
   `_mem_auth_active` tinyint(1) DEFAULT 1,
   `fk__mem_id` int(11) DEFAULT NULL,
   `fk__co_id` int(11) DEFAULT NULL,
-  `_mem_login` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_mem_password` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_mem_login` varchar(255) DEFAULT NULL,
+  `_mem_password` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`_mem_auth_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
 INSERT INTO `_mem_auth` (`_mem_auth_id`, `_mem_auth_new`, `_mem_auth_edit`, `_mem_auth_del`, `_mem_auth_arch`, `_mem_auth_active`, `fk__mem_id`, `fk__co_id`, `_mem_login`, `_mem_password`) VALUES
-(1, '2021-11-19 22:08:16.345440', '2021-11-19 22:08:16.345440', NULL, NULL, 1, 1, 1, 'default@admin', '');
+(1, '2024-08-31 17:11:01.953270', '2024-08-31 17:11:01.953270', NULL, NULL, 1, 1, 1, 'default@admin', '$2y$10$lOQMJqP0A3mWyksJW/jNeOICQVU64ns3rbK7HXfPksTH4bLyHSXBa');
 
-CREATE TABLE `_mem_phone` (
-  `_mem_phone_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_mem_phone` (
+  `_mem_phone_id` int(11) NOT NULL AUTO_INCREMENT,
   `_mem_phone_new` timestamp NULL DEFAULT NULL,
   `_mem_phone_edit` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `_mem_phone_del` timestamp NULL DEFAULT NULL,
@@ -737,13 +848,14 @@ CREATE TABLE `_mem_phone` (
   `fk__co_id` int(11) DEFAULT NULL,
   `fk__mem_id` int(11) DEFAULT NULL,
   `fk__cat_phone_id` int(11) DEFAULT NULL,
-  `_mem_phone_number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `_mem_phone_number` varchar(255) DEFAULT NULL,
   `_mem_phone_verified` tinyint(1) DEFAULT 0,
-  `_mem_phone_verify_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_mem_phone_verify_code` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_mem_phone_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_mem_pref` (
-  `_mem_pref_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_mem_pref` (
+  `_mem_pref_id` int(11) NOT NULL AUTO_INCREMENT,
   `_mem_pref_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_mem_pref_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_mem_pref_del` timestamp(6) NULL DEFAULT NULL,
@@ -751,13 +863,14 @@ CREATE TABLE `_mem_pref` (
   `_mem_pref_active` tinyint(1) DEFAULT 1,
   `fk__co_id` int(11) DEFAULT NULL,
   `fk__mem_id` int(11) DEFAULT NULL,
-  `_mem_pref_path` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_mem_pref_group` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_mem_pref_value` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_mem_pref_path` varchar(255) DEFAULT NULL,
+  `_mem_pref_group` varchar(255) DEFAULT NULL,
+  `_mem_pref_value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_mem_pref_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_mem_reset` (
-  `_mem_reset_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_mem_reset` (
+  `_mem_reset_id` int(11) NOT NULL AUTO_INCREMENT,
   `_mem_reset_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_mem_reset_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_mem_reset_del` timestamp(6) NULL DEFAULT NULL,
@@ -765,60 +878,84 @@ CREATE TABLE `_mem_reset` (
   `_mem_reset_active` tinyint(1) DEFAULT 1,
   `fk__mem_id` int(11) DEFAULT NULL,
   `fk__co_id` int(11) DEFAULT NULL,
-  `_mem_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_mem_reset_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_mem_reset_match_value` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_mem_reset_new_value` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_mem_reset_token` varchar(255) DEFAULT NULL,
+  `_mem_reset_type` varchar(255) DEFAULT NULL,
+  `_mem_reset_match_value` varchar(255) DEFAULT NULL,
+  `_mem_reset_new_value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_mem_reset_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_menu_item` (
-  `_menu_item_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_menu_item` (
+  `_menu_item_id` int(11) NOT NULL AUTO_INCREMENT,
   `_menu_item_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_menu_item_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_menu_item_del` timestamp(6) NULL DEFAULT NULL,
   `_menu_item_arch` timestamp(6) NULL DEFAULT NULL,
   `_menu_item_active` tinyint(1) DEFAULT 1,
   `fk__co_id` int(11) DEFAULT NULL,
-  `_menu_item_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_menu_item_desc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_menu_item_href` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_menu_item_click` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_menu_item_target` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_menu_item_toggle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_menu_item_icon` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_menu_item_public` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_menu_item_name` varchar(255) DEFAULT NULL,
+  `_menu_item_desc` varchar(255) DEFAULT NULL,
+  `_menu_item_href` varchar(255) DEFAULT NULL,
+  `_menu_item_click` varchar(255) DEFAULT NULL,
+  `_menu_item_target` varchar(255) DEFAULT NULL,
+  `_menu_item_toggle` varchar(255) DEFAULT NULL,
+  `_menu_item_icon` varchar(255) DEFAULT NULL,
+  `_menu_item_public` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`_menu_item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_module` (
-  `_module_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_module` (
+  `_module_id` int(11) NOT NULL AUTO_INCREMENT,
   `_module_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_module_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_module_del` timestamp(6) NULL DEFAULT NULL,
   `_module_arch` timestamp(6) NULL DEFAULT NULL,
   `_module_active` tinyint(1) DEFAULT 1,
-  `_module_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'token to translate',
-  `_module_desc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_module_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `_module_name` varchar(255) DEFAULT NULL COMMENT 'token to translate',
+  `_module_desc` varchar(255) DEFAULT NULL,
+  `_module_type` varchar(255) DEFAULT NULL,
   `_module_default` tinyint(1) DEFAULT 0,
-  `_module_display_order` smallint(6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_module_display_order` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`_module_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
 INSERT INTO `_module` (`_module_id`, `_module_new`, `_module_edit`, `_module_del`, `_module_arch`, `_module_active`, `_module_name`, `_module_desc`, `_module_type`, `_module_default`, `_module_display_order`) VALUES
 (1, '2021-11-19 20:46:01.258470', '2021-11-19 20:46:01.258470', NULL, NULL, 1, 'Default Module', 'A module you should edit or delete and make your own.', 'default', 1, 1);
 
-CREATE TABLE `_module_perm` (
-  `_module_perm_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_module_perm` (
+  `_module_perm_id` int(11) NOT NULL AUTO_INCREMENT,
   `_module_perm_new` datetime DEFAULT NULL,
   `_module_perm_edit` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `_module_perm_del` datetime DEFAULT NULL,
   `_module_perm_arch` datetime DEFAULT NULL,
   `_module_perm_active` tinyint(1) DEFAULT 1,
   `fk__module_id` int(11) DEFAULT NULL,
-  `fk__perm_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `fk__perm_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`_module_perm_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_note` (
-  `_note_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_module__mem` (
+  `_module__mem_id` int(11) NOT NULL AUTO_INCREMENT,
+  `_module__mem_new` timestamp NULL DEFAULT NULL,
+  `_module__mem_edit` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `_module__mem_del` timestamp NULL DEFAULT NULL,
+  `_module__mem_arch` timestamp NULL DEFAULT NULL,
+  `_module__mem_active` tinyint(1) DEFAULT 1,
+  `fk__co_id` int(11) DEFAULT NULL,
+  `fk__module_id` int(11) DEFAULT NULL,
+  `fk__mem_id` int(11) DEFAULT NULL,
+  `fk__role_id` int(11) DEFAULT NULL,
+  `_module__mem_uuid` char(32) DEFAULT NULL,
+  `_module__mem_ulid` char(32) DEFAULT NULL,
+  PRIMARY KEY (`_module__mem_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
+
+INSERT INTO `_module__mem` (`_module__mem_id`, `_module__mem_new`, `_module__mem_edit`, `_module__mem_del`, `_module__mem_arch`, `_module__mem_active`, `fk__co_id`, `fk__module_id`, `fk__mem_id`, `fk__role_id`, `_module__mem_uuid`, `_module__mem_ulid`) VALUES
+(1, '2024-01-14 07:42:10', '2024-06-30 01:10:12', NULL, NULL, 1, 1, 1, 1, 1, NULL, '01j1jsx77mysskc06q4bcerrqn'),
+(6, '2024-07-01 08:11:56', '2024-07-22 03:52:17', NULL, NULL, 1, 2, 1, 2, 3, NULL, '01j1ncd3vddabxdvjys8bdbpnd');
+
+CREATE TABLE IF NOT EXISTS `_note` (
+  `_note_id` int(11) NOT NULL AUTO_INCREMENT,
   `_note_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_note_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_note_del` timestamp(6) NULL DEFAULT NULL,
@@ -830,13 +967,14 @@ CREATE TABLE `_note` (
   `fk__note_id` int(11) DEFAULT NULL COMMENT 'if !NULL, this is a reply to this note_id',
   `_note_edited` tinyint(1) DEFAULT 0,
   `_note_effective_date` timestamp(6) NULL DEFAULT NULL,
-  `_note_text` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_note_obj` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_note_obj_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_note_text` mediumtext DEFAULT NULL,
+  `_note_obj` varchar(255) DEFAULT NULL,
+  `_note_obj_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`_note_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_notif` (
-  `_notif_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_notif` (
+  `_notif_id` int(11) NOT NULL AUTO_INCREMENT,
   `_notif_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_notif_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_notif_del` timestamp(6) NULL DEFAULT NULL,
@@ -844,11 +982,12 @@ CREATE TABLE `_notif` (
   `_notif_active` tinyint(1) DEFAULT 1,
   `fk__co_id` int(11) DEFAULT NULL,
   `fk__mem_id` int(11) DEFAULT NULL COMMENT 'Author, 0 if system',
-  `_notif_text` text COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_notif_text` text DEFAULT NULL,
+  PRIMARY KEY (`_notif_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_notif_signal` (
-  `_notif_signal_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_notif_signal` (
+  `_notif_signal_id` int(11) NOT NULL AUTO_INCREMENT,
   `_notif_signal_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_notif_signal_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_notif_signal_del` timestamp(6) NULL DEFAULT NULL,
@@ -856,117 +995,79 @@ CREATE TABLE `_notif_signal` (
   `_notif_signal_active` tinyint(1) DEFAULT 1,
   `fk__co_id` int(11) DEFAULT NULL,
   `fk__signal_id` int(11) DEFAULT NULL,
-  `fk__notif_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `fk__notif_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`_notif_signal_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_pay` (
-  `_pay_id` int(11) NOT NULL,
-  `_pay_new` timestamp NULL DEFAULT NULL,
-  `_pay_edit` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
-  `_pay_del` timestamp NULL DEFAULT NULL,
-  `_pay_arch` timestamp NULL DEFAULT NULL,
-  `_pay_active` tinyint(1) DEFAULT 1,
-  `fk__co_id` int(11) DEFAULT NULL,
-  `_pay_count` smallint(6) DEFAULT NULL,
-  `_pay_cust_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE TABLE `_perm` (
-  `_perm_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_perm` (
+  `_perm_id` int(11) NOT NULL AUTO_INCREMENT,
   `_perm_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_perm_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_perm_del` timestamp(6) NULL DEFAULT NULL,
   `_perm_arch` timestamp(6) NULL DEFAULT NULL,
   `_perm_active` tinyint(1) DEFAULT 1,
   `_perm_protected` tinyint(1) NOT NULL DEFAULT 0,
-  `_perm_role_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
-  `_perm_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_perm_path` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_perm_desc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_perm_role_type` varchar(255) DEFAULT '',
+  `_perm_name` varchar(255) DEFAULT NULL,
+  `_perm_path` varchar(255) DEFAULT NULL,
+  `_perm_desc` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_perm_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
 INSERT INTO `_perm` (`_perm_id`, `_perm_new`, `_perm_edit`, `_perm_del`, `_perm_arch`, `_perm_active`, `_perm_protected`, `_perm_role_type`, `_perm_name`, `_perm_path`, `_perm_desc`) VALUES
-(1, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Authentication', '/_auth_token', 'All authentication actions'),
-(2, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Beehive Excluded Objects', '/_meditation_exclude', 'All Beehive excluded object actions'),
-(3, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Beehive Objects', '/_meditation_obj', 'All objects Beehive has under its control'),
-(4, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Configuration', '/_config', 'All configuration actions'),
-(5, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Countries', '/_country', 'All country actions'),
-(6, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Documents', '/_doc', 'All document actions'),
-(7, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Follows/Following', '/_follow', 'All permissions for following'),
-(8, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Language', '/_lang', 'All language actions'),
-(9, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Log', '/_log', 'All log actions'),
-(10, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Users', '/_mem', 'All user actions'),
-(11, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'User Authentication', '/_mem_auth', 'Users may log in and be authenticated'),
-(12, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'User Preferences', '/_mem_pref', 'All user preference actions'),
-(13, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'User Password Reset', '/_mem_reset', 'All password reset actions'),
-(14, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Menu Items', '/_menu_item', 'All menu item actions'),
-(15, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Modules', '/_module', 'All module actions'),
-(16, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Module Users', '/_module_mem', 'All module user actions'),
-(17, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Notes', '/_note', 'All note actions'),
-(18, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Notifications', '/_notif', 'All notification actions'),
-(19, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Notification Signals', '/_notif_signal', 'All notification signal actions'),
-(20, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Permissions', '/_perm', 'All permission actions'),
-(21, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Permission Menu Items', '/_perm_menu_item', 'All permission menu item actions'),
-(22, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Pricing', '/_pricing', 'All pricing actions'),
-(23, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Pricing Limits', '/_pricing_limit', 'All pricing limit actions'),
-(24, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Pricing Modules', '/_pricing_module', 'All pricing module actions'),
-(25, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Public Paths', '/_public_path', 'All public path actions'),
-(26, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Reports', '/_report', 'All report actions'),
-(27, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Report Libraries', '/_report_lib', 'All report library actions'),
-(28, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Roles', '/_role', 'All role actions'),
-(29, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Role Permissions', '/_role_perm', 'All role permission actions'),
-(30, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Settings', '/_setting', 'All setting actions'),
-(31, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Signals', '/_signal', 'All signal actions'),
-(32, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Signal Users', '/_signal_mem', 'All signal user actions'),
-(33, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'States/Provinces/Regions', '/_state', 'All state actions'),
-(34, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Subscribers', '/_co', 'All subscriber actions'),
-(35, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Subscribed Modules', '/_co_module', 'All subscribed module actions'),
-(36, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Subscriber Preferences', '/_co_pref', 'All subscriber preference actions'),
-(37, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Tags', '/_tag', 'All tag actions'),
-(38, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Tasks', '/_task', 'All task actions'),
-(39, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Language Tokens', '/_token', 'All language token actions'),
-(40, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Token Translations', '/_token_xl8', 'All token translation actions'),
-(41, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Timezones', '/_tz', 'All timezone actions'),
-(42, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Valid Form Fields', '/_valid_field', 'All form field actions'),
-(43, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Valid Forms', '/_valid_form', 'All valid form actions'),
-(44, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Beehive Actions - All', '/_meditation', 'To manage all aspects of Beehive'),
-(45, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Registration', '/_register', 'All registration actions'),
-(46, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Module Permissions', '/_module_perm', 'All module permission actions'),
-(47, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'User Addresses', '/_mem_addr', 'All user address actions'),
-(48, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'User Phones', '/_mem_phone', 'All user phone actions'),
-(49, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Calendar', '/_cal', 'All calendar actions'),
-(50, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'External Calendars', '/_cal_ext', 'All external calendar actions'),
-(51, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Calendar Followers', '/_cal_follow', 'All calendar follower actions'),
-(52, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Calendar Items', '/_cal_item', 'All calendar item actions'),
-(53, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Phone Types', '/_cat_phone', 'All phone type actions'),
-(54, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Address Types', '/_cat_addr', 'All address type actions'),
-(55, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Headquarters', '/_hq', 'All headquarter actions'),
-(56, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, 'superadmin', 'Payment Actions', '/_pay', 'For all payment actions necessary for a checkout and subscription recurring billing'),
-(57, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', 'Configuration Page', '/page/configuration', 'Allow users access to the configuration page'),
-(58, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 1, '', 'List Members', '/_mem/list', 'To be able to list members in dropdowns and lists.'),
-(59, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', 'Get all subscriber users', '/_co_mem/list', 'To be able to see all metered users for a subscriber in dropdowns and lists'),
-(60, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', 'Role Permissions Page', '/page/role_perms', 'To be able to manage roles and permissions'),
-(61, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', 'Fetch Subscriber User', '/_co_mem/fetch', NULL),
-(62, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', 'Fetch Active Roles', '/_role/fetch', NULL),
-(63, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', 'List all roles', '/_role/list', NULL),
-(64, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', 'Save Subscriber Member', '/_co_mem/save', NULL),
-(65, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', 'Roles & Permissions Configuration Page', '/page/_role_perm', NULL),
-(66, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', 'Manage Organization Details', '/page/_coscriber', NULL),
-(67, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', '/_cat_note', '/_cat_note', NULL),
-(68, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', '/_co_mem', '/_co_mem', NULL),
-(69, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', 'Note Category List', '/_cat_note/list', NULL),
-(70, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', NULL, '/_cat_note/fetch', NULL),
-(71, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', NULL, '/_cat_note/save', NULL),
-(72, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', NULL, '/_cat_note/delete', NULL),
-(73, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', NULL, '/page/billing', NULL),
-(74, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', 'Managing Subscriber Preferences', '/_co_pref/pref', NULL),
-(75, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', NULL, '/_co/save_email_footer', NULL),
-(76, '2021-10-08 20:32:36.000000', '2021-10-08 20:32:36.000000', NULL, NULL, 1, 0, '', NULL, '/_note/get_by_obj', NULL),
-(77, '2021-10-10 23:34:26.000000', '2021-10-10 23:34:26.000000', NULL, NULL, 1, 0, '', NULL, '/_page/_mem_reset', NULL),
-(78, '2021-11-19 22:05:48.000000', '2021-11-19 22:05:48.000000', NULL, NULL, 1, 0, 'superadmin', 'All Pages', '/page', 'This gives the admin the right to see all pages.');
+(1, '2024-09-01 04:51:48.510741', '2024-09-01 04:51:48.510741', NULL, NULL, 1, 0, '', '/_admin_exclude', '/_admin_exclude', NULL),
+(2, '2024-09-01 04:51:48.606952', '2024-09-01 04:51:48.606952', NULL, NULL, 1, 0, '', '/_admin_obj', '/_admin_obj', NULL),
+(3, '2024-09-01 04:51:48.679285', '2024-09-01 04:51:48.679285', NULL, NULL, 1, 0, '', '/_auth_token', '/_auth_token', NULL),
+(4, '2024-09-01 04:51:48.717701', '2024-09-01 04:51:48.717701', NULL, NULL, 1, 0, '', '/_cal', '/_cal', NULL),
+(5, '2024-09-01 04:51:48.826837', '2024-09-01 04:51:48.826837', NULL, NULL, 1, 0, '', '/_cal_ext', '/_cal_ext', NULL),
+(6, '2024-09-01 04:51:48.899049', '2024-09-01 04:51:48.899049', NULL, NULL, 1, 0, '', '/_cal_follow', '/_cal_follow', NULL),
+(7, '2024-09-01 04:51:48.976726', '2024-09-01 04:51:48.976726', NULL, NULL, 1, 0, '', '/_cal_item', '/_cal_item', NULL),
+(8, '2024-09-01 04:51:49.054034', '2024-09-01 04:51:49.054034', NULL, NULL, 1, 0, '', '/_cat_addr', '/_cat_addr', NULL),
+(9, '2024-09-01 04:51:49.115605', '2024-09-01 04:51:49.115605', NULL, NULL, 1, 0, '', '/_cat_note', '/_cat_note', NULL),
+(10, '2024-09-01 04:51:49.149267', '2024-09-01 04:51:49.149267', NULL, NULL, 1, 0, '', '/_cat_phone', '/_cat_phone', NULL),
+(11, '2024-09-01 04:51:49.208506', '2024-09-01 04:51:49.208506', NULL, NULL, 1, 0, '', '/_co', '/_co', NULL),
+(12, '2024-09-01 04:51:49.286617', '2024-09-01 04:51:49.286617', NULL, NULL, 1, 0, '', '/_co_mem', '/_co_mem', NULL),
+(13, '2024-09-01 04:51:49.371069', '2024-09-01 04:51:49.371069', NULL, NULL, 1, 0, '', '/_co_pref', '/_co_pref', NULL),
+(14, '2024-09-01 04:51:49.508975', '2024-09-01 04:51:49.508975', NULL, NULL, 1, 0, '', '/_co_sub_metric', '/_co_sub_metric', NULL),
+(15, '2024-09-01 04:51:49.621233', '2024-09-01 04:51:49.621233', NULL, NULL, 1, 0, '', '/_co_sub_plan', '/_co_sub_plan', NULL),
+(16, '2024-09-01 04:51:49.742119', '2024-09-01 04:51:49.742119', NULL, NULL, 1, 0, '', '/_config', '/_config', NULL),
+(17, '2024-09-01 04:51:49.833001', '2024-09-01 04:51:49.833001', NULL, NULL, 1, 0, '', '/_country', '/_country', NULL),
+(18, '2024-09-01 04:51:49.908887', '2024-09-01 04:51:49.908887', NULL, NULL, 1, 0, '', '/_doc', '/_doc', NULL),
+(19, '2024-09-01 04:51:49.987088', '2024-09-01 04:51:49.987088', NULL, NULL, 1, 0, '', '/_follow', '/_follow', NULL),
+(20, '2024-09-01 04:51:50.052616', '2024-09-01 04:51:50.052616', NULL, NULL, 1, 0, '', '/_lang', '/_lang', NULL),
+(21, '2024-09-01 04:51:50.136310', '2024-09-01 04:51:50.136310', NULL, NULL, 1, 0, '', '/_log', '/_log', NULL),
+(22, '2024-09-01 04:51:50.173710', '2024-09-01 04:51:50.173710', NULL, NULL, 1, 0, '', '/_mem', '/_mem', NULL),
+(23, '2024-09-01 04:51:50.266735', '2024-09-01 04:51:50.266735', NULL, NULL, 1, 0, '', '/_mem_addr', '/_mem_addr', NULL),
+(24, '2024-09-01 04:51:50.386151', '2024-09-01 04:51:50.386151', NULL, NULL, 1, 0, '', '/_mem_auth', '/_mem_auth', NULL),
+(25, '2024-09-01 04:51:50.438422', '2024-09-01 04:51:50.438422', NULL, NULL, 1, 0, '', '/_mem_phone', '/_mem_phone', NULL),
+(26, '2024-09-01 04:51:50.534266', '2024-09-01 04:51:50.534266', NULL, NULL, 1, 0, '', '/_mem_pref', '/_mem_pref', NULL),
+(27, '2024-09-01 04:51:50.626029', '2024-09-01 04:51:50.626029', NULL, NULL, 1, 0, '', '/_mem_reset', '/_mem_reset', NULL),
+(28, '2024-09-01 04:51:50.681149', '2024-09-01 04:51:50.681149', NULL, NULL, 1, 0, '', '/_menu_item', '/_menu_item', NULL),
+(29, '2024-09-01 04:51:50.778133', '2024-09-01 04:51:50.778133', NULL, NULL, 1, 0, '', '/_module', '/_module', NULL),
+(30, '2024-09-01 04:51:50.888943', '2024-09-01 04:51:50.888943', NULL, NULL, 1, 0, '', '/_module__mem', '/_module__mem', NULL),
+(31, '2024-09-01 04:51:51.013669', '2024-09-01 04:51:51.013669', NULL, NULL, 1, 0, '', '/_module_perm', '/_module_perm', NULL),
+(32, '2024-09-01 04:51:51.104773', '2024-09-01 04:51:51.104773', NULL, NULL, 1, 0, '', '/_note', '/_note', NULL),
+(33, '2024-09-01 04:51:51.199004', '2024-09-01 04:51:51.199004', NULL, NULL, 1, 0, '', '/_notif', '/_notif', NULL),
+(34, '2024-09-01 04:51:51.336446', '2024-09-01 04:51:51.336446', NULL, NULL, 1, 0, '', '/_notif_signal', '/_notif_signal', NULL),
+(35, '2024-09-01 04:51:51.447898', '2024-09-01 04:51:51.447898', NULL, NULL, 1, 0, '', '/_perm', '/_perm', NULL),
+(36, '2024-09-01 04:51:51.593540', '2024-09-01 04:51:51.593540', NULL, NULL, 1, 0, '', '/_perm_menu_item', '/_perm_menu_item', NULL),
+(37, '2024-09-01 04:51:51.708770', '2024-09-01 04:51:51.708770', NULL, NULL, 1, 0, '', '/_public_path', '/_public_path', NULL),
+(38, '2024-09-01 04:51:51.801749', '2024-09-01 04:51:51.801749', NULL, NULL, 1, 0, '', '/_role', '/_role', NULL),
+(39, '2024-09-01 04:51:51.903150', '2024-09-01 04:51:51.903150', NULL, NULL, 1, 0, '', '/_role_perm', '/_role_perm', NULL),
+(40, '2024-09-01 04:51:52.019686', '2024-09-01 04:51:52.019686', NULL, NULL, 1, 0, '', '/_setting', '/_setting', NULL),
+(41, '2024-09-01 04:51:52.130196', '2024-09-01 04:51:52.130196', NULL, NULL, 1, 0, '', '/_state', '/_state', NULL),
+(42, '2024-09-01 04:51:52.239561', '2024-09-01 04:51:52.239561', NULL, NULL, 1, 0, '', '/_sub_plan', '/_sub_plan', NULL),
+(43, '2024-09-01 04:51:52.363061', '2024-09-01 04:51:52.363061', NULL, NULL, 1, 0, '', '/_sub_plan_metric', '/_sub_plan_metric', NULL),
+(44, '2024-09-01 04:51:52.476015', '2024-09-01 04:51:52.476015', NULL, NULL, 1, 0, '', '/_tag', '/_tag', NULL),
+(45, '2024-09-01 04:51:52.567155', '2024-09-01 04:51:52.567155', NULL, NULL, 1, 0, '', '/_task', '/_task', NULL),
+(46, '2024-09-01 04:51:52.706942', '2024-09-01 04:51:52.706942', NULL, NULL, 1, 0, '', '/_token', '/_token', NULL),
+(47, '2024-09-01 04:51:52.800664', '2024-09-01 04:51:52.800664', NULL, NULL, 1, 0, '', '/_token_xl8', '/_token_xl8', NULL),
+(48, '2024-09-01 04:51:52.898195', '2024-09-01 04:51:52.898195', NULL, NULL, 1, 0, '', '/_tz', '/_tz', NULL),
+(49, '2024-09-01 04:51:53.014166', '2024-09-01 04:51:53.014166', NULL, NULL, 1, 0, '', '/_valid_field', '/_valid_field', NULL),
+(50, '2024-09-01 04:51:53.127408', '2024-09-01 04:51:53.127408', NULL, NULL, 1, 0, '', '/_valid_form', '/_valid_form', NULL);
 
-CREATE TABLE `_perm_menu_item` (
-  `_perm_menu_item_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_perm_menu_item` (
+  `_perm_menu_item_id` int(11) NOT NULL AUTO_INCREMENT,
   `_perm_menu_item_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_perm_menu_item_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_perm_menu_item_del` timestamp(6) NULL DEFAULT NULL,
@@ -975,64 +1076,20 @@ CREATE TABLE `_perm_menu_item` (
   `fk__co_id` int(11) DEFAULT NULL,
   `fk__perm_id` int(11) DEFAULT NULL,
   `fk__menu_item_id` int(11) DEFAULT NULL,
-  `_perm_menu_item_disp_order` smallint(6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_perm_menu_item_disp_order` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`_perm_menu_item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_pricing` (
-  `_pricing_id` int(11) NOT NULL,
-  `_pricing_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_pricing_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_pricing_del` timestamp(6) NULL DEFAULT NULL,
-  `_pricing_arch` timestamp(6) NULL DEFAULT NULL,
-  `_pricing_active` tinyint(1) DEFAULT 1,
-  `_pricing_default` tinyint(1) NOT NULL DEFAULT 0,
-  `_pricing_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_pricing_desc` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_pricing_price` decimal(20,2) DEFAULT NULL,
-  `_pricing_display_order` smallint(6) DEFAULT NULL,
-  `_pricing_pay_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Payment integration id'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE TABLE `_pricing_limit` (
-  `_pricing_limit_id` int(11) NOT NULL,
-  `_pricing_limit_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_pricing_limit_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_pricing_limit_del` timestamp(6) NULL DEFAULT NULL,
-  `_pricing_limit_arch` timestamp(6) NULL DEFAULT NULL,
-  `_pricing_limit_active` tinyint(1) DEFAULT 1,
-  `_pricing_limit_default` tinyint(1) DEFAULT 0,
-  `fk__pricing_id` int(11) DEFAULT NULL,
-  `fk__pricing_module_id` int(11) DEFAULT NULL,
-  `_pricing_limit_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_pricing_limit_price` decimal(10,2) DEFAULT NULL,
-  `_pricing_limit_free` smallint(6) DEFAULT NULL COMMENT 'The number of this usage that is free',
-  `_pricing_limit_free_days` int(11) DEFAULT NULL,
-  `_pricing_limit_min` int(11) DEFAULT NULL,
-  `_pricing_limit_max` int(11) DEFAULT NULL,
-  `_pricing_limit_unit` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_pricing_limit_unit_src` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'The table or service that will check the meter'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE TABLE `_pricing_module` (
-  `_pricing_module_id` int(11) NOT NULL,
-  `_pricing_module_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_pricing_module_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_pricing_module_del` timestamp(6) NULL DEFAULT NULL,
-  `_pricing_module_arch` timestamp(6) NULL DEFAULT NULL,
-  `_pricing_module_active` tinyint(1) DEFAULT 1,
-  `fk__pricing_id` int(11) DEFAULT NULL,
-  `fk__module_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE TABLE `_public_path` (
-  `_public_path_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_public_path` (
+  `_public_path_id` int(11) NOT NULL AUTO_INCREMENT,
   `_public_path_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_public_path_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_public_path_del` timestamp(6) NULL DEFAULT NULL,
   `_public_path_arch` timestamp(6) NULL DEFAULT NULL,
   `_public_path_active` tinyint(1) DEFAULT 1,
-  `_public_path` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_public_path` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_public_path_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
 INSERT INTO `_public_path` (`_public_path_id`, `_public_path_new`, `_public_path_edit`, `_public_path_del`, `_public_path_arch`, `_public_path_active`, `_public_path`) VALUES
 (1, '2021-07-31 03:48:49.804572', '2021-07-31 03:48:49.804572', NULL, NULL, 1, '_auth/password'),
@@ -1040,45 +1097,18 @@ INSERT INTO `_public_path` (`_public_path_id`, `_public_path_new`, `_public_path
 (3, '2021-09-16 01:52:50.905655', '2021-09-16 01:52:50.905655', NULL, NULL, 1, '_setting/get_base_settings'),
 (4, '2021-09-16 01:52:53.719502', '2021-09-16 01:52:53.719502', NULL, NULL, 1, '_auth/logout'),
 (5, '2021-09-16 01:53:14.656621', '2021-09-16 01:53:14.656621', NULL, NULL, 1, '_pricing'),
-(6, '2021-09-16 01:53:17.822908', '2021-09-16 01:53:17.822908', NULL, NULL, 1, 'page/index'),
+(6, '2024-08-31 20:40:37.431008', '2024-08-31 20:40:37.431008', NULL, NULL, 1, '_page/show/index'),
 (7, '2021-09-16 14:51:58.000000', '2021-09-16 14:51:58.000000', NULL, NULL, 1, '_register/register_co'),
 (8, '2021-09-21 15:50:39.715911', '2021-09-21 15:50:39.715911', NULL, NULL, 1, '_verify/email'),
-(9, '2021-09-21 16:10:04.000000', '2021-09-21 16:10:04.000000', NULL, NULL, 1, 'page/_verify'),
-(10, '2021-09-27 22:16:55.616683', '2021-09-27 22:16:55.616683', NULL, NULL, 1, 'page/password_reset'),
+(9, '2024-08-31 20:40:37.447865', '2024-08-31 20:40:37.447865', NULL, NULL, 1, '_page/show/_verify'),
+(10, '2024-08-31 20:40:37.450256', '2024-08-31 20:40:37.450256', NULL, NULL, 1, '_page/show/password_reset'),
 (11, '2021-09-28 16:10:52.000000', '2021-09-28 16:10:52.000000', NULL, NULL, 1, '_mem_reset/reset'),
 (12, '2021-09-30 00:09:43.343747', '2021-09-30 00:09:43.343747', NULL, NULL, 1, '_valid_field/form_fields'),
-(13, '2021-09-28 16:10:52.000000', '2021-09-28 16:10:52.000000', NULL, NULL, 1, 'page/_meditation')
-;
+(13, '2024-08-31 20:40:37.452741', '2024-08-31 20:40:37.452741', NULL, NULL, 1, '_page/show/_admin'),
+(14, '2024-08-31 21:38:40.559998', '2024-08-31 21:38:40.559998', NULL, NULL, 1, '_admin/auto_create');
 
-CREATE TABLE `_report` (
-  `_report_id` int(11) NOT NULL,
-  `_report_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_report_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_report_del` timestamp(6) NULL DEFAULT NULL,
-  `_report_arch` timestamp(6) NULL DEFAULT NULL,
-  `_report_active` tinyint(1) DEFAULT 1,
-  `_report_public` tinyint(1) DEFAULT NULL,
-  `fk__co_id` int(11) DEFAULT NULL,
-  `fk__mem_id` int(11) DEFAULT NULL COMMENT 'Report Author',
-  `_report_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_report_filter_json` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_report_out_json` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE TABLE `_report_lib` (
-  `_report_lib_id` int(11) NOT NULL,
-  `_report_lib_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_report_lib_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_report_lib_del` timestamp(6) NULL DEFAULT NULL,
-  `_report_lib_arch` timestamp(6) NULL DEFAULT NULL,
-  `_report_lib_active` tinyint(1) DEFAULT 1,
-  `_report_lib_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_report_lib_filter_json` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_report_lib_out_json` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE TABLE `_role` (
-  `_role_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_role` (
+  `_role_id` int(11) NOT NULL AUTO_INCREMENT,
   `_role_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_role_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_role_del` timestamp(6) NULL DEFAULT NULL,
@@ -1086,115 +1116,90 @@ CREATE TABLE `_role` (
   `_role_active` tinyint(1) DEFAULT 1,
   `fk__co_id` int(11) DEFAULT NULL,
   `_role_default` tinyint(1) DEFAULT 0,
-  `_role_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_role_desc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_role_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Logical value of the role'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_role_name` varchar(255) DEFAULT NULL,
+  `_role_desc` varchar(255) DEFAULT NULL,
+  `_role_type` varchar(255) DEFAULT NULL COMMENT 'Logical value of the role',
+  PRIMARY KEY (`_role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
 INSERT INTO `_role` (`_role_id`, `_role_new`, `_role_edit`, `_role_del`, `_role_arch`, `_role_active`, `fk__co_id`, `_role_default`, `_role_name`, `_role_desc`, `_role_type`) VALUES
 (1, '2021-11-19 20:47:18.286851', '2021-11-19 20:47:18.286851', NULL, NULL, 1, 1, 1, 'Administrator', 'This is your default admin account. Do not make changes unless you are sure.', 'admin');
 
-CREATE TABLE `_role_perm` (
-  `_role_perm_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_role_perm` (
+  `_role_perm_id` int(11) NOT NULL AUTO_INCREMENT,
   `_role_perm_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_role_perm_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_role_perm_del` timestamp(6) NULL DEFAULT NULL,
   `_role_perm_arch` timestamp(6) NULL DEFAULT NULL,
   `_role_perm_active` tinyint(1) DEFAULT 1,
   `fk__role_id` int(11) DEFAULT NULL,
-  `fk__perm_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `fk__perm_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`_role_perm_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
 INSERT INTO `_role_perm` (`_role_perm_id`, `_role_perm_new`, `_role_perm_edit`, `_role_perm_del`, `_role_perm_arch`, `_role_perm_active`, `fk__role_id`, `fk__perm_id`) VALUES
-(1, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 1),
-(2, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 2),
-(3, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 3),
-(4, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 4),
-(5, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 5),
-(6, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 6),
-(7, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 7),
-(8, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 8),
-(9, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 9),
-(10, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 10),
-(11, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 11),
-(12, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 12),
-(13, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 13),
-(14, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 14),
-(15, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 15),
-(16, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 16),
-(17, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 17),
-(18, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 18),
-(19, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 19),
-(20, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 20),
-(21, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 21),
-(22, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 22),
-(23, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 23),
-(24, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 24),
-(25, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 25),
-(26, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 26),
-(27, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 27),
-(28, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 28),
-(29, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 29),
-(30, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 30),
-(31, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 31),
-(32, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 32),
-(33, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 33),
-(34, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 34),
-(35, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 35),
-(36, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 36),
-(37, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 37),
-(38, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 38),
-(39, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 39),
-(40, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 40),
-(41, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 41),
-(42, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 42),
-(43, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 43),
-(44, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 44),
-(45, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 45),
-(46, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 46),
-(47, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 47),
-(48, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 48),
-(49, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 49),
-(50, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 50),
-(51, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 51),
-(52, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 52),
-(53, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 53),
-(54, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 54),
-(55, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 55),
-(56, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 56),
-(57, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 57),
-(58, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 58),
-(59, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 59),
-(60, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 60),
-(61, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 61),
-(62, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 62),
-(63, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 63),
-(64, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 64),
-(65, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 65),
-(66, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 66),
-(67, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 67),
-(68, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 68),
-(69, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 69),
-(70, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 70),
-(71, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 71),
-(72, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 72),
-(73, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 73),
-(74, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 74),
-(75, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 75),
-(76, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 76),
-(77, '2021-11-19 22:04:31.942970', '2021-11-19 22:04:31.942970', NULL, NULL, 1, 1, 77),
-(78, '2021-11-19 22:06:22.855649', '2021-11-19 22:06:22.855649', NULL, NULL, 1, 1, 78);
+(1, '2024-09-01 04:51:48.515694', '2024-09-01 04:51:48.515694', NULL, NULL, 1, 1, 1),
+(2, '2024-09-01 04:51:48.610935', '2024-09-01 04:51:48.610935', NULL, NULL, 1, 1, 2),
+(3, '2024-09-01 04:51:48.682866', '2024-09-01 04:51:48.682866', NULL, NULL, 1, 1, 3),
+(4, '2024-09-01 04:51:48.730619', '2024-09-01 04:51:48.730619', NULL, NULL, 1, 1, 4),
+(5, '2024-09-01 04:51:48.831260', '2024-09-01 04:51:48.831260', NULL, NULL, 1, 1, 5),
+(6, '2024-09-01 04:51:48.902438', '2024-09-01 04:51:48.902438', NULL, NULL, 1, 1, 6),
+(7, '2024-09-01 04:51:48.980431', '2024-09-01 04:51:48.980431', NULL, NULL, 1, 1, 7),
+(8, '2024-09-01 04:51:49.057858', '2024-09-01 04:51:49.057858', NULL, NULL, 1, 1, 8),
+(9, '2024-09-01 04:51:49.120902', '2024-09-01 04:51:49.120902', NULL, NULL, 1, 1, 9),
+(10, '2024-09-01 04:51:49.153643', '2024-09-01 04:51:49.153643', NULL, NULL, 1, 1, 10),
+(11, '2024-09-01 04:51:49.212511', '2024-09-01 04:51:49.212511', NULL, NULL, 1, 1, 11),
+(12, '2024-09-01 04:51:49.291454', '2024-09-01 04:51:49.291454', NULL, NULL, 1, 1, 12),
+(13, '2024-09-01 04:51:49.380558', '2024-09-01 04:51:49.380558', NULL, NULL, 1, 1, 13),
+(14, '2024-09-01 04:51:49.515032', '2024-09-01 04:51:49.515032', NULL, NULL, 1, 1, 14),
+(15, '2024-09-01 04:51:49.630461', '2024-09-01 04:51:49.630461', NULL, NULL, 1, 1, 15),
+(16, '2024-09-01 04:51:49.746760', '2024-09-01 04:51:49.746760', NULL, NULL, 1, 1, 16),
+(17, '2024-09-01 04:51:49.838868', '2024-09-01 04:51:49.838868', NULL, NULL, 1, 1, 17),
+(18, '2024-09-01 04:51:49.912630', '2024-09-01 04:51:49.912630', NULL, NULL, 1, 1, 18),
+(19, '2024-09-01 04:51:49.991602', '2024-09-01 04:51:49.991602', NULL, NULL, 1, 1, 19),
+(20, '2024-09-01 04:51:50.062509', '2024-09-01 04:51:50.062509', NULL, NULL, 1, 1, 20),
+(21, '2024-09-01 04:51:50.145463', '2024-09-01 04:51:50.145463', NULL, NULL, 1, 1, 21),
+(22, '2024-09-01 04:51:50.185693', '2024-09-01 04:51:50.185693', NULL, NULL, 1, 1, 22),
+(23, '2024-09-01 04:51:50.278627', '2024-09-01 04:51:50.278627', NULL, NULL, 1, 1, 23),
+(24, '2024-09-01 04:51:50.390653', '2024-09-01 04:51:50.390653', NULL, NULL, 1, 1, 24),
+(25, '2024-09-01 04:51:50.447210', '2024-09-01 04:51:50.447210', NULL, NULL, 1, 1, 25),
+(26, '2024-09-01 04:51:50.538388', '2024-09-01 04:51:50.538388', NULL, NULL, 1, 1, 26),
+(27, '2024-09-01 04:51:50.634715', '2024-09-01 04:51:50.634715', NULL, NULL, 1, 1, 27),
+(28, '2024-09-01 04:51:50.685222', '2024-09-01 04:51:50.685222', NULL, NULL, 1, 1, 28),
+(29, '2024-09-01 04:51:50.782603', '2024-09-01 04:51:50.782603', NULL, NULL, 1, 1, 29),
+(30, '2024-09-01 04:51:50.893765', '2024-09-01 04:51:50.893765', NULL, NULL, 1, 1, 30),
+(31, '2024-09-01 04:51:51.018834', '2024-09-01 04:51:51.018834', NULL, NULL, 1, 1, 31),
+(32, '2024-09-01 04:51:51.108623', '2024-09-01 04:51:51.108623', NULL, NULL, 1, 1, 32),
+(33, '2024-09-01 04:51:51.213335', '2024-09-01 04:51:51.213335', NULL, NULL, 1, 1, 33),
+(34, '2024-09-01 04:51:51.342760', '2024-09-01 04:51:51.342760', NULL, NULL, 1, 1, 34),
+(35, '2024-09-01 04:51:51.458164', '2024-09-01 04:51:51.458164', NULL, NULL, 1, 1, 35),
+(36, '2024-09-01 04:51:51.598986', '2024-09-01 04:51:51.598986', NULL, NULL, 1, 1, 36),
+(37, '2024-09-01 04:51:51.712110', '2024-09-01 04:51:51.712110', NULL, NULL, 1, 1, 37),
+(38, '2024-09-01 04:51:51.806563', '2024-09-01 04:51:51.806563', NULL, NULL, 1, 1, 38),
+(39, '2024-09-01 04:51:51.910321', '2024-09-01 04:51:51.910321', NULL, NULL, 1, 1, 39),
+(40, '2024-09-01 04:51:52.026052', '2024-09-01 04:51:52.026052', NULL, NULL, 1, 1, 40),
+(41, '2024-09-01 04:51:52.141825', '2024-09-01 04:51:52.141825', NULL, NULL, 1, 1, 41),
+(42, '2024-09-01 04:51:52.250404', '2024-09-01 04:51:52.250404', NULL, NULL, 1, 1, 42),
+(43, '2024-09-01 04:51:52.366751', '2024-09-01 04:51:52.366751', NULL, NULL, 1, 1, 43),
+(44, '2024-09-01 04:51:52.481600', '2024-09-01 04:51:52.481600', NULL, NULL, 1, 1, 44),
+(45, '2024-09-01 04:51:52.577402', '2024-09-01 04:51:52.577402', NULL, NULL, 1, 1, 45),
+(46, '2024-09-01 04:51:52.712843', '2024-09-01 04:51:52.712843', NULL, NULL, 1, 1, 46),
+(47, '2024-09-01 04:51:52.809525', '2024-09-01 04:51:52.809525', NULL, NULL, 1, 1, 47),
+(48, '2024-09-01 04:51:52.906112', '2024-09-01 04:51:52.906112', NULL, NULL, 1, 1, 48),
+(49, '2024-09-01 04:51:53.018697', '2024-09-01 04:51:53.018697', NULL, NULL, 1, 1, 49),
+(50, '2024-09-01 04:51:53.137417', '2024-09-01 04:51:53.137417', NULL, NULL, 1, 1, 50);
 
-CREATE TABLE `_setting` (
-  `_setting_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_setting` (
+  `_setting_id` int(11) NOT NULL AUTO_INCREMENT,
   `_setting_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_setting_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_setting_del` timestamp(6) NULL DEFAULT NULL,
   `_setting_arch` timestamp(6) NULL DEFAULT NULL,
   `_setting_active` tinyint(1) DEFAULT 1,
-  `_setting_key` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_setting_value` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_setting_key` varchar(255) DEFAULT NULL,
+  `_setting_value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_setting_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
 INSERT INTO `_setting` (`_setting_id`, `_setting_new`, `_setting_edit`, `_setting_del`, `_setting_arch`, `_setting_active`, `_setting_key`, `_setting_value`) VALUES
 (1, '2021-09-14 02:24:23.998547', '2021-09-14 02:24:23.998547', NULL, NULL, 1, 'product_name', ''),
@@ -1211,43 +1216,19 @@ INSERT INTO `_setting` (`_setting_id`, `_setting_new`, `_setting_edit`, `_settin
 (12, '2021-08-03 16:20:39.872723', '2021-08-03 16:20:39.872723', NULL, NULL, 1, 'copyright_banner', ''),
 (13, '2021-09-16 22:27:02.010711', '2021-09-16 22:27:02.010711', NULL, NULL, 1, 'stripe_public_test_key', '');
 
-CREATE TABLE `_signal` (
-  `_signal_id` int(11) NOT NULL,
-  `_signal_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_signal_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_signal_del` timestamp(6) NULL DEFAULT NULL,
-  `_signal_arch` timestamp(6) NULL DEFAULT NULL,
-  `_signal_active` tinyint(1) DEFAULT 1,
-  `_signal_configurable` tinyint(1) DEFAULT 0,
-  `_signal_channel` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_signal_flag` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_signal_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE TABLE `_signal_mem` (
-  `_signal_mem_id` int(11) NOT NULL,
-  `_signal_mem_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_signal_mem_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_signal_mem_del` timestamp(6) NULL DEFAULT NULL,
-  `_signal_mem_arch` timestamp(6) NULL DEFAULT NULL,
-  `_signal_mem_active` tinyint(1) DEFAULT 1,
-  `fk__co_id` int(11) DEFAULT NULL,
-  `fk__mem_id` int(11) DEFAULT NULL,
-  `fk__signal_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE TABLE `_state` (
-  `_state_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_state` (
+  `_state_id` int(11) NOT NULL AUTO_INCREMENT,
   `_state_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_state_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_state_arch` timestamp(6) NULL DEFAULT NULL,
   `_state_del` timestamp(6) NULL DEFAULT NULL,
   `_state_active` tinyint(1) DEFAULT 1,
-  `_state_name` char(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_state_abbrev` char(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `_state_name` char(50) DEFAULT NULL,
+  `_state_abbrev` char(2) DEFAULT NULL,
   `fk__country_id` int(11) DEFAULT NULL,
-  `_state_display_order` smallint(6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_state_display_order` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`_state_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
 INSERT INTO `_state` (`_state_id`, `_state_new`, `_state_edit`, `_state_arch`, `_state_del`, `_state_active`, `_state_name`, `_state_abbrev`, `fk__country_id`, `_state_display_order`) VALUES
 (1, '2021-07-31 03:05:35.000000', '2021-07-31 03:06:05.000000', NULL, NULL, 1, 'Alabama', 'AL', 231, 0),
@@ -1302,54 +1283,44 @@ INSERT INTO `_state` (`_state_id`, `_state_new`, `_state_edit`, `_state_arch`, `
 (50, '2021-07-31 03:05:35.000000', '2021-07-31 03:06:05.000000', NULL, NULL, 1, 'Wyoming', 'WY', 231, 0),
 (51, '2021-07-31 03:05:35.000000', '2021-07-31 03:06:05.000000', NULL, NULL, 1, 'District of Columbia', 'DC', 231, 0);
 
-CREATE TABLE `_co` (
-  `_co_id` int(11) NOT NULL,
-  `_co_new` timestamp(6) NULL DEFAULT NULL,
-  `_co_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_co_del` timestamp(6) NULL DEFAULT NULL,
-  `_co_arch` timestamp(6) NULL DEFAULT NULL,
-  `_co_active` tinyint(1) DEFAULT 1,
-  `fk__mem_id` int(11) DEFAULT NULL COMMENT 'The owner of the subscription',
-  `fk__pricing_id` int(11) DEFAULT NULL,
-  `_co_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_co_domain` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'This is the subdomain that is used to scope all calls',
-  `_co_ulid` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_co_setup` tinyint(1) DEFAULT 0,
-  `_co_configured` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Short for subscriber';
-
-INSERT INTO `_co` (`_co_id`, `_co_new`, `_co_edit`, `_co_del`, `_co_arch`, `_co_active`, `fk__mem_id`, `fk__pricing_id`, `_co_name`, `_co_domain`, `_co_ulid`, `_co_setup`, `_co_configured`) VALUES
-(1, '2021-10-08 19:53:38.000000', '2021-10-08 19:53:38.000000', NULL, NULL, 1, 1, NULL, 'Default Install', 'setup', NULL, 1, 1);
-
-CREATE TABLE `_co_mem` (
-  `_co_mem_id` int(11) NOT NULL,
-  `_co_mem_new` timestamp NULL DEFAULT NULL,
-  `_co_mem_edit` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
-  `_co_mem_del` timestamp NULL DEFAULT NULL,
-  `_co_mem_arch` timestamp NULL DEFAULT NULL,
-  `_co_mem_active` tinyint(1) DEFAULT 1,
+CREATE TABLE IF NOT EXISTS `_sub_plan` (
+  `_sub_plan_id` int(11) NOT NULL AUTO_INCREMENT,
+  `_sub_plan_new` timestamp NOT NULL DEFAULT current_timestamp(),
+  `_sub_plan_edit` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `_sub_plan_del` timestamp NULL DEFAULT NULL,
+  `_sub_plan_arch` timestamp NULL DEFAULT NULL,
+  `_sub_plan_active` tinyint(1) DEFAULT NULL,
   `fk__co_id` int(11) DEFAULT NULL,
-  `fk__mem_id` int(11) DEFAULT NULL,
-  `fk__role_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_sub_plan_has_trial` tinyint(1) DEFAULT NULL,
+  `_sub_plan_trial_duration` int(11) DEFAULT NULL COMMENT 'in days',
+  `_sub_plan_mth_price` decimal(7,2) DEFAULT NULL,
+  `_sub_plan_yr_price` decimal(7,2) DEFAULT NULL,
+  `_sub_plan_name` varchar(255) DEFAULT NULL,
+  `_sub_plan_desc` text DEFAULT NULL,
+  `_sub_plan_ulid` char(32) DEFAULT NULL,
+  PRIMARY KEY (`_sub_plan_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-INSERT INTO `_co_mem` (`_co_mem_id`, `_co_mem_new`, `_co_mem_edit`, `_co_mem_del`, `_co_mem_arch`, `_co_mem_active`, `fk__co_id`, `fk__mem_id`, `fk__role_id`) VALUES
-(1, '2021-11-14 20:17:30', '2021-11-19 20:47:06', NULL, NULL, 1, 1, 1, 1);
-
-CREATE TABLE `_co_pref` (
-  `_co_pref_id` int(11) NOT NULL,
-  `_co_pref_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_co_pref_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `_co_pref_del` timestamp(6) NULL DEFAULT NULL,
-  `_co_pref_arch` timestamp(6) NULL DEFAULT NULL,
-  `_co_pref_active` tinyint(1) DEFAULT 1,
+CREATE TABLE IF NOT EXISTS `_sub_plan_metric` (
+  `_sub_plan_metric_id` int(11) NOT NULL AUTO_INCREMENT,
+  `_sub_plan_metric_new` timestamp NOT NULL DEFAULT current_timestamp(),
+  `_sub_plan_metric_edit` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `_sub_plan_metric_del` timestamp NULL DEFAULT NULL,
+  `_sub_plan_metric_arch` timestamp NULL DEFAULT NULL,
+  `_sub_plan_metric_active` tinyint(1) DEFAULT NULL,
   `fk__co_id` int(11) DEFAULT NULL,
-  `_co_pref_key` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_co_pref_val` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `fk__sub_plan_id` int(11) DEFAULT NULL,
+  `_sub_plan_metric_is_one_time` tinyint(1) DEFAULT 0,
+  `_sub_plan_metric_extra_price` decimal(7,2) DEFAULT NULL,
+  `_sub_plan_metric_extra_qty` smallint(6) DEFAULT NULL,
+  `_sub_plan_metric_units_incl` smallint(6) DEFAULT NULL COMMENT '0 = no limit',
+  `_sub_plan_metric_unit` varchar(20) DEFAULT NULL,
+  `_sub_plan_metric_ulid` char(32) DEFAULT NULL,
+  PRIMARY KEY (`_sub_plan_metric_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_tag` (
-  `_tag_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_tag` (
+  `_tag_id` int(11) NOT NULL AUTO_INCREMENT,
   `_tag_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_tag_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_tag_del` timestamp(6) NULL DEFAULT NULL,
@@ -1357,13 +1328,14 @@ CREATE TABLE `_tag` (
   `_tag_active` tinyint(1) DEFAULT 1,
   `fk__co_id` int(11) DEFAULT NULL,
   `fk__mem_id` int(11) DEFAULT NULL,
-  `_tag` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_tag_obj` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_tag_obj_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_tag` varchar(255) DEFAULT NULL,
+  `_tag_obj` varchar(255) DEFAULT NULL,
+  `_tag_obj_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`_tag_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_task` (
-  `_task_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_task` (
+  `_task_id` int(11) NOT NULL AUTO_INCREMENT,
   `_task_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_task_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_task_del` timestamp(6) NULL DEFAULT NULL,
@@ -1375,28 +1347,31 @@ CREATE TABLE `_task` (
   `fk_cat_task_id` int(11) DEFAULT NULL,
   `fk_program_id` int(11) DEFAULT NULL,
   `_task_due_date` date DEFAULT NULL,
-  `_task_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_task_desc` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_task_obj` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `_task_name` varchar(255) DEFAULT NULL,
+  `_task_desc` text DEFAULT NULL,
+  `_task_obj` varchar(255) DEFAULT NULL,
   `_task_obj_id` int(11) DEFAULT NULL,
   `_task_required` tinyint(1) DEFAULT 0,
   `_task_completion_date` date DEFAULT NULL,
-  `_task_status` tinytext COLLATE utf8_unicode_ci DEFAULT '0' COMMENT '0 = No disposition, -1 = did not complete, 1 = did complete',
-  `_task_private` tinyint(1) DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_task_status` tinytext DEFAULT '0' COMMENT '0 = No disposition, -1 = did not complete, 1 = did complete',
+  `_task_private` tinyint(1) DEFAULT 1,
+  PRIMARY KEY (`_task_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_token` (
-  `_token_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_token` (
+  `_token_id` int(11) NOT NULL AUTO_INCREMENT,
   `_token_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_token_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_token_del` timestamp(6) NULL DEFAULT NULL,
   `_token_arch` timestamp(6) NULL DEFAULT NULL,
   `_token_active` tinyint(1) DEFAULT 1,
-  `_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_token` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_token_id`),
+  KEY `token` (`_token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_token_xl8` (
-  `_token_xl8_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_token_xl8` (
+  `_token_xl8_id` int(11) NOT NULL AUTO_INCREMENT,
   `_token_xl8_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_token_xl8_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_token_xl8_del` timestamp(6) NULL DEFAULT NULL,
@@ -1404,20 +1379,24 @@ CREATE TABLE `_token_xl8` (
   `_token_xl8_active` tinyint(1) DEFAULT 1,
   `fk__token_id` int(11) DEFAULT NULL,
   `fk__lang_id` int(11) DEFAULT NULL,
-  `_token_xl8` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_token_xl8` mediumtext DEFAULT NULL,
+  PRIMARY KEY (`_token_xl8_id`),
+  KEY `fk_token_id` (`fk__token_id`),
+  KEY `fk_lang_id` (`fk__lang_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_tz` (
-  `_tz_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_tz` (
+  `_tz_id` int(11) NOT NULL AUTO_INCREMENT,
   `_tz_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_tz_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_tz_del` timestamp(6) NULL DEFAULT NULL,
   `_tz_arch` timestamp(6) NULL DEFAULT NULL,
   `_tz_active` tinyint(1) DEFAULT 1,
-  `_tz_region` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_tz_city` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_tz_value` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_tz_region` varchar(255) DEFAULT NULL,
+  `_tz_city` varchar(255) DEFAULT NULL,
+  `_tz_value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_tz_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=427 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
 INSERT INTO `_tz` (`_tz_id`, `_tz_new`, `_tz_edit`, `_tz_del`, `_tz_arch`, `_tz_active`, `_tz_region`, `_tz_city`, `_tz_value`) VALUES
 (1, '2021-07-31 03:05:35.000000', '2021-07-31 03:06:05.000000', NULL, NULL, 1, 'Africa', 'Abidjan', 'Africa/Abidjan'),
@@ -1848,371 +1827,409 @@ INSERT INTO `_tz` (`_tz_id`, `_tz_new`, `_tz_edit`, `_tz_del`, `_tz_arch`, `_tz_
 (425, '2021-07-31 03:05:35.000000', '2021-07-31 03:06:05.000000', NULL, NULL, 1, 'Pacific', 'Wallis', 'Pacific/Wallis'),
 (426, '2021-07-31 03:05:35.000000', '2021-07-31 03:06:05.000000', NULL, NULL, 1, 'UTC', 'GMT', 'UTC/GMT');
 
-CREATE TABLE `_valid_field` (
-  `_valid_field_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `_valid_field` (
+  `_valid_field_id` int(11) NOT NULL AUTO_INCREMENT,
   `_valid_field_new` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_valid_field_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_valid_field_del` timestamp(6) NULL DEFAULT NULL,
   `_valid_field_arch` timestamp(6) NULL DEFAULT NULL,
   `_valid_field_active` tinyint(1) DEFAULT 1,
   `fk__valid_form_id` int(11) DEFAULT NULL,
-  `_valid_field_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_valid_field_input_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_valid_field_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'input type="[]"',
+  `_valid_field_name` varchar(255) DEFAULT NULL,
+  `_valid_field_input_id` varchar(255) DEFAULT NULL,
+  `_valid_field_type` varchar(255) DEFAULT NULL COMMENT 'input type="[]"',
   `_valid_field_required` tinyint(1) DEFAULT 0,
-  `_valid_field_src` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_valid_field_mask` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_valid_field_default_value` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_valid_field_min` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_valid_field_max` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_valid_field_format` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `_valid_field_src` varchar(255) DEFAULT NULL,
+  `_valid_field_mask` varchar(255) DEFAULT NULL,
+  `_valid_field_default_value` varchar(255) DEFAULT NULL,
+  `_valid_field_min` varchar(255) DEFAULT NULL,
+  `_valid_field_max` varchar(255) DEFAULT NULL,
+  `_valid_field_format` varchar(255) DEFAULT NULL,
   `fk__valid_field_id` int(11) DEFAULT NULL COMMENT 'This validation rule only if this field exists and has the valid_field_if_value',
-  `_valid_field_if_value` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `_valid_field_if_value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_valid_field_id`),
+  KEY `fk__valid_form_id` (`fk__valid_form_id`),
+  KEY `fk__valid_field_id` (`fk__valid_field_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=314 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
 
-CREATE TABLE `_valid_form` (
-  `_valid_form_id` int(11) NOT NULL,
+INSERT INTO `_valid_field` (`_valid_field_id`, `_valid_field_new`, `_valid_field_edit`, `_valid_field_del`, `_valid_field_arch`, `_valid_field_active`, `fk__valid_form_id`, `_valid_field_name`, `_valid_field_input_id`, `_valid_field_type`, `_valid_field_required`, `_valid_field_src`, `_valid_field_mask`, `_valid_field_default_value`, `_valid_field_min`, `_valid_field_max`, `_valid_field_format`, `fk__valid_field_id`, `_valid_field_if_value`) VALUES
+(1, '2024-09-01 04:53:26.827938', '2024-09-01 04:53:26.827938', NULL, NULL, 1, 1, '_admin_exclude_id', 'save__admin_exclude_form__admin_exclude_id', 'number', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(2, '2024-09-01 04:53:26.831225', '2024-09-01 04:53:26.831225', NULL, NULL, 1, 1, '_admin_exclude_new', 'save__admin_exclude_form__admin_exclude_new', 'datetime-local', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(3, '2024-09-01 04:53:26.836867', '2024-09-01 04:53:26.836867', NULL, NULL, 1, 1, '_admin_exclude_edit', 'save__admin_exclude_form__admin_exclude_edit', 'datetime-local', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(4, '2024-09-01 04:53:26.840023', '2024-09-01 04:53:26.840023', NULL, NULL, 1, 1, '_admin_exclude_del', 'save__admin_exclude_form__admin_exclude_del', 'datetime-local', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(5, '2024-09-01 04:53:26.842545', '2024-09-01 04:53:26.842545', NULL, NULL, 1, 1, '_admin_exclude_arch', 'save__admin_exclude_form__admin_exclude_arch', 'datetime-local', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(6, '2024-09-01 04:53:26.844399', '2024-09-01 04:53:26.844399', NULL, NULL, 1, 1, '_admin_exclude_active', 'save__admin_exclude_form__admin_exclude_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(7, '2024-09-01 04:53:26.845938', '2024-09-01 04:53:26.845938', NULL, NULL, 1, 1, '_admin_exclude_type', 'save__admin_exclude_form__admin_exclude_type', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(8, '2024-09-01 04:53:26.847618', '2024-09-01 04:53:26.847618', NULL, NULL, 1, 1, '_admin_exclude_value', 'save__admin_exclude_form__admin_exclude_value', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(9, '2024-09-01 04:53:26.893491', '2024-09-01 04:53:26.893491', NULL, NULL, 1, 2, '_admin_obj_id', 'save__admin_obj_form__admin_obj_id', 'number', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(10, '2024-09-01 04:53:26.897174', '2024-09-01 04:53:26.897174', NULL, NULL, 1, 2, '_admin_obj_new', 'save__admin_obj_form__admin_obj_new', 'datetime-local', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(11, '2024-09-01 04:53:26.900569', '2024-09-01 04:53:26.900569', NULL, NULL, 1, 2, '_admin_obj_edit', 'save__admin_obj_form__admin_obj_edit', 'datetime-local', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(12, '2024-09-01 04:53:26.903749', '2024-09-01 04:53:26.903749', NULL, NULL, 1, 2, '_admin_obj_del', 'save__admin_obj_form__admin_obj_del', 'datetime-local', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(13, '2024-09-01 04:53:26.906603', '2024-09-01 04:53:26.906603', NULL, NULL, 1, 2, '_admin_obj_arch', 'save__admin_obj_form__admin_obj_arch', 'datetime-local', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(14, '2024-09-01 04:53:26.909549', '2024-09-01 04:53:26.909549', NULL, NULL, 1, 2, '_admin_obj_active', 'save__admin_obj_form__admin_obj_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(15, '2024-09-01 04:53:26.912954', '2024-09-01 04:53:26.912954', NULL, NULL, 1, 2, '_admin_obj_name', 'save__admin_obj_form__admin_obj_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(16, '2024-09-01 04:53:26.916437', '2024-09-01 04:53:26.916437', NULL, NULL, 1, 2, '_admin_obj_table', 'save__admin_obj_form__admin_obj_table', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(17, '2024-09-01 04:53:26.919470', '2024-09-01 04:53:26.919470', NULL, NULL, 1, 2, '_admin_obj_obj', 'save__admin_obj_form__admin_obj_obj', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(18, '2024-09-01 04:53:26.921993', '2024-09-01 04:53:26.921993', NULL, NULL, 1, 2, '_admin_obj_ctlr', 'save__admin_obj_form__admin_obj_ctlr', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(19, '2024-09-01 04:53:26.924617', '2024-09-01 04:53:26.924617', NULL, NULL, 1, 2, '_admin_obj_page', 'save__admin_obj_form__admin_obj_page', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(20, '2024-09-01 04:53:26.926858', '2024-09-01 04:53:26.926858', NULL, NULL, 1, 2, '_admin_obj_perm', 'save__admin_obj_form__admin_obj_perm', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(21, '2024-09-01 04:53:26.928450', '2024-09-01 04:53:26.928450', NULL, NULL, 1, 2, '_admin_obj_role_perm', 'save__admin_obj_form__admin_obj_role_perm', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(22, '2024-09-01 04:53:26.930074', '2024-09-01 04:53:26.930074', NULL, NULL, 1, 2, '_admin_obj_save_modal', 'save__admin_obj_form__admin_obj_save_modal', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(23, '2024-09-01 04:53:26.931535', '2024-09-01 04:53:26.931535', NULL, NULL, 1, 2, '_admin_obj_valid_form', 'save__admin_obj_form__admin_obj_valid_form', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(24, '2024-09-01 04:53:27.019492', '2024-09-01 04:53:27.019492', NULL, NULL, 1, 3, '_cal_id', 'save__cal_form__cal_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(25, '2024-09-01 04:53:27.021551', '2024-09-01 04:53:27.021551', NULL, NULL, 1, 3, '_cal_active', 'save__cal_form__cal_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(26, '2024-09-01 04:53:27.023142', '2024-09-01 04:53:27.023142', NULL, NULL, 1, 3, '_cal_name', 'save__cal_form__cal_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(27, '2024-09-01 04:53:27.145128', '2024-09-01 04:53:27.145128', NULL, NULL, 1, 4, '_cal_ext_id', 'save__cal_ext_form__cal_ext_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(28, '2024-09-01 04:53:27.147325', '2024-09-01 04:53:27.147325', NULL, NULL, 1, 4, '_cal_ext_active', 'save__cal_ext_form__cal_ext_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(29, '2024-09-01 04:53:27.149391', '2024-09-01 04:53:27.149391', NULL, NULL, 1, 4, '_cal_ext_name', 'save__cal_ext_form__cal_ext_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(30, '2024-09-01 04:53:27.240917', '2024-09-01 04:53:27.240917', NULL, NULL, 1, 5, '_cal_follow_id', 'save__cal_follow_form__cal_follow_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(31, '2024-09-01 04:53:27.242739', '2024-09-01 04:53:27.242739', NULL, NULL, 1, 5, '_cal_follow_active', 'save__cal_follow_form__cal_follow_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(32, '2024-09-01 04:53:27.244411', '2024-09-01 04:53:27.244411', NULL, NULL, 1, 5, '_cal_follow_name', 'save__cal_follow_form__cal_follow_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(33, '2024-09-01 04:53:27.329546', '2024-09-01 04:53:27.329546', NULL, NULL, 1, 6, '_cal_item_id', 'save__cal_item_form__cal_item_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(34, '2024-09-01 04:53:27.331057', '2024-09-01 04:53:27.331057', NULL, NULL, 1, 6, '_cal_item_active', 'save__cal_item_form__cal_item_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(35, '2024-09-01 04:53:27.332459', '2024-09-01 04:53:27.332459', NULL, NULL, 1, 6, '_cal_item_name', 'save__cal_item_form__cal_item_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(36, '2024-09-01 04:53:27.436426', '2024-09-01 04:53:27.436426', NULL, NULL, 1, 7, '_cat_addr_id', 'save__cat_addr_form__cat_addr_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(37, '2024-09-01 04:53:27.438664', '2024-09-01 04:53:27.438664', NULL, NULL, 1, 7, '_cat_addr_active', 'save__cat_addr_form__cat_addr_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(38, '2024-09-01 04:53:27.440223', '2024-09-01 04:53:27.440223', NULL, NULL, 1, 7, '_cat_addr_order', 'save__cat_addr_form__cat_addr_order', 'number', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(39, '2024-09-01 04:53:27.441635', '2024-09-01 04:53:27.441635', NULL, NULL, 1, 7, '_cat_addr_name', 'save__cat_addr_form__cat_addr_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(40, '2024-09-01 04:53:27.511476', '2024-09-01 04:53:27.511476', NULL, NULL, 1, 8, '_cat_note_id', 'save__cat_note_form__cat_note_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(41, '2024-09-01 04:53:27.512973', '2024-09-01 04:53:27.512973', NULL, NULL, 1, 8, '_cat_note_active', 'save__cat_note_form__cat_note_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(42, '2024-09-01 04:53:27.514697', '2024-09-01 04:53:27.514697', NULL, NULL, 1, 8, '_cat_note_order', 'save__cat_note_form__cat_note_order', 'number', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(43, '2024-09-01 04:53:27.516141', '2024-09-01 04:53:27.516141', NULL, NULL, 1, 8, '_cat_note_name', 'save__cat_note_form__cat_note_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(44, '2024-09-01 04:53:27.628111', '2024-09-01 04:53:27.628111', NULL, NULL, 1, 9, '_cat_phone_id', 'save__cat_phone_form__cat_phone_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(45, '2024-09-01 04:53:27.631579', '2024-09-01 04:53:27.631579', NULL, NULL, 1, 9, '_cat_phone_active', 'save__cat_phone_form__cat_phone_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(46, '2024-09-01 04:53:27.635267', '2024-09-01 04:53:27.635267', NULL, NULL, 1, 9, '_cat_phone_order', 'save__cat_phone_form__cat_phone_order', 'number', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(47, '2024-09-01 04:53:27.638998', '2024-09-01 04:53:27.638998', NULL, NULL, 1, 9, '_cat_phone_name', 'save__cat_phone_form__cat_phone_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(48, '2024-09-01 04:53:27.728876', '2024-09-01 04:53:27.728876', NULL, NULL, 1, 10, '_co_id', 'save__co_form__co_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(49, '2024-09-01 04:53:27.730498', '2024-09-01 04:53:27.730498', NULL, NULL, 1, 10, '_co_active', 'save__co_form__co_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(50, '2024-09-01 04:53:27.732030', '2024-09-01 04:53:27.732030', NULL, NULL, 1, 10, 'fk__mem_id', 'save__co_form_fk__mem_id', 'select', 0, '/_mem/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(51, '2024-09-01 04:53:27.733428', '2024-09-01 04:53:27.733428', NULL, NULL, 1, 10, 'fk__sub_plan', 'save__co_form_fk__sub_plan', 'number', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(52, '2024-09-01 04:53:27.734903', '2024-09-01 04:53:27.734903', NULL, NULL, 1, 10, '_co_name', 'save__co_form__co_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(53, '2024-09-01 04:53:27.736458', '2024-09-01 04:53:27.736458', NULL, NULL, 1, 10, '_co_domain', 'save__co_form__co_domain', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(54, '2024-09-01 04:53:27.738039', '2024-09-01 04:53:27.738039', NULL, NULL, 1, 10, '_co_ulid', 'save__co_form__co_ulid', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(55, '2024-09-01 04:53:27.739757', '2024-09-01 04:53:27.739757', NULL, NULL, 1, 10, '_co_setup', 'save__co_form__co_setup', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(56, '2024-09-01 04:53:27.741275', '2024-09-01 04:53:27.741275', NULL, NULL, 1, 10, '_co_configured', 'save__co_form__co_configured', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(57, '2024-09-01 04:53:27.812768', '2024-09-01 04:53:27.812768', NULL, NULL, 1, 11, '_co_mem_id', 'save__co_mem_form__co_mem_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(58, '2024-09-01 04:53:27.814434', '2024-09-01 04:53:27.814434', NULL, NULL, 1, 11, '_co_mem_active', 'save__co_mem_form__co_mem_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(59, '2024-09-01 04:53:27.816062', '2024-09-01 04:53:27.816062', NULL, NULL, 1, 11, 'fk__mem_id', 'save__co_mem_form_fk__mem_id', 'select', 0, '/_mem/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(60, '2024-09-01 04:53:27.817640', '2024-09-01 04:53:27.817640', NULL, NULL, 1, 11, 'fk__role_id', 'save__co_mem_form_fk__role_id', 'select', 0, '/_role/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(61, '2024-09-01 04:53:27.918045', '2024-09-01 04:53:27.918045', NULL, NULL, 1, 12, '_co_pref_id', 'save__co_pref_form__co_pref_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(62, '2024-09-01 04:53:27.920712', '2024-09-01 04:53:27.920712', NULL, NULL, 1, 12, '_co_pref_active', 'save__co_pref_form__co_pref_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(63, '2024-09-01 04:53:27.923979', '2024-09-01 04:53:27.923979', NULL, NULL, 1, 12, '_co_pref_key', 'save__co_pref_form__co_pref_key', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(64, '2024-09-01 04:53:27.926232', '2024-09-01 04:53:27.926232', NULL, NULL, 1, 12, '_co_pref_val', 'save__co_pref_form__co_pref_val', 'text', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(65, '2024-09-01 04:53:28.012677', '2024-09-01 04:53:28.012677', NULL, NULL, 1, 13, '_co_sub_metric_id', 'save__co_sub_metric_form__co_sub_metric_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(66, '2024-09-01 04:53:28.014651', '2024-09-01 04:53:28.014651', NULL, NULL, 1, 13, '_co_sub_metric_active', 'save__co_sub_metric_form__co_sub_metric_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(67, '2024-09-01 04:53:28.016578', '2024-09-01 04:53:28.016578', NULL, NULL, 1, 13, 'fk__sub_plan_metric_id', 'save__co_sub_metric_form_fk__sub_plan_metric_id', 'select', 0, '/_sub_plan_metric/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(68, '2024-09-01 04:53:28.018421', '2024-09-01 04:53:28.018421', NULL, NULL, 1, 13, '_co_sub_metric_count_curr', 'save__co_sub_metric_form__co_sub_metric_count_curr', 'number', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(69, '2024-09-01 04:53:28.021571', '2024-09-01 04:53:28.021571', NULL, NULL, 1, 13, '_co_sub_metric_count_over', 'save__co_sub_metric_form__co_sub_metric_count_over', 'number', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(70, '2024-09-01 04:53:28.024886', '2024-09-01 04:53:28.024886', NULL, NULL, 1, 13, '_co_sub_metric_total_price', 'save__co_sub_metric_form__co_sub_metric_total_price', 'text', 0, NULL, NULL, NULL, NULL, '72', NULL, NULL, NULL),
+(71, '2024-09-01 04:53:28.026645', '2024-09-01 04:53:28.026645', NULL, NULL, 1, 13, '_co_sub_metric_ulid', 'save__co_sub_metric_form__co_sub_metric_ulid', 'text', 0, NULL, NULL, NULL, NULL, '32', NULL, NULL, NULL),
+(72, '2024-09-01 04:53:28.120840', '2024-09-01 04:53:28.120840', NULL, NULL, 1, 14, '_co_sub_plan_id', 'save__co_sub_plan_form__co_sub_plan_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(73, '2024-09-01 04:53:28.123631', '2024-09-01 04:53:28.123631', NULL, NULL, 1, 14, '_co_sub_plan_active', 'save__co_sub_plan_form__co_sub_plan_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(74, '2024-09-01 04:53:28.125882', '2024-09-01 04:53:28.125882', NULL, NULL, 1, 14, 'fk__sub_plan_id', 'save__co_sub_plan_form_fk__sub_plan_id', 'select', 0, '/_sub_plan/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(75, '2024-09-01 04:53:28.127718', '2024-09-01 04:53:28.127718', NULL, NULL, 1, 14, '_co_sub_plan_has_trial', 'save__co_sub_plan_form__co_sub_plan_has_trial', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(76, '2024-09-01 04:53:28.129713', '2024-09-01 04:53:28.129713', NULL, NULL, 1, 14, '_co_sub_plan_trial_end', 'save__co_sub_plan_form__co_sub_plan_trial_end', 'datetime-local', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(77, '2024-09-01 04:53:28.131359', '2024-09-01 04:53:28.131359', NULL, NULL, 1, 14, '_co_sub_plan_total_price', 'save__co_sub_plan_form__co_sub_plan_total_price', 'text', 0, NULL, NULL, NULL, NULL, '72', NULL, NULL, NULL),
+(78, '2024-09-01 04:53:28.133043', '2024-09-01 04:53:28.133043', NULL, NULL, 1, 14, '_co_sub_plan_date_last_bill', 'save__co_sub_plan_form__co_sub_plan_date_last_bill', 'datetime-local', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(79, '2024-09-01 04:53:28.134787', '2024-09-01 04:53:28.134787', NULL, NULL, 1, 14, '_co_sub_plan_date_next_bill', 'save__co_sub_plan_form__co_sub_plan_date_next_bill', 'datetime-local', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(80, '2024-09-01 04:53:28.136366', '2024-09-01 04:53:28.136366', NULL, NULL, 1, 14, '_co_sub_plan_ulid', 'save__co_sub_plan_form__co_sub_plan_ulid', 'text', 0, NULL, NULL, NULL, NULL, '32', NULL, NULL, NULL),
+(81, '2024-09-01 04:53:28.195311', '2024-09-01 04:53:28.195311', NULL, NULL, 1, 15, '_config_id', 'save__config_form__config_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(82, '2024-09-01 04:53:28.196984', '2024-09-01 04:53:28.196984', NULL, NULL, 1, 15, '_config_active', 'save__config_form__config_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(83, '2024-09-01 04:53:28.198595', '2024-09-01 04:53:28.198595', NULL, NULL, 1, 15, '_config_name', 'save__config_form__config_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(84, '2024-09-01 04:53:28.200211', '2024-09-01 04:53:28.200211', NULL, NULL, 1, 15, '_config_desc', 'save__config_form__config_desc', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(85, '2024-09-01 04:53:28.201762', '2024-09-01 04:53:28.201762', NULL, NULL, 1, 15, '_config_table', 'save__config_form__config_table', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(86, '2024-09-01 04:53:28.203495', '2024-09-01 04:53:28.203495', NULL, NULL, 1, 15, '_config_link', 'save__config_form__config_link', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(87, '2024-09-01 04:53:28.285800', '2024-09-01 04:53:28.285800', NULL, NULL, 1, 16, '_country_id', 'save__country_form__country_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(88, '2024-09-01 04:53:28.287892', '2024-09-01 04:53:28.287892', NULL, NULL, 1, 16, '_country_active', 'save__country_form__country_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(89, '2024-09-01 04:53:28.289785', '2024-09-01 04:53:28.289785', NULL, NULL, 1, 16, '_country_name', 'save__country_form__country_name', 'text', 0, NULL, NULL, NULL, NULL, '100', NULL, NULL, NULL),
+(90, '2024-09-01 04:53:28.291204', '2024-09-01 04:53:28.291204', NULL, NULL, 1, 16, '_country_abbrev', 'save__country_form__country_abbrev', 'text', 0, NULL, NULL, NULL, NULL, '2', NULL, NULL, NULL),
+(91, '2024-09-01 04:53:28.292677', '2024-09-01 04:53:28.292677', NULL, NULL, 1, 16, '_country_display_order', 'save__country_form__country_display_order', 'number', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(92, '2024-09-01 04:53:28.380484', '2024-09-01 04:53:28.380484', NULL, NULL, 1, 17, '_doc_id', 'save__doc_form__doc_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(93, '2024-09-01 04:53:28.382114', '2024-09-01 04:53:28.382114', NULL, NULL, 1, 17, '_doc_active', 'save__doc_form__doc_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(94, '2024-09-01 04:53:28.383743', '2024-09-01 04:53:28.383743', NULL, NULL, 1, 17, 'fk__mem_id', 'save__doc_form_fk__mem_id', 'select', 0, '/_mem/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(95, '2024-09-01 04:53:28.385440', '2024-09-01 04:53:28.385440', NULL, NULL, 1, 17, 'fk_uploader__mem_id', 'save__doc_form_fk_uploader__mem_id', 'select', 0, '/uploader__mem/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(96, '2024-09-01 04:53:28.387653', '2024-09-01 04:53:28.387653', NULL, NULL, 1, 17, '_doc_name', 'save__doc_form__doc_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(97, '2024-09-01 04:53:28.388929', '2024-09-01 04:53:28.388929', NULL, NULL, 1, 17, '_doc_orig_name', 'save__doc_form__doc_orig_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(98, '2024-09-01 04:53:28.390712', '2024-09-01 04:53:28.390712', NULL, NULL, 1, 17, '_doc_type', 'save__doc_form__doc_type', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(99, '2024-09-01 04:53:28.392002', '2024-09-01 04:53:28.392002', NULL, NULL, 1, 17, '_doc_size', 'save__doc_form__doc_size', 'number', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(100, '2024-09-01 04:53:28.393483', '2024-09-01 04:53:28.393483', NULL, NULL, 1, 17, '_doc_s3_loc', 'save__doc_form__doc_s3_loc', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(101, '2024-09-01 04:53:28.394738', '2024-09-01 04:53:28.394738', NULL, NULL, 1, 17, '_doc_hash', 'save__doc_form__doc_hash', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(102, '2024-09-01 04:53:28.474118', '2024-09-01 04:53:28.474118', NULL, NULL, 1, 18, '_follow_id', 'save__follow_form__follow_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(103, '2024-09-01 04:53:28.477356', '2024-09-01 04:53:28.477356', NULL, NULL, 1, 18, '_follow_active', 'save__follow_form__follow_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(104, '2024-09-01 04:53:28.479916', '2024-09-01 04:53:28.479916', NULL, NULL, 1, 18, 'fk__mem_id', 'save__follow_form_fk__mem_id', 'select', 0, '/_mem/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(105, '2024-09-01 04:53:28.482633', '2024-09-01 04:53:28.482633', NULL, NULL, 1, 18, '_follow_obj', 'save__follow_form__follow_obj', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(106, '2024-09-01 04:53:28.485320', '2024-09-01 04:53:28.485320', NULL, NULL, 1, 18, '_follow_obj_id', 'save__follow_form__follow_obj_id', 'number', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(107, '2024-09-01 04:53:28.573633', '2024-09-01 04:53:28.573633', NULL, NULL, 1, 19, '_lang_id', 'save__lang_form__lang_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(108, '2024-09-01 04:53:28.575523', '2024-09-01 04:53:28.575523', NULL, NULL, 1, 19, '_lang_active', 'save__lang_form__lang_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(109, '2024-09-01 04:53:28.577074', '2024-09-01 04:53:28.577074', NULL, NULL, 1, 19, '_lang_order', 'save__lang_form__lang_order', 'number', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(110, '2024-09-01 04:53:28.578624', '2024-09-01 04:53:28.578624', NULL, NULL, 1, 19, '_lang_name', 'save__lang_form__lang_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(111, '2024-09-01 04:53:28.580081', '2024-09-01 04:53:28.580081', NULL, NULL, 1, 19, '_lang_code', 'save__lang_form__lang_code', 'text', 0, NULL, NULL, NULL, NULL, '5', NULL, NULL, NULL),
+(112, '2024-09-01 04:53:28.581635', '2024-09-01 04:53:28.581635', NULL, NULL, 1, 19, '_lang_default', 'save__lang_form__lang_default', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(113, '2024-09-01 04:53:28.583520', '2024-09-01 04:53:28.583520', NULL, NULL, 1, 19, '_lang_system', 'save__lang_form__lang_system', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(114, '2024-09-01 04:53:28.682556', '2024-09-01 04:53:28.682556', NULL, NULL, 1, 20, '_mem_id', 'save__mem_form__mem_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(115, '2024-09-01 04:53:28.685202', '2024-09-01 04:53:28.685202', NULL, NULL, 1, 20, '_mem_active', 'save__mem_form__mem_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(116, '2024-09-01 04:53:28.688572', '2024-09-01 04:53:28.688572', NULL, NULL, 1, 20, 'fk__doc_id', 'save__mem_form_fk__doc_id', 'select', 0, '/_doc/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(117, '2024-09-01 04:53:28.693303', '2024-09-01 04:53:28.693303', NULL, NULL, 1, 20, '_mem_ulid', 'save__mem_form__mem_ulid', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(118, '2024-09-01 04:53:28.695486', '2024-09-01 04:53:28.695486', NULL, NULL, 1, 20, '_mem_code', 'save__mem_form__mem_code', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(119, '2024-09-01 04:53:28.697242', '2024-09-01 04:53:28.697242', NULL, NULL, 1, 20, '_mem_fname', 'save__mem_form__mem_fname', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(120, '2024-09-01 04:53:28.699058', '2024-09-01 04:53:28.699058', NULL, NULL, 1, 20, '_mem_mname', 'save__mem_form__mem_mname', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(121, '2024-09-01 04:53:28.700962', '2024-09-01 04:53:28.700962', NULL, NULL, 1, 20, '_mem_lname', 'save__mem_form__mem_lname', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(122, '2024-09-01 04:53:28.703234', '2024-09-01 04:53:28.703234', NULL, NULL, 1, 20, '_mem_name', 'save__mem_form__mem_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(123, '2024-09-01 04:53:28.705330', '2024-09-01 04:53:28.705330', NULL, NULL, 1, 20, '_mem_dob', 'save__mem_form__mem_dob', 'datetime-local', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(124, '2024-09-01 04:53:28.706862', '2024-09-01 04:53:28.706862', NULL, NULL, 1, 20, '_mem_email', 'save__mem_form__mem_email', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(125, '2024-09-01 04:53:28.708383', '2024-09-01 04:53:28.708383', NULL, NULL, 1, 20, '_mem_email_verified', 'save__mem_form__mem_email_verified', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(126, '2024-09-01 04:53:28.709846', '2024-09-01 04:53:28.709846', NULL, NULL, 1, 20, '_mem_configured', 'save__mem_form__mem_configured', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(127, '2024-09-01 04:53:28.805173', '2024-09-01 04:53:28.805173', NULL, NULL, 1, 21, '_mem_addr_id', 'save__mem_addr_form__mem_addr_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(128, '2024-09-01 04:53:28.807545', '2024-09-01 04:53:28.807545', NULL, NULL, 1, 21, '_mem_addr_active', 'save__mem_addr_form__mem_addr_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(129, '2024-09-01 04:53:28.809012', '2024-09-01 04:53:28.809012', NULL, NULL, 1, 21, 'fk__mem_id', 'save__mem_addr_form_fk__mem_id', 'select', 0, '/_mem/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(130, '2024-09-01 04:53:28.810844', '2024-09-01 04:53:28.810844', NULL, NULL, 1, 21, 'fk__state_id', 'save__mem_addr_form_fk__state_id', 'select', 0, '/_state/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(131, '2024-09-01 04:53:28.813026', '2024-09-01 04:53:28.813026', NULL, NULL, 1, 21, 'fk__country_id', 'save__mem_addr_form_fk__country_id', 'select', 0, '/_country/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(132, '2024-09-01 04:53:28.814842', '2024-09-01 04:53:28.814842', NULL, NULL, 1, 21, 'fk__cat_addr_id', 'save__mem_addr_form_fk__cat_addr_id', 'select', 0, '/_cat_addr/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(133, '2024-09-01 04:53:28.816714', '2024-09-01 04:53:28.816714', NULL, NULL, 1, 21, '_mem_addr_street', 'save__mem_addr_form__mem_addr_street', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(134, '2024-09-01 04:53:28.819064', '2024-09-01 04:53:28.819064', NULL, NULL, 1, 21, '_mem_addr_street_two', 'save__mem_addr_form__mem_addr_street_two', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(135, '2024-09-01 04:53:28.820915', '2024-09-01 04:53:28.820915', NULL, NULL, 1, 21, '_mem_addr_apt_name', 'save__mem_addr_form__mem_addr_apt_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(136, '2024-09-01 04:53:28.822596', '2024-09-01 04:53:28.822596', NULL, NULL, 1, 21, '_mem_addr_city', 'save__mem_addr_form__mem_addr_city', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(137, '2024-09-01 04:53:28.824230', '2024-09-01 04:53:28.824230', NULL, NULL, 1, 21, '_mem_addr_postal', 'save__mem_addr_form__mem_addr_postal', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(138, '2024-09-01 04:53:28.825608', '2024-09-01 04:53:28.825608', NULL, NULL, 1, 21, '_mem_addr_owned', 'save__mem_addr_form__mem_addr_owned', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(139, '2024-09-01 04:53:28.827047', '2024-09-01 04:53:28.827047', NULL, NULL, 1, 21, '_mem_addr_rented', 'save__mem_addr_form__mem_addr_rented', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(140, '2024-09-01 04:53:28.828428', '2024-09-01 04:53:28.828428', NULL, NULL, 1, 21, '_mem_addr_start', 'save__mem_addr_form__mem_addr_start', 'datetime-local', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(141, '2024-09-01 04:53:28.829843', '2024-09-01 04:53:28.829843', NULL, NULL, 1, 21, '_mem_addr_end', 'save__mem_addr_form__mem_addr_end', 'datetime-local', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(142, '2024-09-01 04:53:28.831292', '2024-09-01 04:53:28.831292', NULL, NULL, 1, 21, '_mem_addr_current', 'save__mem_addr_form__mem_addr_current', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(143, '2024-09-01 04:53:28.832659', '2024-09-01 04:53:28.832659', NULL, NULL, 1, 21, '_mem_addr_renewal', 'save__mem_addr_form__mem_addr_renewal', 'datetime-local', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(144, '2024-09-01 04:53:28.835497', '2024-09-01 04:53:28.835497', NULL, NULL, 1, 21, '_mem_addr_duration', 'save__mem_addr_form__mem_addr_duration', 'number', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(145, '2024-09-01 04:53:28.838081', '2024-09-01 04:53:28.838081', NULL, NULL, 1, 21, '_mem_addr_homeless', 'save__mem_addr_form__mem_addr_homeless', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(146, '2024-09-01 04:53:28.839987', '2024-09-01 04:53:28.839987', NULL, NULL, 1, 21, '_mem_addr_protect', 'save__mem_addr_form__mem_addr_protect', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(147, '2024-09-01 04:53:28.977933', '2024-09-01 04:53:28.977933', NULL, NULL, 1, 22, '_mem_phone_id', 'save__mem_phone_form__mem_phone_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(148, '2024-09-01 04:53:28.979932', '2024-09-01 04:53:28.979932', NULL, NULL, 1, 22, '_mem_phone_active', 'save__mem_phone_form__mem_phone_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(149, '2024-09-01 04:53:28.981980', '2024-09-01 04:53:28.981980', NULL, NULL, 1, 22, 'fk__mem_id', 'save__mem_phone_form_fk__mem_id', 'select', 0, '/_mem/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(150, '2024-09-01 04:53:28.984640', '2024-09-01 04:53:28.984640', NULL, NULL, 1, 22, 'fk__cat_phone_id', 'save__mem_phone_form_fk__cat_phone_id', 'select', 0, '/_cat_phone/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(151, '2024-09-01 04:53:28.986544', '2024-09-01 04:53:28.986544', NULL, NULL, 1, 22, '_mem_phone_number', 'save__mem_phone_form__mem_phone_number', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(152, '2024-09-01 04:53:28.988980', '2024-09-01 04:53:28.988980', NULL, NULL, 1, 22, '_mem_phone_verified', 'save__mem_phone_form__mem_phone_verified', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(153, '2024-09-01 04:53:28.990898', '2024-09-01 04:53:28.990898', NULL, NULL, 1, 22, '_mem_phone_verify_code', 'save__mem_phone_form__mem_phone_verify_code', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(154, '2024-09-01 04:53:29.067799', '2024-09-01 04:53:29.067799', NULL, NULL, 1, 23, '_mem_pref_id', 'save__mem_pref_form__mem_pref_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(155, '2024-09-01 04:53:29.069639', '2024-09-01 04:53:29.069639', NULL, NULL, 1, 23, '_mem_pref_active', 'save__mem_pref_form__mem_pref_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(156, '2024-09-01 04:53:29.071565', '2024-09-01 04:53:29.071565', NULL, NULL, 1, 23, 'fk__mem_id', 'save__mem_pref_form_fk__mem_id', 'select', 0, '/_mem/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(157, '2024-09-01 04:53:29.073141', '2024-09-01 04:53:29.073141', NULL, NULL, 1, 23, '_mem_pref_path', 'save__mem_pref_form__mem_pref_path', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(158, '2024-09-01 04:53:29.074618', '2024-09-01 04:53:29.074618', NULL, NULL, 1, 23, '_mem_pref_group', 'save__mem_pref_form__mem_pref_group', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(159, '2024-09-01 04:53:29.076044', '2024-09-01 04:53:29.076044', NULL, NULL, 1, 23, '_mem_pref_value', 'save__mem_pref_form__mem_pref_value', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(160, '2024-09-01 04:53:29.218376', '2024-09-01 04:53:29.218376', NULL, NULL, 1, 24, '_menu_item_id', 'save__menu_item_form__menu_item_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(161, '2024-09-01 04:53:29.221281', '2024-09-01 04:53:29.221281', NULL, NULL, 1, 24, '_menu_item_active', 'save__menu_item_form__menu_item_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(162, '2024-09-01 04:53:29.223445', '2024-09-01 04:53:29.223445', NULL, NULL, 1, 24, '_menu_item_name', 'save__menu_item_form__menu_item_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(163, '2024-09-01 04:53:29.225134', '2024-09-01 04:53:29.225134', NULL, NULL, 1, 24, '_menu_item_desc', 'save__menu_item_form__menu_item_desc', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(164, '2024-09-01 04:53:29.226585', '2024-09-01 04:53:29.226585', NULL, NULL, 1, 24, '_menu_item_href', 'save__menu_item_form__menu_item_href', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(165, '2024-09-01 04:53:29.227798', '2024-09-01 04:53:29.227798', NULL, NULL, 1, 24, '_menu_item_click', 'save__menu_item_form__menu_item_click', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(166, '2024-09-01 04:53:29.228990', '2024-09-01 04:53:29.228990', NULL, NULL, 1, 24, '_menu_item_target', 'save__menu_item_form__menu_item_target', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(167, '2024-09-01 04:53:29.230364', '2024-09-01 04:53:29.230364', NULL, NULL, 1, 24, '_menu_item_toggle', 'save__menu_item_form__menu_item_toggle', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(168, '2024-09-01 04:53:29.231781', '2024-09-01 04:53:29.231781', NULL, NULL, 1, 24, '_menu_item_icon', 'save__menu_item_form__menu_item_icon', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(169, '2024-09-01 04:53:29.233227', '2024-09-01 04:53:29.233227', NULL, NULL, 1, 24, '_menu_item_public', 'save__menu_item_form__menu_item_public', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(170, '2024-09-01 04:53:29.330923', '2024-09-01 04:53:29.330923', NULL, NULL, 1, 25, '_module_id', 'save__module_form__module_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(171, '2024-09-01 04:53:29.333141', '2024-09-01 04:53:29.333141', NULL, NULL, 1, 25, '_module_active', 'save__module_form__module_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(172, '2024-09-01 04:53:29.335852', '2024-09-01 04:53:29.335852', NULL, NULL, 1, 25, '_module_name', 'save__module_form__module_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(173, '2024-09-01 04:53:29.338956', '2024-09-01 04:53:29.338956', NULL, NULL, 1, 25, '_module_desc', 'save__module_form__module_desc', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(174, '2024-09-01 04:53:29.341584', '2024-09-01 04:53:29.341584', NULL, NULL, 1, 25, '_module_type', 'save__module_form__module_type', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(175, '2024-09-01 04:53:29.343384', '2024-09-01 04:53:29.343384', NULL, NULL, 1, 25, '_module_default', 'save__module_form__module_default', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(176, '2024-09-01 04:53:29.346109', '2024-09-01 04:53:29.346109', NULL, NULL, 1, 25, '_module_display_order', 'save__module_form__module_display_order', 'number', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(177, '2024-09-01 04:53:29.460866', '2024-09-01 04:53:29.460866', NULL, NULL, 1, 26, '_module__mem_id', 'save__module__mem_form__module__mem_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(178, '2024-09-01 04:53:29.462969', '2024-09-01 04:53:29.462969', NULL, NULL, 1, 26, '_module__mem_active', 'save__module__mem_form__module__mem_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(179, '2024-09-01 04:53:29.464777', '2024-09-01 04:53:29.464777', NULL, NULL, 1, 26, 'fk__module_id', 'save__module__mem_form_fk__module_id', 'select', 0, '/_module/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(180, '2024-09-01 04:53:29.467046', '2024-09-01 04:53:29.467046', NULL, NULL, 1, 26, 'fk__mem_id', 'save__module__mem_form_fk__mem_id', 'select', 0, '/_mem/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(181, '2024-09-01 04:53:29.468512', '2024-09-01 04:53:29.468512', NULL, NULL, 1, 26, 'fk__role_id', 'save__module__mem_form_fk__role_id', 'select', 0, '/_role/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(182, '2024-09-01 04:53:29.470311', '2024-09-01 04:53:29.470311', NULL, NULL, 1, 26, '_module__mem_uuid', 'save__module__mem_form__module__mem_uuid', 'text', 0, NULL, NULL, NULL, NULL, '32', NULL, NULL, NULL),
+(183, '2024-09-01 04:53:29.472296', '2024-09-01 04:53:29.472296', NULL, NULL, 1, 26, '_module__mem_ulid', 'save__module__mem_form__module__mem_ulid', 'text', 0, NULL, NULL, NULL, NULL, '32', NULL, NULL, NULL),
+(184, '2024-09-01 04:53:29.526609', '2024-09-01 04:53:29.526609', NULL, NULL, 1, 27, '_module_perm_id', 'save__module_perm_form__module_perm_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(185, '2024-09-01 04:53:29.536948', '2024-09-01 04:53:29.536948', NULL, NULL, 1, 27, '_module_perm_active', 'save__module_perm_form__module_perm_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(186, '2024-09-01 04:53:29.540900', '2024-09-01 04:53:29.540900', NULL, NULL, 1, 27, 'fk__module_id', 'save__module_perm_form_fk__module_id', 'select', 0, '/_module/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(187, '2024-09-01 04:53:29.544196', '2024-09-01 04:53:29.544196', NULL, NULL, 1, 27, 'fk__perm_id', 'save__module_perm_form_fk__perm_id', 'select', 0, '/_perm/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(188, '2024-09-01 04:53:29.627459', '2024-09-01 04:53:29.627459', NULL, NULL, 1, 28, '_note_id', 'save__note_form__note_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(189, '2024-09-01 04:53:29.629758', '2024-09-01 04:53:29.629758', NULL, NULL, 1, 28, '_note_active', 'save__note_form__note_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(190, '2024-09-01 04:53:29.632078', '2024-09-01 04:53:29.632078', NULL, NULL, 1, 28, 'fk__mem_id', 'save__note_form_fk__mem_id', 'select', 0, '/_mem/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(191, '2024-09-01 04:53:29.633644', '2024-09-01 04:53:29.633644', NULL, NULL, 1, 28, 'fk__cat_note_id', 'save__note_form_fk__cat_note_id', 'select', 0, '/_cat_note/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(192, '2024-09-01 04:53:29.635308', '2024-09-01 04:53:29.635308', NULL, NULL, 1, 28, 'fk__note_id', 'save__note_form_fk__note_id', 'select', 0, '/_note/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(193, '2024-09-01 04:53:29.637282', '2024-09-01 04:53:29.637282', NULL, NULL, 1, 28, '_note_edited', 'save__note_form__note_edited', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(194, '2024-09-01 04:53:29.638956', '2024-09-01 04:53:29.638956', NULL, NULL, 1, 28, '_note_effective_date', 'save__note_form__note_effective_date', 'datetime-local', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(195, '2024-09-01 04:53:29.640603', '2024-09-01 04:53:29.640603', NULL, NULL, 1, 28, '_note_text', 'save__note_form__note_text', 'text', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(196, '2024-09-01 04:53:29.642105', '2024-09-01 04:53:29.642105', NULL, NULL, 1, 28, '_note_obj', 'save__note_form__note_obj', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(197, '2024-09-01 04:53:29.643573', '2024-09-01 04:53:29.643573', NULL, NULL, 1, 28, '_note_obj_id', 'save__note_form__note_obj_id', 'number', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(198, '2024-09-01 04:53:29.723957', '2024-09-01 04:53:29.723957', NULL, NULL, 1, 29, '_notif_id', 'save__notif_form__notif_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(199, '2024-09-01 04:53:29.726110', '2024-09-01 04:53:29.726110', NULL, NULL, 1, 29, '_notif_active', 'save__notif_form__notif_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(200, '2024-09-01 04:53:29.727853', '2024-09-01 04:53:29.727853', NULL, NULL, 1, 29, 'fk__mem_id', 'save__notif_form_fk__mem_id', 'select', 0, '/_mem/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(201, '2024-09-01 04:53:29.732693', '2024-09-01 04:53:29.732693', NULL, NULL, 1, 29, '_notif_text', 'save__notif_form__notif_text', 'text', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(202, '2024-09-01 04:53:29.843575', '2024-09-01 04:53:29.843575', NULL, NULL, 1, 30, '_notif_signal_id', 'save__notif_signal_form__notif_signal_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(203, '2024-09-01 04:53:29.845899', '2024-09-01 04:53:29.845899', NULL, NULL, 1, 30, '_notif_signal_active', 'save__notif_signal_form__notif_signal_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(204, '2024-09-01 04:53:29.847823', '2024-09-01 04:53:29.847823', NULL, NULL, 1, 30, 'fk__signal_id', 'save__notif_signal_form_fk__signal_id', 'select', 0, '/_signal/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(205, '2024-09-01 04:53:29.850176', '2024-09-01 04:53:29.850176', NULL, NULL, 1, 30, 'fk__notif_id', 'save__notif_signal_form_fk__notif_id', 'select', 0, '/_notif/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(206, '2024-09-01 04:53:29.944495', '2024-09-01 04:53:29.944495', NULL, NULL, 1, 31, '_perm_id', 'save__perm_form__perm_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(207, '2024-09-01 04:53:29.946921', '2024-09-01 04:53:29.946921', NULL, NULL, 1, 31, '_perm_active', 'save__perm_form__perm_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(208, '2024-09-01 04:53:29.949374', '2024-09-01 04:53:29.949374', NULL, NULL, 1, 31, '_perm_protected', 'save__perm_form__perm_protected', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(209, '2024-09-01 04:53:29.952382', '2024-09-01 04:53:29.952382', NULL, NULL, 1, 31, '_perm_role_type', 'save__perm_form__perm_role_type', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(210, '2024-09-01 04:53:29.955113', '2024-09-01 04:53:29.955113', NULL, NULL, 1, 31, '_perm_name', 'save__perm_form__perm_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(211, '2024-09-01 04:53:29.956817', '2024-09-01 04:53:29.956817', NULL, NULL, 1, 31, '_perm_path', 'save__perm_form__perm_path', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(212, '2024-09-01 04:53:29.958727', '2024-09-01 04:53:29.958727', NULL, NULL, 1, 31, '_perm_desc', 'save__perm_form__perm_desc', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(213, '2024-09-01 04:53:30.064697', '2024-09-01 04:53:30.064697', NULL, NULL, 1, 32, '_perm_menu_item_id', 'save__perm_menu_item_form__perm_menu_item_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(214, '2024-09-01 04:53:30.067559', '2024-09-01 04:53:30.067559', NULL, NULL, 1, 32, '_perm_menu_item_active', 'save__perm_menu_item_form__perm_menu_item_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(215, '2024-09-01 04:53:30.069819', '2024-09-01 04:53:30.069819', NULL, NULL, 1, 32, 'fk__perm_id', 'save__perm_menu_item_form_fk__perm_id', 'select', 0, '/_perm/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(216, '2024-09-01 04:53:30.072682', '2024-09-01 04:53:30.072682', NULL, NULL, 1, 32, 'fk__menu_item_id', 'save__perm_menu_item_form_fk__menu_item_id', 'select', 0, '/_menu_item/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(217, '2024-09-01 04:53:30.075082', '2024-09-01 04:53:30.075082', NULL, NULL, 1, 32, '_perm_menu_item_disp_order', 'save__perm_menu_item_form__perm_menu_item_disp_order', 'number', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(218, '2024-09-01 04:53:30.177367', '2024-09-01 04:53:30.177367', NULL, NULL, 1, 33, '_public_path_id', 'save__public_path_form__public_path_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(219, '2024-09-01 04:53:30.180126', '2024-09-01 04:53:30.180126', NULL, NULL, 1, 33, '_public_path_active', 'save__public_path_form__public_path_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(220, '2024-09-01 04:53:30.182025', '2024-09-01 04:53:30.182025', NULL, NULL, 1, 33, '_public_path', 'save__public_path_form__public_path', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(221, '2024-09-01 04:53:30.298248', '2024-09-01 04:53:30.298248', NULL, NULL, 1, 34, '_role_id', 'save__role_form__role_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(222, '2024-09-01 04:53:30.300079', '2024-09-01 04:53:30.300079', NULL, NULL, 1, 34, '_role_active', 'save__role_form__role_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(223, '2024-09-01 04:53:30.302240', '2024-09-01 04:53:30.302240', NULL, NULL, 1, 34, '_role_default', 'save__role_form__role_default', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(224, '2024-09-01 04:53:30.304806', '2024-09-01 04:53:30.304806', NULL, NULL, 1, 34, '_role_name', 'save__role_form__role_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(225, '2024-09-01 04:53:30.306541', '2024-09-01 04:53:30.306541', NULL, NULL, 1, 34, '_role_desc', 'save__role_form__role_desc', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(226, '2024-09-01 04:53:30.308279', '2024-09-01 04:53:30.308279', NULL, NULL, 1, 34, '_role_type', 'save__role_form__role_type', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(227, '2024-09-01 04:53:30.419247', '2024-09-01 04:53:30.419247', NULL, NULL, 1, 35, '_role_perm_id', 'save__role_perm_form__role_perm_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(228, '2024-09-01 04:53:30.421546', '2024-09-01 04:53:30.421546', NULL, NULL, 1, 35, '_role_perm_active', 'save__role_perm_form__role_perm_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(229, '2024-09-01 04:53:30.423304', '2024-09-01 04:53:30.423304', NULL, NULL, 1, 35, 'fk__role_id', 'save__role_perm_form_fk__role_id', 'select', 0, '/_role/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(230, '2024-09-01 04:53:30.425046', '2024-09-01 04:53:30.425046', NULL, NULL, 1, 35, 'fk__perm_id', 'save__role_perm_form_fk__perm_id', 'select', 0, '/_perm/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(231, '2024-09-01 04:53:30.535405', '2024-09-01 04:53:30.535405', NULL, NULL, 1, 36, '_setting_id', 'save__setting_form__setting_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(232, '2024-09-01 04:53:30.538761', '2024-09-01 04:53:30.538761', NULL, NULL, 1, 36, '_setting_active', 'save__setting_form__setting_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(233, '2024-09-01 04:53:30.542023', '2024-09-01 04:53:30.542023', NULL, NULL, 1, 36, '_setting_key', 'save__setting_form__setting_key', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(234, '2024-09-01 04:53:30.545455', '2024-09-01 04:53:30.545455', NULL, NULL, 1, 36, '_setting_value', 'save__setting_form__setting_value', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(235, '2024-09-01 04:53:30.658078', '2024-09-01 04:53:30.658078', NULL, NULL, 1, 37, '_state_id', 'save__state_form__state_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(236, '2024-09-01 04:53:30.661005', '2024-09-01 04:53:30.661005', NULL, NULL, 1, 37, '_state_active', 'save__state_form__state_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(237, '2024-09-01 04:53:30.662940', '2024-09-01 04:53:30.662940', NULL, NULL, 1, 37, '_state_name', 'save__state_form__state_name', 'text', 0, NULL, NULL, NULL, NULL, '50', NULL, NULL, NULL),
+(238, '2024-09-01 04:53:30.664758', '2024-09-01 04:53:30.664758', NULL, NULL, 1, 37, '_state_abbrev', 'save__state_form__state_abbrev', 'text', 0, NULL, NULL, NULL, NULL, '2', NULL, NULL, NULL),
+(239, '2024-09-01 04:53:30.666643', '2024-09-01 04:53:30.666643', NULL, NULL, 1, 37, 'fk__country_id', 'save__state_form_fk__country_id', 'select', 0, '/_country/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(240, '2024-09-01 04:53:30.668714', '2024-09-01 04:53:30.668714', NULL, NULL, 1, 37, '_state_display_order', 'save__state_form__state_display_order', 'number', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(241, '2024-09-01 04:53:30.748600', '2024-09-01 04:53:30.748600', NULL, NULL, 1, 38, '_sub_plan_id', 'save__sub_plan_form__sub_plan_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(242, '2024-09-01 04:53:30.751237', '2024-09-01 04:53:30.751237', NULL, NULL, 1, 38, '_sub_plan_active', 'save__sub_plan_form__sub_plan_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(243, '2024-09-01 04:53:30.754912', '2024-09-01 04:53:30.754912', NULL, NULL, 1, 38, '_sub_plan_has_trial', 'save__sub_plan_form__sub_plan_has_trial', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(244, '2024-09-01 04:53:30.758639', '2024-09-01 04:53:30.758639', NULL, NULL, 1, 38, '_sub_plan_trial_duration', 'save__sub_plan_form__sub_plan_trial_duration', 'number', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(245, '2024-09-01 04:53:30.760775', '2024-09-01 04:53:30.760775', NULL, NULL, 1, 38, '_sub_plan_mth_price', 'save__sub_plan_form__sub_plan_mth_price', 'text', 0, NULL, NULL, NULL, NULL, '72', NULL, NULL, NULL);
+INSERT INTO `_valid_field` (`_valid_field_id`, `_valid_field_new`, `_valid_field_edit`, `_valid_field_del`, `_valid_field_arch`, `_valid_field_active`, `fk__valid_form_id`, `_valid_field_name`, `_valid_field_input_id`, `_valid_field_type`, `_valid_field_required`, `_valid_field_src`, `_valid_field_mask`, `_valid_field_default_value`, `_valid_field_min`, `_valid_field_max`, `_valid_field_format`, `fk__valid_field_id`, `_valid_field_if_value`) VALUES
+(246, '2024-09-01 04:53:30.762419', '2024-09-01 04:53:30.762419', NULL, NULL, 1, 38, '_sub_plan_yr_price', 'save__sub_plan_form__sub_plan_yr_price', 'text', 0, NULL, NULL, NULL, NULL, '72', NULL, NULL, NULL),
+(247, '2024-09-01 04:53:30.763960', '2024-09-01 04:53:30.763960', NULL, NULL, 1, 38, '_sub_plan_name', 'save__sub_plan_form__sub_plan_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(248, '2024-09-01 04:53:30.765463', '2024-09-01 04:53:30.765463', NULL, NULL, 1, 38, '_sub_plan_desc', 'save__sub_plan_form__sub_plan_desc', 'text', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(249, '2024-09-01 04:53:30.766951', '2024-09-01 04:53:30.766951', NULL, NULL, 1, 38, '_sub_plan_ulid', 'save__sub_plan_form__sub_plan_ulid', 'text', 0, NULL, NULL, NULL, NULL, '32', NULL, NULL, NULL),
+(250, '2024-09-01 04:53:30.791965', '2024-09-01 04:53:30.791965', NULL, NULL, 1, 39, '_sub_plan_metric_id', 'save__sub_plan_metric_form__sub_plan_metric_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(251, '2024-09-01 04:53:30.793743', '2024-09-01 04:53:30.793743', NULL, NULL, 1, 39, '_sub_plan_metric_active', 'save__sub_plan_metric_form__sub_plan_metric_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(252, '2024-09-01 04:53:30.795329', '2024-09-01 04:53:30.795329', NULL, NULL, 1, 39, 'fk__sub_plan_id', 'save__sub_plan_metric_form_fk__sub_plan_id', 'select', 0, '/_sub_plan/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(253, '2024-09-01 04:53:30.796642', '2024-09-01 04:53:30.796642', NULL, NULL, 1, 39, '_sub_plan_metric_is_one_time', 'save__sub_plan_metric_form__sub_plan_metric_is_one_time', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(254, '2024-09-01 04:53:30.797905', '2024-09-01 04:53:30.797905', NULL, NULL, 1, 39, '_sub_plan_metric_extra_price', 'save__sub_plan_metric_form__sub_plan_metric_extra_price', 'text', 0, NULL, NULL, NULL, NULL, '72', NULL, NULL, NULL),
+(255, '2024-09-01 04:53:30.799106', '2024-09-01 04:53:30.799106', NULL, NULL, 1, 39, '_sub_plan_metric_extra_qty', 'save__sub_plan_metric_form__sub_plan_metric_extra_qty', 'number', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(256, '2024-09-01 04:53:30.800447', '2024-09-01 04:53:30.800447', NULL, NULL, 1, 39, '_sub_plan_metric_units_incl', 'save__sub_plan_metric_form__sub_plan_metric_units_incl', 'number', 0, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL),
+(257, '2024-09-01 04:53:30.802043', '2024-09-01 04:53:30.802043', NULL, NULL, 1, 39, '_sub_plan_metric_unit', 'save__sub_plan_metric_form__sub_plan_metric_unit', 'text', 0, NULL, NULL, NULL, NULL, '20', NULL, NULL, NULL),
+(258, '2024-09-01 04:53:30.803981', '2024-09-01 04:53:30.803981', NULL, NULL, 1, 39, '_sub_plan_metric_ulid', 'save__sub_plan_metric_form__sub_plan_metric_ulid', 'text', 0, NULL, NULL, NULL, NULL, '32', NULL, NULL, NULL),
+(259, '2024-09-01 04:53:30.839085', '2024-09-01 04:53:30.839085', NULL, NULL, 1, 40, '_tag_id', 'save__tag_form__tag_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(260, '2024-09-01 04:53:30.841378', '2024-09-01 04:53:30.841378', NULL, NULL, 1, 40, '_tag_active', 'save__tag_form__tag_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(261, '2024-09-01 04:53:30.842966', '2024-09-01 04:53:30.842966', NULL, NULL, 1, 40, 'fk__mem_id', 'save__tag_form_fk__mem_id', 'select', 0, '/_mem/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(262, '2024-09-01 04:53:30.844483', '2024-09-01 04:53:30.844483', NULL, NULL, 1, 40, '_tag', 'save__tag_form__tag', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(263, '2024-09-01 04:53:30.845916', '2024-09-01 04:53:30.845916', NULL, NULL, 1, 40, '_tag_obj', 'save__tag_form__tag_obj', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(264, '2024-09-01 04:53:30.847584', '2024-09-01 04:53:30.847584', NULL, NULL, 1, 40, '_tag_obj_id', 'save__tag_form__tag_obj_id', 'number', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(265, '2024-09-01 04:53:30.931585', '2024-09-01 04:53:30.931585', NULL, NULL, 1, 41, '_task_id', 'save__task_form__task_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(266, '2024-09-01 04:53:30.933499', '2024-09-01 04:53:30.933499', NULL, NULL, 1, 41, '_task_active', 'save__task_form__task_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(267, '2024-09-01 04:53:30.935326', '2024-09-01 04:53:30.935326', NULL, NULL, 1, 41, 'fk__mem_id', 'save__task_form_fk__mem_id', 'select', 0, '/_mem/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(268, '2024-09-01 04:53:30.937307', '2024-09-01 04:53:30.937307', NULL, NULL, 1, 41, 'fk_task_completer_id', 'save__task_form_fk_task_completer_id', 'select', 0, '/task_completer/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(269, '2024-09-01 04:53:30.939095', '2024-09-01 04:53:30.939095', NULL, NULL, 1, 41, 'fk_cat_task_id', 'save__task_form_fk_cat_task_id', 'select', 0, '/cat_task/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(270, '2024-09-01 04:53:30.940603', '2024-09-01 04:53:30.940603', NULL, NULL, 1, 41, 'fk_program_id', 'save__task_form_fk_program_id', 'select', 0, '/program/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(271, '2024-09-01 04:53:30.942030', '2024-09-01 04:53:30.942030', NULL, NULL, 1, 41, '_task_due_date', 'save__task_form__task_due_date', 'datetime-local', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(272, '2024-09-01 04:53:30.943302', '2024-09-01 04:53:30.943302', NULL, NULL, 1, 41, '_task_name', 'save__task_form__task_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(273, '2024-09-01 04:53:30.944830', '2024-09-01 04:53:30.944830', NULL, NULL, 1, 41, '_task_desc', 'save__task_form__task_desc', 'text', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(274, '2024-09-01 04:53:30.946198', '2024-09-01 04:53:30.946198', NULL, NULL, 1, 41, '_task_obj', 'save__task_form__task_obj', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(275, '2024-09-01 04:53:30.947637', '2024-09-01 04:53:30.947637', NULL, NULL, 1, 41, '_task_obj_id', 'save__task_form__task_obj_id', 'number', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(276, '2024-09-01 04:53:30.949045', '2024-09-01 04:53:30.949045', NULL, NULL, 1, 41, '_task_required', 'save__task_form__task_required', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(277, '2024-09-01 04:53:30.951296', '2024-09-01 04:53:30.951296', NULL, NULL, 1, 41, '_task_completion_date', 'save__task_form__task_completion_date', 'datetime-local', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(278, '2024-09-01 04:53:30.953816', '2024-09-01 04:53:30.953816', NULL, NULL, 1, 41, '_task_status', 'save__task_form__task_status', 'text', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(279, '2024-09-01 04:53:30.957644', '2024-09-01 04:53:30.957644', NULL, NULL, 1, 41, '_task_private', 'save__task_form__task_private', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(280, '2024-09-01 04:53:31.061447', '2024-09-01 04:53:31.061447', NULL, NULL, 1, 42, '_token_id', 'save__token_form__token_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(281, '2024-09-01 04:53:31.063968', '2024-09-01 04:53:31.063968', NULL, NULL, 1, 42, '_token_active', 'save__token_form__token_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(282, '2024-09-01 04:53:31.065765', '2024-09-01 04:53:31.065765', NULL, NULL, 1, 42, '_token', 'save__token_form__token', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(283, '2024-09-01 04:53:31.177131', '2024-09-01 04:53:31.177131', NULL, NULL, 1, 43, '_token_xl8_id', 'save__token_xl8_form__token_xl8_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(284, '2024-09-01 04:53:31.178822', '2024-09-01 04:53:31.178822', NULL, NULL, 1, 43, '_token_xl8_active', 'save__token_xl8_form__token_xl8_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(285, '2024-09-01 04:53:31.180493', '2024-09-01 04:53:31.180493', NULL, NULL, 1, 43, 'fk__token_id', 'save__token_xl8_form_fk__token_id', 'select', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(286, '2024-09-01 04:53:31.182343', '2024-09-01 04:53:31.182343', NULL, NULL, 1, 43, 'fk__lang_id', 'save__token_xl8_form_fk__lang_id', 'select', 0, '/_lang/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(287, '2024-09-01 04:53:31.184262', '2024-09-01 04:53:31.184262', NULL, NULL, 1, 43, '_token_xl8', 'save__token_xl8_form__token_xl8', 'text', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(288, '2024-09-01 04:53:31.259210', '2024-09-01 04:53:31.259210', NULL, NULL, 1, 44, '_tz_id', 'save__tz_form__tz_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(289, '2024-09-01 04:53:31.261219', '2024-09-01 04:53:31.261219', NULL, NULL, 1, 44, '_tz_active', 'save__tz_form__tz_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(290, '2024-09-01 04:53:31.262791', '2024-09-01 04:53:31.262791', NULL, NULL, 1, 44, '_tz_region', 'save__tz_form__tz_region', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(291, '2024-09-01 04:53:31.264411', '2024-09-01 04:53:31.264411', NULL, NULL, 1, 44, '_tz_city', 'save__tz_form__tz_city', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(292, '2024-09-01 04:53:31.265786', '2024-09-01 04:53:31.265786', NULL, NULL, 1, 44, '_tz_value', 'save__tz_form__tz_value', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(293, '2024-09-01 04:53:31.391632', '2024-09-01 04:53:31.391632', NULL, NULL, 1, 45, '_valid_field_id', 'save__valid_field_form__valid_field_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(294, '2024-09-01 04:53:31.395631', '2024-09-01 04:53:31.395631', NULL, NULL, 1, 45, '_valid_field_active', 'save__valid_field_form__valid_field_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(295, '2024-09-01 04:53:31.399311', '2024-09-01 04:53:31.399311', NULL, NULL, 1, 45, 'fk__valid_form_id', 'save__valid_field_form_fk__valid_form_id', 'select', 0, '/_valid_form/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(296, '2024-09-01 04:53:31.403448', '2024-09-01 04:53:31.403448', NULL, NULL, 1, 45, '_valid_field_name', 'save__valid_field_form__valid_field_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(297, '2024-09-01 04:53:31.409053', '2024-09-01 04:53:31.409053', NULL, NULL, 1, 45, '_valid_field_input_id', 'save__valid_field_form__valid_field_input_id', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(298, '2024-09-01 04:53:31.413580', '2024-09-01 04:53:31.413580', NULL, NULL, 1, 45, '_valid_field_type', 'save__valid_field_form__valid_field_type', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(299, '2024-09-01 04:53:31.417295', '2024-09-01 04:53:31.417295', NULL, NULL, 1, 45, '_valid_field_required', 'save__valid_field_form__valid_field_required', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(300, '2024-09-01 04:53:31.421719', '2024-09-01 04:53:31.421719', NULL, NULL, 1, 45, '_valid_field_src', 'save__valid_field_form__valid_field_src', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(301, '2024-09-01 04:53:31.425926', '2024-09-01 04:53:31.425926', NULL, NULL, 1, 45, '_valid_field_mask', 'save__valid_field_form__valid_field_mask', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(302, '2024-09-01 04:53:31.429144', '2024-09-01 04:53:31.429144', NULL, NULL, 1, 45, '_valid_field_default_value', 'save__valid_field_form__valid_field_default_value', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(303, '2024-09-01 04:53:31.432216', '2024-09-01 04:53:31.432216', NULL, NULL, 1, 45, '_valid_field_min', 'save__valid_field_form__valid_field_min', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(304, '2024-09-01 04:53:31.435080', '2024-09-01 04:53:31.435080', NULL, NULL, 1, 45, '_valid_field_max', 'save__valid_field_form__valid_field_max', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(305, '2024-09-01 04:53:31.438292', '2024-09-01 04:53:31.438292', NULL, NULL, 1, 45, '_valid_field_format', 'save__valid_field_form__valid_field_format', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(306, '2024-09-01 04:53:31.441443', '2024-09-01 04:53:31.441443', NULL, NULL, 1, 45, 'fk__valid_field_id', 'save__valid_field_form_fk__valid_field_id', 'select', 0, '/_valid_field/list', NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(307, '2024-09-01 04:53:31.444216', '2024-09-01 04:53:31.444216', NULL, NULL, 1, 45, '_valid_field_if_value', 'save__valid_field_form__valid_field_if_value', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(308, '2024-09-01 04:53:31.532969', '2024-09-01 04:53:31.532969', NULL, NULL, 1, 46, '_valid_form_id', 'save__valid_form_form__valid_form_id', 'hidden', 0, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL),
+(309, '2024-09-01 04:53:31.534513', '2024-09-01 04:53:31.534513', NULL, NULL, 1, 46, '_valid_form_active', 'save__valid_form_form__valid_form_active', 'number', 0, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(310, '2024-09-01 04:53:31.536168', '2024-09-01 04:53:31.536168', NULL, NULL, 1, 46, '_valid_form_name', 'save__valid_form_form__valid_form_name', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(311, '2024-09-01 04:53:31.538404', '2024-09-01 04:53:31.538404', NULL, NULL, 1, 46, '_valid_form_input_id', 'save__valid_form_form__valid_form_input_id', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(312, '2024-09-01 04:53:31.540309', '2024-09-01 04:53:31.540309', NULL, NULL, 1, 46, '_valid_form_table', 'save__valid_form_form__valid_form_table', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL),
+(313, '2024-09-01 04:53:31.541810', '2024-09-01 04:53:31.541810', NULL, NULL, 1, 46, '_valid_form_action', 'save__valid_form_form__valid_form_action', 'text', 0, NULL, NULL, NULL, NULL, '255', NULL, NULL, NULL);
+
+CREATE TABLE IF NOT EXISTS `_valid_form` (
+  `_valid_form_id` int(11) NOT NULL AUTO_INCREMENT,
   `_valid_form_new` timestamp(6) NULL DEFAULT NULL,
   `_valid_form_edit` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `_valid_form_del` timestamp(6) NULL DEFAULT NULL,
   `_valid_form_arch` timestamp(6) NULL DEFAULT NULL,
   `_valid_form_active` tinyint(1) DEFAULT 1,
-  `_valid_form_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_valid_form_input_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_valid_form_table` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `_valid_form_action` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-ALTER TABLE `_auth_token`
-  ADD PRIMARY KEY (`_auth_token_id`);
-
-ALTER TABLE `_meditation_exclude`
-  ADD PRIMARY KEY (`_meditation_exclude_id`);
-
-ALTER TABLE `_meditation_obj`
-  ADD PRIMARY KEY (`_meditation_obj_id`);
-
-ALTER TABLE `_cal`
-  ADD PRIMARY KEY (`_cal_id`);
-
-ALTER TABLE `_cal_ext`
-  ADD PRIMARY KEY (`_cal_ext_id`);
-
-ALTER TABLE `_cal_follow`
-  ADD PRIMARY KEY (`_cal_follow_id`);
-
-ALTER TABLE `_cal_item`
-  ADD PRIMARY KEY (`_cal_item_id`);
-
-ALTER TABLE `_cat_addr`
-  ADD PRIMARY KEY (`_cat_addr_id`);
-
-ALTER TABLE `_cat_note`
-  ADD PRIMARY KEY (`_cat_note_id`);
-
-ALTER TABLE `_cat_phone`
-  ADD PRIMARY KEY (`_cat_phone_id`);
-
-ALTER TABLE `_config`
-  ADD PRIMARY KEY (`_config_id`);
-
-ALTER TABLE `_country`
-  ADD PRIMARY KEY (`_country_id`),
-  ADD KEY `_country_abbrev` (`_country_abbrev`),
-  ADD KEY `_country_name` (`_country_name`) USING BTREE;
-
-ALTER TABLE `_doc`
-  ADD PRIMARY KEY (`_doc_id`);
-
-ALTER TABLE `_follow`
-  ADD PRIMARY KEY (`_follow_id`),
-  ADD KEY `_follow_obj` (`_follow_obj`),
-  ADD KEY `_follow_obj_id` (`_follow_obj_id`);
-
-ALTER TABLE `_lang`
-  ADD PRIMARY KEY (`_lang_id`);
-
-ALTER TABLE `_log`
-  ADD PRIMARY KEY (`_log_id`);
-
-ALTER TABLE `_mem`
-  ADD PRIMARY KEY (`_mem_id`);
-
-ALTER TABLE `_mem_addr`
-  ADD PRIMARY KEY (`_mem_addr_id`);
-
-ALTER TABLE `_mem_auth`
-  ADD PRIMARY KEY (`_mem_auth_id`);
-
-ALTER TABLE `_mem_phone`
-  ADD PRIMARY KEY (`_mem_phone_id`);
-
-ALTER TABLE `_mem_pref`
-  ADD PRIMARY KEY (`_mem_pref_id`);
-
-ALTER TABLE `_mem_reset`
-  ADD PRIMARY KEY (`_mem_reset_id`);
-
-ALTER TABLE `_menu_item`
-  ADD PRIMARY KEY (`_menu_item_id`);
-
-ALTER TABLE `_module`
-  ADD PRIMARY KEY (`_module_id`);
-
-ALTER TABLE `_module_perm`
-  ADD PRIMARY KEY (`_module_perm_id`);
-
-ALTER TABLE `_note`
-  ADD PRIMARY KEY (`_note_id`);
-
-ALTER TABLE `_notif`
-  ADD PRIMARY KEY (`_notif_id`);
-
-ALTER TABLE `_notif_signal`
-  ADD PRIMARY KEY (`_notif_signal_id`);
-
-ALTER TABLE `_pay`
-  ADD PRIMARY KEY (`_pay_id`);
-
-ALTER TABLE `_perm`
-  ADD PRIMARY KEY (`_perm_id`);
-
-ALTER TABLE `_perm_menu_item`
-  ADD PRIMARY KEY (`_perm_menu_item_id`);
-
-ALTER TABLE `_pricing`
-  ADD PRIMARY KEY (`_pricing_id`);
-
-ALTER TABLE `_pricing_limit`
-  ADD PRIMARY KEY (`_pricing_limit_id`);
-
-ALTER TABLE `_pricing_module`
-  ADD PRIMARY KEY (`_pricing_module_id`);
-
-ALTER TABLE `_public_path`
-  ADD PRIMARY KEY (`_public_path_id`);
-
-ALTER TABLE `_report`
-  ADD PRIMARY KEY (`_report_id`);
-
-ALTER TABLE `_report_lib`
-  ADD PRIMARY KEY (`_report_lib_id`);
-
-ALTER TABLE `_role`
-  ADD PRIMARY KEY (`_role_id`);
-
-ALTER TABLE `_role_perm`
-  ADD PRIMARY KEY (`_role_perm_id`);
-
-ALTER TABLE `_setting`
-  ADD PRIMARY KEY (`_setting_id`);
-
-ALTER TABLE `_signal`
-  ADD PRIMARY KEY (`_signal_id`);
-
-ALTER TABLE `_signal_mem`
-  ADD PRIMARY KEY (`_signal_mem_id`);
-
-ALTER TABLE `_state`
-  ADD PRIMARY KEY (`_state_id`);
-
-ALTER TABLE `_co`
-  ADD PRIMARY KEY (`_co_id`),
-  ADD UNIQUE KEY `_co_domain` (`_co_domain`);
-
-ALTER TABLE `_co_mem`
-  ADD PRIMARY KEY (`_co_mem_id`);
-
-ALTER TABLE `_co_pref`
-  ADD PRIMARY KEY (`_co_pref_id`);
-
-ALTER TABLE `_tag`
-  ADD PRIMARY KEY (`_tag_id`);
-
-ALTER TABLE `_task`
-  ADD PRIMARY KEY (`_task_id`);
-
-ALTER TABLE `_token`
-  ADD PRIMARY KEY (`_token_id`),
-  ADD KEY `token` (`_token`);
-
-ALTER TABLE `_token_xl8`
-  ADD PRIMARY KEY (`_token_xl8_id`),
-  ADD KEY `fk_token_id` (`fk__token_id`),
-  ADD KEY `fk_lang_id` (`fk__lang_id`);
-
-ALTER TABLE `_tz`
-  ADD PRIMARY KEY (`_tz_id`);
-
-ALTER TABLE `_valid_field`
-  ADD PRIMARY KEY (`_valid_field_id`),
-  ADD KEY `fk__valid_form_id` (`fk__valid_form_id`),
-  ADD KEY `fk__valid_field_id` (`fk__valid_field_id`);
-
-ALTER TABLE `_valid_form`
-  ADD PRIMARY KEY (`_valid_form_id`),
-  ADD KEY `_valid_form_input_id` (`_valid_form_input_id`);
-
-
-ALTER TABLE `_auth_token`
-  MODIFY `_auth_token_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_meditation_exclude`
-  MODIFY `_meditation_exclude_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_meditation_obj`
-  MODIFY `_meditation_obj_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_cal`
-  MODIFY `_cal_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_cal_ext`
-  MODIFY `_cal_ext_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_cal_follow`
-  MODIFY `_cal_follow_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_cal_item`
-  MODIFY `_cal_item_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_cat_addr`
-  MODIFY `_cat_addr_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_cat_note`
-  MODIFY `_cat_note_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_cat_phone`
-  MODIFY `_cat_phone_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_config`
-  MODIFY `_config_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_country`
-  MODIFY `_country_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_doc`
-  MODIFY `_doc_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_follow`
-  MODIFY `_follow_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_lang`
-  MODIFY `_lang_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_log`
-  MODIFY `_log_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_mem`
-  MODIFY `_mem_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_mem_addr`
-  MODIFY `_mem_addr_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_mem_auth`
-  MODIFY `_mem_auth_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_mem_phone`
-  MODIFY `_mem_phone_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_mem_pref`
-  MODIFY `_mem_pref_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_mem_reset`
-  MODIFY `_mem_reset_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_menu_item`
-  MODIFY `_menu_item_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_module`
-  MODIFY `_module_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_module_perm`
-  MODIFY `_module_perm_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_note`
-  MODIFY `_note_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_notif`
-  MODIFY `_notif_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_notif_signal`
-  MODIFY `_notif_signal_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_pay`
-  MODIFY `_pay_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_perm`
-  MODIFY `_perm_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_perm_menu_item`
-  MODIFY `_perm_menu_item_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_pricing`
-  MODIFY `_pricing_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_pricing_limit`
-  MODIFY `_pricing_limit_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_pricing_module`
-  MODIFY `_pricing_module_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_public_path`
-  MODIFY `_public_path_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_report`
-  MODIFY `_report_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_report_lib`
-  MODIFY `_report_lib_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_role`
-  MODIFY `_role_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_role_perm`
-  MODIFY `_role_perm_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_setting`
-  MODIFY `_setting_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_signal`
-  MODIFY `_signal_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_signal_mem`
-  MODIFY `_signal_mem_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_state`
-  MODIFY `_state_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_co`
-  MODIFY `_co_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_co_mem`
-  MODIFY `_co_mem_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_co_pref`
-  MODIFY `_co_pref_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_tag`
-  MODIFY `_tag_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_task`
-  MODIFY `_task_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_token`
-  MODIFY `_token_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_token_xl8`
-  MODIFY `_token_xl8_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_tz`
-  MODIFY `_tz_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_valid_field`
-  MODIFY `_valid_field_id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `_valid_form`
-  MODIFY `_valid_form_id` int(11) NOT NULL AUTO_INCREMENT;
+  `_valid_form_name` varchar(255) DEFAULT NULL,
+  `_valid_form_input_id` varchar(255) DEFAULT NULL,
+  `_valid_form_table` varchar(255) DEFAULT NULL,
+  `_valid_form_action` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`_valid_form_id`),
+  KEY `_valid_form_input_id` (`_valid_form_input_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_nopad_ci;
+
+INSERT INTO `_valid_form` (`_valid_form_id`, `_valid_form_new`, `_valid_form_edit`, `_valid_form_del`, `_valid_form_arch`, `_valid_form_active`, `_valid_form_name`, `_valid_form_input_id`, `_valid_form_table`, `_valid_form_action`) VALUES
+(1, '2024-09-01 04:53:26.816825', '2024-09-01 04:53:26.816825', NULL, NULL, 1, 'Save _admin_exclude', 'save__admin_exclude_form', '_admin_exclude', '/_admin_exclude/save'),
+(2, '2024-09-01 04:53:26.881260', '2024-09-01 04:53:26.881260', NULL, NULL, 1, 'Save _admin_obj', 'save__admin_obj_form', '_admin_obj', '/_admin_obj/save'),
+(3, '2024-09-01 04:53:27.013370', '2024-09-01 04:53:27.013370', NULL, NULL, 1, 'Save _cal', 'save__cal_form', '_cal', '/_cal/save'),
+(4, '2024-09-01 04:53:27.134605', '2024-09-01 04:53:27.134605', NULL, NULL, 1, 'Save _cal_ext', 'save__cal_ext_form', '_cal_ext', '/_cal_ext/save'),
+(5, '2024-09-01 04:53:27.232882', '2024-09-01 04:53:27.232882', NULL, NULL, 1, 'Save _cal_follow', 'save__cal_follow_form', '_cal_follow', '/_cal_follow/save'),
+(6, '2024-09-01 04:53:27.324570', '2024-09-01 04:53:27.324570', NULL, NULL, 1, 'Save _cal_item', 'save__cal_item_form', '_cal_item', '/_cal_item/save'),
+(7, '2024-09-01 04:53:27.428739', '2024-09-01 04:53:27.428739', NULL, NULL, 1, 'Save _cat_addr', 'save__cat_addr_form', '_cat_addr', '/_cat_addr/save'),
+(8, '2024-09-01 04:53:27.505277', '2024-09-01 04:53:27.505277', NULL, NULL, 1, 'Save _cat_note', 'save__cat_note_form', '_cat_note', '/_cat_note/save'),
+(9, '2024-09-01 04:53:27.614559', '2024-09-01 04:53:27.614559', NULL, NULL, 1, 'Save _cat_phone', 'save__cat_phone_form', '_cat_phone', '/_cat_phone/save'),
+(10, '2024-09-01 04:53:27.723580', '2024-09-01 04:53:27.723580', NULL, NULL, 1, 'Save _co', 'save__co_form', '_co', '/_co/save'),
+(11, '2024-09-01 04:53:27.806537', '2024-09-01 04:53:27.806537', NULL, NULL, 1, 'Save _co_mem', 'save__co_mem_form', '_co_mem', '/_co_mem/save'),
+(12, '2024-09-01 04:53:27.909999', '2024-09-01 04:53:27.909999', NULL, NULL, 1, 'Save _co_pref', 'save__co_pref_form', '_co_pref', '/_co_pref/save'),
+(13, '2024-09-01 04:53:28.002614', '2024-09-01 04:53:28.002614', NULL, NULL, 1, 'Save _co_sub_metric', 'save__co_sub_metric_form', '_co_sub_metric', '/_co_sub_metric/save'),
+(14, '2024-09-01 04:53:28.112365', '2024-09-01 04:53:28.112365', NULL, NULL, 1, 'Save _co_sub_plan', 'save__co_sub_plan_form', '_co_sub_plan', '/_co_sub_plan/save'),
+(15, '2024-09-01 04:53:28.189889', '2024-09-01 04:53:28.189889', NULL, NULL, 1, 'Save _config', 'save__config_form', '_config', '/_config/save'),
+(16, '2024-09-01 04:53:28.277423', '2024-09-01 04:53:28.277423', NULL, NULL, 1, 'Save _country', 'save__country_form', '_country', '/_country/save'),
+(17, '2024-09-01 04:53:28.372522', '2024-09-01 04:53:28.372522', NULL, NULL, 1, 'Save _doc', 'save__doc_form', '_doc', '/_doc/save'),
+(18, '2024-09-01 04:53:28.460288', '2024-09-01 04:53:28.460288', NULL, NULL, 1, 'Save _follow', 'save__follow_form', '_follow', '/_follow/save'),
+(19, '2024-09-01 04:53:28.567209', '2024-09-01 04:53:28.567209', NULL, NULL, 1, 'Save _lang', 'save__lang_form', '_lang', '/_lang/save'),
+(20, '2024-09-01 04:53:28.673017', '2024-09-01 04:53:28.673017', NULL, NULL, 1, 'Save _mem', 'save__mem_form', '_mem', '/_mem/save'),
+(21, '2024-09-01 04:53:28.796809', '2024-09-01 04:53:28.796809', NULL, NULL, 1, 'Save _mem_addr', 'save__mem_addr_form', '_mem_addr', '/_mem_addr/save'),
+(22, '2024-09-01 04:53:28.968904', '2024-09-01 04:53:28.968904', NULL, NULL, 1, 'Save _mem_phone', 'save__mem_phone_form', '_mem_phone', '/_mem_phone/save'),
+(23, '2024-09-01 04:53:29.062512', '2024-09-01 04:53:29.062512', NULL, NULL, 1, 'Save _mem_pref', 'save__mem_pref_form', '_mem_pref', '/_mem_pref/save'),
+(24, '2024-09-01 04:53:29.204650', '2024-09-01 04:53:29.204650', NULL, NULL, 1, 'Save _menu_item', 'save__menu_item_form', '_menu_item', '/_menu_item/save'),
+(25, '2024-09-01 04:53:29.320115', '2024-09-01 04:53:29.320115', NULL, NULL, 1, 'Save _module', 'save__module_form', '_module', '/_module/save'),
+(26, '2024-09-01 04:53:29.451032', '2024-09-01 04:53:29.451032', NULL, NULL, 1, 'Save _module__mem', 'save__module__mem_form', '_module__mem', '/_module__mem/save'),
+(27, '2024-09-01 04:53:29.513257', '2024-09-01 04:53:29.513257', NULL, NULL, 1, 'Save _module_perm', 'save__module_perm_form', '_module_perm', '/_module_perm/save'),
+(28, '2024-09-01 04:53:29.619536', '2024-09-01 04:53:29.619536', NULL, NULL, 1, 'Save _note', 'save__note_form', '_note', '/_note/save'),
+(29, '2024-09-01 04:53:29.714503', '2024-09-01 04:53:29.714503', NULL, NULL, 1, 'Save _notif', 'save__notif_form', '_notif', '/_notif/save'),
+(30, '2024-09-01 04:53:29.837726', '2024-09-01 04:53:29.837726', NULL, NULL, 1, 'Save _notif_signal', 'save__notif_signal_form', '_notif_signal', '/_notif_signal/save'),
+(31, '2024-09-01 04:53:29.932733', '2024-09-01 04:53:29.932733', NULL, NULL, 1, 'Save _perm', 'save__perm_form', '_perm', '/_perm/save'),
+(32, '2024-09-01 04:53:30.054712', '2024-09-01 04:53:30.054712', NULL, NULL, 1, 'Save _perm_menu_item', 'save__perm_menu_item_form', '_perm_menu_item', '/_perm_menu_item/save'),
+(33, '2024-09-01 04:53:30.164414', '2024-09-01 04:53:30.164414', NULL, NULL, 1, 'Save _public_path', 'save__public_path_form', '_public_path', '/_public_path/save'),
+(34, '2024-09-01 04:53:30.290076', '2024-09-01 04:53:30.290076', NULL, NULL, 1, 'Save _role', 'save__role_form', '_role', '/_role/save'),
+(35, '2024-09-01 04:53:30.413256', '2024-09-01 04:53:30.413256', NULL, NULL, 1, 'Save _role_perm', 'save__role_perm_form', '_role_perm', '/_role_perm/save'),
+(36, '2024-09-01 04:53:30.524054', '2024-09-01 04:53:30.524054', NULL, NULL, 1, 'Save _setting', 'save__setting_form', '_setting', '/_setting/save'),
+(37, '2024-09-01 04:53:30.646470', '2024-09-01 04:53:30.646470', NULL, NULL, 1, 'Save _state', 'save__state_form', '_state', '/_state/save'),
+(38, '2024-09-01 04:53:30.739453', '2024-09-01 04:53:30.739453', NULL, NULL, 1, 'Save _sub_plan', 'save__sub_plan_form', '_sub_plan', '/_sub_plan/save'),
+(39, '2024-09-01 04:53:30.786242', '2024-09-01 04:53:30.786242', NULL, NULL, 1, 'Save _sub_plan_metric', 'save__sub_plan_metric_form', '_sub_plan_metric', '/_sub_plan_metric/save'),
+(40, '2024-09-01 04:53:30.831643', '2024-09-01 04:53:30.831643', NULL, NULL, 1, 'Save _tag', 'save__tag_form', '_tag', '/_tag/save'),
+(41, '2024-09-01 04:53:30.924552', '2024-09-01 04:53:30.924552', NULL, NULL, 1, 'Save _task', 'save__task_form', '_task', '/_task/save'),
+(42, '2024-09-01 04:53:31.045477', '2024-09-01 04:53:31.045477', NULL, NULL, 1, 'Save _token', 'save__token_form', '_token', '/_token/save'),
+(43, '2024-09-01 04:53:31.171401', '2024-09-01 04:53:31.171401', NULL, NULL, 1, 'Save _token_xl8', 'save__token_xl8_form', '_token_xl8', '/_token_xl8/save'),
+(44, '2024-09-01 04:53:31.249472', '2024-09-01 04:53:31.249472', NULL, NULL, 1, 'Save _tz', 'save__tz_form', '_tz', '/_tz/save'),
+(45, '2024-09-01 04:53:31.373018', '2024-09-01 04:53:31.373018', NULL, NULL, 1, 'Save _valid_field', 'save__valid_field_form', '_valid_field', '/_valid_field/save'),
+(46, '2024-09-01 04:53:31.526639', '2024-09-01 04:53:31.526639', NULL, NULL, 1, 'Save _valid_form', 'save__valid_form_form', '_valid_form', '/_valid_form/save');
 SET FOREIGN_KEY_CHECKS=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
