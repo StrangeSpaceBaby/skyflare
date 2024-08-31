@@ -11,14 +11,14 @@ class _da extends _fail
 {
 	private bool $allow_co_override = FALSE;
 	private bool $paginate = FALSE;
-	private string $dsn;
-	protected string $dbuser;
-	protected string $dbpass;
-	protected string $dbname;
-	private int $default_result_count;
-	private int $page;
-	private int $count;
-	protected object $db;
+	private string $dsn = '';
+	protected string $dbuser = '';
+	protected string $dbpass = '';
+	protected string $dbname = '';
+	private int $default_result_count = 0;
+	private int $page = 0;
+	private int $count = 0;
+	protected object|null $db = NULL;
 
 	/**
 	 *	__construct automatically tries to connect to the database using the special $_SERVER vars ($_SERVER[DB*]).

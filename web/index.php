@@ -9,39 +9,16 @@ const LOG_LEVEL = 'error';
 
 require_once( '../init/init.php' );
 
+// Creates a log for this overall process
 $log = new _log();
 
+// Starts app, no need to call anything else.
 $app = new _app();
 
-$_tpl->assign( '_co', (new _co())->co() );
+$_tpl->assign( '_co', (new _co())->_co() );
 $_tpl->assign( 'me', (new _mem())->me() );
 
-
-if( !$token && !$path_allowed && !$public_path && '/page/auth-login' != $path )
-{
-    // Redirect to log them in
-    header( "Location: /page/auth-login" );
-    exit;
-}
-
-if( $token && !$path_allowed && !$public_path )
-{
-	header( 'HTTP/1.1 401 Invalid path: ' . $_REQUEST['request'], TRUE, 401 );
-	if( 'page' == $ctlr )
-	{
-		$_tpl->assign( 'message', 'Invalid Path: ' . $_REQUEST['request'] );
-		print $_tpl->parse( TPL_CORE . 'error/_401.html' );
-		exit;
-	}
-	exit;
-}
-
-$settings = $_setting->list([ 'return_key' => '_setting_id' ]);
-$set_list = [];
-if( $settings )
-{
-	$set_list = array_column( $settings, '_setting_value', '_setting_key' );
-}
+exit;
 
 if( 'page' == $ctlr )
 {

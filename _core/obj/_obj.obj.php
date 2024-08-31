@@ -12,14 +12,14 @@ use Ulid\Ulid;
 
 class _obj extends _da
 {
-	protected string $table;
-	protected string $table_id;
-	protected string $table_ulid;
-	protected array $table_explain;
-	public string $last_query;
-	public array $last_bound;
-	protected int $_co_id;
-	protected ?string $_co_ulid;
+	protected string $table = '';
+	protected string $table_id = '';
+	protected string $table_ulid = '';
+	protected array $table_explain = [];
+	public string $last_query = '';
+	public array $last_bound = [];
+	protected int $_co_id = 0;
+	protected ?string $_co_ulid = '';
 	protected ?object $data_obj = NULL;
 
 	public function __construct( string $table )
@@ -43,7 +43,7 @@ class _obj extends _da
 	}
 
 	/**
-	 * Undocumented function
+	 * Checks whether a passed name of a file belongs to the _core or app space
 	 *
 	 * @param string $check
 	 * @return boolean
@@ -58,7 +58,14 @@ class _obj extends _da
 		return FALSE;
 	}
 
-	public function search( $filters, $opts )
+	/**
+	 * Not currently in use. Probably will rely on get_by_col for functionality
+	 *
+	 * @param array $filters
+	 * @param array $opts
+	 * @return void
+	 */
+	public function search( array $filters, array $opts ) : void
 	{
 		p( 'search' );
 		p( $filters );
@@ -656,12 +663,12 @@ class _obj extends _da
 	/**
 	 *	Simple function to hash a password uniformly
  	 *	@param   string	$password
-	 *	@return  string	sha512 hashed value of $password
+	 *	@return  string	bcrypt hashed value of $password
 	 */
 
 	public function encrypt_password( string $password ) : string
 	{
-		return password_hash( $password, PASSWORD_DEFAULT );
+		return password_hash( $password, PASSWORD_BCRYPT );
 	}
 
 	/**
@@ -676,14 +683,16 @@ class _obj extends _da
 	}
 
 	/**
-	 *	 @copyright 2008 Kevin van Zonneveld (https://kevin.vanzonneveld.net)
-	 *	 @license   https://www.opensource.org/licenses/bsd-license.php New BSD Licence
-	 *	 @link	https://kevin.vanzonneveld.net/
-	 *	 @param mixed   $in   String or long input to translate
-	 *	 @param boolean $to_num  Reverses translation when true
-	 *	 @param mixed   $pad_up  Number or boolean padds the result up to a specified length
-	 *	 @param string  $pass_key Supplying a password makes it harder to calculate the original ID
-	 *	 @return mixed string or long
+	 *	Used for generating short uniques for non-cryptographically necessary codes
+	 *
+	 *	@copyright 2008 Kevin van Zonneveld (https://kevin.vanzonneveld.net)
+	 *	@license   https://www.opensource.org/licenses/bsd-license.php New BSD Licence
+	 *	@link	https://kevin.vanzonneveld.net/
+	 *	@param mixed   $in   String or long input to translate
+	 *	@param boolean $to_num  Reverses translation when true
+	 *	@param mixed   $pad_up  Number or boolean padds the result up to a specified length
+	 *	@param string  $pass_key Supplying a password makes it harder to calculate the original ID
+	 *	@return mixed string or long
 	 */
 	function alphaID( string $in, bool $to_num = false, bool $pad_up = false, string $pass_key = null) : string
 	{

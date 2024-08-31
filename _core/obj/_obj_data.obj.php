@@ -5,8 +5,10 @@
  */
 class _obj_data extends _fail
 {
-	public function __construct()
+	public function __construct( string $obj_name )
 	{
+		parent::__construct();
+		$this->log_chan( $obj_name . '_data' );
 	}
 
 	/**
@@ -51,7 +53,7 @@ class _obj_data extends _fail
 		switch( $format )
 		{
 			case 'array':
-				return $this->select_cols;
+				return array_keys( $this->select_cols );
 			case 'string':
 				return implode( ", ", array_keys( $this->select_cols ) );
 		}

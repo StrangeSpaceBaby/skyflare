@@ -11,7 +11,7 @@ class _auth_token extends _obj
 	/**
 	 * Expires all tokens of a certain type for current user. 'password' is default
 	 *
-	 * @param string $type type fo token to expire
+	 * @param string $type type of token to expire
 	 * @return boolean TRUE on success, FALSE on error
 	 */
 	public function expire_all_tokens( string $type = 'password' ) : bool

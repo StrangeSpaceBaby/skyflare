@@ -95,6 +95,8 @@ class _auth extends _obj
 	 */
 	public function auth() : array|bool
 	{
+		$this->log_msg( '_auth->auth()' );
+
 		$o_token = new _auth_token();
 		$auth_token = $o_token->verify_token();
 		$this->log_data([ 'auth_token' => $auth_token ]);
@@ -118,7 +120,7 @@ class _auth extends _obj
 	 */
 	public function password() : array|bool
 	{
-		$this->log_data([ '_mem_login' => $_POST['_mem_login'] ]);
+		$this->log_data([ '_mem_login' => _POST['_mem_login'] ]);
 
 		$o_token = new _auth_token();
 		$curr_token = $o_token->verify_token();
@@ -132,19 +134,19 @@ class _auth extends _obj
 			header( 'auth_token_expires: ' . $curr_token['_auth_token_expires'] );
 			header( 'auth_token_already_valid: 1' );
 
-			header( 'HTTP/1.1 200 Access token already valid', TRUE, 200 );
+			header(  $_SERVER["SERVER_PROTOCOL"] . "200 Access token already valid", TRUE, 200 );
 			return TRUE;
 		}
 
-		if( $_POST['_mem_login'] && $_POST['_mem_password'] )
+		if( _POST['_mem_login'] && _POST['_mem_password'] )
 		{
 			$this->log_msg( 'has_login_creds' );
-			$_mem = $this->get_by_col([ '_mem_login' => $_POST['_mem_login'] ], FALSE, TRUE, [], "*" );
+			$_mem = $this->get_by_col([ '_mem_login' => _POST['_mem_login'] ], FALSE, TRUE, [], "*" );
 			$this->log_data([ '_mem' => $_mem ]);
 			if( $_mem['fk__mem_id'] )
 			{
 				$this->log_msg( '_mem_found' );
-				if( !password_verify( $_POST['_mem_password'], $_mem['_mem_password'] ) )
+				if( !password_verify( _POST['_mem_password'], $_mem['_mem_password'] ) )
 				{
 					$this->log_msg( 'invalid_password' );
 					$this->fail( 'invalid_password' );
@@ -159,7 +161,7 @@ class _auth extends _obj
 				header( 'auth_token: ' . $token['auth_token'] );
 				header( 'auth_token_expires: ' . $token['expires'] );
 				header( 'auth_token_generated: 1' );
-				header( 'OK', TRUE, 200 );
+				header( $_SERVER["SERVER_PROTOCOL"] . " 200 Authenticated", TRUE, 200 );
 
 				$this->log_msg( 'token_generated' );
 				$this->success( 'token_generated' );
@@ -168,14 +170,12 @@ class _auth extends _obj
 			else
 			{
 				$this->log_msg( 'login_not_found' );
-				header( 'Unauthenticated', TRUE, 403 );
 				$this->fail( 'login_not_found' );
 				return FALSE;
 			}
 		}
 
 		$this->log_msg( 'missing_credentials' );
-		header( 'Username or password missing', TRUE, 400 );
 		$this->fail( 'missing_credentials' );
 		return FALSE;
 	}

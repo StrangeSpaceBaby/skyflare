@@ -4,20 +4,14 @@ use Monolog\Formatter\JsonFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 
-/**
- *	_log manages everythign related to logging in the application.  Using Monolog,
- *	_log manages channels for message differentiation and logs to the appropriate channels.
- */
-
- #[AllowDynamicProperties]
 class _log
 {
-	protected $channels;
-	protected $curr_channel;
-	protected $log_level = 'debug';
-	protected $log_level_num;
-	protected $log_msg;
-	protected $log_data;
+	protected array $channels = [];
+	protected string $curr_channel = '';
+	protected string $log_level = LOG_LEVEL;
+	protected int $log_level_num = 0;
+	protected string $log_msg = '';
+	protected array|string $log_data = [];
 
 	public function __construct()
 	{
@@ -147,10 +141,10 @@ class _log
 	protected function get_log_opts() : array
 	{
 		return [
-			'chan' => $this->curr_channel,
-			'type' => $this->log_level,
-			'context' => $this->log_data,
-			'msg' => $this->log_msg
+			'chan'		=> $this->curr_channel,
+			'type'		=> $this->log_level,
+			'context'	=> $this->log_data,
+			'msg'		=> $this->log_msg
 		];
 	}
 
@@ -186,9 +180,7 @@ class _log
 
 		$opts['context']['class'] = get_called_class();
 
-		$this
-		->channels[$opts['chan']]
-		->$type( $opts['msg'], $opts['context'] );
+		$this->channels[$opts['chan']]->$type( $opts['msg'], $opts['context'] );
 
 		return $this;
 	}

@@ -110,7 +110,8 @@ class _mem extends _obj
 		}
 
 		$this->success( 'me_initted' );
-		// me stored in session for easier retrieval without having to parse the current mem token each time.
+
+		// me stored in session for easier retrieval in me() without having to parse the current mem token each time.
 		$_SESSION['me'] = $me;
 		return $me;
 	}
@@ -133,7 +134,7 @@ class _mem extends _obj
 			return $_SESSION['me'][$key];
 		}
 
-		return $_SESSION['me'];
+		return $_SESSION['me'] ?? [];
 	}
 
 	/**
