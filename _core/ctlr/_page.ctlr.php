@@ -34,10 +34,10 @@ class _page_ctlr extends _ctlr
 			}
 			else
 			{
-				require_once( $page_script );
-
 				$this->_tpl->assign( '_co', (new _co())->_co() );
 				$this->_tpl->assign( 'me', (new _mem())->me() );
+
+				require_once( $page_script );
 
 				print $this->_tpl->parse( $page_tpl );
 			}
