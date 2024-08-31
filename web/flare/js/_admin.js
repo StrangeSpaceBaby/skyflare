@@ -1,14 +1,14 @@
-class _meditation
+class _admin
 {
 	constructor( _opts )
 	{
-		log( '_meditation constructor' );
+		log( '_admin constructor' );
 		log( _opts );
 
 		let _defaults = { table: null };
 		this.opts = { ..._defaults, ..._opts };
 
-		log( '_meditation constructor opts' );
+		log( '_admin constructor opts' );
 		log( this.opts );
 		return this;
 	}

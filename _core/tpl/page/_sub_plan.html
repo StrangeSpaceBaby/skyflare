@@ -1,0 +1,134 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_sub_plan List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-right">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_sub_plan_list' }).initTable().then( () => { new _table({ table: '_sub_plan_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_sub_plan_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_sub_plan_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__sub_plan_box" onClick="new _form({ form_id: 'save__sub_plan_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						</div>
+						<div id="_sub_plan_list"
+							class="list-group col-12 autoload _sub_plan_list"
+							data-src="/_sub_plan/list"
+							data-populate="_sub_plan_list"
+							data-tpl="_sub_plan_list_tpl"
+							data-when-empty="<div class='list-group-item'>No _sub_plan to display</div>"
+							>
+							<div class="list-group-item list-group-header keep">
+								<div class="row">
+									<div class="col" data-col="_sub_plan_id" data-col-type="int">_sub_plan_id</div>
+<div class="col" data-col="_sub_plan_new" data-col-type="timestamp">_sub_plan_new</div>
+<div class="col" data-col="_sub_plan_edit" data-col-type="timestamp">_sub_plan_edit</div>
+<div class="col" data-col="_sub_plan_del" data-col-type="timestamp">_sub_plan_del</div>
+<div class="col" data-col="_sub_plan_arch" data-col-type="timestamp">_sub_plan_arch</div>
+<div class="col" data-col="_sub_plan_active" data-col-type="tinyint">_sub_plan_active</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">fk__co_id</div>
+<div class="col" data-col="_sub_plan_has_trial" data-col-type="tinyint">_sub_plan_has_trial</div>
+<div class="col" data-col="_sub_plan_trial_duration" data-col-type="int">_sub_plan_trial_duration</div>
+<div class="col" data-col="_sub_plan_mth_price" data-col-type="decimal">_sub_plan_mth_price</div>
+<div class="col" data-col="_sub_plan_yr_price" data-col-type="decimal">_sub_plan_yr_price</div>
+<div class="col" data-col="_sub_plan_name" data-col-type="varchar">_sub_plan_name</div>
+<div class="col" data-col="_sub_plan_desc" data-col-type="text">_sub_plan_desc</div>
+<div class="col" data-col="_sub_plan_ulid" data-col-type="char">_sub_plan_ulid</div>
+<div class="col text-center"><i class="fa fa-tools"></i></div>
+								</div>
+							</div>
+						</div>
+						<template id="_sub_plan_list_tpl" class="d-none">
+							<div id="_sub_plan_~~_sub_plan_id~~" class="list-group-item"
+								data-filter-_sub_plan_id=~~_sub_plan_id~~
+data-filter-_sub_plan_new=~~_sub_plan_new~~
+data-filter-_sub_plan_edit=~~_sub_plan_edit~~
+data-filter-_sub_plan_del=~~_sub_plan_del~~
+data-filter-_sub_plan_arch=~~_sub_plan_arch~~
+data-filter-_sub_plan_active=~~_sub_plan_active~~
+data-filter-fk__co_id=~~fk__co_id~~
+data-filter-_sub_plan_has_trial=~~_sub_plan_has_trial~~
+data-filter-_sub_plan_trial_duration=~~_sub_plan_trial_duration~~
+data-filter-_sub_plan_mth_price=~~_sub_plan_mth_price~~
+data-filter-_sub_plan_yr_price=~~_sub_plan_yr_price~~
+data-filter-_sub_plan_name=~~_sub_plan_name~~
+data-filter-_sub_plan_desc=~~_sub_plan_desc~~
+data-filter-_sub_plan_ulid=~~_sub_plan_ulid~~
+								>
+								<div class="row justify-content-between">
+									<div class="col" data-col="_sub_plan_id" data-col-type="int">~~_sub_plan_id~~</div>
+<div class="col" data-col="_sub_plan_new" data-col-type="timestamp">~~_sub_plan_new~~</div>
+<div class="col" data-col="_sub_plan_edit" data-col-type="timestamp">~~_sub_plan_edit~~</div>
+<div class="col" data-col="_sub_plan_del" data-col-type="timestamp">~~_sub_plan_del~~</div>
+<div class="col" data-col="_sub_plan_arch" data-col-type="timestamp">~~_sub_plan_arch~~</div>
+<div class="col" data-col="_sub_plan_active" data-col-type="tinyint">~~_sub_plan_active~~</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">~~fk__co_id~~</div>
+<div class="col" data-col="_sub_plan_has_trial" data-col-type="tinyint">~~_sub_plan_has_trial~~</div>
+<div class="col" data-col="_sub_plan_trial_duration" data-col-type="int">~~_sub_plan_trial_duration~~</div>
+<div class="col" data-col="_sub_plan_mth_price" data-col-type="decimal">~~_sub_plan_mth_price~~</div>
+<div class="col" data-col="_sub_plan_yr_price" data-col-type="decimal">~~_sub_plan_yr_price~~</div>
+<div class="col" data-col="_sub_plan_name" data-col-type="varchar">~~_sub_plan_name~~</div>
+<div class="col" data-col="_sub_plan_desc" data-col-type="text">~~_sub_plan_desc~~</div>
+<div class="col" data-col="_sub_plan_ulid" data-col-type="char">~~_sub_plan_ulid~~</div>
+
+									<div class="col">
+										<div class="btn-group">
+											<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#save__sub_plan_box"
+												onClick="
+													new _form({ form_id: 'save__sub_plan_form', autoform: true }).autoform()
+													.then(
+														() =>
+														{
+															new _api({ url: '/_sub_plan/fetch/~~_sub_plan_id~~' })
+															.poll()
+															.then(
+																function( _ret )
+																{
+																	if( 1 == _ret.return )
+																	{
+																		new _form({ form_id: 'save__sub_plan_form', data: _ret.data }).popForm();
+																	}
+																}
+															);
+														}
+													);
+												">Edit
+											</button>
+											<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+												<span class="visually-hidden">Toggle Dropdown</span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a href="javascript:void(0);" class="dropdown-item"
+													onClick="
+														if( confirm( 'Are you sure you want to delete?' ) )
+														{
+															new _api({ url: '/_sub_plan/delete/~~_sub_plan_id~~' })
+																.poll()
+																.then(
+																	() =>
+																	{
+																		new _loader({}).load( '._sub_plan_list' );
+																	}
+																);
+														}">Delete
+												</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__sub_plan_modal_tpl" class="autotpl" data-tpl="modal/_sub_plan_save"></div>
+
+~~include:_master_foot~~

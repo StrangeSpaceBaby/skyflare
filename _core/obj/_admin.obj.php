@@ -13,7 +13,7 @@ class _admin extends _obj
 	 * @param string $table name of table/entity to create
 	 * @return boolean Always TRUE
 	 */
-	public function create_table( string $table ) : bool
+	public function create_entity( string $table ) : bool
 	{
 		p( 'create table ' . $table );
 		$q = "SELECT * FROM information_schema.TABLES WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?";
@@ -561,7 +561,7 @@ class _admin extends _obj
 		while( $table = $sth->fetchColumn() )
 		{
 			p( 'calling create table on ' . $table );
-			$this->create_table( $table );
+			$this->create_entity( $table );
 		}
 
 		header( 'HTTP/1.1 200 Awareness attained.' );

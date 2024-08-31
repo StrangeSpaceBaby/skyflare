@@ -61,31 +61,33 @@ data-filter-_notif_text=~~_notif_text~~
 <div class="col" data-col="_notif_text" data-col-type="text">~~_notif_text~~</div>
 
 									<div class="col">
-										<div class="row">
-											<div class="col d-flex justify-content-between">
-												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__notif_box"
-													onClick="
-														new _form({ form_id: 'save__notif_form', autoform: true }).autoform()
-														.then(
-															() =>
-															{
-																new _api({ url: '/_notif/fetch/~~_notif_id~~' })
-																.poll()
-																.then(
-																	function( _ret )
+										<div class="btn-group">
+											<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#save__notif_box"
+												onClick="
+													new _form({ form_id: 'save__notif_form', autoform: true }).autoform()
+													.then(
+														() =>
+														{
+															new _api({ url: '/_notif/fetch/~~_notif_id~~' })
+															.poll()
+															.then(
+																function( _ret )
+																{
+																	if( 1 == _ret.return )
 																	{
-																		if( 1 == _ret.return )
-																		{
-																			new _form({ form_id: 'save__notif_form', data: _ret.data }).popForm();
-																		}
+																		new _form({ form_id: 'save__notif_form', data: _ret.data }).popForm();
 																	}
-																);
-															}
-														);
-													">
-													<i class="bi bi-pencil-fill"></i>
-												</a>
-												<a href="javascript:void(0);"
+																}
+															);
+														}
+													);
+												">Edit
+											</button>
+											<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+												<span class="visually-hidden">Toggle Dropdown</span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a href="javascript:void(0);" class="dropdown-item"
 													onClick="
 														if( confirm( 'Are you sure you want to delete?' ) )
 														{
@@ -94,11 +96,12 @@ data-filter-_notif_text=~~_notif_text~~
 																.then(
 																	() =>
 																	{
-																		new _loader({}).load( '#_notif_list' );
+																		new _loader({}).load( '._notif_list' );
 																	}
 																);
-														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
-											</div>
+														}">Delete
+												</a></li>
+											</ul>
 										</div>
 									</div>
 								</div>
