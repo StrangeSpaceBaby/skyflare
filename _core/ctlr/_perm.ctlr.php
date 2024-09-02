@@ -21,7 +21,7 @@ class _perm_ctlr extends _ctlr
 	 */
 	public function list( array $args = [] ) : array|bool
 	{
-		$perms = $this->obj->get_by_col([ '_perm_role_type' => '!superadmin' ], TRUE, TRUE, [], "_perm_id, _perm_protected, _perm_role_type, _perm_name, _perm_path, _perm_desc" );
+		$perms = $this->obj->get_by_col([ '_perm_role_type' => '!superadmin' ], TRUE, TRUE, [], "_perm_id, _perm_protected, _perm_role_type, _perm_name, _perm_path, _perm_desc, _perm_ulid" );
 		if( FALSE === $perms )
 		{
 			$this->fail( 'perms_not_listed' );

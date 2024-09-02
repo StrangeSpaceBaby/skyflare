@@ -27,7 +27,7 @@ class _perm_data extends _obj_data
 			"_perm_name" => "varchar",
 			"_perm_path" => "varchar",
 			"_perm_desc" => "varchar",
-
+			"_perm_ulid" => "char"
 		];
 
 		$this->select_cols = [
@@ -40,7 +40,7 @@ class _perm_data extends _obj_data
 			"_perm_name" => "varchar",
 			"_perm_path" => "varchar",
 			"_perm_desc" => "varchar",
-
+			"_perm_ulid" => "char"
 		];
 
 		$this->full_join = [

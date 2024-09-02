@@ -17,7 +17,7 @@ class _util_ctlr extends _ctlr
 	{
 		// Get all table names
 		// Select all ulid columns for all tables
-		$this->obj->check_for_ulids();
+		print( $this->obj->check_for_ulids() );
 		exit;
 	}
 
