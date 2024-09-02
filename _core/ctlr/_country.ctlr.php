@@ -10,5 +10,4 @@ class _country_ctlr extends _ctlr
 	{
 		parent::__construct( '_country' );
 	}
-
 }

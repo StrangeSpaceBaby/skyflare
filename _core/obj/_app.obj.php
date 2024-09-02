@@ -21,11 +21,11 @@ class _app extends _fail
 
 		$this->api = new _api();
 
-		$this->log_data([ 'requested_path' => _GET['sky_request'] ]);
+		$this->log_data([ 'requested_path' => $_GET['sky_request'] ]);
 
-		if( _GET['sky_request'] )
+		if( $_GET['sky_request'] )
 		{
-			$this->requested_path = _GET['sky_request'];
+			$this->requested_path = $_GET['sky_request'];
 		}
 
 		$this->start_app();
@@ -50,6 +50,29 @@ class _app extends _fail
 		$this->log_data([ $ctlr ])->log_msg( 'instantiated ctlr' );
 
 		$reflectedMethod = new ReflectionMethod( $ctlr_name, $this->method );
+
+		// Need to check params for ULIDs to convert to IDs
+		// Automatically sanitizes _POST and _GET, replace ULIDs with IDs where possible
+		$o_safe_map = new _safe_map();
+
+		if( $_POST )
+		{
+			$o_safe_map->convert_post_ulids();
+		}
+
+		if( $this->args )
+		{
+			$this->args = $o_safe_map->convert_get_ulids( $ctlr->get_table_name(), $this->args );
+		}
+
+		$methodParams = $reflectedMethod->getParameters();
+		if( $methodParams )
+		{
+			foreach( $methodParams as $arg )
+			{
+			}
+		}
+
 		$result = $reflectedMethod->invoke( $ctlr, $this->args );
 
 		if( $ctlr->failed() )
@@ -61,7 +84,7 @@ class _app extends _fail
 			$this->api->success( $ctlr->get_error_msg() );
 		}
 
-		$this->api->data( $result )->send();
+		$this->api->data( $o_safe_map->convert_ids_to_ulids( $result ) )->send();
 		exit;
 	}
 
@@ -90,7 +113,7 @@ class _app extends _fail
 			$this->log_msg( '!authed, !path_access & !/_auth/password ' . $this->requested_path );
 			header(  $_SERVER["SERVER_PROTOCOL"] . "401 Path denied {$this->requested_path}", TRUE, 401 );
 			$www_authenticate_msg = "WWW-Authenticate: {$this->requested_path}. ";
-			$www_authenticate_msg .= ( !_POST['_mem_login'] || !_POST['_mem_password'] ) ? "Incomplete credentials" : "Invalid credentials";
+			$www_authenticate_msg .= ( !$_POST['_mem_login'] || !$_POST['_mem_password'] ) ? "Incomplete credentials" : "Invalid credentials";
 			header( $www_authenticate_msg );
 			exit;
 		}
@@ -161,8 +184,8 @@ class _app extends _fail
 	private function check_path_access() : bool
 	{
 		$o_public_path = new _public_path();
-		$this->path_access = $o_public_path->is_public_path( $this->path . '/' . $this->args );
-		$this->log_msg( 'public path access ' . print_r( $this->path_access, TRUE ) );
+		$this->path_access = $o_public_path->is_public_path( $this->requested_path );
+		$this->log_data( $this->path_access )->log_msg( 'public path access' );
 		if( !$this->path_access )
 		{
 			$this->path_access = (new _perm())->verify_path_access( $this->path );

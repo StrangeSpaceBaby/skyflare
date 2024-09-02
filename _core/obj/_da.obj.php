@@ -9,20 +9,22 @@
 
 class _da extends _fail
 {
-	private bool $allow_co_override = FALSE;
-	private bool $paginate = FALSE;
-	private string $dsn = '';
-	protected string $dbuser = '';
-	protected string $dbpass = '';
-	protected string $dbname = '';
-	private int $default_result_count = 0;
-	private int $page = 0;
-	private int $count = 0;
-	protected object|null $db = NULL;
+	private bool $allow_co_override		= FALSE;
+	private bool $paginate				= FALSE;
+	private string $dsn					= '';
+	protected string $dbuser			= '';
+	protected string $dbpass			= '';
+	protected string $dbname			= '';
+	private int $default_result_count	= 0;
+	private int $page					= 0;
+	private int $count					= 0;
+	protected object|null $db			= NULL;
+	public string $last_query			= '';
+	public array $last_bound			= [];
 
 	/**
 	 *	__construct automatically tries to connect to the database using the special $_SERVER vars ($_SERVER[DB*]).
-	 *	For greatest safety, these values should be set in the apache conf and then the web directory should be
+	 *	For greatest safety, these values should be set in the webserver virtualhost conf and then the web directory should be
 	 *	AllowOverride None so that .htaccess files can't change this information.
 	 */
 	public function __construct()

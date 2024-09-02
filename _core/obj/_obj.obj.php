@@ -238,11 +238,12 @@ class _obj extends _da
 		}
 
 		$this->paginate();
+
 		$rows = $this->get_by_col( $select_cols, TRUE, TRUE, $this->data_obj->full_join(), $this->data_obj->select_cols() );
 
 		if( FALSE === $rows )
 		{
-			$this->fail( 'could_not_list_' . $this->table );
+			$this->fail( $this->get_error_msg() );
 			return FALSE;
 		}
 
@@ -521,7 +522,10 @@ class _obj extends _da
 			$cols_and_vals['fk__co_id'] = $this->_co_id;
 		}
 
-		$q .= " AND " . implode( " AND ", array_keys( $params ) );
+		if( $params )
+		{
+			$q .= " AND " . implode( " AND ", array_keys( $params ) );
+		}
 
 		if( $order_by )
 		{
@@ -569,6 +573,7 @@ class _obj extends _da
  		}
  		catch( QueryException $qe )
  		{
+			p( $qe );
 			$this->fail( 'query_failure' );
  			return FALSE;
  		}
@@ -599,6 +604,11 @@ class _obj extends _da
 
 		$this->log_data( $cols )->log_msg( 'get_by_id' );
 		return $this->get_by_col( $cols, FALSE, FALSE, $this->data_obj->full_join(), $this->data_obj->select_cols() );
+	}
+
+	public function get_table_name()
+	{
+		return $this->table;
 	}
 
 	/**

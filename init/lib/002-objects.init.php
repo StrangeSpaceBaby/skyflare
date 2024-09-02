@@ -1,5 +1,6 @@
 <?php
 
+// Reject bad tenant scopes
 $_co = new _co();
 if( !$_co->_co( '_co_id' ) )
 {

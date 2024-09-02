@@ -18,12 +18,13 @@ class _public_path extends _obj
 	 * @param string $path full requested path
 	 * @return array|boolean _public_path row or FALSE one rror
 	 */
-	public function is_public_path() : array|bool
+	public function is_public_path( string $requested_path ) : array|bool
 	{
-        list( $ctlr_level, $path ) = explode( '/', _GET['sky_request'] );
+        list( $ctlr_level, $path, $deep_path, $args ) = explode( '/', $requested_path, 4 );
         $path = $ctlr_level . '/' . $path;
+		$deep_path = $deep_path ? $path . '/' . $deep_path : $this->generate_ulid; // Generating a ulid so that the deep path can never be found if there is no deep path
 
-		$public_path = $this->get_by_col([ '_public_path' => [ $ctlr_level, $path, _GET['sky_request'] ] ]);
+		$public_path = $this->get_by_col([ '_public_path' => [ $ctlr_level, $path, $deep_path ] ]);
 		if( FALSE !== $public_path )
 		{
 			$this->log_data([ $path, $public_path ])->log_msg( 'path_is_public' );

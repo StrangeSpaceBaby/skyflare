@@ -24,6 +24,11 @@ class _ctlr extends _fail
 		$this->_obj( $obj, $args );
 	}
 
+	public function get_table_name()
+	{
+		return $this->obj->get_table_name();
+	}
+
 	/**
 	 * Toggles a row's _active column
 	 *
