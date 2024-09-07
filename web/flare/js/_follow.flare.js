@@ -1,3 +1,16 @@
+/*
+ * _follow.js - Sky only.  Manages following/unfollowing and listing followers and following
+ * 
+ * Copyright (c) 2024 Greg Strange
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, subject to
+ * including this permission notice in all copies or substantial portions
+ * of the Software.
+ */
+
 class _follow
 {
 	constructor( _opts)
@@ -6,13 +19,13 @@ class _follow
 
 		this.opts = { ..._defaults, ..._opts };
 
-		log( '_follow _opts' );
-		log( this.opts );
+		new _log( '_follow _opts' );
+		new _log( this.opts );
 	}
 
 	toggle()
 	{
-		log( 'toggle' );
+		new _log( 'toggle' );
 		let $this = this;
 		return new Promise(
 			( _success, _fail ) =>
@@ -22,7 +35,7 @@ class _follow
 				.then(
 					( _ret ) =>
 					{
-						tablog( _ret );
+						new _log({ msg: _ret, publish: 'console.table' });
 						if( 1 == _ret.return )
 						{
 							new _growl({ growl: _ret.msg, type: 'success' });
@@ -69,13 +82,13 @@ class _follow
 
 	getFollows( _types )
 	{
-		log( 'getFollows' );
+		new _log( 'getFollows' );
 		this.opts.objs = [ this.opts._follow_obj ];
 
 		if( !!_types )
 		{
-			log( 'types' );
-			log( _types );
+			new _log( 'types' );
+			new _log( _types );
 			this.opts.objs = _types.join( '|' );
 		}
 
@@ -88,7 +101,7 @@ class _follow
 				.then(
 					( _ret ) =>
 					{
-						tablog( _ret );
+						new _log({ msg: _ret, publish: 'console.table' });
 						if( 1 == _ret.return )
 						{
 							new _growl({ growl: _ret.msg, type: 'success' });

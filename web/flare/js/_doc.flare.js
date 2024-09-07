@@ -1,9 +1,22 @@
+/*
+ * _admin.js - Manages administrative interface components and interactions
+ * 
+ * Copyright (c) 2024 Greg Strange
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, subject to
+ * including this permission notice in all copies or substantial portions
+ * of the Software.
+ */
+
 class _doc
 {
 	constructor( _opts )
 	{
-		log( '_doc constructor' );
-		log( _opts );
+		new _log( '_doc constructor' );
+		new _log( _opts );
 
 		let _defaults =
 		{
@@ -24,8 +37,8 @@ class _doc
 			this.opts.populate = '#' + this.opts.populate;
 		}
 
-		log( '_doc constructor opts' );
-		log( this.opts );
+		new _log( '_doc constructor opts' );
+		new _log( this.opts );
 		return this;
 	}
 
@@ -41,10 +54,10 @@ class _doc
 				}
 
 				let _fileInput = $( $this.opts.file_id );
-				log( 'fileInput' );
-				log( _fileInput );
+				new _log( 'fileInput' );
+				new _log( _fileInput );
 				let _files = _fileInput[0].files;
-				log( _files );
+				new _log( _files );
 
 				if( 'undefined' !== typeof _files && _files.length )
 				{
@@ -54,8 +67,8 @@ class _doc
 						let _file = _files[_f];
 						if( 'object' === typeof _file )
 						{
-							log( 'readFile '+ _f );
-							log( _file );
+							new _log( 'readFile '+ _f );
+							new _log( _file );
 
 							_file.index = _f;
 							if( !this.acceptableType( _file.type ) )
@@ -65,7 +78,7 @@ class _doc
 
 							if( $this.opts.populate )
 							{
-								log( 'fileInput list populating' );
+								new _log( 'fileInput list populating' );
 								$( $this.opts.populate ).append( new _jig({ tpl: $this.opts.file_tpl, data: _file }).popTpl() );
 
 								$( '#doc_thumb_' + _f ).append( $this.fileIcon( _file.type ) );
@@ -79,7 +92,7 @@ class _doc
 				}
 				else
 				{
-					log( 'no files to process' );
+					new _log( 'no files to process' );
 					return _resolve( 'no_files_to_process' );
 				}
 			}
@@ -88,8 +101,8 @@ class _doc
 
 	save()
 	{
-		log( 'new _doc' );
-		log( this.opts );
+		new _log( 'new _doc' );
+		new _log( this.opts );
 		return new Promise(
 			( _success, _fail ) =>
 			{
@@ -137,10 +150,10 @@ class _doc
 
 	fileIcon( _type )
 	{
-		log( 'fileIcon' );
-		log( _type );
+		new _log( 'fileIcon' );
+		new _log( _type );
 		let _fileParts = _type.split("/");
-		log( _fileParts );
+		new _log( _fileParts );
 		let _icon = '<i class="bi bi-file fa-fw fa-2x text-primary"></i>';
 
 		if( 'image' == _fileParts[0] )
@@ -163,7 +176,7 @@ class _doc
 			}
 		}
 
-		log( _icon );
+		new _log( _icon );
 		return _icon;
 	}
 }

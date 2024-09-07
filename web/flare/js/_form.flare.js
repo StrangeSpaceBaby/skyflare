@@ -1,6 +1,14 @@
-/**
- *	form.js is an overlay to manage many form processes such as validation, sending and receiving form data, etc.
- *	@param	object	_opts	form_id
+/*
+ * _form.js - Sophisticated flare for creating, validating and saving form data
+ * 
+ * Copyright (c) 2024 Greg Strange
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, subject to
+ * including this permission notice in all copies or substantial portions
+ * of the Software.
  */
 
 class _form
@@ -8,14 +16,14 @@ class _form
 	constructor( _opts )
 	{
 		// Should have a form_id at the minimum
-		log( '_form constructor' );
-		log( _opts );
+		new _log( '_form constructor' );
+		new _log( _opts );
 
 		let _defaults = { form_id: null, method: 'POST', autoform: false };
 		this.opts = { ..._defaults, ..._opts };
 
-		log( '_form constructor opts' );
-		log( this.opts );
+		new _log( '_form constructor opts' );
+		new _log( this.opts );
 		return this.setup();
 	}
 
@@ -31,27 +39,27 @@ class _form
 					_selector = $this.opts.form_id;
 				}
 
-				log( 'autoform selector ' + _selector );
+				new _log( 'autoform selector ' + _selector );
 				$( _selector ).each(
 					( _index, _elem ) =>
 					{
-						log( 'elem' );
-						log( _elem );
-						log( $( _elem ) );
+						new _log( 'elem' );
+						new _log( _elem );
+						new _log( $( _elem ) );
 
 						// These two lines allow for a dynamic setting of the form input and to use a generic form container
 						let _formId = $( _elem ).attr( 'data-form-input-id' ) ? $( _elem ).attr( 'data-form-input-id' ) : $( _elem ).attr( 'id' );
 						let _formSelector = $( _elem ).attr( 'id' );
 
-						log( 'autoform ' + _selector + ' formId -->' + _formId );
+						new _log( 'autoform ' + _selector + ' formId -->' + _formId );
 						new _api({ url: '/_valid_field/form_fields/' + _formId }).poll().then(
 							( _ret ) =>
 							{
 								if( 1 == _ret.return )
 								{
-									log( 'autoform success' );
+									new _log( 'autoform success' );
 
-									log('#' + _formSelector + '_fields');
+									new _log('#' + _formSelector + '_fields');
 									let _cFormFields = $( '#' + _formSelector + '_fields' );
 									_cFormFields.empty();
 
@@ -64,7 +72,7 @@ class _form
 										for( let _i in _ret.data )
 										{
 											let _field = _ret.data[_i];
-											log( _field );
+											new _log( _field );
 											let _fieldHtml = '';
 											let _fieldLabel = '';
 											let _table = '';
@@ -118,8 +126,8 @@ class _form
 													_fieldHtml += '" />';
 													break;
 												case 'select':
-													log( 'select autoform' );
-													log( _field );
+													new _log( 'select autoform' );
+													new _log( _field );
 													_table = _field.name.split( '_' );
 													if( 'fk' == _table.shift() && 'id' == _table.pop() )
 													{
@@ -158,21 +166,21 @@ class _form
 			{
 				let _formId = $this.opts.form_id;
 
-				log( '_form popForm data' );
-				tablog( $this.opts.data );
+				new _log( '_form popForm data' );
+				new _log({ msg: $this.opts.data, publish: 'console.table' });
 
 				for( let _i in $this.opts.data )
 				{
 					let _val = $this.opts.data[_i];
-					log( '_i' );
-					log( _i );
-					log( _val );
-					log( 'selector' );
+					new _log( '_i' );
+					new _log( _i );
+					new _log( _val );
+					new _log( 'selector' );
 					let _sel = _formId + ' [name="' + _i + '"]';
-					log( _sel );
+					new _log( _sel );
 					let _type = $( _sel ).prop( 'type' );
-					log( 'type' );
-					log( _type );
+					new _log( 'type' );
+					new _log( _type );
 					switch( _type )
 					{
 						case 'radio':
@@ -191,8 +199,8 @@ class _form
 							$( _sel ).val( _date.format( 'YYYY-MM-DD') );
 							break;
 						default:
-							log( 'default popForm type' );
-							log( _type );
+							new _log( 'default popForm type' );
+							new _log( _type );
 							$( _sel ).val( _val );
 							break;
 					}
@@ -216,7 +224,7 @@ class _form
 
 		if( 'undefined' === typeof $( this.opts.form_id ) || !$( this.opts.form_id ).length )
 		{
-			log( 'form_id ' + this.opts.form_id + ' not in DOM' );
+			new _log( 'form_id ' + this.opts.form_id + ' not in DOM' );
 			return false;
 		}
 
@@ -240,19 +248,19 @@ class _form
 		$( this.opts.form_id + ' .required' ).filter( ':input' ).each(
 			function( _index, _elem )
 			{
-				log( 'required' );
-				log( 'validate elem' );
-				log( _elem );
+				new _log( 'required' );
+				new _log( 'validate elem' );
+				new _log( _elem );
 				_elem = $( _elem );
-				log( _elem );
+				new _log( _elem );
 				let _elemId = _elem.prop( 'id' );
 				let _elemType = _elem.prop( 'type' );
-				log( _elemId );
-				log( _elemType );
+				new _log( _elemId );
+				new _log( _elemType );
 
 				let _elemVal = _elem.val();
-				log( 'elemVal' );
-				log( _elemVal );
+				new _log( 'elemVal' );
+				new _log( _elemVal );
 				switch( _elemType )
 				{
 					case 'select-one':
@@ -260,13 +268,13 @@ class _form
 						_elemVal = $( '#' + _elemId + ' option:selected' ).val();
 						break;
 				}
-				log( _elemVal );
+				new _log( _elemVal );
 
 				if( !_elemVal )
 				{
-					log( _elem.val() );
-					log( 'form field missing value' );
-					log( _elemId );
+					new _log( _elem.val() );
+					new _log( 'form field missing value' );
+					new _log( _elemId );
 					$( _elemId ).addClass( 'error' );
 					_validErrors++;
 				}
@@ -282,7 +290,7 @@ class _form
 			return true;
 		}
 
-		log( 'error counts ' + _validErrors );
+		new _log( 'error counts ' + _validErrors );
 		return false;
 	}
 
@@ -292,7 +300,7 @@ class _form
 		{
 			if( !this.validate() )
 			{
-				log( 'not valid form ' + this.opts.form_id );
+				new _log( 'not valid form ' + this.opts.form_id );
 				return _fail( 'form_has_errors' );
 			}
 
@@ -316,16 +324,16 @@ class _form
 			.then(
 				function( _ret )
 				{
-					log( 'form send ret' );
-					log( _ret );
+					new _log( 'form send ret' );
+					new _log( _ret );
 					return _success( _ret );
 				}
 			)
 			.catch(
 				function( _ret )
 				{
-					log( 'form send catch ret' );
-					log( _ret );
+					new _log( 'form send catch ret' );
+					new _log( _ret );
 					return _fail( _ret );
 				}
 			);
@@ -335,17 +343,17 @@ class _form
 	getFormData()
 	{
 		let _formId = this.opts.form_id;
-		log( 'getformData' );
-		log( _formId );
+		new _log( 'getformData' );
+		new _log( _formId );
 		let _data = $( _formId ).serializeArray();
-		log( _data );
+		new _log( _data );
 
 		let _return = {};
 		for( let _i in _data )
 		{
-			log( 'formData' );
-			log( _i );
-			log( _data[_i] );
+			new _log( 'formData' );
+			new _log( _i );
+			new _log( _data[_i] );
 			_return[_data[_i].name] = _data[_i].value;
 		}
 
@@ -355,8 +363,8 @@ class _form
 	resetForm()
 	{
 		let _formId = this.opts.form_id;
-		log( 'resetform' );
-		log( _formId );
+		new _log( 'resetform' );
+		new _log( _formId );
 
 		$( _formId )[0].reset();
 		$( _formId + ' input:hidden' ).val( '' );

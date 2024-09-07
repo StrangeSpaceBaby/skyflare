@@ -5,9 +5,9 @@
 		<div class="h6">Pricing</div>
 		<form>
 			<div class="accordion autoload" id="pricing_list"
-				data-src="/_pricing/list"
-				data-tpl="pricing_list_tpl"
-				data-populate="pricing_list"
+				data-fl-src="/_pricing/list"
+				data-fl-tpl="pricing_list_tpl"
+				data-fl-populate="pricing_list"
 			>
 			</div>
 		</form>
@@ -26,10 +26,10 @@
 				<div id="collapse_pricing_~~_pricing_id~~" class="accordion-collapse collapse" aria-labelledby="heading_~~_pricing_id~~" data-bs-parent="#pricing_list">
 					<div class="accordion-body">
 						<ul id="module_list_~~_pricing_id~~" class="list-group list-group-flush"
-							data-src="/_pricing_module/get_by_pricing/~~_pricing_id~~"
-							data-tpl="module_list_tpl"
-							data-populate="module_list_~~_pricing_id~~"
-							data-when-empty="<li class='list-group-item'>No modules to display</li>"
+							data-fl-src="/_pricing_module/get_by_pricing/~~_pricing_id~~"
+							data-fl-tpl="module_list_tpl"
+							data-fl-populate="module_list_~~_pricing_id~~"
+							data-fl-when-empty="<li class='list-group-item'>No modules to display</li>"
 						>
 						</ul>
 					</div>
@@ -50,9 +50,9 @@
 				<div id="collapse_module_~~_pricing_module_id~~" class="accordion-collapse collapse" aria-labelledby="heading_module_~~_pricing_module_id~~" data-bs-parent="#module_list_~~_pricing_module_id~~">
 					<div class="accordion-body">
 						<div class="accordion" id="pricing_limit_list_~~_pricing_module_id~~"
-							data-src="/_pricing_limit/get_by_pricing_module/~~_pricing_module_id~~"
-							data-tpl="limit_list_tpl"
-							data-populate="pricing_limit_list_~~_pricing_module_id~~"
+							data-fl-src="/_pricing_limit/get_by_pricing_module/~~_pricing_module_id~~"
+							data-fl-tpl="limit_list_tpl"
+							data-fl-populate="pricing_limit_list_~~_pricing_module_id~~"
 						>
 						</div>
 					</div>
@@ -150,6 +150,6 @@
 
 <script src="/core/js/_pricing.js"></script>
 
-<div id="save_pricing_limit_modal" data-tpl="modal/_pricing_limit_save" class="autotpl"></div>
-<div id="save_pricing_module_modal" data-tpl="modal/_pricing_module_save" class="autotpl"></div>
-<div id="save_pricing_modal" data-tpl="modal/_pricing_save" class="autotpl"></div>
+<div id="save_pricing_limit_modal" data-fl-tpl="modal/_pricing_limit_save" class="autotpl"></div>
+<div id="save_pricing_module_modal" data-fl-tpl="modal/_pricing_module_save" class="autotpl"></div>
+<div id="save_pricing_modal" data-fl-tpl="modal/_pricing_save" class="autotpl"></div>

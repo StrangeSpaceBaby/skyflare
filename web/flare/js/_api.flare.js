@@ -1,5 +1,14 @@
-/**
- *	The API class provides for a slick overlayer to facilitate token management, access verification, etc.
+/*
+ * _api.flare.js - Provides an interface for API interactions with token management and access verification
+ * 
+ * Copyright (c) 2024 Greg Strange
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, subject to
+ * including this permission notice in all copies or substantial portions
+ * of the Software.
  */
 
 class _api
@@ -30,8 +39,8 @@ class _api
 				if( !$this.opts.force_fetch )
 				{
 					let _cached = o_db.get_by_key( $this.opts.url );
-					log( 'cached_api checked' );
-					log( _cached );
+					new _log( 'cached_api checked' );
+					new _log( _cached );
 					if( _cached )
 					{
 						return _resolve( _cached );
@@ -39,8 +48,8 @@ class _api
 				}
 				*/
 
-				log( 'poll auth_token' );
-				log( $this.opts.auth_token );
+				new _log( 'poll auth_token' );
+				new _log( $this.opts.auth_token );
 				$.ajax({
 					method: $this.opts.method,
 					url: $this.opts.url,
@@ -51,7 +60,7 @@ class _api
 					},
 					success: function( _ret )
 					{
-						log( $this.opts.url + ' success' );
+						new _log( $this.opts.url + ' success' );
 
 						if( 1 == _ret.return )
 						{
@@ -66,11 +75,15 @@ class _api
 							.catch(
 								( _ret ) =>
 								{
-									log( 'cached_api store failed for ' + $this.opts.url );
+									new _log( 'cached_api store failed for ' + $this.opts.url );
 									return _resolve( _ret );
 								}
 							);
 							*/
+							return _resolve( _ret );
+						}
+						else if( _ret )
+						{
 							return _resolve( _ret );
 						}
 						else
@@ -80,16 +93,16 @@ class _api
 					},
 					error: function( _ret )
 					{
-						log( $this.opts.url + ' failure' );
+						new _log( $this.opts.url + ' failure' );
 						return _reject( _ret );
 					}
 				}).always(
 					( _ret, _textStatus, _xhr ) =>
 					{
-						log( 'api always response header for ' + $this.opts.url );
-						// log( _xhr.getAllResponseHeaders() );
-						log( _xhr.status );
-						log( '/api always response_header for ' + $this.opts.url );
+						// new _log( 'api always response header for ' + $this.opts.url );
+						// new _log( _xhr.getAllResponseHeaders() );
+						// new _log( _xhr.status );
+						// new _log( '/api always response_header for ' + $this.opts.url );
 
 						switch( _xhr.status )
 						{
@@ -99,15 +112,15 @@ class _api
 									let o_store = new _store();
 									o_store.put( 'auth_token', _xhr.getResponseHeader( 'auth_token' ) );
 									o_store.put( 'auth_token_expires', _xhr.getResponseHeader( 'auth_token_expires' ) );
-									log( 'auth_token updated' );
+									new _log( 'auth_token updated' );
 									return _resolve( _xhr );
 								}
 								break;
 							case 403:
-								log( 'Invalid path! ' + $this.opts.url );
+								new _log( 'Invalid path! ' + $this.opts.url );
 								return _reject( 'Invalid Path' );
 							case 401:
-								log( 'Path Unauthorized' );
+								new _log( 'Path Unauthorized' );
 								return _reject( 'Not Authorized' );
 						}
 					}

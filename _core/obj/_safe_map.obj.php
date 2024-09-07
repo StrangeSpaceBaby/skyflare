@@ -103,6 +103,11 @@ class _safe_map extends _da
 
 	public function convert_get_ulids( $table, $get_vals = [] )
 	{
+		if( !$table )
+		{
+			return [];
+		}
+		
 		if( $get_vals )
 		{
 			$this->log_msg( 'converting $_GET ULIDs' );

@@ -10,10 +10,10 @@
 </div>
 <div class="row autoload"
 		id="obj_list"
-		data-src="/_admin/get_objs"
-		data-populate="obj_list"
-		data-tpl="obj_list_tpl"
-		data-when-empty="<li class='list-group-item'>No objects to display</li>"
+		data-fl-src="/_admin/get_objs"
+		data-fl-populate="obj_list"
+		data-fl-tpl="obj_list_tpl"
+		data-fl-when-empty="<li class='list-group-item'>No objects to display</li>"
 	>
 </div>
 <template id="obj_list_tpl">
@@ -28,6 +28,6 @@
 	</div>
 </template>
 
-<div id="beehive_modal_tpl" class="autotpl" data-tpl="modal/_admin_obj_save"></div>
+<div id="beehive_modal_tpl" class="autotpl" data-fl-tpl="modal/_admin_obj_save"></div>
 
 ~~include:_master_foot~~
