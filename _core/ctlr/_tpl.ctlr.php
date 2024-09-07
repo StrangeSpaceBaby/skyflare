@@ -14,7 +14,7 @@ class _tpl_ctlr extends _ctlr
 	 * @param array|string if array, then it contains a sub directory in the /tpl directory; if string, top level tpl
 	 * @return string|boolean template content on success, FALSE on error
 	 */
-	public function by_name( $name ) : string|bool
+	public function by_name( string|array $name ) : string|bool
 	{
 		$this->log_data([ $name ])->log_msg( 'by_name arg' );
 		if( is_array( $name ) )
