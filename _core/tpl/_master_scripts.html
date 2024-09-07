@@ -6,28 +6,22 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<!-- <script src="/flare/js/_store.js"></script>
-<script src="/flare/js/_dom.js"></script>
-<script src="/flare/js/_tab.js"></script>
-<script src="/flare/js/_db.js"></script>
-<script src="/flare/js/_role_perm.js"></script>
-<script src="/flare/js/_loader.js"></script>
-<script src="/flare/js/_jig.js"></script>
-<script src="/flare/js/_table.js"></script>
-<script src="/flare/js/_toggle.js"></script>
-<script src="/flare/js/_config.js"></script>
-<script src="/flare/js/_lang.js"></script>
-<script src="/flare/js/_auth.js"></script>
-<script src="/flare/js/_api.js"></script>
-<script src="/flare/js/_form.js"></script>
-<script src="/flare/js/_file.js"></script>
-<script src="/flare/js/_follow.js"></script>
-<script src="/flare/js/_note.js"></script>
-<script src="/flare/js/_growl.js"></script>
-<script src="/flare/js/_cal.js"></script>
--->
-
 <script src="/flare/js/_init.flare.js"></script>
+
+<script>
+	document.addEventListener( 'DOMContentLoaded', 
+		function()
+		{
+			new _init()
+			.catch(
+				( error ) =>
+				{
+					console.table( error );
+				}
+			);
+		}, { once: true }
+	);
+</script>
 
 <flares>
 </flares>

@@ -216,16 +216,3 @@ class _init
             });
     }
 }
-
-document.addEventListener( 'DOMContentLoaded', 
-	function()
-	{
-		new _init()
-		.catch(
-			( error ) =>
-			{
-				console.table( error );
-			}
-		);
-	}, { once: true }
-);
