@@ -1,16 +1,29 @@
+/*
+ * _toggle.js - Sets, changes and updates toggle representations
+ * 
+ * Copyright (c) 2024 Greg Strange
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, subject to
+ * including this permission notice in all copies or substantial portions
+ * of the Software.
+ */
+
 class _toggle
 {
 	constructor( _opts )
 	{
-		log( 'toggle constructor' );
-		log( _opts );
+		new _log( 'toggle constructor' );
+		new _log( _opts );
 
 		let _defaults = { elem: null };
 		this.opts = { ..._defaults, ..._opts };
 
 		this.opts.elem = ('#' + this.opts.elem).replace( '##', '#' ); // Adds a # to the id in case it was forgotten
-		log( 'toggle constructor opts' );
-		log( this.opts );
+		new _log( 'toggle constructor opts' );
+		new _log( this.opts );
 
 		return this;
 	}

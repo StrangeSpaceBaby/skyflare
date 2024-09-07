@@ -1,3 +1,18 @@
+/*
+ * _cal.flare.js - Manages calendar functionality including month/year navigation and event display
+ * 
+ * Requires momentjs 2.29 or later (https://momentjs.com/)
+ * 
+ * Copyright (c) 2024 Greg Strange
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, subject to
+ * including this permission notice in all copies or substantial portions
+ * of the Software.
+ */
+
 class _cal
 {
 	constructor( _opts )
@@ -15,17 +30,17 @@ class _cal
 			( _success, _fail ) =>
 			{
 				let _cal = $( $this.opts.cal_id );
-				log( 'next Month cal' );
-				log( _cal );
+				new _log( 'next Month cal' );
+				new _log( _cal );
 				let _currMonth = _dom.getData( $this.opts.cal_id, 'calMonth' );
-				log( 'currMonth' );
-				log( _currMonth );
+				new _log( 'currMonth' );
+				new _log( _currMonth );
 
 				_currMonth = moment( _currMonth );
 				let _nextMonth = _currMonth.subtract( 1, 'month' );
 
-				log( 'actual nextMonth' );
-				log( _nextMonth );
+				new _log( 'actual nextMonth' );
+				new _log( _nextMonth );
 				_dom.setData( $this.opts.cal_id, 'calMonth', _nextMonth.format( 'YYYY-MM-DD') );
 				$this.init();
 			}
@@ -39,17 +54,17 @@ class _cal
 			( _success, _fail ) =>
 			{
 				let _cal = $( $this.opts.cal_id );
-				log( 'next Month cal' );
-				log( _cal );
+				new _log( 'next Month cal' );
+				new _log( _cal );
 				let _currMonth = _dom.getData( $this.opts.cal_id, 'calMonth' );
-				log( 'currMonth' );
-				log( _currMonth );
+				new _log( 'currMonth' );
+				new _log( _currMonth );
 
 				_currMonth = moment( _currMonth );
 				let _nextMonth = _currMonth.add( 1, 'year' );
 
-				log( 'actual nextMonth' );
-				log( _nextMonth );
+				new _log( 'actual nextMonth' );
+				new _log( _nextMonth );
 				_dom.setData( $this.opts.cal_id, 'calMonth', _nextMonth.format( 'YYYY-MM-DD') );
 				$this.init();
 			}
@@ -63,17 +78,17 @@ class _cal
 			( _success, _fail ) =>
 			{
 				let _cal = $( $this.opts.cal_id );
-				log( 'next Month cal' );
-				log( _cal );
+				new _log( 'next Month cal' );
+				new _log( _cal );
 				let _currMonth = _dom.getData( $this.opts.cal_id, 'calMonth' );
-				log( 'currMonth' );
-				log( _currMonth );
+				new _log( 'currMonth' );
+				new _log( _currMonth );
 
 				_currMonth = moment( _currMonth );
 				let _nextMonth = _currMonth.subtract( 1, 'year' );
 
-				log( 'actual nextMonth' );
-				log( _nextMonth );
+				new _log( 'actual nextMonth' );
+				new _log( _nextMonth );
 				_dom.setData( $this.opts.cal_id, 'calMonth', _nextMonth.format( 'YYYY-MM-DD') );
 				$this.init();
 			}
@@ -87,17 +102,17 @@ class _cal
 			( _success, _fail ) =>
 			{
 				let _cal = $( $this.opts.cal_id );
-				log( 'next Month cal' );
-				log( _cal );
+				new _log( 'next Month cal' );
+				new _log( _cal );
 				let _currMonth = _dom.getData( $this.opts.cal_id, 'calMonth' );
-				log( 'currMonth' );
-				log( _currMonth );
+				new _log( 'currMonth' );
+				new _log( _currMonth );
 
 				_currMonth = moment( _currMonth );
 				let _nextMonth = _currMonth.add( 1, 'month' );
 
-				log( 'actual nextMonth' );
-				log( _nextMonth );
+				new _log( 'actual nextMonth' );
+				new _log( _nextMonth );
 				_dom.setData( $this.opts.cal_id, 'calMonth', _nextMonth.format( 'YYYY-MM-DD') );
 				$this.init();
 			}
@@ -106,7 +121,7 @@ class _cal
 
 	autocal()
 	{
-		log( '_cal autoload' );
+		new _log( '_cal autoload' );
 
 		return new Promise(
 			( _success, _fail ) =>
@@ -114,7 +129,7 @@ class _cal
 				$( '.autocal' ).each(
 					function( _index, _elem )
 					{
-						log( _elem );
+						new _log( _elem );
 						new _cal({ cal_id: $( _elem ).prop( 'id' ) }).init();
 					}
 				)
@@ -201,8 +216,8 @@ class _cal
 				.catch(
 					( _err ) =>
 					{
-						log( 'cal api errored' );
-						log( _err );
+						new _log( 'cal api errored' );
+						new _log( _err );
 					}
 				);
 			}

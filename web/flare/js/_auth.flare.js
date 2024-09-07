@@ -1,9 +1,22 @@
+/*
+ * _auth.flare.js - Manages authentication processes including login and logout operations
+ * 
+ * Copyright (c) 2024 Greg Strange
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, subject to
+ * including this permission notice in all copies or substantial portions
+ * of the Software.
+ */
+
 class _auth
 {
 	constructor( _opts )
 	{
-		log( '_auth constructor' );
-		log( _opts );
+		new _log( '_auth constructor' );
+		new _log( _opts );
 
 		let _defaults = {
 			form_id: null,
@@ -16,8 +29,8 @@ class _auth
 
 		this.opts = { ..._defaults, ..._opts };
 
-		log( '_auth constructor opts' );
-		log( this.opts );
+		new _log( '_auth constructor opts' );
+		new _log( this.opts );
 		return this;
 	}
 
@@ -57,18 +70,18 @@ class _auth
 						{
 							if( 1 == _ret.return )
 							{
-								log( 'init.auth _ret' );
-								log( _ret );
+								new _log( 'init.auth _ret' );
+								new _log( _ret );
 
 								new _growl({ growl: _ret.msg, type: _ret.return ? 'success' : 'danger' });
 
-								log( 'typeof auth_token' );
-								log( typeof _ret.data.auth_token );
-								log( 'auth api auth_token' );
-								log( _ret.data.auth_token );
+								new _log( 'typeof auth_token' );
+								new _log( typeof _ret.data.auth_token );
+								new _log( 'auth api auth_token' );
+								new _log( _ret.data.auth_token );
 								if( 'undefined' !== typeof _ret.data.auth_token )
 								{
-									log( 'auth_token not undefined' );
+									new _log( 'auth_token not undefined' );
 									let o_store = new _store();
 									o_store.del( 'auth_token' );
 									o_store.del( 'auth_token_type' );
@@ -80,8 +93,8 @@ class _auth
 									const d = new Date();
   									d.setTime(d.getTime() + (1*24*60*60*1000));
   									let expires = "expires="+ d.toUTCString();
-									log( 'auth cookie set' );
-									log( "auth_token=" + _ret.data.auth_token + ";" + expires + ";path=/" );
+									new _log( 'auth cookie set' );
+									new _log( "auth_token=" + _ret.data.auth_token + ";" + expires + ";path=/" );
   									document.cookie = "auth_token=" + _ret.data.auth_token + ";" + expires + ";path=/";
 								}
 
@@ -89,8 +102,8 @@ class _auth
 							}
 							else
 							{
-								log( 'init.auth failed' );
-								tablog( _ret );
+								new _log( 'init.auth failed' );
+								new _log({ msg: _ret, publish: 'console.table' });
 								return _fail( _ret );
 							}
 						}
@@ -98,10 +111,10 @@ class _auth
 					.catch(
 						( _xhr, _textStatus, _errorThrown ) =>
 						{
-							log( 'auth error' );
-							log( _xhr );
-							log( _textStatus );
-							log( _errorThrown );
+							new _log( 'auth error' );
+							new _log( _xhr );
+							new _log( _textStatus );
+							new _log( _errorThrown );
 							return _fail( _textStatus + ' ' + _errorThrown );
 						}
 					);

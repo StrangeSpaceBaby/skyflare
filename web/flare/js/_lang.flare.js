@@ -1,3 +1,16 @@
+/*
+ * _lang.js - Fetches language translations from api endpoint
+ * 
+ * Copyright (c) 2024 Greg Strange
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, subject to
+ * including this permission notice in all copies or substantial portions
+ * of the Software.
+ */
+
 class _lang
 {
 	construct( _opts )
@@ -32,15 +45,14 @@ class _lang
 					}
 				);
 			}
-			else if( 'undefined' != typeof _xl8 && _xl8 )
+			
+			if( 'undefined' != typeof _xl8 && _xl8 )
 			{
 				console.log( ' xl8ing ' + _xl8 );
 				return _resolve( _xl8 );
 			}
-			else
-			{
-				return _resolve( _token );
-			}
+			
+			return _resolve( _token );
 		});
 	}
 }

@@ -1,3 +1,17 @@
+/*
+ * _table.js - Manages table optiosn for filtering and column selection
+ *             as well as granular sorting options.
+ * 
+ * Copyright (c) 2024 Greg Strange
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, subject to
+ * including this permission notice in all copies or substantial portions
+ * of the Software.
+ */
+
 class _table
 {
 	constructor( _opts )
@@ -5,7 +19,7 @@ class _table
 		let _table = document.getElementById( 'table_pref_col_nav' );
 		if( null === _table )
 		{
-			log( 'no table_pref_col_nav for use in table.js' );
+			new _log( 'no table_pref_col_nav for use in table.js' );
 			return false;
 		}
 
@@ -13,20 +27,20 @@ class _table
 
 		this.opts = { ..._defaults, ..._opts };
 
-		log( '_table _opts' );
-		log( this.opts );
+		new _log( '_table _opts' );
+		new _log( this.opts );
 
 		return this;
 	}
 
 	filter( _vars )
 	{
-		log( 'filter vars' );
-		log( _vars );
+		new _log( 'filter vars' );
+		new _log( _vars );
 
-		log( 'input[type=checkbox][name=filter_' + _vars.col + '][value="'+ _vars.value + '"]' );
-		log( $( '#' + this.opts.table ) );
-		log( '[data-filter-' + _vars.col + '="' + _vars.value + '"]' );
+		new _log( 'input[type=checkbox][name=filter_' + _vars.col + '][value="'+ _vars.value + '"]' );
+		new _log( $( '#' + this.opts.table ) );
+		new _log( '[data-filter-' + _vars.col + '="' + _vars.value + '"]' );
 
 		if( $( 'input[type=checkbox][name=filter_' + _vars.col + '][value="'+ _vars.value + '"]' ).prop( 'checked' ) )
 		{
@@ -40,24 +54,24 @@ class _table
 
 	sortCol( _sortCol )
 	{
-		log( window.ux );
-		log( 'start_direction' );
+		new _log( window.ux );
+		new _log( 'start_direction' );
 
 		let _this = document.getElementById( 'sort_icon_' + _sortCol );
 		let _dir = _this.dataset.direction;
 		let _table = '#' + this.opts.table;
 
-		log( 'direction' );
-		log( _dir );
-		log( _this.dataset );
+		new _log( 'direction' );
+		new _log( _dir );
+		new _log( _this.dataset );
 
-		log( 'end_direction' );
-		log( _this.dataset.direction );
+		new _log( 'end_direction' );
+		new _log( _this.dataset.direction );
 
 		let _vals = {};
 		let _type = $( _table + ' .list-group-header' ).find( '[data-col="' + _sortCol + '"]' ).data( 'col-type' );
-		log( 'type' );
-		log( _type );
+		new _log( 'type' );
+		new _log( _type );
 
 		let _sortNumeric = 0;
 		switch( _type )
@@ -76,9 +90,9 @@ class _table
 		$( _table ).children().not( '.list-group-header' ).find( '[data-col="' + _sortCol + '"]' ).each(
 			function( _index, _col )
 			{
-				log( 'col' );
-				log( _col );
-				log( $( _col ).closest( '.list-group-item' ) );
+				new _log( 'col' );
+				new _log( _col );
+				new _log( $( _col ).closest( '.list-group-item' ) );
 
 				let _id = $( _col ).closest( '.list-group-item' ).prop( 'id' );
 				let _val = $( _col ).text();
@@ -104,26 +118,26 @@ class _table
 					_vals[_val] = [];
 				}
 
-				log( '_val' );
-				log( _val );
-				log( _vals );
+				new _log( '_val' );
+				new _log( _val );
+				new _log( _vals );
 				_vals[_val].push( _id );
 			}
 		);
 
-		log( 'vals' );
-		log( _vals );
+		new _log( 'vals' );
+		new _log( _vals );
 
-		log( 'keys' );
+		new _log( 'keys' );
 		let _keys = [];
 		_keys = Object.keys( _vals );
-		log( _keys );
+		new _log( _keys );
 
 		$( '.sort-icon' ).not( 'sort_col_' + _sortCol ).addClass( _this.dataset.defaultIcon ).removeClass( _this.dataset.sortDown ).removeClass( _this.dataset.sortUp );
 
 		if( 'up' == _dir )
 		{
-			log( 'going down' );
+			new _log( 'going down' );
 			_this.dataset.direction = 'down';
 			$( this ).addClass( _this.dataset.sortDown ).removeClass( _this.dataset.sortUp );
 			if( !_sortNumeric )
@@ -137,7 +151,7 @@ class _table
 		}
 		else if( 'down' == _dir )
 		{
-			log( 'going up' );
+			new _log( 'going up' );
 			_this.dataset.direction = 'up';
 			$( this ).addClass( _this.dataset.sortUp ).removeClass( _this.dataset.sortDown );
 			if( !_sortNumeric )
@@ -154,14 +168,14 @@ class _table
 		for( let _i = 0; _i < _keys.length; _i++ )
 		{
 			let _val = _keys[_i];
-			log( '_val' );
-			log( _val );
+			new _log( '_val' );
+			new _log( _val );
 
 			for( let _j = 0; _j < _vals[_val].length; _j++ )
 			{
 				let _elem = _vals[_val][_j];
-				log( '_elem' );
-				log( _elem );
+				new _log( '_elem' );
+				new _log( _elem );
 				$( '#' + _elem ).css( 'order', _order );
 				_order++;
 			}
@@ -170,8 +184,8 @@ class _table
 
 	toggleHiddenCol( _col )
 	{
-		log( 'start_hidden' );
-		log( '#' + this.opts.table + ' *[data-col="' + _col + '"]' );
+		new _log( 'start_hidden' );
+		new _log( '#' + this.opts.table + ' *[data-col="' + _col + '"]' );
 
 		$( '#' + this.opts.table + ' *[data-col="' + _col + '"]' ).toggleClass( 'd-none' );
 
@@ -180,14 +194,14 @@ class _table
 
 	updateHiddenColToggle( _col )
 	{
-		log( 'updateHiddenColToggle' );
-		log( _col );
+		new _log( 'updateHiddenColToggle' );
+		new _log( _col );
 		let _this = document.getElementById( 'hide_icon_' + _col );
 		let _on = _this.dataset.on;
 
-		log( 'on' );
-		log( _on );
-		log( _this.dataset );
+		new _log( 'on' );
+		new _log( _on );
+		new _log( _this.dataset );
 
 		$( '#hide_icon_' + _col ).toggleClass( _this.dataset.onIcon + ' text-success' ).toggleClass( _this.dataset.offIcon + ' text-dark' );
 		if( 1 == _this.dataset.on )
@@ -202,10 +216,10 @@ class _table
 
 	openPrefs()
 	{
-		log( 'openPrefs' );
+		new _log( 'openPrefs' );
 		let _modal = $( '#table_prefs_box' );
-		log( 'modal' );
-		log( _modal );
+		new _log( 'modal' );
+		new _log( _modal );
 
 		let _list = $( '#table_pref_col_nav' );
 		_list.empty();
@@ -215,9 +229,9 @@ class _table
 		let _table = this.opts.table;
 		document.getElementById( 'table_pref_col_nav' ).dataset.tableId = _table;
 
-		log( 'typeof window' );
-		log( typeof window.ux.tables );
-		tablog( window.ux.tables );
+		new _log( 'typeof window' );
+		new _log( typeof window.ux.tables );
+		new _log({ msg: window.ux.tables, publish: 'console.table' });
 
 		if( 'undefined' == typeof window.ux.tables || !window.ux.tables[_table] )
 		{
@@ -227,8 +241,8 @@ class _table
 		for( let _i in window.ux.tables[_table].col_order )
 		{
 			let _col = window.ux.tables[_table].col_order[_i];
-			log( 'prefs _col' );
-			log( _col );
+			new _log( 'prefs _col' );
+			new _log( _col );
 			if( !_col )
 			{
 				continue;
@@ -246,10 +260,10 @@ class _table
 
 	openFilters()
 	{
-		log( 'openFilters' );
+		new _log( 'openFilters' );
 		let _modal = $( '#table_filters_box' );
-		log( 'modal' );
-		log( _modal );
+		new _log( 'modal' );
+		new _log( _modal );
 
 		let _list = $( '#table_filter_col_nav' );
 		_list.empty();
@@ -263,17 +277,17 @@ class _table
 		$( '#' + _table ).children().not( '.list-group-header' ).each(
 			( _index, _elem ) =>
 			{
-				log( 'dataset' );
-				log( _elem.dataset );
+				new _log( 'dataset' );
+				new _log( _elem.dataset );
 				for( let _key in _elem.dataset )
 				{
 					let _data = _elem.dataset[_key];
 					if( 'filter' == _key.substring( 0, 6 ) )
 					{
-						log( 'openFilters filter' );
-						log( _key );
+						new _log( 'openFilters filter' );
+						new _log( _key );
 						_key = _key.substring( 6 ).toLowerCase();
-						log( _key );
+						new _log( _key );
 
 						if( 'undefined' === typeof( _filters[_key] ) )
 						{
@@ -285,8 +299,8 @@ class _table
 				}
 			}
 		);
-		log( 'filters' );
-		tablog( _filters );
+		new _log( 'filters' );
+		new _log({ msg: _filters, publish: 'console.table' });
 
 		let _headerTpl = 'table_filter_col_section_nav_tpl';
 		for( let _i in _filters )
@@ -302,15 +316,15 @@ class _table
 
 	autotable()
 	{
-		log( 'autotable' );
+		new _log( 'autotable' );
 		return new Promise(
 			( _success, _fail ) =>
 			{
 				$( '.autotable' ).each(
 					function( _index, _elem )
 					{
-						log( 'elem' );
-						log( _elem );
+						new _log( 'elem' );
+						new _log( _elem );
 						new _table({ table: '#' + $( _elem ).attr( 'id' ) }).initTable();
 					}
 				);
@@ -322,20 +336,20 @@ class _table
 
 	render()
 	{
-		log( 'render ' + this.opts.table );
+		new _log( 'render ' + this.opts.table );
 		let $this = this;
 		return new Promise(
 			( _success, _fail ) =>
 			{
 				let _table = $this.opts.table.replace( /[^A-Za-z0-9\-\_]/g, "" );
-				log( '_table' );
-				log( _table );
-				log( 'table in window ux' );
-				log( window.ux.tables[_table] );
-				log( window.ux.tables );
+				new _log( '_table' );
+				new _log( _table );
+				new _log( 'table in window ux' );
+				new _log( window.ux.tables[_table] );
+				new _log( window.ux.tables );
 				if( 'undefined' === typeof window.ux.tables[_table] || !window.ux.tables[_table] )
 				{
-					log( 'table not initted' );
+					new _log( 'table not initted' );
 					return _fail( 'table_not_initted' );
 				}
 
@@ -344,10 +358,10 @@ class _table
 					$( window.ux.tables[_table].cols_hidden ).each(
 						function( _index, _col )
 						{
-							log( 'hidden cols' );
-							log( _index );
-							log( _col );
-							log( '#' + _table + ' *[data-col="' + _col + '"]' );
+							new _log( 'hidden cols' );
+							new _log( _index );
+							new _log( _col );
+							new _log( '#' + _table + ' *[data-col="' + _col + '"]' );
 							$( '*[data-col="' + _col + '"]' ).addClass( 'd-none' );
 						}
 					);
@@ -366,14 +380,14 @@ class _table
 
 	initTable()
 	{
-		log( 'initTable' );
-		log( this.opts );
+		new _log( 'initTable' );
+		new _log( this.opts );
 
 		let $this = this;
 		let _table = $( '#' + $this.opts.table );
 		let _tableName = _table.attr( 'id' );
-		log( 'tableName' );
-		log( _tableName );
+		new _log( 'tableName' );
+		new _log( _tableName );
 
 		if( 'undefined' === typeof window.ux.tables[_tableName] )
 		{
@@ -389,7 +403,7 @@ class _table
 			{
 				if( !$this.opts.table )
 				{
-					log( 'no table provided to _ux initTable()' );
+					new _log( 'no table provided to _ux initTable()' );
 					return _fail( _ret );
 				}
 
@@ -448,8 +462,8 @@ class _table
 					}
 				);
 
-				log( 'end initTable' );
-				log( window.ux.tables[_tableName].cols['Name'] );
+				new _log( 'end initTable' );
+				new _log( window.ux.tables[_tableName].cols['Name'] );
 				this.render();
 
 				return _success( _tableName + ' table initted' );
