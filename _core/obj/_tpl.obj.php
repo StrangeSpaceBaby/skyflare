@@ -136,7 +136,6 @@ class _tpl extends _obj
 		}
 	}
 
-
 	/**
 	 * Thjis allows for one-depth array value to be interpolated
 	 *
@@ -154,6 +153,10 @@ class _tpl extends _obj
 			}
 			else
 			{
+				if( !$val )
+				{
+					$val = '';
+				}
 				$this->tpl = str_replace( '~~' . $array_name . '.' . $key . '~~', $val, $this->tpl );
 			}
 		}

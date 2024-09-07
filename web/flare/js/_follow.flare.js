@@ -19,13 +19,13 @@ class _follow
 
 		this.opts = { ..._defaults, ..._opts };
 
-		log( '_follow _opts' );
-		log( this.opts );
+		new _log( '_follow _opts' );
+		new _log( this.opts );
 	}
 
 	toggle()
 	{
-		log( 'toggle' );
+		new _log( 'toggle' );
 		let $this = this;
 		return new Promise(
 			( _success, _fail ) =>
@@ -35,7 +35,7 @@ class _follow
 				.then(
 					( _ret ) =>
 					{
-						tablog( _ret );
+						new _log({ msg: _ret, publish: 'console.table' });
 						if( 1 == _ret.return )
 						{
 							new _growl({ growl: _ret.msg, type: 'success' });
@@ -82,13 +82,13 @@ class _follow
 
 	getFollows( _types )
 	{
-		log( 'getFollows' );
+		new _log( 'getFollows' );
 		this.opts.objs = [ this.opts._follow_obj ];
 
 		if( !!_types )
 		{
-			log( 'types' );
-			log( _types );
+			new _log( 'types' );
+			new _log( _types );
 			this.opts.objs = _types.join( '|' );
 		}
 
@@ -101,7 +101,7 @@ class _follow
 				.then(
 					( _ret ) =>
 					{
-						tablog( _ret );
+						new _log({ msg: _ret, publish: 'console.table' });
 						if( 1 == _ret.return )
 						{
 							new _growl({ growl: _ret.msg, type: 'success' });

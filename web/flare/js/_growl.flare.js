@@ -38,8 +38,8 @@ class _growl
 		this.opts.state = this.state_classes[this.opts.type];
 		this.opts.state_text = this.state_text_classes[this.opts.type];
 
-		log( '_growl _opts' );
-		log( this.opts );
+		new _log( '_growl _opts' );
+		new _log( this.opts );
 
 		return this.growl();
 	}
@@ -49,8 +49,8 @@ class _growl
 		let _now = Date.now();
 		let _count = $( '.growl' ).length + 1;
 		let _id = _now + '-' + _count;
-		log( 'growl id' );
-		log( _id );
+		new _log( 'growl id' );
+		new _log( _id );
 		$( '#growl_container' ).append( new _jig({ tpl: 'growl_tpl', data: { growl: this.opts.msg, id: _id, state: this.opts.state, state_text: this.opts.state_text }, default: '-' }).popTpl() );
 		setTimeout(
 			function()

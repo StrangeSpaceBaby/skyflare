@@ -45,7 +45,7 @@ class _jig
 						.catch(
 							( _msg ) =>
 							{
-								log( _id + ' failed autotpl with message ' + _msg );
+								new _log( _id + ' failed autotpl with message ' + _msg );
 							}
 						);
 					}
@@ -58,7 +58,7 @@ class _jig
 
 	postPop( _id )
 	{
-		log( 'postPop' );
+		new _log( 'postPop' );
 		$( ('#' + _id).replace( '##', '#' ) ).find( '.autoload' ).each(
 			( _loadIndex, _loadElem ) =>
 			{
@@ -83,13 +83,13 @@ class _jig
 			}
 		);
 
-		log( 'postPop settoggle' );
-		log( ('#' + _id).replace( '##', '#' ) );
+		new _log( 'postPop settoggle' );
+		new _log( ('#' + _id).replace( '##', '#' ) );
 		$( ('#' + _id).replace( '##', '#' ) ).find( '.autotoggle' ).each(
 			( _toggleIndex, _toggleElem ) =>
 			{
-				log( 'toggling' );
-				log( _toggleElem );
+				new _log( 'toggling' );
+				new _log( _toggleElem );
 				let _toggleId = $( _toggleElem ).attr( 'id' );
 				new _toggle({ elem: '#' + _toggleId }).setToggle();
 			}
@@ -137,8 +137,8 @@ class _jig
 
 		if( '' == _src || 'undefined' == typeof _src )
 		{
-			log( _tplHandle + ' not found' );
-			log( 'src', _src );
+			new _log( _tplHandle + ' not found' );
+			new _log( 'src', _src );
 			return false;
 		}
 

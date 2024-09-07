@@ -13,30 +13,34 @@
 
 class _init
 {
-    #allModules = [
-        'loader',
-        'form',
-        'table',
-        'jig',
-        'toggle',
-        'cal',
-        'api',
-        'auth',
-        'dom',
-        'file',
-        'follow',
-        'growl',
-        'store',
+    #allflares = [
+        '_log',
+        '_dom',
+        '_jig',
+        '_config',
+        '_growl',
+        '_api',
+        '_loader',
+        '_form',
+        '_table',
+        '_toggle',
+        '_cal',
+        '_auth',
+        '_file',
+        '_follow',
+        '_store',
     ];
 
+    #loadedflares = [];
+    
     constructor( _opts = {} )
     {
         let _defaults = { 
-            modules: this.#allModules, 
+            flares: this.#allflares, 
             src: '/flare/js/',
             baseSettingsUrl: '/_setting/get_base_settings', 
             useSky: true,
-            moduleConfigs:
+            flareConfigs:
 			{
                 _api:
 				{
@@ -47,15 +51,30 @@ class _init
         };
 
         this.opts = { ..._defaults, ..._opts };
-        this.loadedModules = new Set();
-        this.setupGlobalConfig();
-		this.loadBaseSettings();
-        this.loadModules();
+        this.loadflares()
+            .then(
+                () =>
+                {
+                    new _log( 'loadflares ended in constructor' );
+                    this.setupGlobalConfig();
+                    this.loadBaseSettings();
+                    this.callAutoFunctions();
+                }
+            )
+            .catch(
+                ( error ) =>
+                {
+                    return Promise.reject( error );
+                }
+            );
+
+        return Promise.resolve();
     }
 
     setupGlobalConfig()
     {
-        _config.init( this.opts.moduleConfigs )
+        console.log( this.#loadedflares );
+        _config.init( this.opts.flareConfigs )
         	    .catch(
 					( error ) =>
 					{
@@ -64,82 +83,103 @@ class _init
 				);
     }
 
-    loadModules()
+    loadflares()
     {
-        return Promise.all(
-			this.opts.modules.map(
-                ( module ) =>
-                {
-                    this.loadModule( module )
-                }
-            )
-            .catch( ( error ) =>
+        console.log( this.#loadedflares );
+        let flares = [];
+        (this.opts.flares).forEach(
+            ( flare ) =>
             {
-                new _log({ msg: 'loadModules failure', publish: 'console.error' });
-                new _log({ msg: error, publish: 'console.error' });
-                return reject( error );
-            })
-		);
+                flares.push(
+                    this.loadflare( flare )
+                    .catch(
+                        function( error )
+                        {
+                            new _log({ msg: 'loadflares failure', publish: 'console.error' });
+                            new _log({ msg: error, publish: 'console.error' });
+                            return Promise.reject( error );
+                        }
+                    )
+                )
+            }
+        );
+
+        return Promise.all(flares);
     }
 
-    loadModule( module )
+    loadflare( flare )
     {
-        if( this.loadedModules.has( module ) )
+        if( (this.#loadedflares).includes( flare ) )
         {
             return Promise.resolve();
         }
 
-        return new Promise( ( resolve, reject ) =>
-        {
-            let script = document.createElement( 'script' );
-            script.src = `${this.opts.src}/${module}.flare.js`;
-
-            script.onload = () =>
+        return new Promise(
+            ( resolve, reject ) =>
             {
-                this.initializeModule( module );
-                resolve();
-            };
+                let script = document.createElement( 'script' );
+                script.src = `${this.opts.src}${flare}.flare.js`;
+                script.async = false;
 
-            script.onerror = ( event ) =>
-            {
-                let errorMsg = `Failed to load module: ${module}`;
-                if( event.error )
+                script.onload = () =>
                 {
-                    errorMsg += `\nError: ${event.error.message}`;
-                    if( event.error.stack )
-                    {
-                        errorMsg += `\nStack: ${event.error.stack}`;
-                    }
-                }
-                reject( new Error( errorMsg ) );
-            };
+                    (this.#loadedflares).push( flare );
+                    resolve();
+                };
 
-            document.head.appendChild( script );
-        });
+                script.onerror = ( event ) =>
+                {
+                    let errorMsg = `Failed to load flare: ${flare}`;
+                    if( event.error )
+                    {
+                        errorMsg += `\nError: ${event.error.message}`;
+                        if( event.error.stack )
+                        {
+                            errorMsg += `\nStack: ${event.error.stack}`;
+                        }
+                    }
+                    reject( new Error( errorMsg ) );
+                };
+
+                document.body.appendChild( script );
+            }
+        );
     }
 
-    initializeModule( module )
+    callAutoFunctions()
     {
-        switch( module )
+        let flareOrder = [ '_loader', '_form', '_table', '_jig', '_toggle', '_cal' ];
+
+        for( let index in flareOrder )
         {
-            case 'loader':
-                new _loader({}).autoload();
-                break;
-            case 'form':
-                new _form({}).autoform();
-                break;
-            case 'table':
-                new _table({}).autotable();
-                break;
-            case 'jig':
-                new _jig({}).autotpl();
-                break;
-            case 'toggle':
-                new _toggle({}).autotoggle();
-                break;
-            case 'cal':
-                new _cal({}).autocal();
-                break;
+            let flare = flareOrder[index];
+            if( !(this.#loadedflares).includes( flare ) )
+            {
+                new _log( flare + ' was not loaded for initialization' );
+                return Promise.reject();
+            }
+
+            switch( flare )
+            {
+                case '_loader':
+                    new _loader({}).autoload();
+                    break;
+                case '_form':
+                    new _form({}).autoform();
+                    break;
+                case '_table':
+                    new _table({}).autotable();
+                    break;
+                case '_jig':
+                    new _jig({}).autotpl();
+                    break;
+                case '_toggle':
+                    new _toggle({}).autotoggle();
+                    break;
+                case '_cal':
+                    new _cal({}).autocal();
+                    break;
+            }
         }
     }
 
@@ -178,13 +218,13 @@ class _init
 }
 
 document.addEventListener( 'DOMContentLoaded', 
-	() =>
+	function()
 	{
 		new _init()
 		.catch(
 			( error ) =>
 			{
-				new _log({ msg: error, publish: 'console.error' }) 
+				console.table( error );
 			}
 		);
 	}, { once: true }

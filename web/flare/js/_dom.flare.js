@@ -15,14 +15,14 @@ class _dom
 {
 	constructor( _opts )
 	{
-		log( '_dom constructor' );
-		log( _opts );
+		new _log( '_dom constructor' );
+		new _log( _opts );
 
 		let _defaults = {};
 		this.opts = { ..._defaults, ..._opts };
 
-		log( '_dom constructor opts' );
-		log( this.opts );
+		new _log( '_dom constructor opts' );
+		new _log( this.opts );
 		return this;
 	}
 
@@ -32,12 +32,12 @@ class _dom
 		let _elem = document.getElementById( _elemId );
 		if( !_elem )
 		{
-			log( 'element not in dom for data retrieval ' + _elemId + ' ' + _attr );
+			new _log( 'element not in dom for data retrieval ' + _elemId + ' ' + _attr );
 			return false;
 		}
 
-		log( 'getData returned' );
-		log( document.getElementById( _elemId ).dataset[_attr] );
+		new _log( 'getData returned' );
+		new _log( document.getElementById( _elemId ).dataset[_attr] );
 
 		return document.getElementById( _elemId ).dataset[_attr];
 	}
@@ -48,12 +48,12 @@ class _dom
 		let _elem = document.getElementById( _elemId );
 		if( !_elem )
 		{
-			log( 'element not in dom for data setting ' + _elemId + ' ' + _attr );
+			new _log( 'element not in dom for data setting ' + _elemId + ' ' + _attr );
 			return false;
 		}
 
-		log( 'setData returned' );
-		log( document.getElementById( _elemId ).dataset );
+		new _log( 'setData returned' );
+		new _log( document.getElementById( _elemId ).dataset );
 		document.getElementById( _elemId ).dataset[_attr] = _val;
 
 		return _val;

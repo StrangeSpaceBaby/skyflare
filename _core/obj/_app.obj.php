@@ -47,7 +47,7 @@ class _app extends _fail
 		}
 
 		$ctlr = new $ctlr_name();
-		$this->log_data([ $ctlr ])->log_msg( 'instantiated ctlr' );
+		$this->log_data([ $ctlr ], FALSE )->log_msg( 'instantiated ctlr' );
 
 		$reflectedMethod = new ReflectionMethod( $ctlr_name, $this->method );
 
@@ -60,7 +60,8 @@ class _app extends _fail
 			$o_safe_map->convert_post_ulids();
 		}
 
-		if( $this->args )
+		$this->log_data( $this->args )->log_msg( 'app obj args' );
+		if( $this->args && !in_array( $this->ctlr, ['_page', '_tpl'] )  )
 		{
 			$this->args = $o_safe_map->convert_get_ulids( $ctlr->get_table_name(), $this->args );
 		}
@@ -135,6 +136,7 @@ class _app extends _fail
 			$this->log_msg( 'SUBDOMAIN_SCOPE TRUE ' . $subdomain );
 		}
 
+		$this->log_data( $uri )->log_msg( 'uri' );
 		$this->ctlr		= array_shift( $uri );
 		$this->method	= array_shift( $uri );
 		
@@ -163,8 +165,6 @@ class _app extends _fail
 
 	private function check_auth() : string
 	{
-		$this->log_msg( 'app->check_auth()' );
-
 		$o_auth = new _auth();
 
 		$token = $o_auth->auth();
@@ -177,7 +177,6 @@ class _app extends _fail
 			$this->token_expires = $token['_auth_token_expires'];
 		}
 
-		$this->log_msg( 'authed: ' . $this->is_authed() );
 		return $this->is_authed();
 	}
 
@@ -185,7 +184,7 @@ class _app extends _fail
 	{
 		$o_public_path = new _public_path();
 		$this->path_access = $o_public_path->is_public_path( $this->requested_path );
-		$this->log_data( $this->path_access )->log_msg( 'public path access' );
+		$this->path_access ?? $this->log_msg( 'public path access' );
 		if( !$this->path_access )
 		{
 			$this->path_access = (new _perm())->verify_path_access( $this->path );
