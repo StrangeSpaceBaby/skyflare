@@ -54,6 +54,12 @@ class _api
 					body: JSON.stringify( this.opts.data )
 				};
 
+				let beforeRequest = _config.get( '_api', 'beforeRequest' );
+				if( beforeRequest && 'function' == typeof beforeRequest )
+				{
+					beforeRequest( this.opts, fetchOptions );
+				}
+	
 				fetch( this.opts.url, fetchOptions )
 				.then(
 					( response ) =>
@@ -86,6 +92,13 @@ class _api
 					( data ) =>
 					{
 						new _log( this.opts.url + ' success' );
+						
+						let afterRequest = _config.get( '_api', 'afterRequest' );
+						if( afterRequest && 'function' == typeof afterRequest )
+						{
+							afterRequest( data, this.opts );
+						}
+
 						return resolve( data );
 					})
 				.catch(

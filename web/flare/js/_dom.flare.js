@@ -13,49 +13,182 @@
 
 class _dom
 {
-	constructor( _opts )
-	{
-		new _log( '_dom constructor' );
-		new _log( _opts );
+    constructor( _opts )
+    {
+        new _log( '_dom constructor' );
+        new _log( _opts );
 
-		let _defaults = {};
-		this.opts = { ..._defaults, ..._opts };
+        let _defaults = {};
+        this.opts = { ..._defaults, ..._opts };
 
-		new _log( '_dom constructor opts' );
-		new _log( this.opts );
-		return this;
-	}
+        new _log( '_dom constructor opts' );
+        new _log( this.opts );
+        return this;
+    }
 
-	static getData( _elemId, _attr )
-	{
-		_elemId = _elemId.replace( '#', '' );
-		let _elem = document.getElementById( _elemId );
-		if( !_elem )
-		{
-			new _log( 'element not in dom for data retrieval ' + _elemId + ' ' + _attr );
-			return false;
-		}
+    static attr( elemId, attrName, value )
+    {
+        let elem = document.querySelector( selector );
 
-		new _log( 'getData returned' );
-		new _log( document.getElementById( _elemId ).dataset[_attr] );
+        if( !elem )
+        {
+            new _log( `Element not found in DOM: ${elemId}` );
+            return null;
+        }
 
-		return document.getElementById( _elemId ).dataset[_attr];
-	}
+        if( !value )
+        {
+            // Get attribute
+            let result = elem.getAttribute( attrName );
+            new _log( `Getting attribute ${attrName} for ${elemId}: ${result}` );
+            return result;
+        }
+        else
+        {
+            // Set attribute
+            elem.setAttribute( attrName, value );
+            new _log( `Setting attribute ${attrName} for ${elemId} to ${value}` );
+            return value;
+        }
+    }
 
-	static setData( _elemId, _attr, _val )
-	{
-		_elemId = _elemId.replace( '#', '' );
-		let _elem = document.getElementById( _elemId );
-		if( !_elem )
-		{
-			new _log( 'element not in dom for data setting ' + _elemId + ' ' + _attr );
-			return false;
-		}
+    static val( elemId, value )
+    {
+        let elem = document.querySelector( selector );
 
-		new _log( 'setData returned' );
-		new _log( document.getElementById( _elemId ).dataset );
-		document.getElementById( _elemId ).dataset[_attr] = _val;
+        if( !elem )
+        {
+            new _log( `Element not found in DOM: ${elemId}` );
+            return null;
+        }
 
-		return _val;
-	}
+        if( 'undefined' === typeof value )
+        {
+            // Get value
+            let result = elem.value;
+            new _log( `Getting value for ${elemId}: ${result}` );
+            return result;
+        }
+        else
+        {
+            // Set value
+            elem.value = value;
+            new _log( `Setting value for ${elemId} to ${value}` );
+            return value;
+        }
+    }
+
+    static elem( selector )
+    {
+        return document.querySelector( selector );
+    }
+
+    static elemAll( selector )
+    {
+        let elements = Array.from( document.querySelectorAll( selector ) );
+        if( !elements.length )
+        {
+            new _log( `No elements found for selector: ${selector}` );
+            return this._chainableMethods( [] );
+        }
+        return this._chainableMethods( elements );
+    }
+
+    static empty( selector )
+    {
+        let elements = this.elem( selector ).elements;
+        elements.forEach(
+            ( elem ) =>
+            {
+                let tagName = elem.tagName.toLowerCase();
+                if( 'select' == tagName )
+                {
+                    elem.options.length = 0;
+                }
+                else if( 'textarea' == tagName )
+                {
+                    elem.value = '';
+                }
+                else if( 'input' != tagName )
+                {
+                    elem.innerHTML = '';
+                }
+            }
+        );
+        new _log( `Emptied elements matching: ${selector}` );
+        return true;
+    }
+
+    static _chainableMethods( elements )
+    {
+        return {
+            not: ( notSelector ) =>
+            {
+                elements = elements.filter(
+                    ( elem ) =>
+                    {
+                        return !elem.matches( notSelector );
+                    }
+                );
+                return this._chainableMethods( elements );
+            },
+            elements: elements
+        };
+    }
+
+    static hasClass( selector, className )
+    {
+        let element = this.elem( selector ).elements[0];
+        if( !element )
+        {
+            return false;
+        }
+        return element.classList.contains( className );
+    }
+
+    static addClass( selector, className )
+    {
+        let elements = this.elem( selector ).elements;
+        elements.forEach(
+            ( element ) =>
+            {
+                if( !this.hasClass( selector, className ) )
+                {
+                    element.classList.add( className );
+                }
+            }
+        );
+
+        return true;
+    }
+
+    static removeClass( selector, className )
+    {
+        let elements = this.elem( selector ).elements;
+        elements.forEach(
+            ( element ) =>
+            {
+                if( this.hasClass( selector, className ) )
+                {
+                    element.classList.remove( className );
+                }
+            }
+        );
+
+        return true;
+    }
+
+    static toggleClass( selector, className )
+    {
+        if( this.hasClass( selector, className ) )
+        {
+            this.removeClass( selector, className );
+        }
+        else
+        {
+            this.addClass( selector, className );
+        }
+
+		return true;
+    }
 }
