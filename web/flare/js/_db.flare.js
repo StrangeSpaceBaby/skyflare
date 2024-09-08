@@ -13,156 +13,279 @@
 
 class _db
 {
-	constructor( _opts )
-	{
-		// Should have a database name at the minimum
-		log( '_db constructor' );
-		log( _opts );
+    constructor( _opts = {} )
+    {
+        let _defaults = {
+            dbName: _config.get( '_db', 'dbName' ) ?? 'FlareDB',
+            storeName: _config.get( '_db', 'storeName' ) ?? 'FlareStore',
+            version: _config.get( '_db', 'version' ) ?? 1,
+            schemaUrl: _config.get( '_db', 'schemaUrl' ) ?? '/api/db-schema'
+        };
 
-		let _defaults = { dbname: null, dbversion: 1, key:{ keyPath: 'id', autoIncrement: true }, store: null, data: {}  };
-		this.opts = { ..._defaults, ..._opts };
+        this.opts = { ..._defaults, ..._opts };
+        this.db = null;
+        this.schemaConfig = null;
+    }
 
-		log( '_db constructor opts' );
-		log( this.opts );
-
-		this.connect();
-	}
-
-	get_by_key( _value )
-	{
-		let _result = this._store.get( _value );
-		log( '_db ' + this.opts.dbname + ' get_by_key ' + _value );
-		return new Promise(
+    #fetchSchema()
+    {
+		let $this = this;
+        return new Promise(
 			( _resolve, _reject ) =>
 			{
-				if( _result )
+				new _api({ url: $this.opts.schemaUrl })
+				.poll()
+				.then( ( response ) =>
 				{
-					return _resolve( _result );
-				}
+					let schema = JSON.parse( response );
+					if( !schema[$this.opts.version] )
+					{
+						return _reject( new Error( `No schema definition found for version ${$this.opts.version}` ) );
+					}
 
-				return _reject( 'some error occurred get_by_key' );
+					return _resolve( response );
+				});
+			}
+		); 
+    }
+
+    #open()
+    {
+		let $this = this;
+        return new Promise(
+			( _resolve, _reject ) =>
+			{
+				let request = indexedDB.open( $this.opts.dbName, $this.opts.version );
+
+				request.onupgradeneeded = 
+				( event ) =>
+				{
+					$this.#fetchSchema()
+					.then(
+						( schema ) =>
+						{
+							let db = event.target.result;
+							let transaction = event.target.transaction;
+							let oldVersion = event.oldVersion;
+		
+							for ( let version = oldVersion + 1; version <= $this.opts.version; version++ )
+							{
+								if( schema[version] )
+								{
+									schema[version].forEach(
+										( update ) =>
+										{
+											$this.#applySchemaUpdate( db, transaction, update )
+											.catch(
+												( error ) =>
+												{
+													return _reject( error );
+												}
+											);
+										}
+									);
+								}
+							}
+
+							return _resolve( `${$this.opts.dbName} updated from version ${event.oldVersion} to ${$this.opts.version}` );
+						}
+					)
+					.catch(
+						( error ) =>
+						{
+							return _reject( error );
+						}
+					);
+				};
+
+				request.onsuccess = 
+				( event ) =>
+				{
+					$this.db = event.target.result;
+					_resolve( $this.db );
+				};
+
+				request.onerror = 
+				( event ) =>
+				{
+					_reject( `Database error: ${event.target.error}` );
+				};
 			}
 		);
-	}
+    }
 
-	insert( _key, _value )
-	{
-		let $this = this;
-		log( '_db insert ' + _key );
-		log( $this );
+    #applySchemaUpdate( db, transaction, update )
+    {
 		return new Promise(
 			( _resolve, _reject ) =>
 			{
-				if( !$this.opts.data )
+				switch ( update.action )
 				{
-					return _reject( 'No data supplied to insert' );
+					case 'createStore':
+						db.createObjectStore( update.store, update.options );
+						break;
+					case 'deleteStore':
+						db.deleteObjectStore( update.store );
+						break;
+					case 'createIndex':
+						let store = transaction.objectStore( update.store );
+						store.createIndex( update.index, update.keyPath, update.options );
+						break;
+					case 'deleteIndex':
+						store = transaction.objectStore( update.store );
+						store.deleteIndex( update.index );
+						break;
+					default:
+						console.warn( `Unknown schema update action: ${update.action}` );
+						return _reject( new Error( `Unknown schema update action: ${update.action}` ) );
 				}
 
-				let _insert = $this._store.put( _key, _value );
-				_insert.onerror =
-				function()
-				{
-					return _reject( _insert.error.name );
-				}
-
-				_insert.onsuccess =
-				function()
-				{
-					return _resolve( 'object inserted' );
-				}
-
+				return _resolve( `${update.action} performed` );
 			}
 		)
-	}
+    }
 
-	connect()
-	{
-		let $this = this;
-		return new Promise(
-			( _resolve, _reject ) =>
-			{
-				let _dbRequest = indexedDB.open( $this.opts.dbname, $this.opts.dbversion );
+    #close()
+    {
+        if( this.db )
+        {
+            this.db.close();
+            this.db = null;
+        }
+    }
 
-				_dbRequest.onupgradeneeded =
-				function( _event )
-				{
-					// triggers if client has no database
-					// initialize db
-					// Need more logic for updates from the api for struct changes
-					let _db = _dbRequest.result;
-					switch( _event.oldVersion )
-					{
-						case 0:
-							// initialize
-							_db.createObjectStore( $this.opts.dbname, { keyPath: $this.opts.key.keyPath, autoIncrement: $this.opts.keyautoIncrement });
-						case 1:
-							// Update db
-					}
-				};
+    save( data, key = null )
+    {
+        return this.#open()
+            .then( () =>
+            {
+                return new Promise( ( resolve, reject ) =>
+                {
+                    let transaction = this.db.transaction([this.opts.storeName], 'readwrite');
+                    let store = transaction.objectStore( this.opts.storeName );
+                    let request = key ? store.put( data, key ) : store.put( data );
 
-				_dbRequest.onerror =
-				function()
-				{
-					log( '_db connect error' );
-					log( _dbRequest.error );
-					return _reject( _dbRequest.error );
-				};
+                    request.onerror = 
+                    () =>
+                    {
+                        reject( request.error );
+                    };
+                    request.onsuccess = 
+                    () =>
+                    {
+                        resolve( request.result );
+                    };
+                });
+            })
+			.catch( ( error ) => { return reject( error ) } )
+            .finally( () => this.#close() );
+    }
 
-				_dbRequest.onsuccess =
-				function()
-				{
-					let _db = _dbRequest.result;
-					_db.onversionchange =
-					function()
-					{
-						_db.close();
-						alert( 'Your local information is outdated.  Please save any work and refresh the page.' );
-						return _reject( 'Database outdated. Please refresh.' );
-					}
+    select( key )
+    {
+        return this.#open()
+            .then( () =>
+            {
+                return new Promise( ( resolve, reject ) =>
+                {
+                    let transaction = this.db.transaction([this.opts.storeName], 'readonly');
+                    let store = transaction.objectStore( this.opts.storeName );
+                    let request = store.get( key );
 
-					$this._db = _db;
-					return _resolve( $this.setTransaction() );
-				};
+                    request.onerror = 
+                    () =>
+                    {
+                        reject( request.error );
+                    };
+                    request.onsuccess = 
+                    () =>
+                    {
+                        resolve( request.result );
+                    };
+                });
+            })
+			.catch( ( error ) => { return reject( error ) } )
+            .finally( () => this.#close() );
+    }
 
-				_dbRequest.onblocked =
-				function()
-				{
-					// This means there is another open connection to the same db and it wasn't properly closed after onversionchange
-					alert( 'Please close all other tabs you have open and refresh this page.' );
-					return _reject( 'Database blocked' );
-				}
-			}
-		);
-	}
+    deleteFrom( key )
+    {
+        return this.#open()
+            .then( () =>
+            {
+                return new Promise( ( resolve, reject ) =>
+                {
+                    let transaction = this.db.transaction([this.opts.storeName], 'readwrite');
+                    let store = transaction.objectStore( this.opts.storeName );
+                    let request = store.delete( key );
 
-	setTransaction()
-	{
-		this._xaction = this._db.transaction( this.opts.store, "readwrite" );
-		this._store = this._xaction.objectStore( this.opts.store );
+                    request.onerror = 
+                    () =>
+                    {
+                        reject( request.error );
+                    };
+                    request.onsuccess = 
+                    () =>
+                    {
+                        resolve();
+                    };
+                });
+            })
+			.catch( ( error ) => { return reject( error ) } )
+            .finally( () => this.#close() );
+    }
 
-		return this;
-	}
+    clear()
+    {
+        return this.#open()
+            .then( () =>
+            {
+                return new Promise( ( resolve, reject ) =>
+                {
+                    let transaction = this.db.transaction([this.opts.storeName], 'readwrite');
+                    let store = transaction.objectStore( this.opts.storeName );
+                    let request = store.clear();
 
-	deleteDB()
-	{
-		let $this = this;
-		return new Promise(
-			( _resolve, _reject ) =>
-			{
-				let _deleteRequest = indexedDB.deleteDatabase( $this.opts.dbname );
+                    request.onerror = 
+                    () =>
+                    {
+                        reject( request.error );
+                    };
+                    request.onsuccess = 
+                    () =>
+                    {
+                        resolve();
+                    };
+                });
+            })
+			.catch( ( error ) => { return reject( error ) } )
+            .finally( () => this.#close() );
+    }
 
-				_deleteRequest.onsuccess =
-				function()
-				{
-					return _resolve( 'Database deleted' );
-				}
+    getAll()
+    {
+        return this.#open()
+            .then( () =>
+            {
+                return new Promise( ( resolve, reject ) =>
+                {
+                    let transaction = this.db.transaction([this.opts.storeName], 'readonly');
+                    let store = transaction.objectStore( this.opts.storeName );
+                    let request = store.getAll();
 
-				_deleteRequest.onerror =
-				function()
-				{
-					return _reject( 'Database not deleted' );
-				}
-			}
-		);
-	}
+                    request.onerror = 
+                    () =>
+                    {
+                        reject( request.error );
+                    };
+                    request.onsuccess = 
+                    () =>
+                    {
+                        resolve( request.result );
+                    };
+                });
+            })
+			.catch( ( error ) => { return reject( error ) } )
+            .finally( () => this.#close() );
+    }
 }
