@@ -29,7 +29,7 @@ class _admin extends _obj
 		if( !$curr_table )
 		{
 			p( 'creating table in db: ' . $table );
-			$create_table_tpl = file_get_contents( ADMIN . "tpl/create_table.tpl" );
+			$create_table_tpl = file_get_contents( ADMIN . "tpl/create_table.sql" );
 			$create_table_sql = str_replace( '~~table~~', $table, $create_table_tpl );
 
 			$sth = $this->query( $create_table_sql );
@@ -96,7 +96,7 @@ class _admin extends _obj
 
 		$obj['_admin_obj_valid_form'] = 1;
 
-		$exclude_cruds = [ '_auth_token', '_mem_auth', '_mem_reset', '_country', '_state', '_tz', '_follow' ];
+		$exclude_cruds = [ '_auth_token', '_mem_auth', '_mem_reset', '_country', '_state', '_tz' ];
 		print "Crud files for $table\n";
 		if( !in_array( $table, $exclude_cruds ) )
 		{
@@ -129,8 +129,8 @@ class _admin extends _obj
 
 		if( !file_exists( $filename ) )
 		{
-			$obj_tpl = file_get_contents( ADMIN . "tpl/obj.data.tpl" );
-			print "\n\nOBJ DATA TPL: " . ADMIN . "tpl/obj.data.tpl" . "\n";
+			$obj_tpl = file_get_contents( ADMIN . "tpl/obj.data.php" );
+			print "\n\nOBJ DATA TPL: " . ADMIN . "tpl/obj.data.php" . "\n";
 
 			$columns = $this->explain_table( $table, TRUE ); // force refresh of table definitions just in case
 			if( !$columns )
@@ -273,7 +273,7 @@ class _admin extends _obj
 		p( $filename . "\n" );
 		if( !file_exists( $filename ) )
 		{
-			$ctlr_tpl = file_get_contents( ADMIN . "tpl/ctlr.tpl" );
+			$ctlr_tpl = file_get_contents( ADMIN . "tpl/ctlr.php" );
 			$fh = fopen( $filename, 'w' );
 			fwrite( $fh, str_replace( '~~ctlr~~', $ctlr, $ctlr_tpl ) );
 			fclose( $fh );
@@ -305,8 +305,8 @@ class _admin extends _obj
 		p( $filename );
 		if( !file_exists( $filename ) )
 		{
-			$obj_tpl = file_get_contents( ADMIN . "tpl/obj.tpl" );
-			print "\n\nOBJ TPL: " . ADMIN . "tpl/obj.tpl" . "\n";
+			$obj_tpl = file_get_contents( ADMIN . "tpl/obj.php" );
+			print "\n\nOBJ TPL: " . ADMIN . "tpl/obj.php" . "\n";
 			if( !$obj_tpl )
 			{
 				print "NO OBJ TEMPLATE FOUND";
@@ -350,8 +350,8 @@ class _admin extends _obj
 
 		if( !file_exists( $page_file ) )
 		{
-			$page_tpl = file_get_contents( ADMIN . "tpl/page.tpl" );
-			print "\n\nPAGE TPL: " . ADMIN . "tpl/page.tpl" . "\n";
+			$page_tpl = file_get_contents( ADMIN . "tpl/page.php" );
+			print "\n\nPAGE TPL: " . ADMIN . "tpl/page.php" . "\n";
 			if( !$page_tpl )
 			{
 				print "NO PAGE TEMPLATE FOUND";
@@ -402,8 +402,8 @@ class _admin extends _obj
 
 		if( !file_exists( $save_modal ) )
 		{
-			$save_tpl = file_get_contents( ADMIN . "/tpl/modal.save.tpl" );
-			print "\n\nSAVE TPL: " . ADMIN . "/tpl/save.tpl" . "\n";
+			$save_tpl = file_get_contents( ADMIN . "/tpl/modal.save.html" );
+			print "\n\nSAVE TPL: " . ADMIN . "/tpl/save.html" . "\n";
 			p( $save_tpl );
 			if( !$save_tpl )
 			{
@@ -564,7 +564,7 @@ class _admin extends _obj
 			$this->create_entity( $table );
 		}
 
-		header( 'HTTP/1.1 200 Awareness attained.' );
+		header( 'HTTP/1.1 200 Entities auto-created.' );
 		exit;
 	}
 }

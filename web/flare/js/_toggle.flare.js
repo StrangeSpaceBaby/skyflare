@@ -34,7 +34,7 @@ class _toggle
 			function( _index, _elem )
 			{
 				let _id = $( _elem ).prop( 'id' );
-				_dom.setData( _id, 'state', 0 );
+				_dom.setData( _id, 'flare-toggle-state', 0 );
 				new _toggle({ elem: _id }).setToggle();
 			}
 		)
@@ -46,7 +46,7 @@ class _toggle
 			function( _index, _elem )
 			{
 				let _id = $( _elem ).prop( 'id' );
-				_dom.setData( _id, 'state', 1 );
+				_dom.setData( _id, 'flare-toggle-state', 1 );
 				new _toggle({ elem: _id }).setToggle();
 			}
 		)
@@ -60,7 +60,7 @@ class _toggle
 				$( '.autotoggle' ).each(
 					function( _index, _elem )
 					{
-						new _toggle({ elem: $( _elem ).prop( 'id' ) }).setToggle();
+						new _toggle({ elem: new _dom.attr( _elem, 'id' ) }).setToggle();
 					}
 				)
 
@@ -75,8 +75,8 @@ class _toggle
 		return new Promise(
 			( _success, _fail ) =>
 			{
-				let _id = $( $this.opts.elem ).attr( 'id' );
-				let _state = $( ('#' + _id).replace( '##', '#' ) ).attr( 'data-state' );
+				let _id = new _dom.attr( $this.opts.elem, 'id' );
+				let _state = new _dom.attr( ('#' + _id).replace( '##', '#' ), 'flare-toggle-state' );
 				if( 'undefined' !== typeof _state )
 				{
 					if( ( 'boolean' === typeof _state && _state ) || 1 == _state )
@@ -103,7 +103,7 @@ class _toggle
 	switch()
 	{
 		let _elem = this.opts.elem;
-		let _toggleState = $( _elem ).data( 'state' );
+		let _toggleState = new _dom.attr( _elem, 'flare-toggle-state' );
 
 		if( 'undefined' != typeof _toggleState )
 		{
@@ -130,11 +130,12 @@ class _toggle
 			return this;
 		}
 
-		let _toggleOnClass = $( _elem ).data( 'toggle-on-class' );
-		let _toggleOffClass = $( _elem ).data( 'toggle-off-class' );
+		let _toggleOnClass = new _dom.attr( _elem, 'flare-toggle-on-class' );
+		let _toggleOffClass = new _dom.attr( _elem, 'flare-toggle-off-class' );
 
-		$( _elem ).removeClass( _toggleOffClass ).addClass( _toggleOnClass );
-		document.getElementById( _elem.substr( 1 ) ).setAttribute( 'data-state', 1 );
+		new _dom.removeClass( _elem, _toggleOffClass );
+		new _dom.addClass( _elem, _toggleOnClass );
+		new _dom.attr( _elem.substr( 1 ), 'flare-toggle-state', 1 );
 
 		return this;
 	}
@@ -147,11 +148,12 @@ class _toggle
 			return this;
 		}
 
-		let _toggleOnClass = $( _elem ).data( 'toggle-on-class' );
-		let _toggleOffClass = $( _elem ).data( 'toggle-off-class' );
+		let _toggleOnClass = new _dom.attr( _elem, 'flare-toggle-on-class' );
+		let _toggleOffClass = new _dom.attr( _elem, 'flare-toggle-off-class' );
 
-		$( _elem ).removeClass( _toggleOnClass ).addClass( _toggleOffClass );
-		document.getElementById( _elem.substr( 1 ) ).setAttribute( 'data-state', 0 );
+		new _dom.removeClass( _elem, _toggleOnClass );
+		new _dom.addClass( _elem, _toggleOffClass );
+		new _dom.attr( _elem.substr( 1 ), 'flare-toggle-state', 0 );
 
 		return this;
 	}

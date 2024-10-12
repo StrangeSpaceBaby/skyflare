@@ -42,18 +42,18 @@ class _file
 		return new Promise(
 			( _resolve, _reject ) =>
 			{
-				log( 'file read' );
-				log( _element );
+				new _log( 'file read' );
+				new _log( _element );
 
 				let _file = $( _element ).prop( 'files' )[0];
-				log( _file );
+				new _log( _file );
 				let $this = this;
 				// @TODO This will later need to grab the user's pricing tier and get the limit
 				// 1 meg limit
 				if( 1000000 < _file.size ) // one megabyte limit
 				{
-					growl( 'file_too_big', { type: 'danger' });
-					log( 'file_too_big' );
+					new _growl( 'file_too_big', { type: 'danger' });
+					new _log( 'file_too_big' );
 					return _reject( 'file_too_big' );
 				}
 
@@ -63,15 +63,15 @@ class _file
 					function()
 					{
 						let _result = _reader.result;
-						log( 'file result' );
-						log( _result );
+						new _log( 'file result' );
+						new _log( _result );
 						$( '#doc_details_display' ).html( '<div class="col">' + _file.name + '</div><div class="col">' + $this.formatBytes( _file.size ) + '</div>' );
 
 						return _resolve( _result );
 					};
 
 				let _dataUrl = _reader.readAsDataURL( $( _element ).prop( 'files' )[0] );
-				log( _dataUrl );
+				new _log( _dataUrl );
 			}
 		);
 	}

@@ -1,5 +1,5 @@
 /*
- * _db.js - Manages interactions with an IndexDB database
+ * _db.js - Manages interactions with an IndexedDB database
  * 
  * Copyright (c) 2024 Greg Strange
  * 

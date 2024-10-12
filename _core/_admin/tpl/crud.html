@@ -17,11 +17,11 @@
 						</div>
 						<div id="~~crud~~_list"
 							class="list-group col-12 autoload ~~crud~~_list"
-							data-src="/~~crud~~/list"
-							data-populate="~~crud~~_list"
-							data-tpl="~~crud~~_list_tpl"
-							data-when-empty="<div class='list-group-item'>No ~~crud~~ to display</div>"
-							>
+							flare-src="/~~crud~~/list"
+							flare-populate="~~crud~~_list"
+							flare-tpl="~~crud~~_list_tpl"
+							flare-when-empty="<div class='list-group-item'>No ~~crud~~ to display</div>"
+						>
 							<div class="list-group-item list-group-header keep">
 								<div class="row">
 									~~crud_header~~
@@ -42,7 +42,7 @@
 													.then(
 														() =>
 														{
-															new _api({ url: '/~~crud~~/fetch/~~~~crud~~_id~~' })
+															new _api({ url: '/~~crud~~/fetch/~~crud~~_id~~' })
 															.poll()
 															.then(
 																function( _ret )
@@ -65,7 +65,7 @@
 													onClick="
 														if( confirm( 'Are you sure you want to delete?' ) )
 														{
-															new _api({ url: '/~~crud~~/delete/~~~~crud~~_id~~' })
+															new _api({ url: '/~~crud~~/delete/~~crud~~_id~~' })
 																.poll()
 																.then(
 																	() =>
@@ -88,6 +88,6 @@
 	</div>
 </body>
 
-<div id="save_~~crud~~_modal_tpl" class="autotpl" data-tpl="modal/~~crud~~_save"></div>
+<div id="save_~~crud~~_modal_tpl" class="autotpl" flare-tpl="modal/~~crud~~_save"></div>
 
 ~~include:_master_foot~~

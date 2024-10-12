@@ -31,9 +31,9 @@ class _tab
         new _log( _tab_name );
         new _log( this.opts.tabs_content_elem + ' > ' + this.opts.tab_class );
         new _log( this.opts.tabs_content_elem + ' > #' + _tab_name );
-        $( this.opts.tab_class ).addClass( 'd-none' );
-        $( this.opts.tab_nav_class ).removeClass( 'active' );
-        $( '#' + _tab_name ).removeClass( 'd-none' );
-        $( 'a[href="#' + _tab_name + '"]' ).addClass( 'active' );
+        new _dom.addClass( this.opts.tab_class, 'd-none' );
+        new _dom.removeClass( this.opts.tab_nav_class, 'active' );
+        new _dom.removeClass( '#' + _tab_name, 'd-none' );
+        new _dom.addClass( 'a[href="#' + _tab_name + '"]', 'active' );
     }
 }

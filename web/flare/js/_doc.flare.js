@@ -1,5 +1,5 @@
 /*
- * _admin.js - Manages administrative interface components and interactions
+ * _doc.js - Standardizes managing documents from files
  * 
  * Copyright (c) 2024 Greg Strange
  * 

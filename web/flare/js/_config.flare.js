@@ -15,7 +15,7 @@ class _config
 {
 	static get( module, key )
 	{
-		if (!window.flareConfigData)
+		if( !window.flareConfigData )
 		{
 			new _log({ msg: 'Flare configuration not initialized', publish: 'console.error' });
 			return undefined;
