@@ -1,0 +1,34 @@
+<div id="table_filters_box" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="z-index: 9999 !important; top: 0; position: fixed;box-shadow: 5px 10px #888888;">
+	<div class="modal-dialog" role="document" style="min-width: 20vw;">
+		<div class="modal-content rounded">
+			<div class="modal-header">
+				<h5 class="modal-title">Table Filters</h5>
+				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true"><i class="bi bi-times"></i></span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<ul id="table_filter_col_nav" data-table-id="" class="list-group">
+				</ul>
+			</div>
+			<div class="modal-footer d-flex justify-content-between">
+				<a href="javascript: void(0);" class="btn btn-default" data-bs-dismiss="modal">Close</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<template id="table_filter_col_nav_tpl">
+	<li id="table_filter_~~col~~" class="list-group-item" data-col="~~col~~">
+		<div class="row">
+			<div class="col-2"><input type="checkbox" checked="checked" name="filter_~~col~~" value="~~label~~" onClick="new _table({ table: $( '#table_filter_col_nav' ).data( 'table-id' ) }).filter({ col: '~~col~~', value: '~~label~~' });" /></div>
+			<div class="col-10">~~label~~</div>
+		</div>
+	</li>
+</template>
+
+<template id="table_filter_col_section_nav_tpl">
+	<li id="table_filter_~~section~~" class="list-group-item list-group-header">
+		~~section~~
+	</li>
+</template>

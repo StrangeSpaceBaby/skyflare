@@ -1,0 +1,11 @@
+/*
+	This declaraton allows for templates to be available in the DOM for hydration by keeping it visible off screen
+*/
+
+.autotpl
+{
+	display: block;
+	overflow: hidden;
+	position: absolute;
+	left: -999em;
+}

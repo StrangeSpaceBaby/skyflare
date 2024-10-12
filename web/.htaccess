@@ -1,0 +1,30 @@
+# BROWSER CACHING USING CACHE-CONTROL HEADERS
+<ifModule mod_headers.c>
+	# One year for image and video files
+  	<filesMatch ".(flv|gif|ico|jpg|jpeg|mp4|mpeg|png|svg|swf|webp)$">
+		Header set Cache-Control "max-age=31536000, public"
+  	</filesMatch>
+
+	# One month for JavaScript and PDF files
+  	<filesMatch ".(js|pdf)$">
+		Header set Cache-Control "max-age=2592000, public"
+  	</filesMatch>
+
+	# One week for CSS files
+  	<filesMatch ".(css)$">
+		Header set Cache-Control "max-age=604800, public"
+  	</filesMatch>
+</ifModule>
+
+Options +FollowSymLinks
+
+#Rewrite rules
+RewriteEngine on
+
+# If the request is a file, folder or symlink that exists, serve it up
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.+)$ - [S=1]
+
+# otherwise, serve your index.html app
+RewriteRule ^(.+)$ /index.php?sky_request=$1 [L]

@@ -1,0 +1,12 @@
+{
+
+	"require": {
+		"monolog/monolog": "^2.1",
+		"aws/aws-sdk-php": "^3.154",
+		"guzzlehttp/guzzle": "^7.0",
+		"voku/anti-xss": "^4.1",
+		"robinvdvleuten/ulid": "^5.0",
+		"erichowey/nanp-number-formatter": "^2.0",
+		"wildbit/postmark-php": "^6.0"
+	}
+}

@@ -1,0 +1,81 @@
+<div id="save__mem_addr_box" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal" role="document" style="display: block;">
+		<div class="modal-content rounded">
+			<div class="modal-header">
+				<h5 class="modal-title">Save Address Form</h5>
+			</div>
+			<div class="modal-body">
+				<form id="save__mem_addr_form" method="POST" action="/_mem_addr/save" class="form validate">
+					<div id="save__mem_addr_form_fields">
+						<div class="form-row">
+							<input type="hidden" name="_mem_addr_id" id="save__mem_addr_form__mem_addr_id" value="" class="">
+							<input type="hidden" name="fk__mem_id" id="save__mem_addr_form_fk__mem_id" value="" class="">
+						</div>
+					</div>
+					<div class="form-row">
+						<label for="save__mem_addr_form_fk__cat_addr_id">
+							<a href="javascript:void(0);" onclick="new _loader({}).load( 'save__mem_addr_form_fk__cat_addr_id' );">Address Category</a>
+						</label>
+						<select name="fk__cat_addr_id" id="save__mem_addr_form_fk__cat_addr_id" class="form-control autoload"
+							data-src="/_cat_addr/list"
+							data-tpl="save__mem_addr_form_fk__cat_addr_id_tpl"
+							data-populate="save__mem_addr_form_fk__cat_addr_id"
+							data-when-empty="<option value=''>No address categories to list</option>"
+						>
+							<option value="" class="keep">Select</option>
+						</select>
+						<template id="save__mem_addr_form_fk__cat_addr_id_tpl">
+							<option value="~~_cat_addr_id~~">~~_cat_addr_name~~</option>
+						</template>
+					</div>
+					<div class="form-row">
+						<label for="save__mem_addr_form__mem_addr_street">Street</label>
+						<input type="text" name="_mem_addr_street" id="save__mem_addr_form__mem_addr_street" value="" class="form-control">
+					</div>
+					<div class="form-row">
+						<label for="save__mem_addr_form__mem_addr_street_two">Apt or Suite</label>
+						<input type="text" name="_mem_addr_street_two" id="save__mem_addr_form__mem_addr_street_two" value="" class="form-control">
+					</div>
+					<div class="form-row">
+						<label for="save__mem_addr_form__mem_addr_city">City</label>
+						<input type="text" name="_mem_addr_city" id="save__mem_addr_form__mem_addr_city" value="" class="form-control">
+					</div>
+					<div class="form-row">
+						<label for="save__mem_addr_form_fk__state_id">
+							<a href="javascript:void(0);" onclick="new _loader({}).load( 'save__mem_addr_form_fk__state_id' );">State</a>
+						</label>
+						<select name="fk__state_id" id="save__mem_addr_form_fk__state_id" class="form-control autoload"
+							data-src="/_state/list"
+							data-tpl="save__mem_addr_form_fk__state_id_tpl"
+							data-populate="save__mem_addr_form_fk__state_id"
+							data-when-empty="<option value=''>No states to list</option>"
+						>
+							<option value="" class="keep">Select</option>
+						</select>
+						<template id="save__mem_addr_form_fk__state_id_tpl">
+							<option value="~~_state_id~~">~~_state_name~~ (~~_state_abbrev~~)</option>
+						</template>
+					</div>
+					<div class="form-row">
+						<label for="save__mem_addr_form__mem_addr_postal">Postal Code</label>
+						<input type="text" name="_mem_addr_postal" id="save__mem_addr_form__mem_addr_postal" value="" class="form-control">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer d-flex justify-content-between">
+				<a href="javascript:void(0)" data-bs-dismiss="modal" onClick="new _form({ form_id: '#save__mem_addr_form' }).resetForm();" class="btn btn-default">Cancel</a>
+				<a href="javascript:void(0)"
+					onClick="new _form({ form_id: 'save__mem_addr_form' })
+							.send()
+							.then(
+								function( _ret )
+								{
+									new _form({ form_id: '#save__mem_addr_form' }).resetForm();
+									new _loader({}).load( '._mem_addr_list' );
+									$( '#save__mem_addr_box' ).modal( 'toggle' );
+								}
+							);" class="btn btn-primary">Save</a>
+			</div>
+		</div>
+	</div>
+</div>

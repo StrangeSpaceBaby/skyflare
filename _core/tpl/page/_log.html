@@ -1,0 +1,128 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_log List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-right">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_log_list' }).initTable().then( () => { new _table({ table: '_log_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_log_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_log_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__log_box" onClick="new _form({ form_id: 'save__log_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						</div>
+						<div id="_log_list"
+							class="list-group col-12 autoload _log_list"
+							data-fl-src="/_log/list"
+							data-fl-populate="_log_list"
+							data-fl-tpl="_log_list_tpl"
+							data-fl-when-empty="<div class='list-group-item'>No _log to display</div>"
+							>
+							<div class="list-group-item list-group-header keep">
+								<div class="row">
+									<div class="col" data-col="_log_id" data-col-type="int">_log_id</div>
+<div class="col" data-col="_log_new" data-col-type="timestamp">_log_new</div>
+<div class="col" data-col="_log_edit" data-col-type="timestamp">_log_edit</div>
+<div class="col" data-col="_log_del" data-col-type="timestamp">_log_del</div>
+<div class="col" data-col="_log_arch" data-col-type="timestamp">_log_arch</div>
+<div class="col" data-col="_log_active" data-col-type="tinyint">_log_active</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">fk__co_id</div>
+<div class="col" data-col="fk__mem_id" data-col-type="int">fk__mem_id</div>
+<div class="col" data-col="fk__module_id" data-col-type="int">fk__module_id</div>
+<div class="col" data-col="_log_type" data-col-type="varchar">_log_type</div>
+<div class="col" data-col="_log_obj" data-col-type="varchar">_log_obj</div>
+<div class="col" data-col="_log_obj_id" data-col-type="int">_log_obj_id</div>
+<div class="col" data-col="_log_note" data-col-type="varchar">_log_note</div>
+<div class="col text-center"><i class="fa fa-tools"></i></div>
+								</div>
+							</div>
+						</div>
+						<template id="_log_list_tpl" class="d-none">
+							<div id="_log_~~_log_id~~" class="list-group-item"
+								data-filter-_log_id=~~_log_id~~
+data-filter-_log_new=~~_log_new~~
+data-filter-_log_edit=~~_log_edit~~
+data-filter-_log_del=~~_log_del~~
+data-filter-_log_arch=~~_log_arch~~
+data-filter-_log_active=~~_log_active~~
+data-filter-fk__co_id=~~fk__co_id~~
+data-filter-fk__mem_id=~~fk__mem_id~~
+data-filter-fk__module_id=~~fk__module_id~~
+data-filter-_log_type=~~_log_type~~
+data-filter-_log_obj=~~_log_obj~~
+data-filter-_log_obj_id=~~_log_obj_id~~
+data-filter-_log_note=~~_log_note~~
+								>
+								<div class="row justify-content-between">
+									<div class="col" data-col="_log_id" data-col-type="int">~~_log_id~~</div>
+<div class="col" data-col="_log_new" data-col-type="timestamp">~~_log_new~~</div>
+<div class="col" data-col="_log_edit" data-col-type="timestamp">~~_log_edit~~</div>
+<div class="col" data-col="_log_del" data-col-type="timestamp">~~_log_del~~</div>
+<div class="col" data-col="_log_arch" data-col-type="timestamp">~~_log_arch~~</div>
+<div class="col" data-col="_log_active" data-col-type="tinyint">~~_log_active~~</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">~~fk__co_id~~</div>
+<div class="col" data-col="fk__mem_id" data-col-type="int">~~fk__mem_id~~</div>
+<div class="col" data-col="fk__module_id" data-col-type="int">~~fk__module_id~~</div>
+<div class="col" data-col="_log_type" data-col-type="varchar">~~_log_type~~</div>
+<div class="col" data-col="_log_obj" data-col-type="varchar">~~_log_obj~~</div>
+<div class="col" data-col="_log_obj_id" data-col-type="int">~~_log_obj_id~~</div>
+<div class="col" data-col="_log_note" data-col-type="varchar">~~_log_note~~</div>
+
+									<div class="col">
+										<div class="row">
+											<div class="col d-flex justify-content-between">
+												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__log_box"
+													onClick="
+														new _form({ form_id: 'save__log_form', autoform: true }).autoform()
+														.then(
+															() =>
+															{
+																new _api({ url: '/_log/fetch/~~_log_id~~' })
+																.poll()
+																.then(
+																	function( _ret )
+																	{
+																		if( 1 == _ret.return )
+																		{
+																			new _form({ form_id: 'save__log_form', data: _ret.data }).popForm();
+																		}
+																	}
+																);
+															}
+														);
+													">
+													<i class="bi bi-pencil-fill"></i>
+												</a>
+												<a href="javascript:void(0);"
+													onClick="
+														if( confirm( 'Are you sure you want to delete?' ) )
+														{
+															new _api({ url: '/_log/delete/~~_log_id~~' })
+																.poll()
+																.then(
+																	() =>
+																	{
+																		new _loader({}).load( '#_log_list' );
+																	}
+																);
+														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__log_modal_tpl" class="autotpl" data-fl-tpl="modal/_log_save"></div>
+
+~~include:_master_foot~~

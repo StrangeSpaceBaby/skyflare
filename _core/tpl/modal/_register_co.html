@@ -1,0 +1,75 @@
+<div id="register_co_box" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document" style="">
+		<div class="modal-content">
+			<div class="modal-header bg-light">
+				<h5 class="modal-title">Create An Account</h5>
+			</div>
+			<div class="modal-body">
+				<div class="card-text">
+					<form id="register_co_form" method="POST" action="/_register/register_co" class="form validate content">
+						<div class="form-row">
+							<div class="col-md-6 col-12">
+								<p class="bg-light p-1">We never provide your information to anyone else. We don't send you any marketing emails. We just use this information for account control purposes.</p>
+							</div>
+							<div class="col-md-6 col-12">
+								<div class="form-row">
+								</div>
+								<div class="form-row">
+									<p id="register_co_error_box" class="bg-danger text-light p-1 d-none"></p>
+								</div>
+								<div class="form-row">
+									<div class="form-group col-6">
+										<input type="text" name="_mem_fname" id="register_co__mem_fname" value="" placeholder="First Name" class="form-control required" />
+									</div>
+									<div class="form-group col-6">
+										<input type="text" name="_mem_lname" id="register_co__mem_lname" value="" placeholder="Last Name" class="form-control required" />
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-group col-6">
+										<input type="email" name="_mem_login" id="register_co__mem_login" value="" placeholder="Email" class="form-control required" />
+									</div>
+									<div class="form-group col-6">
+										<input type="email" name="_mem_login_verify" id="register_co__mem_login_verify" value="" placeholder="Enter Email Again" class="form-control required" />
+									</div>
+									<div class="col-12">
+										<small>Please give a valid email address. A link will be sent to you to login.</small>
+									</div>
+								</div>
+								<div class="form-row mt-3">
+									<div class="form-group offset-3">
+										<div class="form-check">
+											<input type="checkbox" class="form-check-input required" name="tos_agree" value="1" />
+											<label class="form-check-label required">I have read the <a href="/page/tos" target="_blank">Terms of Service</a></label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" class="form-check-input required" name="pp_agree" value="1" />
+											<label class="form-check-label required">I have read the <a href="/page/privacy" target="_blank">Privacy Policy</a></label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer justify-content-between d-flex">
+				<a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-default">Close</a>
+				<a href="javascript:void(0);"
+					onClick="new _form({ form_id: 'register_co_form' })
+							.send()
+							.then(
+								function( _ret )
+								{
+									new _growl({ growl: _ret.msg, type: _ret.return ? 'success' : 'error' });
+									if( 1 == _ret.return )
+									{
+										new _form({ form_id: '#register_co_form' }).resetForm();
+										$( '#register_co_box' ).modal( 'toggle' );
+									}
+								}
+							);" class="btn btn-primary">Create Account</a>
+			</div>
+		</div>
+	</div>
+</div>

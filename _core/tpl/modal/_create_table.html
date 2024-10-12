@@ -1,0 +1,49 @@
+<div id="save_obj_box" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-sm" role="document" style="">
+		<div class="modal-content rounded">
+			<div class="modal-header">
+				<h5 class="modal-title">Create Object</h5>
+				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="card-text">
+					<form id="save_obj_form" method="POST" action="/_admin/create_table" class="form validate content">
+						<div class="row">
+							<div class="col-12">
+								<div class="form-group">
+									<input name="_admin_obj_name" id="save_obj__admin_obj_name" class="form-control required" placeholder="Object name" type="text">
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="form-group">
+									<input name="_admin_obj_table" id="save_obj__admin_obj_table" class="form-control" placeholder="Associated Table" type="text">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer justify-content-between d-flex">
+				<div class="col">
+					<a href="javascript:void(0);" data-bs-dismiss="modal">Close</a>
+				</div>
+				<div class="col text-right">
+					<a href="javascript:void(0);"
+						onClick="new _form({ form_id: 'save_obj_form' })
+						.send()
+						.then(
+							function( _ret )
+							{
+								$( '#save_obj_form' )[0].reset();
+								new _loader({}).load( '#objs_list' );
+
+								$( '#save_obj_box' ).modal( 'toggle' );
+							});"
+						class="btn btn-primary">Create</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

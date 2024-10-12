@@ -1,0 +1,73 @@
+<div id="save__mem_box" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal" role="document" style="display: block;">
+		<div class="modal-content rounded">
+			<div class="modal-header">
+				<h5 class="modal-title">Save User</h5>
+			</div>
+			<div class="modal-body">
+				<form id="save__mem_form" method="POST" action="/_co_mem/save" class="form validate">
+					<div id="save__mem_form_fields">
+						<div class="form-row">
+							<input type="hidden" name="_co_mem_id" id="save__mem_form__co_mem_id" value="" class="form-control">
+						</div>
+						<div class="form-row">
+							<label for="save__mem_form_fk__role_id"><a href="#refresh_roles" onClick="new _loader({}).load( 'save__mem_form_fk__role_id' );">Role</a></label>
+							<select name="fk__role_id" id="save__mem_form_fk__role_id" class="form-control required autoload"
+								data-src="/_role/list"
+								data-tpl="save__mem_form_fk__role_id_tpl"
+								data-populate="save__mem_form_fk__role_id"
+							>
+								<option value="" class="keep">Select</option>
+							</select>
+							<template id="save__mem_form_fk__role_id_tpl">
+								<option value="~~_role_id~~">~~_role_name~~</option>
+							</template>
+						</div>
+						<div class="form-row">
+							<label for="save__mem_form__mem_fname">First Name</label>
+							<input type="text" name="_mem_fname" id="save__mem_form__mem_fname" value="" class="form-control required">
+						</div>
+						<div class="form-row">
+							<label for="save__mem_form__mem_lname">Last Name</label>
+							<input type="text" name="_mem_lname" id="save__mem_form__mem_lname" value="" class="form-control required">
+						</div>
+						<div class="form-row">
+							<label for="save__mem_form__mem_email">Email</label>
+							<input type="email" name="_mem_email" id="save__mem_form__mem_email" value="" class="form-control required">
+						</div>
+						<div class="form-row">
+							<label for="save__mem_form__mem_dob">Birthdate</label>
+							<input type="date" name="_mem_dob" id="save__mem_form__mem_dob" value="" class="form-control">
+						</div>
+						<div class="form-row">
+							<label for="save__mem_form__mem_code">User Code</label>
+							<input type="text" name="_mem_code" id="save__mem_form__mem_code" value="" class="form-control" disabled>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer d-flex justify-content-between">
+				<a href="javascript:void(0)" data-bs-dismiss="modal" onClick="new _form({ form_id: '#save__mem_form' }).resetForm();" class="btn btn-default">Cancel</a>
+				<a href="javascript:void(0)"
+					onClick="new _form({ form_id: 'save__mem_form' })
+							.send()
+							.then(
+								function( _ret )
+								{
+									if( 1 == _ret.return )
+									{
+										new _form({ form_id: '#save__mem_form' }).resetForm();
+										new _loader({}).load( '._co_mem_list' );
+										$( '#save__mem_box' ).modal( 'toggle' );
+										growl( _ret.msg, 'success' );
+									}
+									else
+									{
+										growl( _ret.msg, 'error' );
+									}
+								}
+							);" class="btn btn-primary">Save</a>
+			</div>
+		</div>
+	</div>
+</div>

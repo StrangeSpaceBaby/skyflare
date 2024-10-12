@@ -1,0 +1,35 @@
+<div id="table_prefs_box" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="z-index: 9999 !important; top: 0; position: fixed;box-shadow: 5px 10px #888888;">
+	<div class="modal-dialog" role="document" style="min-width: 20vw;">
+		<div class="modal-content rounded">
+			<div class="modal-header">
+				<h5 class="modal-title">Table Preferences</h5>
+				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true"><i class="bi bi-times"></i></span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="alert alert-info">Drag to Reorder</div>
+				<ul id="table_pref_col_nav" data-table-id="" class="list-group">
+				</ul>
+			</div>
+			<div class="modal-footer d-flex justify-content-between">
+				<a href="javascript: void(0);" class="btn btn-default" data-bs-dismiss="modal">Close</a>
+				<a href="javascript: void(0);" class="btn btn-primary" data-bs-dismiss="modal">Save as Default</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<template id="table_pref_col_nav_tpl">
+	<li id="table_pref_~~col~~" class="list-group-item d-flex justify-content-between" data-col="~~col~~">
+		<div><i class="bi bi-grip-vertical fa-fw mr-1 text-primary"></i> ~~label~~</div>
+		<div>
+			<i id="hide_icon_~~col~~" class="bi bi-2x fa-toggle-on hide-icon text-success mr-2"
+			onClick="new _table({}).toggleHiddenCol( '~~col~~' );"
+			data-on="1" data-on-icon="fa-toggle-on" data-off-icon="fa-toggle-off"></i>
+			<i id="sort_icon_~~col~~" class="bi bi-2x fa-sort-circle sort-icon text-primary"
+			onClick="new _table({}).sortCol( '~~col~~' );"
+			data-direction="up" data-default-icon="fa-sort-circle" data-sort-up="fa-sort-circle-up" data-sort-down="fa-sort-circle-down"></i>
+		</div>
+	</li>
+</template>

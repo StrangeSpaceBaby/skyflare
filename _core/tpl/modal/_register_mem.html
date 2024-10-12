@@ -1,0 +1,29 @@
+<div id="register_user_box" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-sm" role="document" style="">
+		<div class="modal-content rounded">
+			<div class="modal-header">
+				<h5 class="modal-title">Register</h5>
+			</div>
+			<div class="modal-body">
+				<div class="card-text">
+					<form id="register_user_form" method="POST" action="/_register/register_mem" class="form validate content">
+						<div class="row">
+							<div class="col-12">
+								<div class="form-group">
+									<input name="_mem_login" id="register_user__mem_login" class="form-control required" placeholder="Your Email" type="email">
+								</div>
+								<div class="form-group">
+									<input name="_mem_password" id="register_user__mem_password" class="form-control required" placeholder="Your Password" type="password">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer justify-content-between d-flex">
+				<a href="javascript:void(0);" data-bs-dismiss="modal">Close</a>
+				<a href="javascript:void(0);" onClick="new _auth({ form_id: 'auth_user_form' }).auth().then( ( _ret ) => { window.location.href = window.location.href } ).catch( ( _ret ) => { log( 'auth died' ); log( _ret ); });" class="btn btn-primary">Login</a>
+			</div>
+		</div>
+	</div>
+</div>

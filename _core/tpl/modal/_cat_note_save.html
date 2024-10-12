@@ -1,0 +1,81 @@
+<div id="save__cat_note_box" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal" role="document" style="display: block;">
+		<div class="modal-content rounded">
+			<div class="modal-header">
+				<h5 class="modal-title">Note Categories</h5>
+			</div>
+			<div class="modal-body">
+				<ul id="_cat_note_list" class="list-group autoload _cat_note_list"
+					data-src="/_cat_note/list"
+					data-tpl="_cat_note_list_tpl"
+					data-populate="_cat_note_list"
+					data-when-empty="<li class='list-group-item'>No categories to list.</li>"
+				>
+				</ul>
+				<template id="_cat_note_list_tpl">
+					<li id="_cat_note_~~_cat_note_id~~" class="list-group-item">
+						<div class="row">
+							<div class="col-md-8 col-6">
+								~~_cat_note_name~~
+							</div>
+							<div class="col-md-4 col-6 d-flex justify-content-between">
+								<a href="javascript:void(0);" onClick="new _api({ url: '/_cat_note/fetch/~~_cat_note_id~~' }).poll().then( ( _ret ) => { if( 1 == _ret.return ) { new _form({ form_id: 'save__cat_note_form', data: _ret.data }).popForm(); } } );"><i class="fad fa-edit"></i></a>
+								<a href="javascript:void(0);"
+									onClick="
+										if( confirm( 'Are you sure you want to delete this category?' ) )
+										{
+											new _api({ url: '/_cat_note/delete/~~_cat_note_id~~' }).poll()
+											.then(
+												( _ret ) =>
+												{
+													if( 1 == _ret.return )
+													{
+														new _loader({}).load( '._cat_note_list' );
+													}
+													else
+													{
+														growl( _ret.msg, 'error' );
+													}
+												}
+											);
+										}
+										"><i class="fad fa-times text-danger"></i></a>
+							</div>
+						</div>
+					</li>
+				</template>
+			</div>
+			<div class="modal-body">
+				<h6>Save Category</h6>
+				<form id="save__cat_note_form" method="POST" action="/_cat_note/save" class="form validate">
+					<input type="hidden" name="_cat_note_id" id="save__cat_note_form__cat_note_id" value="" />
+					<div class="form-row">
+						<label for="save__cat_note_form__cat_note_name">Name</label>
+						<input type="text" name="_cat_note_name" id="save__cat_note_form__cat_note_name" value="" class="form-control" />
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer d-flex justify-content-between">
+				<a href="javascript:void(0)" data-bs-dismiss="modal" onClick="new _form({ form_id: '#save__cat_note_form' }).resetForm();" class="btn btn-default">Close Window</a>
+				<a href="javascript:void(0)" onClick="new _form({ form_id: '#save__cat_note_form' }).resetForm();" class="btn btn-default">Clear</a>
+				<a href="javascript:void(0)"
+					onClick="new _form({ form_id: 'save__cat_note_form' })
+							.send()
+							.then(
+								function( _ret )
+								{
+									if( 1 == _ret.return )
+									{
+										new _form({ form_id: '#save__cat_note_form' }).resetForm();
+										new _loader({}).load( '._cat_note_list' );
+									}
+									else
+									{
+										growl( _ret.msg, 'error' );
+									}
+								}
+							);" class="btn btn-primary">Save</a>
+			</div>
+		</div>
+	</div>
+</div>

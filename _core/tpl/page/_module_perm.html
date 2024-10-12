@@ -1,0 +1,116 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_module_perm List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-right">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_module_perm_list' }).initTable().then( () => { new _table({ table: '_module_perm_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_module_perm_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_module_perm_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__module_perm_box" onClick="new _form({ form_id: 'save__module_perm_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						</div>
+						<div id="_module_perm_list"
+							class="list-group col-12 autoload _module_perm_list"
+							data-fl-src="/_module_perm/list"
+							data-fl-populate="_module_perm_list"
+							data-fl-tpl="_module_perm_list_tpl"
+							data-fl-when-empty="<div class='list-group-item'>No _module_perm to display</div>"
+							>
+							<div class="list-group-item list-group-header keep">
+								<div class="row">
+									<div class="col" data-col="_module_perm_id" data-col-type="int">_module_perm_id</div>
+<div class="col" data-col="_module_perm_new" data-col-type="datetime">_module_perm_new</div>
+<div class="col" data-col="_module_perm_edit" data-col-type="datetime">_module_perm_edit</div>
+<div class="col" data-col="_module_perm_del" data-col-type="datetime">_module_perm_del</div>
+<div class="col" data-col="_module_perm_arch" data-col-type="datetime">_module_perm_arch</div>
+<div class="col" data-col="_module_perm_active" data-col-type="tinyint">_module_perm_active</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">fk__co_id</div>
+<div class="col" data-col="fk__module_id" data-col-type="int">fk__module_id</div>
+<div class="col" data-col="fk__perm_id" data-col-type="int">fk__perm_id</div>
+<div class="col text-center"><i class="fa fa-tools"></i></div>
+								</div>
+							</div>
+						</div>
+						<template id="_module_perm_list_tpl" class="d-none">
+							<div id="_module_perm_~~_module_perm_id~~" class="list-group-item"
+								data-filter-_module_perm_id=~~_module_perm_id~~
+data-filter-_module_perm_new=~~_module_perm_new~~
+data-filter-_module_perm_edit=~~_module_perm_edit~~
+data-filter-_module_perm_del=~~_module_perm_del~~
+data-filter-_module_perm_arch=~~_module_perm_arch~~
+data-filter-_module_perm_active=~~_module_perm_active~~
+data-filter-fk__co_id=~~fk__co_id~~
+data-filter-fk__module_id=~~fk__module_id~~
+data-filter-fk__perm_id=~~fk__perm_id~~
+								>
+								<div class="row justify-content-between">
+									<div class="col" data-col="_module_perm_id" data-col-type="int">~~_module_perm_id~~</div>
+<div class="col" data-col="_module_perm_new" data-col-type="datetime">~~_module_perm_new~~</div>
+<div class="col" data-col="_module_perm_edit" data-col-type="datetime">~~_module_perm_edit~~</div>
+<div class="col" data-col="_module_perm_del" data-col-type="datetime">~~_module_perm_del~~</div>
+<div class="col" data-col="_module_perm_arch" data-col-type="datetime">~~_module_perm_arch~~</div>
+<div class="col" data-col="_module_perm_active" data-col-type="tinyint">~~_module_perm_active~~</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">~~fk__co_id~~</div>
+<div class="col" data-col="fk__module_id" data-col-type="int">~~fk__module_id~~</div>
+<div class="col" data-col="fk__perm_id" data-col-type="int">~~fk__perm_id~~</div>
+
+									<div class="col">
+										<div class="row">
+											<div class="col d-flex justify-content-between">
+												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__module_perm_box"
+													onClick="
+														new _form({ form_id: 'save__module_perm_form', autoform: true }).autoform()
+														.then(
+															() =>
+															{
+																new _api({ url: '/_module_perm/fetch/~~_module_perm_id~~' })
+																.poll()
+																.then(
+																	function( _ret )
+																	{
+																		if( 1 == _ret.return )
+																		{
+																			new _form({ form_id: 'save__module_perm_form', data: _ret.data }).popForm();
+																		}
+																	}
+																);
+															}
+														);
+													">
+													<i class="bi bi-pencil-fill"></i>
+												</a>
+												<a href="javascript:void(0);"
+													onClick="
+														if( confirm( 'Are you sure you want to delete?' ) )
+														{
+															new _api({ url: '/_module_perm/delete/~~_module_perm_id~~' })
+																.poll()
+																.then(
+																	() =>
+																	{
+																		new _loader({}).load( '._module_perm_list' );
+																	}
+																);
+														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__module_perm_modal_tpl" class="autotpl" data-fl-tpl="modal/_module_perm_save"></div>
+
+~~include:_master_foot~~

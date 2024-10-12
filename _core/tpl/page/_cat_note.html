@@ -1,0 +1,116 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_cat_note List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-right">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_cat_note_list' }).initTable().then( () => { new _table({ table: '_cat_note_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_cat_note_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_cat_note_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__cat_note_box" onClick="new _form({ form_id: 'save__cat_note_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						</div>
+						<div id="_cat_note_list"
+							class="list-group col-12 autoload _cat_note_list"
+							data-fl-src="/_cat_note/list"
+							data-fl-populate="_cat_note_list"
+							data-fl-tpl="_cat_note_list_tpl"
+							data-fl-when-empty="<div class='list-group-item'>No _cat_note to display</div>"
+							>
+							<div class="list-group-item list-group-header keep">
+								<div class="row">
+									<div class="col" data-col="_cat_note_id" data-col-type="int">_cat_note_id</div>
+<div class="col" data-col="_cat_note_new" data-col-type="timestamp">_cat_note_new</div>
+<div class="col" data-col="_cat_note_edit" data-col-type="timestamp">_cat_note_edit</div>
+<div class="col" data-col="_cat_note_del" data-col-type="timestamp">_cat_note_del</div>
+<div class="col" data-col="_cat_note_arch" data-col-type="timestamp">_cat_note_arch</div>
+<div class="col" data-col="_cat_note_active" data-col-type="tinyint">_cat_note_active</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">fk__co_id</div>
+<div class="col" data-col="_cat_note_order" data-col-type="smallint">_cat_note_order</div>
+<div class="col" data-col="_cat_note_name" data-col-type="varchar">_cat_note_name</div>
+<div class="col text-center"><i class="fa fa-tools"></i></div>
+								</div>
+							</div>
+						</div>
+						<template id="_cat_note_list_tpl" class="d-none">
+							<div id="_cat_note_~~_cat_note_id~~" class="list-group-item"
+								data-filter-_cat_note_id=~~_cat_note_id~~
+data-filter-_cat_note_new=~~_cat_note_new~~
+data-filter-_cat_note_edit=~~_cat_note_edit~~
+data-filter-_cat_note_del=~~_cat_note_del~~
+data-filter-_cat_note_arch=~~_cat_note_arch~~
+data-filter-_cat_note_active=~~_cat_note_active~~
+data-filter-fk__co_id=~~fk__co_id~~
+data-filter-_cat_note_order=~~_cat_note_order~~
+data-filter-_cat_note_name=~~_cat_note_name~~
+								>
+								<div class="row justify-content-between">
+									<div class="col" data-col="_cat_note_id" data-col-type="int">~~_cat_note_id~~</div>
+<div class="col" data-col="_cat_note_new" data-col-type="timestamp">~~_cat_note_new~~</div>
+<div class="col" data-col="_cat_note_edit" data-col-type="timestamp">~~_cat_note_edit~~</div>
+<div class="col" data-col="_cat_note_del" data-col-type="timestamp">~~_cat_note_del~~</div>
+<div class="col" data-col="_cat_note_arch" data-col-type="timestamp">~~_cat_note_arch~~</div>
+<div class="col" data-col="_cat_note_active" data-col-type="tinyint">~~_cat_note_active~~</div>
+<div class="col" data-col="fk__co_id" data-col-type="int">~~fk__co_id~~</div>
+<div class="col" data-col="_cat_note_order" data-col-type="smallint">~~_cat_note_order~~</div>
+<div class="col" data-col="_cat_note_name" data-col-type="varchar">~~_cat_note_name~~</div>
+
+									<div class="col">
+										<div class="row">
+											<div class="col d-flex justify-content-between">
+												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__cat_note_box"
+													onClick="
+														new _form({ form_id: 'save__cat_note_form', autoform: true }).autoform()
+														.then(
+															() =>
+															{
+																new _api({ url: '/_cat_note/fetch/~~_cat_note_id~~' })
+																.poll()
+																.then(
+																	function( _ret )
+																	{
+																		if( 1 == _ret.return )
+																		{
+																			new _form({ form_id: 'save__cat_note_form', data: _ret.data }).popForm();
+																		}
+																	}
+																);
+															}
+														);
+													">
+													<i class="bi bi-pencil-fill"></i>
+												</a>
+												<a href="javascript:void(0);"
+													onClick="
+														if( confirm( 'Are you sure you want to delete?' ) )
+														{
+															new _api({ url: '/_cat_note/delete/~~_cat_note_id~~' })
+																.poll()
+																.then(
+																	() =>
+																	{
+																		new _loader({}).load( '._cat_note_list' );
+																	}
+																);
+														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__cat_note_modal_tpl" class="autotpl" data-fl-tpl="modal/_cat_note_save"></div>
+
+~~include:_master_foot~~
