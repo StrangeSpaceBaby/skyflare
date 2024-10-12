@@ -33,7 +33,7 @@ class _loader
 					{
 						new _log( 'autoload elem' );
 						new _log( _elem );
-						new _loader({}).load( $( _elem ).prop( 'id' ) );
+						new _loader({}).load( new _dom.attr( _elem, 'id' ) );
 					}
 				)
 
@@ -54,7 +54,7 @@ class _loader
 				{
 					new _log( 'multi-load' );
 					new _log( _elem );
-					$this.load( '#' + $( _elem ).attr( 'id' ) );
+					$this.load( '#' + new _dom.attr( _elem, 'id' ) );
 				}
 			)
 		}
@@ -79,11 +79,11 @@ class _loader
 					}
 
 					let _elem = $( _elemId );
-					let _src = !$this.opts.src ? _elem.attr( 'data-fl-src' ) : $this.opts.src;
+					let _src = !$this.opts.src ? _elem.attr( 'flare-src' ) : $this.opts.src;
 					let _replaces = [];
-					let _tpl = !$this.opts.tpl ? _elem.attr( 'data-fl-tpl' ) : $this.opts.tpl;
-					let _populate = !$this.opts.populate ? _elem.attr( 'data-fl-populate' ) : $this.opts.populate;
-					let _emptyMsg = !$this.opts.when_empty ? _elem.attr( 'data-fl-when-empty' ) : $this.opts.when_empty;
+					let _tpl = !$this.opts.tpl ? _elem.attr( 'flare-tpl' ) : $this.opts.tpl;
+					let _populate = !$this.opts.populate ? _elem.attr( 'flare-populate' ) : $this.opts.populate;
+					let _emptyMsg = !$this.opts.when_empty ? _elem.attr( 'flare-when-empty' ) : $this.opts.when_empty;
 
 					let _hashRegex = /#[a-z\d\-_]+/ig;
 					_replaces = [ ..._src.matchAll( _hashRegex ) ];

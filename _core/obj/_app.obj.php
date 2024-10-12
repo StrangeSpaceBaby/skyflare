@@ -4,11 +4,11 @@ class _app extends _fail
 {
 	protected string $requested_path	= '/page/index';	// default path. Maybe should be set in init
 	protected string $path				= ''; 				// The parsed path for use within sky
-	protected array|bool $path_access	= [];				// Assume not allowed, require postiive access grant
+	protected array|bool $path_access	= [];				// Assume not allowed, require positive access grant
 	protected int|bool $authed__mem_id	= 0;				// The eventually authenticated user
 	protected object $api;
 
-	protected string $ctlr 				= '';				// Requested controller parsed from reqested_path
+	protected string $ctlr 				= '';				// Requested controller parsed from requested_path
 	protected string $method 			= '';				// Controller method parsed from requested_path
 	protected array|string $args 		= '';				// Arguments on the url
 	protected string $token				= '';				// Token as determined by check_auth()

@@ -32,8 +32,8 @@ class _jig
 				$( '.autotpl' ).each(
 					( _index, _elem ) =>
 					{
-						let _id = $( _elem ).attr( 'id' );
-						let _tpl = $( '#' + _id ).attr( 'data-tpl' );
+						let _id = new _dom.attr( _elem, 'id' );
+						let _tpl = new _dom.attr( '#' + _id, 'flare-tpl' );
 						this.fetchTpl( _tpl )
 						.then(
 							( _content ) =>
@@ -126,13 +126,13 @@ class _jig
 		let _data = this.opts.data;
 
 		let _src = '';
-		if( $( 'template#' + _tplHandle ).length )
+		if( new _dom.elem( 'template#' + _tplHandle ).length )
 		{
-			_src = $( 'template#' + _tplHandle ).html();
+			_src = new _dom.elem( 'template#' + _tplHandle ).innerHTML;
 		}
 		else
 		{
-			_src = $( 'div#' + _tplHandle ).html();
+			_src = new _dom.elem( 'div#' + _tplHandle ).innerHTML;
 		}
 
 		if( '' == _src || 'undefined' == typeof _src )
