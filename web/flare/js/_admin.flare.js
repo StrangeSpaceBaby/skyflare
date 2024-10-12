@@ -15,22 +15,22 @@ class _admin
 {
 	constructor( _opts )
 	{
-		log( '_admin constructor' );
-		log( _opts );
+		new _log( '_admin constructor' );
+		new _log( _opts );
 
 		let _defaults = { table: null };
 		this.opts = { ..._defaults, ..._opts };
 
-		log( '_admin constructor opts' );
-		log( this.opts );
+		new _log( '_admin constructor opts' );
+		new _log( this.opts );
 		return this;
 	}
 
 	loadTableOverview()
 	{
-		log( 'loadTableOverview' );
+		new _log( 'loadTableOverview' );
 		let _table = this.opts.table;
-		log( _table );
+		new _log( _table );
 		let _formsList = $( '#generic_forms_list' );
 		let _itemsList = $( '#generic_list' );
 
@@ -38,10 +38,10 @@ class _admin
 		let _header = $( '#generic_header' );
 		_header.empty();
 
-		log( 'formsList' );
-		log( _formsList );
-		log( _formsList.data() );
-		log( 'setting ' + '/_valid_form/forms_by_table/' + _table );
+		new _log( 'formsList' );
+		new _log( _formsList );
+		new _log( _formsList.data() );
+		new _log( 'setting ' + '/_valid_form/forms_by_table/' + _table );
 
 		_formsList.attr( 'data-src', '/_valid_form/forms_by_table/' + _table );
 		_itemsList.attr( 'data-src', '/' + _table + '/list' );
@@ -51,7 +51,7 @@ class _admin
 		new _loader({}).load( '#generic_list' ).then(
 			( _ret ) =>
 			{
-				log( 'loading_generic_list' );
+				new _log( 'loading_generic_list' );
 				let _itemsList = $( '#generic_list' );
 				_itemsList.children().not( '.keep' ).not( 'list-group-item-header' ).empty();
 
@@ -64,8 +64,8 @@ class _admin
 						let _headerBuilt = 0;
 
 						let _item = _ret.data[_i];
-						log( 'load generic item' );
-						log( _item );
+						new _log( 'load generic item' );
+						new _log( _item );
 
 						let _itemId = _item[_table + '_id' ];
 

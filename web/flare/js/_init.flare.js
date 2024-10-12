@@ -13,206 +13,234 @@
 
 class _init
 {
-    #allflares = [
-        '_log',
-        '_dom',
-        '_jig',
-        '_config',
-        '_growl',
-        '_api',
-        '_loader',
-        '_form',
-        '_table',
-        '_toggle',
-        '_cal',
-        '_auth',
-        '_file',
-        '_follow',
-        '_store',
-    ];
+	#allflares = [
+		'_log',
+		'_dom',
+		'_jig',
+		'_config',
+		'_growl',
+		'_api',
+		'_loader',
+		'_form',
+		'_table',
+		'_toggle',
+		'_cal',
+		'_auth',
+		'_file',
+		'_follow',
+		'_store',
+	];
 
-    #loadedflares = [];
-    
-    constructor( _opts = {} )
-    {
-        let _defaults = { 
-            flares: this.#allflares, 
-            src: '/flare/js/',
-            baseSettingsUrl: '/_setting/get_base_settings', 
-            useSky: true,
-            flareConfigs:
+	#loadedflares = [];
+	
+	constructor( _opts = {} )
+	{
+		let _defaults = { 
+			flares: this.#allflares, 
+			src: '/flare/js/',
+			baseSettingsUrl: '/_setting/get_base_settings', 
+			useSky: true,
+			flareConfigs:
 			{
-                _api:
+				flare:
 				{
-                    baseUrl: '/',
-					loader: { selector: '.loader' }
+					useSky: true,
 				},
-            }
-        };
+				_api:
+				{
+					baseUrl: '/',
+					loader: { selector: '.loader' },
+					beforeRequest:
+					function( _opts, _fetchOpts )
+					{
 
-        this.opts = { ..._defaults, ..._opts };
-        this.loadflares()
-            .then(
-                () =>
-                {
-                    new _log( 'loadflares ended in constructor' );
-                    this.setupGlobalConfig();
-                    this.loadBaseSettings();
-                    this.callAutoFunctions();
-                }
-            )
-            .catch(
-                ( error ) =>
-                {
-                    return Promise.reject( error );
-                }
-            );
+					},
+					afterRequest:
+					function( _return, _opts )
+					{
 
-        return Promise.resolve();
-    }
+					}
+				},
+				_db:
+				{
+					version: 1,
+					storeName: 'FlareDB',
+					dbName: 'FlareCache',
+					schemaUrl: '/flare/store/flare_cache.json'
+				},
+				_growl:
+				{
+					growl_container: '#growl_container',
+					growl_tpl: '#growl_tpl'
+				}
+			}
+		};
 
-    setupGlobalConfig()
-    {
-        console.log( this.#loadedflares );
-        _config.init( this.opts.flareConfigs )
-        	    .catch(
+		if( !_opts.useSky )
+		{
+			_defaults.baseSettingsUrl = '';
+		}
+
+		this.opts = { ..._defaults, ..._opts };
+		this.loadflares()
+			.then(
+				() =>
+				{
+					this.setupGlobalConfig();
+					this.loadBaseSettings().catch( ( response ) => { new log({ msg: response, publish: 'console.warn' }) });
+					this.callAutoFunctions();
+				}
+			)
+			.catch(
+				( error ) =>
+				{
+					return Promise.reject( error );
+				}
+			);
+
+		return Promise.resolve();
+	}
+
+	setupGlobalConfig()
+	{
+		_config.init( this.opts.flareConfigs )
+				.catch(
 					( error ) =>
 					{
 						new _log({ msg: error, publish: 'console.error' })
 					}
 				);
-    }
+	}
 
-    loadflares()
-    {
-        console.log( this.#loadedflares );
-        let flares = [];
-        (this.opts.flares).forEach(
-            ( flare ) =>
-            {
-                flares.push(
-                    this.loadflare( flare )
-                    .catch(
-                        function( error )
-                        {
-                            new _log({ msg: 'loadflares failure', publish: 'console.error' });
-                            new _log({ msg: error, publish: 'console.error' });
-                            return Promise.reject( error );
-                        }
-                    )
-                )
-            }
-        );
+	loadflares()
+	{
+		let flares = [];
+		(this.opts.flares).forEach(
+			( flare ) =>
+			{
+				flares.push(
+					this.loadflare( flare )
+					.catch(
+						function( error )
+						{
+							new _log({ msg: 'loadflares failure', publish: 'console.error' });
+							new _log({ msg: error, publish: 'console.error' });
+							return Promise.reject( error );
+						}
+					)
+				)
+			}
+		);
 
-        return Promise.all(flares);
-    }
+		return Promise.all(flares);
+	}
 
-    loadflare( flare )
-    {
-        if( (this.#loadedflares).includes( flare ) )
-        {
-            return Promise.resolve();
-        }
+	loadflare( flare )
+	{
+		if( (this.#loadedflares).includes( flare ) )
+		{
+			return Promise.resolve();
+		}
 
-        return new Promise(
-            ( resolve, reject ) =>
-            {
-                let script = document.createElement( 'script' );
-                script.src = `${this.opts.src}${flare}.flare.js`;
-                script.async = false;
+		return new Promise(
+			( resolve, reject ) =>
+			{
+				let script = document.createElement( 'script' );
+				script.src = `${this.opts.src}${flare}.flare.js`;
+				script.async = false;
 
-                script.onload = () =>
-                {
-                    (this.#loadedflares).push( flare );
-                    resolve();
-                };
+				script.onload = () =>
+				{
+					(this.#loadedflares).push( flare );
+					resolve();
+				};
 
-                script.onerror = ( event ) =>
-                {
-                    let errorMsg = `Failed to load flare: ${flare}`;
-                    if( event.error )
-                    {
-                        errorMsg += `\nError: ${event.error.message}`;
-                        if( event.error.stack )
-                        {
-                            errorMsg += `\nStack: ${event.error.stack}`;
-                        }
-                    }
-                    reject( new Error( errorMsg ) );
-                };
+				script.onerror = ( event ) =>
+				{
+					let errorMsg = `Failed to load flare: ${flare}`;
+					if( event.error )
+					{
+						errorMsg += `\nError: ${event.error.message}`;
+						if( event.error.stack )
+						{
+							errorMsg += `\nStack: ${event.error.stack}`;
+						}
+					}
+					reject( new Error( errorMsg ) );
+				};
 
-                document.body.appendChild( script );
-            }
-        );
-    }
+				document.body.appendChild( script );
+			}
+		);
+	}
 
-    callAutoFunctions()
-    {
-        let flareOrder = [ '_loader', '_form', '_table', '_jig', '_toggle', '_cal' ];
+	callAutoFunctions()
+	{
+		let flareOrder = [ '_loader', '_form', '_table', '_jig', '_toggle', '_cal' ];
 
-        for( let index in flareOrder )
-        {
-            let flare = flareOrder[index];
-            if( !(this.#loadedflares).includes( flare ) )
-            {
-                new _log( flare + ' was not loaded for initialization' );
-                return Promise.reject();
-            }
+		for( let index in flareOrder )
+		{
+			let flare = flareOrder[index];
+			if( !(this.#loadedflares).includes( flare ) )
+			{
+				new _log( flare + ' was not loaded for initialization' );
+				return Promise.reject();
+			}
 
-            switch( flare )
-            {
-                case '_loader':
-                    new _loader({}).autoload();
-                    break;
-                case '_form':
-                    new _form({}).autoform();
-                    break;
-                case '_table':
-                    new _table({}).autotable();
-                    break;
-                case '_jig':
-                    new _jig({}).autotpl();
-                    break;
-                case '_toggle':
-                    new _toggle({}).autotoggle();
-                    break;
-                case '_cal':
-                    new _cal({}).autocal();
-                    break;
-            }
-        }
-    }
+			switch( flare )
+			{
+				case '_loader':
+					new _loader({}).autoload();
+					break;
+				case '_form':
+					new _form({}).autoform();
+					break;
+				case '_table':
+					new _table({}).autotable();
+					break;
+				case '_jig':
+					new _jig({}).autotpl();
+					break;
+				case '_toggle':
+					new _toggle({}).autotoggle();
+					break;
+				case '_cal':
+					new _cal({}).autocal();
+					break;
+			}
+		}
+	}
 
-    loadBaseSettings()
-    {
-        if( !this.opts.useSky && !this.opts.baseSettingsUrl )
-        {
-            return Promise.reject( 'Base settings URL not set for non-Sky backend' );
-        }
+	loadBaseSettings()
+	{
+		if( !this.opts.useSky && !this.opts.baseSettingsUrl )
+		{
+			return Promise.reject( 'Flare: base settings URL not set for non-Sky backend' );
+		}
 
-        return new _api({ url: this.opts.baseSettingsUrl })
-            .poll()
-            .then( ( _response ) =>
-            {
-                new _store().put( 'base_settings', _response );
-                for( let _key in _response )
-                {
-                    document.querySelectorAll( `.${_key}` ).forEach(
+		return new _api({ url: this.opts.baseSettingsUrl })
+			.poll()
+			.then( ( _response ) =>
+			{
+				new _store().put( 'base_settings', _response );
+				for( let _key in _response )
+				{
+					document.querySelectorAll( `.${_key}` ).forEach(
 						( elem, index ) => 
-                    	{
-                        	elem.textContent = _response[_key];
-                        	elem.value = _response[_key];
-                    	}
+						{
+							elem.textContent = _response[_key];
+							elem.value = _response[_key];
+						}
 					);
-                }
+				}
 
-                return Promise.resolve();
-            })
-            .catch( ( _error ) =>
-            {
-                new _log({ msg: 'Base settings failure', publish: 'console.error' });
-                new _log({ msg: _error, publish: 'console.table' });
-                return Promise.reject( _error );
-            });
-    }
+				return Promise.resolve();
+			})
+			.catch( ( _error ) =>
+			{
+				new _log({ msg: 'Base settings failure', publish: 'console.error' });
+				new _log({ msg: _error, publish: 'console.table' });
+				return Promise.reject( _error );
+			});
+	}
 }
