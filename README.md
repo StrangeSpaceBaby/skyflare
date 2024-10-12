@@ -11,4 +11,4 @@ SkyFlare was built with a few specific use cases in mind.
 * As a modern API layer for legacy applications with minimal changes to legacy code that may not be conducive to modern web development
 * Backend and frontend components agnostic of each other but intended to work together
 
-Check out the documentation in progress [here](https://github.com/StrangeSpaceBaby/skyflare/wiki)
+Check out the documentation in progress [here](https://getskyflare.com)
