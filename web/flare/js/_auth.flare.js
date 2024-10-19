@@ -56,7 +56,7 @@ class _auth
 				let _data = {};
 				if( $this.opts.form_id )
 				{
-					_data = new _form({ form_id: $this.opts.form_id }).getFormData();
+					_data = new _dom.getFormData( $this.opts.form_id );
 				}
 				else
 				{
@@ -90,8 +90,7 @@ class _auth
 									o_store.put( 'auth_token', _ret.data.auth_token );
 									o_store.put( 'auth_token_expires', _ret.data.expires );
 
-									const d = new Date();
-  									d.setTime(d.getTime() + (1*24*60*60*1000));
+									const d = new Date( _ret.data.expires );
   									let expires = "expires="+ d.toUTCString();
 									new _log( 'auth cookie set' );
 									new _log( "auth_token=" + _ret.data.auth_token + ";" + expires + ";path=/" );

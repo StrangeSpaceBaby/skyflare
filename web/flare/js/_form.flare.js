@@ -214,16 +214,10 @@ class _form
 
 	setup()
 	{
-		if( this.opts.form_id )
-		{
-			if( '#' != this.opts.form_id.substring( 0, 1 ) )
-			{
-				// We add it here in case it was left off so that the form can be found without throwing unnecessary errors.
-				this.opts.form_id = '#' + this.opts.form_id;
-			}
-		}
+		let form_id = ('#' + this.opts.form_id).replace('##','#');
 
-		if( 'undefined' === typeof $( this.opts.form_id ) || !$( this.opts.form_id ).length )
+		let form = new _dom.elem( form_id );
+		if(!form)
 		{
 			new _log( 'form_id ' + this.opts.form_id + ' not in DOM' );
 			return false;
@@ -232,12 +226,12 @@ class _form
 		// Gather some information from the form itself and save for later send()
 		if( 'undefined' === typeof this.opts.action || !this.opts.action )
 		{
-			this.opts.action = $( this.opts.form_id ).prop( 'action' );
+			this.opts.action = new _dom.attr( this.opts.form_id, 'action' );
 		}
 
 		if( 'undefined' === typeof this.opts.method || !this.opts.method )
 		{
-			this.opts.method = $( this.opts.form_id ).prop( 'method' );
+			this.opts.method = new _dom.attr( this.opts.form_id, 'method' );
 		}
 	}
 
@@ -246,27 +240,34 @@ class _form
 		let _validErrors = 0;
 
 		// First we'll process all the required fields so that we can then do conditional requireds
-		$( this.opts.form_id + ' .required' ).filter( ':input' ).each(
-			function( _index, _elem )
+		let elems = new _dom.elemAllFilter( this.opts.form_id + ' .required', ':input' );
+		if( !elems )
+		{
+			return false;
+		}
+
+		elems.forEach(
+			function( _elem )
 			{
 				new _log( 'required' );
 				new _log( 'validate elem' );
 				new _log( _elem );
-				_elem = $( _elem );
+				_elem = new _dom.elem( _elem );
 				new _log( _elem );
-				let _elemId = _elem.prop( 'id' );
-				let _elemType = _elem.prop( 'type' );
+				let _elemId = new _dom.attr( _elem, 'id' );
+				_elemId = ('#' + _elemId).replace('##','#');
+				let _elemType = new _dom.attr( _elem, 'type' );
 				new _log( _elemId );
 				new _log( _elemType );
 
-				let _elemVal = _elem.val();
+				let _elemVal = new _dom.val( _elemId );
 				new _log( 'elemVal' );
 				new _log( _elemVal );
 				switch( _elemType )
 				{
 					case 'select-one':
 					case 'select-multiple':
-						_elemVal = $( '#' + _elemId + ' option:selected' ).val();
+						_elemVal = new _dom.val( _elemId + ' option:selected' );
 						break;
 				}
 				new _log( _elemVal );
@@ -276,12 +277,12 @@ class _form
 					new _log( _elem.val() );
 					new _log( 'form field missing value' );
 					new _log( _elemId );
-					$( _elemId ).addClass( 'error' );
+					new _dom.addClass( _elemId, 'error' );
 					_validErrors++;
 				}
 				else
 				{
-					$( _elemId ).removeClass( 'error' );
+					new _dom.removeClass( _elemId, 'error' );
 				}
 			}
 		);
@@ -305,9 +306,7 @@ class _form
 				return _fail( 'form_has_errors' );
 			}
 
-			var _data = new FormData( $( this.opts.form_id )[0] );
-
-			let o_store = new _store();
+			var _data = new _dom.getFormData( this.opts.form_id );
 
 			new _api({
 				url: this.opts.url,
@@ -334,34 +333,14 @@ class _form
 		});
 	}
 
-	getFormData()
-	{
-		let _formId = this.opts.form_id;
-		new _log( 'getformData' );
-		new _log( _formId );
-		let _data = $( _formId ).serializeArray();
-		new _log( _data );
-
-		let _return = {};
-		for( let _i in _data )
-		{
-			new _log( 'formData' );
-			new _log( _i );
-			new _log( _data[_i] );
-			_return[_data[_i].name] = _data[_i].value;
-		}
-
-		return _return
-	}
-
 	resetForm()
 	{
 		let _formId = this.opts.form_id;
 		new _log( 'resetform' );
 		new _log( _formId );
 
-		$( _formId )[0].reset();
-		$( _formId + ' input:hidden' ).val( '' );
+		new _dom.elem( _formId ).reset();
+		new _dom.val( _formId + ' input:hidden', '' );
 
 		return this;
 	}
