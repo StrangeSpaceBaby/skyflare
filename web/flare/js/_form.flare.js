@@ -19,12 +19,13 @@ class _form
 		new _log( '_form constructor' );
 		new _log( _opts );
 
-		let _defaults = { form_id: null, method: 'POST', autoform: false };
+		let _defaults = { form_id: null, autoform: false };
 		this.opts = { ..._defaults, ..._opts };
 
 		new _log( '_form constructor opts' );
 		new _log( this.opts );
-		return this.setup();
+
+		this.setup();
 	}
 
 	autoform()
@@ -308,18 +309,11 @@ class _form
 
 			let o_store = new _store();
 
-			$.ajax({
-				type: this.opts.method,
-				enctype: 'multipart/form-data',
-				url: this.opts.action,
+			new _api({
+				url: this.opts.url,
+				method: this.opts.method,
 				data: _data,
-				headers:
-				{
-					auth_token: o_store.fetch( 'auth_token' )
-				},
-				processData: false,
-				contentType: false,
-				cache: false
+				enctype: 'multipart/form-data',
 			})
 			.then(
 				function( _ret )

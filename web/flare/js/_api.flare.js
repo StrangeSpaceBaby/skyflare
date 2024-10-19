@@ -28,7 +28,14 @@ class _api
 {
     constructor( opts = {} )
     {
-        let defaults = { url: null, method: 'POST', data: {}, force_fetch: true };
+        let defaults = {
+			url: null,
+			method: 'POST',
+			data: {},
+			force_fetch: true,
+			enctype: 'application/json'
+		};
+
         this.opts = { ...defaults, ...opts };
     }
 
@@ -45,21 +52,21 @@ class _api
 				let o_store = new _store();
 				this.opts.auth_token = o_store.fetch( 'auth_token' );
 				
-				let fetchOptions = {
-					method: this.opts.method,
-					headers: {
-						'Content-Type': 'application/json',
-						'auth_token': this.opts.auth_token
-					},
-					body: JSON.stringify( this.opts.data )
-				};
-
 				let beforeRequest = _config.get( '_api', 'beforeRequest' );
 				if( beforeRequest && 'function' == typeof beforeRequest )
 				{
 					beforeRequest( this.opts, fetchOptions );
 				}
 	
+				let fetchOptions = {
+					method: this.opts.method,
+					headers: {
+						'Content-Type': this.opts.enctype,
+						'auth_token': this.opts.auth_token
+					},
+					body: JSON.stringify( this.opts.data )
+				};
+
 				fetch( this.opts.url, fetchOptions )
 				.then(
 					( response ) =>
@@ -78,12 +85,12 @@ class _api
 						{
 							case 200:
 								return response.json();
-							case 403:
-								new _log( 'Invalid path! ' + this.opts.url );
-								return reject( 'Invalid Path' );
 							case 401:
 								new _log( 'Path Unauthorized' );
 								return reject( 'Not Authorized' );
+							case 403:
+								new _log( 'Invalid path! ' + this.opts.url );
+								return reject( 'Invalid Path' );
 							default:
 								return reject( 'Unexpected status: ' + response.status );
 						}
