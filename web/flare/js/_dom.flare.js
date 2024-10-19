@@ -94,6 +94,19 @@ class _dom
         return this._chainableMethods( elements );
     }
 
+    static elemAllFilter( selector, filter )
+    {
+        try
+        {
+            return [...document.querySelectorAll(selector)].filter( filter );
+        }
+        catch( error )
+        {
+            new _log( 'elemAllFilter failed with ' + selector + ' and ' + filter );
+            new _log({ msg: error, publish: 'console.table' });
+        }
+    }
+
     static empty( selector )
     {
         let elements = this.elem( selector ).elements;
@@ -190,5 +203,20 @@ class _dom
         }
 
 		return true;
+    }
+
+    static getFormData( selector )
+    {
+        try
+        {
+            let form = new _dom.elem( selector );
+            return new FormData( form );
+        }
+        catch( error )
+        {
+            new _log( 'getFormData failed' );
+            new _log({ msg: error, publish: 'console.table' });
+            return false;
+        }
     }
 }
