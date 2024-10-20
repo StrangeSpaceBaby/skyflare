@@ -25,6 +25,7 @@ class _db
         this.opts = { ..._defaults, ..._opts };
         this.db = null;
         this.schemaConfig = null;
+        this.#open();
     }
 
     #fetchSchema()
@@ -170,6 +171,7 @@ class _db
                     {
                         reject( request.error );
                     };
+                    
                     request.onsuccess = 
                     () =>
                     {
@@ -197,6 +199,7 @@ class _db
                     {
                         reject( request.error );
                     };
+
                     request.onsuccess = 
                     () =>
                     {
@@ -208,7 +211,7 @@ class _db
             .finally( () => this.#close() );
     }
 
-    deleteFrom( key )
+    delete( key )
     {
         return this.#open()
             .then( () =>
@@ -224,6 +227,7 @@ class _db
                     {
                         reject( request.error );
                     };
+
                     request.onsuccess = 
                     () =>
                     {
@@ -251,6 +255,7 @@ class _db
                     {
                         reject( request.error );
                     };
+
                     request.onsuccess = 
                     () =>
                     {
@@ -278,6 +283,7 @@ class _db
                     {
                         reject( request.error );
                     };
+
                     request.onsuccess = 
                     () =>
                     {
